@@ -1,7 +1,8 @@
-## Welcome to the Group Buddies Repository!
+# Welcome to the Group Buddies Repository!
 
-# Dev Scripts
+## Dev Scripts
 Frontend: ``` npm run dev ```
+
 Backend: ``` npm run server ```
 
 Frontend is located on [http://localhost:3000](http://localhost:3000)
