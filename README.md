@@ -1,6 +1,8 @@
 # Welcome to the Group Buddies Repository!
 
 ## Dev Scripts
+Ensure you are using node 16.16.0 for this project.
+
 Frontend: ``` npm run dev ```
 
 Backend: ``` npm run server ```
