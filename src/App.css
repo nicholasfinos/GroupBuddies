@@ -1,0 +1,206 @@
+label {
+    display: block;
+    margin-top: 10px;
+  }
+  
+  .card-container.card {
+    max-width: 350px !important;
+    padding: 40px 40px;
+  }
+  
+  .card {
+    background-color: #f7f7f7;
+    padding: 20px 25px 30px;
+    margin: 0 auto 25px;
+    margin-top: 50px;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+  }
+  
+  .account-img-card {
+    width: 96px;
+    height: 96px;
+    margin: 0 auto 10px;
+    display: block;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+  }
+
+  body {
+    margin: 0;
+    font-family: 'Times New Roman';
+  }
+  
+  form {
+    font-family: 'Times New Roman';
+    position: relative;
+    height: 100%;
+    padding: 50px 30px 0;
+    text-align: center;
+  }
+  
+  .fancy-box {
+    border: 3px solid #f8f9fa;
+    background-color:#f8f9fa;
+    width: 85vw;
+    margin: auto;
+  }
+  
+  #horizontal-style {
+    max-width: 100%;
+    position: relative;
+    overflow-x: break-word;
+  }
+  
+  #padding-left {
+    padding-left: 20px;
+  }
+  
+  li {
+    display: inline-flex;
+    white-space: nowrap;
+  }
+  
+  .navbar-spread-style {
+    display: inline-flex;
+    width: 100%;
+    place-content: start space-evenly;
+  }
+  
+  .form-group {
+    display: flex;
+    align-items: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .element {
+    padding-right: 4%;
+  }
+  
+  /* Center Element on Page */
+  .center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    height: 30vh;
+  }
+  
+  .center-element {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    /* height: 30vh; */
+  }
+  
+  /* Dropdown Button */
+  .dropbtn {
+    background-color: inherit;
+    padding: 9px;
+    font-size: 16px;
+    border: none;
+  }
+  
+  /* The container <div> - needed to position the dropdown content */
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  /* Dropdown Content (Hidden by Default) */
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+  
+  /* Links inside the dropdown */
+  .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+  
+  /* Change color of dropdown links on hover */
+  .dropdown-content a:hover {background-color: #ddd;}
+  
+  /* Show the dropdown menu on hover */
+  .dropdown:hover .dropdown-content {display: block;}
+  
+  /* Image Zoom on Hover */
+  .zoom {
+    transition: transform .2s; 
+    margin: 0 auto;
+  }
+  
+  .zoom:hover {
+    transform: scale(1.2);
+  }
+  
+  /* Login Page */
+  /* Add padding to containers */
+  .container {
+    padding: 16px;
+  }
+  
+  /* The "Forgot password" text */
+  span.password {
+    float: center;
+    text-align: center;
+    padding-top: 14px;
+  }
+  
+  /*Sign Up Page */
+  label {
+    display: block;
+    width: auto;
+    margin: 25px auto 0;
+    text-align: center;
+  }
+  
+  label span {
+      font-size: 12px;
+      color: #cfcfcf;
+      text-transform: uppercase;
+  }
+  
+  input {
+    display: block;
+    width: 100%;
+    margin-top: 5px;
+    padding-bottom: 5px;
+    font-size: 16px;
+    border-bottom: 1px solid rgba(0,0,0,0.4);
+    text-align: center;
+  }
+  
+  input[type=text] {
+    color: black;
+  }
+  
+  .forgot-pass {
+    margin-top: 15px;
+    font-size: 12px;
+    color: black;
+  }
+  
+  .submit {
+    margin-top: 30px;
+    margin-bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    background: #f0ca94;
+    text-transform: uppercase;
+    border: 1px blanchedalmond;
+  }  
