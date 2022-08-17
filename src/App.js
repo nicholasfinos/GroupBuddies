@@ -11,10 +11,12 @@ import { logout } from "./actions/auth";
 import { clearMessage } from "./actions/message";
 import { history } from "./helpers/history";
 import BoardStudent from "./components/boardStudent";
-import BoardSubjectCoordinator from "./components/boardSubjectCoordinator";
 import BoardTutor from "./components/boardTutor";
 import logo from "./media/groupbuddies-logo.png"
 import name from "./media/groupbuddies.png"
+import CreateNewSubject from "./components/createNewSubject";
+import viewTutors from "./components/viewTutors";
+import viewSubject from "./components/viewSubject";
 
 const App = () => {
   const [ShowSubjectCoordinator, setShowSubjectCoordinator] = useState(false);
@@ -65,7 +67,9 @@ const App = () => {
 
             {ShowSubjectCoordinator && (
               <li className="nav-item" style={{paddingLeft: "150px"}}>
-                <Link to={"/subjectcoordinator"} className="nav-link">Subject Coordinator Board</Link>
+                <Link to={"/new-subject"} className="nav-link">Create New Subject</Link>
+                <Link to={"/view-subject"} className="nav-link">View a Subject</Link>
+                <Link to={"/view-tutors"} className="nav-link">View Tutors</Link>
               </li>
             )}
 
@@ -107,7 +111,9 @@ const App = () => {
             <Route exact path="/account" component={Account} />
             <Route path="/student" component={BoardStudent} />
             <Route path="/tutor" component={BoardTutor} />
-            <Route path="/subjectcoordinator" component={BoardSubjectCoordinator} />
+            <Route path="/new-subject" component={CreateNewSubject} />
+            <Route path="/view-subject" component={viewSubject} />
+            <Route path="/view-tutors" component={viewTutors} />
           </Switch>
         </div>
       </div>
