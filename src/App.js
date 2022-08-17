@@ -19,6 +19,7 @@ import name from "./media/groupbuddies.png"
 const App = () => {
   const [ShowSubjectCoordinator, setShowSubjectCoordinator] = useState(false);
   const [showTutor, setShowTutor] = useState(false);
+  const [showStudent, setShowStudent] = useState(false);
 
   const { user: currentUser } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
@@ -33,6 +34,7 @@ const App = () => {
     if (currentUser) {
       setShowSubjectCoordinator(currentUser.roles.includes("ROLE_SUBJECTCOORDINATOR"));
       setShowTutor(currentUser.roles.includes("ROLE_TUTOR"));
+      setShowStudent(currentUser.roles.includes("ROLE_STUDENT"));
     }
   }, [currentUser]);
 
@@ -67,11 +69,17 @@ const App = () => {
               </li>
             )}
 
-            {currentUser && (
+            {showStudent && (
+              <li className="nav-item" style={{paddingLeft: "150px"}}>
+                <Link to={"/student"} className="nav-link">Student Board</Link>
+              </li>
+            )}
+
+            {/* {currentUser && (
               <li className="nav-item" style={{paddingLeft: "150px"}}>
                 <Link to={"/user"} className="nav-link">User</Link>
               </li>
-            )}
+            )} */}
           </div>
 
           {currentUser ? (
