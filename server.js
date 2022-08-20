@@ -32,6 +32,9 @@ db.mongoose
     console.error("Connection error", err);
     process.exit();
   });
+  
+db.mongoose.set('useFindAndModify', false); // to use findOneAndUpdate
+
 
 var corsOptions = {
   origin: "http://localhost:8081"
@@ -45,6 +48,7 @@ app.get("/", (req, res) => {
 // routes
 require('./app/routes/auth.routes')(app);
 require('./app/routes/user.routes')(app);
+require('./app/routes/studentProfile.routes')(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;
