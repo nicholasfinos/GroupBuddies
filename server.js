@@ -20,7 +20,7 @@ const User = require("./app/models/user.model");
 const Role = db.role;
 
 db.mongoose
-  .connect(`mongodb://localhost:27017/GroupBuddies`, {
+  .connect(`mongodb://127.0.0.1:27017/GroupBuddies`, {
     useNewUrlParser: true,
     useUnifiedTopology: true
   })

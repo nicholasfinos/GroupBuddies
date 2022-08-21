@@ -4,7 +4,13 @@
 Group Buddies Application (a SDS project)
 
 #### Group 4 (Dream Team) Team Members
-* 
+* Nicholas Finos
+* Grace Billiris
+* Yeran Hettiarachchy
+* Luka Ryan
+* Ashish Chadha
+* Jerome Sario
+* Lachlan Sinclair
 
 #### Setting Up The Application
 **Steps**
