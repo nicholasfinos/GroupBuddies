@@ -12,7 +12,7 @@ class CreateSubject extends React.Component {
     this.onChangeSubjectName = this.onChangeSubjectName.bind(this);
     this.onChangeTutorialNumbers = this.onChangeTutorialNumbers.bind(this);
     this.onChangeGroupAssessment = this.onChangeGroupAssessment.bind(this);
-    this.onChangeSubjectTopics = this.onChnageSubjectTopics.bind(this);
+    this.onChangeSubjectTopics = this.onChangeSubjectTopics.bind(this);
     this.onChangeSemester = this.onChangeSemester.bind(this);
 
     this.state = {
@@ -21,8 +21,8 @@ class CreateSubject extends React.Component {
       groupAssessment: false,
       semester: "",
       subjectTopic: "",
-      username: "",
-    }
+      username: ""
+    };
   }
 
   componentDidMount() {
@@ -95,23 +95,26 @@ class CreateSubject extends React.Component {
   };
 
   render() {
+
+    const { subjectName, tutorialNumber, groupAssessment, semester, subjectTopic, username } = this.state;
+
     return (
       <Form style={{textAlign: "center", maxWidth: '100%', fontFamily: "Times New Roman"}} className="form">
         <h3 style={{color: "light grey"}}>Create a New Subject</h3>
           <div className="card">
             <div className="form-group">
               <label htmlFor="subject-name">Subject Name: </label>
-                <Input className="form-control" style={{minWidth: '500px'}} type="text" name="subjectName" value={this.state.subjectName} onChange={this.onChangeSubjectName}/>
+                <Input className="form-control" style={{minWidth: '500px'}} type="text" name="subjectName" value={subjectName} onChange={this.onChangeSubjectName}/>
             </div>
 
             <div className="form-group">
               <label htmlFor="semester">Semester: </label>
-                <Input className="form-control" style={{minWidth: '500px'}} type="text" name="semester" value={this.state.semester} onChange={this.onChangeSemester}/>
+                <Input className="form-control" style={{minWidth: '500px'}} type="text" name="semester" value={semester} onChange={this.onChangeSemester}/>
             </div>
                   
             <div className="form-group">
               <label style={{marginLeft: "220px"}} htmlFor="tutorial numbers">Number of Tutorials:</label>
-              <select className="form-group border" style={{minWidth: "500px"}} onChange={this.onChangeTutorialNumbers} value={this.state.tutorialNumber}>
+              <select className="form-group border" style={{minWidth: "500px"}} onChange={this.onChangeTutorialNumbers} value={tutorialNumber}>
                 <option value="" disabled selected>Select your option</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
@@ -128,7 +131,7 @@ class CreateSubject extends React.Component {
                   
             <div className="form-group">
               <label style={{marginLeft: "220px"}} htmlFor="group-assessment">Group Assessment:</label>
-              <select className="border" style={{minWidth: "500px"}} onChange={this.onChangeGroupAssessment} value={this.state.groupAssessment}>
+              <select className="border" style={{minWidth: "500px"}} onChange={this.onChangeGroupAssessment} value={groupAssessment}>
                 <option value="" disabled selected>Select your option</option>
                 <option value="Yes">Yes</option>
                 <option value="No">No</option>
@@ -138,7 +141,7 @@ class CreateSubject extends React.Component {
             {/* subject topics */}
             <div className="form-group">
               <label style={{marginLeft: "220px"}} htmlFor="subject-topics">Subject Topics:</label>
-              <textarea className="border" style={{minWidth: "500px"}} id="topics" name="topics" rows="5" placeholder="Please seperate each topic with a comma..." onChange={this.onChangeSubjectTopics} value={this.state.subjectTopic}></textarea>
+              <textarea className="border" style={{minWidth: "500px"}} id="topics" name="topics" rows="5" placeholder="Please seperate each topic with a comma..." onChange={this.onChangeSubjectTopics} value={subjectTopic}></textarea>
             </div>
 
             {/* assign tutors */}
