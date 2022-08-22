@@ -1,9 +1,15 @@
-module.exports = app => {
-    const subjects = require("../controllers/subject.controller.js");
-    var router = require("express").Router();
+const controller = require("../controllers/subject.controller");
 
-    //Create a new Subject
-    router.post("/create/:username", subjects.createSubject);
+module.exports = function(app) {
+    app.use(function(req, res, next) {
+        res.header(
+          "Access-Control-Allow-Headers",
+          "x-access-token, Origin, Content-Type, Accept"
+        );
+        next();
+      });
+    
+    app.get("/api/subject/view", controller.viewSubject);
 
-    app.use('/api/subject', router);
+    app.post("/api/subject/create/:username", controller.createSubject);
 };

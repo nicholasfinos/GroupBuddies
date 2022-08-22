@@ -54,7 +54,7 @@ class CreateSubject extends React.Component {
   }
 
   createSubject() {
-    //Creating Subject Object
+    // Creating Subject Object
     var data = {
       username: this.state.username,
       subjectName: this.state.subjectName,
@@ -155,9 +155,7 @@ class CreateSubject extends React.Component {
           </div>
               
           <div>
-            <Button
-              className = "btn btn-primary btn-block" onClick = {this.createSubject}>
-            </Button>
+            <button className = "btn btn-primary btn-block" onClick = {this.createSubject}>Submit</button>
           </div>
           {/*message && (
             <div className="form-group">

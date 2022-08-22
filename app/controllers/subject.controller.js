@@ -1,8 +1,11 @@
 const Subject = require("../models/subject.model");
 
-//Create and Save a new Subject
+exports.viewSubject = (req, res) => {
+  res.status(200).send("test");
+};
+
 exports.createSubject = (req, res) => {
-  //Create Subject
+  // Create Subject
   const subject = new Subject({
     username: req.body.username,
     subjectName: req.body.subjectName,
@@ -11,6 +14,7 @@ exports.createSubject = (req, res) => {
     semester: req.body.semester,
     subjectTopic: "",
   });
+  console.log('hi');
 
   if(req.body.groupAssessment === "Yes") {
     subject.groupAssessment = true;

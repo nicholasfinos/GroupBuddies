@@ -17,6 +17,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 const db = require("./app/models");
 const User = require("./app/models/user.model");
+const Subject = require("./app/models/subject.model");
+const Tutorial = require("./app/models/tutorial.model");
 const Role = db.role;
 
 db.mongoose
@@ -45,6 +47,7 @@ app.get("/", (req, res) => {
 // routes
 require('./app/routes/auth.routes')(app);
 require('./app/routes/user.routes')(app);
+require('./app/routes/subject.routes')(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;
