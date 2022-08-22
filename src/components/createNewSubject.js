@@ -1,9 +1,8 @@
 import React from "react";
-import SubjectDataService from "../services/subject.service";
+import SubjectDataService from "../services/subject-service";
 
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
-import { Button } from "bootstrap";
 
 class CreateSubject extends React.Component {
   constructor(props) {
