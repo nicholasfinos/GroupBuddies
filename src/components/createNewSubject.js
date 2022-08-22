@@ -51,19 +51,6 @@ const CreateNewSubject = (props) => {
     setLoading(true);
 
     form.current.validateAll();
-
-    // if (checkBtn.current.context._errors.length === 0) {
-    //   dispatch(login(username, password))
-    //     .then(() => {
-    //       props.history.push("/account");
-    //       window.location.reload();
-    //     })
-    //     .catch(() => {
-    //       setLoading(false);
-    //     });
-    // } else {
-    //   setLoading(false);
-    // }
   };
 
   return (
