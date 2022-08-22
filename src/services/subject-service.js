@@ -7,7 +7,11 @@ const viewSubject = () => {
     return axios.get(API_URL);
 };
 
-const create = (data, username) => {
+// const create = (username, subjectName, tutorialNumbers, groupAssessment, semester, subjectTopics) => {
+//     return axios.post(API_URL + "/create/" + username, subjectName, tutorialNumbers, groupAssessment, semester, subjectTopics);
+// };
+
+const create = (username, data) => {
     return axios.post(API_URL + "/create/" + username, data);
 };
 

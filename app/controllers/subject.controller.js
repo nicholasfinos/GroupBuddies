@@ -8,16 +8,16 @@ exports.createSubject = (req, res) => {
   // Create Subject
   const subject = new Subject({
     subjectCoordinator: req.params.username,
-    subjectName: req.query.subjectName,
-    numberTutorials: parseInt(req.query.numberTutorials),
-    groupAssessment: req.query.groupAssessment,
-    semester: req.query.semester
+    subjectName: req.body.subjectName,
+    numberTutorials: parseInt(req.body.numberTutorials),
+    groupAssessment: req.body.groupAssessment,
+    semester: req.body.semester
   });
 
-  if(req.query.topics?.length !== 0){
-    const splitQuery = req.query.topics?.split(",")
+  if(req.body.topics?.length !== 0){
+    const splitQuery = req.body.topics?.split(",")
     var i = 0
-    for (i = 0; i < splitQuery.length; i++){
+    for (i = 0; i < splitQuery?.length; i++){
         subject.subjectTopics[i] = splitQuery[i].trim()
     }
   }
