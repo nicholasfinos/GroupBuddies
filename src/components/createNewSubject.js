@@ -16,10 +16,10 @@ class CreateSubject extends React.Component {
 
     this.state = {
       subjectName: "",
-      tutorialNumber: null,
+      tutorialNumbers: null,
       groupAssessment: false,
       semester: "",
-      subjectTopic: "",
+      subjectTopics: "",
       username: ""
     };
   }
@@ -45,11 +45,11 @@ class CreateSubject extends React.Component {
   }
 
   onChangeTutorialNumbers(e) {
-    this.setState({tutorialNumber: e.target.value});
+    this.setState({tutorialNumbers: e.target.value});
   }
 
   onChangeSubjectTopics(e) {
-    this.setState({subjectTopic: e.target.value});
+    this.setState({subjectTopics: e.target.value});
   }
 
   createSubject() {
@@ -57,21 +57,22 @@ class CreateSubject extends React.Component {
     var data = {
       username: this.state.username,
       subjectName: this.state.subjectName,
-      tutorialNumber: this.state.tutorialNumber,
-      groupAssessment: this.state.groupAssessment,
+      // tutorialNumbers: this.state.tutorialNumbers,
+      // groupAssessment: this.state.groupAssessment,
       semester: this.state.semester,
-      subjectTopic: this.state.subjectTopic,
+      subjectTopics: this.state.subjectTopics,
     }
+    console.log(data)
 
     SubjectDataService.create(data, this.state.username)
       .then((response) => {
         this.setState({
           username: response.data.username,
           subjectName: response.data.subjectName,
-          tutorialNumber: response.data.tutorialNumber,
+          tutorialNumbers: response.data.tutorialNumbers,
           groupAssessment: response.data.groupAssessment,
           semester: response.data.semester,
-          subjectTopic: response.data.subjectTopic
+          subjectTopics: response.data.subjectTopics
         });
         console.log(response.data);        
       })
@@ -81,21 +82,21 @@ class CreateSubject extends React.Component {
     );
   }
 
-  newSubject = ()  => {
-    this.setState = ({
-      subjectName: "",
-      tutorialNumber: null,
-      groupAssessment: false,
-      semester: "",
-      subjectTopic: "",
-      username: ""
-    });
-    this.componentDidMount();
-  };
+  // newSubject = ()  => {
+  //   this.setState = ({
+  //     subjectName: "",
+  //     tutorialNumbers: null,
+  //     groupAssessment: false,
+  //     semester: "",
+  //     subjectTopics: "",
+  //     username: ""
+  //   });
+  //   this.componentDidMount();
+  // };
 
   render() {
 
-    const { subjectName, tutorialNumber, groupAssessment, semester, subjectTopic, username } = this.state;
+    const { subjectName, tutorialNumbers, groupAssessment, semester, subjectTopics } = this.state;
 
     return (
       <Form style={{textAlign: "center", maxWidth: '100%', fontFamily: "Times New Roman"}} className="form">
@@ -113,7 +114,7 @@ class CreateSubject extends React.Component {
                   
             <div className="form-group">
               <label style={{marginLeft: "220px"}} htmlFor="tutorial numbers">Number of Tutorials:</label>
-              <select className="form-group border" style={{minWidth: "500px"}} onChange={this.onChangeTutorialNumbers} value={tutorialNumber}>
+              <select className="form-group border" style={{minWidth: "500px"}} onChange={this.onChangeTutorialNumbers} value={tutorialNumbers}>
                 <option value="" disabled selected>Select your option</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
@@ -140,7 +141,7 @@ class CreateSubject extends React.Component {
             {/* subject topics */}
             <div className="form-group">
               <label style={{marginLeft: "220px"}} htmlFor="subject-topics">Subject Topics:</label>
-              <textarea className="border" style={{minWidth: "500px"}} id="topics" name="topics" rows="5" placeholder="Please seperate each topic with a comma..." onChange={this.onChangeSubjectTopics} value={subjectTopic}></textarea>
+              <textarea className="border" style={{minWidth: "500px"}} id="topics" name="topics" rows="5" placeholder="Please seperate each topic with a comma..." onChange={this.onChangeSubjectTopics} value={subjectTopics}></textarea>
             </div>
 
             {/* assign tutors */}

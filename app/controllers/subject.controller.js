@@ -7,24 +7,26 @@ exports.viewSubject = (req, res) => {
 exports.createSubject = (req, res) => {
   // Create Subject
   const subject = new Subject({
-    username: req.body.username,
-    subjectName: req.body.subjectName,
-    tutorialNumber: parseInt(req.bod.tutorialNumber),
-    groupAssessment: false,
-    semester: req.body.semester,
-    subjectTopic: "",
+    subjectCoordinator: req.params.username,
+    subjectName: req.query.subjectName,
+    numberTutorials: parseInt(req.query.numberTutorials),
+    groupAssessment: req.query.groupAssessment,
+    semester: req.query.semester
   });
-  console.log('hi');
 
-  if(req.body.groupAssessment === "Yes") {
+  if(req.query.topics?.length !== 0){
+    const splitQuery = req.query.topics?.split(",")
+    var i = 0
+    for (i = 0; i < splitQuery.length; i++){
+        subject.subjectTopics[i] = splitQuery[i].trim()
+    }
+  }
+
+  if(req.params.groupAssessment === "Yes") {
     subject.groupAssessment = true;
   }
   else {
     subject.groupAssessment = false;
-  }
-
-  if(req.body.subjectTopic.length !== 0) {
-    subject.subjectTopic = req.body.subjectTopic.split(",");
   }
 
   subject.save((err, subject) => {
@@ -36,7 +38,7 @@ exports.createSubject = (req, res) => {
       res
         .status(200)
         .send({
-          message: "Subject has been created for: " + req.body.username,
+          message: "Subject " + subject.subjectName + " has been created for: " + req.params.username,
         });
     }
   });
