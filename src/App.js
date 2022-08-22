@@ -10,8 +10,7 @@ import Account from "./components/account";
 import { logout } from "./actions/auth";
 import { clearMessage } from "./actions/message";
 import { history } from "./helpers/history";
-import BoardStudent from "./components/boardStudent";
-import BoardSubjectCoordinator from "./components/boardSubjectCoordinator";
+import StudentProfile from "./components/studentProfile";
 import BoardTutor from "./components/boardTutor";
 import logo from "./media/groupbuddies-logo.png"
 import name from "./media/groupbuddies.png"
@@ -19,6 +18,7 @@ import name from "./media/groupbuddies.png"
 const App = () => {
   const [ShowSubjectCoordinator, setShowSubjectCoordinator] = useState(false);
   const [showTutor, setShowTutor] = useState(false);
+  const [showStudent, setShowStudent] = useState(false);
 
   const { user: currentUser } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
@@ -33,6 +33,7 @@ const App = () => {
     if (currentUser) {
       setShowSubjectCoordinator(currentUser.roles.includes("ROLE_SUBJECTCOORDINATOR"));
       setShowTutor(currentUser.roles.includes("ROLE_TUTOR"));
+      setShowStudent(currentUser.roles.includes("ROLE_STUDENT"));
     }
   }, [currentUser]);
 
@@ -63,13 +64,15 @@ const App = () => {
 
             {ShowSubjectCoordinator && (
               <li className="nav-item" style={{paddingLeft: "150px"}}>
-                <Link to={"/subjectcoordinator"} className="nav-link">Subject Coordinator Board</Link>
+                <Link to={"/subject/create/" + currentUser?.username} className="nav-link">Create New Subject</Link>
+                <Link to={"/view-subject"} className="nav-link">View a Subject</Link>
+                <Link to={"/view-tutors"} className="nav-link">View Tutors</Link>
               </li>
             )}
 
-            {currentUser && (
+            {showStudent && (
               <li className="nav-item" style={{paddingLeft: "150px"}}>
-                <Link to={"/user"} className="nav-link">User</Link>
+                <Link to={"/profile/" + currentUser?.username} className="nav-link">My Profile</Link>
               </li>
             )}
           </div>
@@ -97,9 +100,8 @@ const App = () => {
             <Route exact path={["/", "/home"]} component={Home} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/account" component={Account} />
-            <Route path="/student" component={BoardStudent} />
+            <Route path={"/profile/" + currentUser?.username} component={StudentProfile}/>
             <Route path="/tutor" component={BoardTutor} />
-            <Route path="/subjectcoordinator" component={BoardSubjectCoordinator} />
           </Switch>
         </div>
       </div>
