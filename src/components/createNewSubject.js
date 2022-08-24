@@ -1,7 +1,6 @@
 import React from "react";
-import subjectService from "../services/subject-service";
-import Form from "react-validation/build/form";
-import Input from "react-validation/build/input";
+import { Button } from "@material-ui/core";
+import SubjectDataService from "../services/subject-service";
 
 class CreateSubject extends React.Component {
   constructor(props) {
@@ -15,8 +14,8 @@ class CreateSubject extends React.Component {
     
     this.state = {
       subjectName: "",
-      tutorialNumbers: null,
-      groupAssessment: false,
+      tutorialNumbers: "",
+      groupAssessment: "",
       semester: "",
       subjectTopics: "",
       username: ""
@@ -50,11 +49,9 @@ class CreateSubject extends React.Component {
     this.setState({subjectTopics: e.target.value});
   }
 
-  createSubject(e) {
-    // Creating Subject Object
-    e.preventDefault();
-    // this.state is not read-able?
-    const data = {
+  saveSubject = () => {
+    var data;
+    data = {
       username: this.state?.username,
       subjectName: this.state?.subjectName,
       tutorialNumbers: this.state?.tutorialNumbers,
@@ -64,11 +61,9 @@ class CreateSubject extends React.Component {
     }
     console.log(data)
 
-    // subjectService.create(this.state?.username, this.state?.subjectName, this.state?.tutorialNumbers, this.state?.groupAssessment, this.state?.semester, this.state?.subjectTopics)
-    subjectService.create(this.state.username, data)
+    SubjectDataService.create(data, data.username)
       .then((response) => {
         this.setState({
-          username: response.data?.username,
           subjectName: response.data?.subjectName,
           tutorialNumbers: response.data?.tutorialNumbers,
           groupAssessment: response.data?.groupAssessment,
@@ -79,44 +74,28 @@ class CreateSubject extends React.Component {
       })
       .catch((e) => {
         console.log(e);
-      }
-    );
+      });
   }
 
-  // newSubject = ()  => {
-  //   this.setState = ({
-  //     subjectName: "",
-  //     tutorialNumbers: null,
-  //     groupAssessment: false,
-  //     semester: "",
-  //     subjectTopics: "",
-  //     username: ""
-  //   });
-  //   this.componentDidMount();
-  // };
-
   render() {
-
-    const { subjectName, tutorialNumbers, groupAssessment, semester, subjectTopics } = this.state;
-
     return (
-      <Form style={{textAlign: "center", maxWidth: '100%', fontFamily: "Times New Roman"}} className="form" onSubmit={this.createSubject}>
+      <div style={{textAlign: "center", maxWidth: '100%', fontFamily: "Times New Roman"}} className="form">
         <h3 style={{color: "light grey"}}>Create a New Subject</h3>
           <div className="card">
             <div className="form-group">
               <label htmlFor="subject-name">Subject Name: </label>
-                <Input className="form-control" style={{minWidth: '500px'}} type="text" name="subjectName" value={subjectName} onChange={this.onChangeSubjectName}/>
+                <input className="form-control" style={{minWidth: '500px'}} type="text" name="subjectName" onChange={this.onChangeSubjectName}/>
             </div>
 
             <div className="form-group">
               <label htmlFor="semester">Semester: </label>
-                <Input className="form-control" style={{minWidth: '500px'}} type="text" name="semester" value={semester} onChange={this.onChangeSemester}/>
+                <input className="form-control" style={{minWidth: '500px'}} type="text" name="semester" onChange={this.onChangeSemester}/>
             </div>
                   
             <div className="form-group">
               <label style={{marginLeft: "220px"}} htmlFor="tutorial numbers">Number of Tutorials:</label>
-              <select className="form-group border" style={{minWidth: "500px"}} onChange={this.onChangeTutorialNumbers} value={tutorialNumbers}>
-                <option value="" disabled selected>Select your option</option>
+              <select className="form-group border" style={{minWidth: "500px"}} onChange={this.onChangeTutorialNumbers}>
+                <option value="" disabled defaultValue={"Select your option"}></option>
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -132,8 +111,8 @@ class CreateSubject extends React.Component {
                   
             <div className="form-group">
               <label style={{marginLeft: "220px"}} htmlFor="group-assessment">Group Assessment:</label>
-              <select className="border" style={{minWidth: "500px"}} onChange={this.onChangeGroupAssessment} value={groupAssessment}>
-                <option value="" disabled selected>Select your option</option>
+              <select className="border" style={{minWidth: "500px"}} onChange={this.onChangeGroupAssessment}>
+                <option value="" disabled defaultValue={"Select your option"}></option>
                 <option value="Yes">Yes</option>
                 <option value="No">No</option>
               </select>
@@ -142,7 +121,7 @@ class CreateSubject extends React.Component {
             {/* subject topics */}
             <div className="form-group">
               <label style={{marginLeft: "220px"}} htmlFor="subject-topics">Subject Topics:</label>
-              <textarea className="border" style={{minWidth: "500px"}} id="topics" name="topics" rows="5" placeholder="Please seperate each topic with a comma..." onChange={this.onChangeSubjectTopics} value={subjectTopics}></textarea>
+              <textarea className="border" style={{minWidth: "500px"}} id="topics" name="topics" rows="5" placeholder="Please seperate each topic with a comma..." onChange={this.onChangeSubjectTopics}></textarea>
             </div>
 
             {/* assign tutors */}
@@ -154,10 +133,9 @@ class CreateSubject extends React.Component {
               </div>
             </div>    
       
-            <button className="btn btn-primary btn-block">Submit</button>
-
         </div>
-      </Form>
+        <Button size="small" variant="contained" onClick={this.saveSubject}>Submit</Button>
+      </div>
     );
   };
 }

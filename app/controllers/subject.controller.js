@@ -9,9 +9,10 @@ exports.createSubject = (req, res) => {
   const subject = new Subject({
     subjectCoordinator: req.params.username,
     subjectName: req.body.subjectName,
-    numberTutorials: parseInt(req.body.numberTutorials),
     groupAssessment: req.body.groupAssessment,
-    semester: req.body.semester
+    numberTutorials: req.body.numberTutorials,
+    topics: req.body.topics,
+    semester: req.body.semester,
   });
 
   if(req.body.topics?.length !== 0){
@@ -22,16 +23,24 @@ exports.createSubject = (req, res) => {
     }
   }
 
+  // temp solution: (perm. soln to make all fields compulsory)
+  if(req.body.numberTutorials === undefined){
+    subject.numberTutorials = 0;
+  } else {
+    subject.numberTutorials = parseInt(req.body.numberTutorials);
+  }
+
   if(req.params.groupAssessment === "Yes") {
     subject.groupAssessment = true;
-  }
-  else {
+  } else {
     subject.groupAssessment = false;
   }
 
+  console.log(subject)
+
   subject.save((err, subject) => {
-    if(err) {
-      res.status(500).send({message:err});
+    if (err) {
+      res.status(500).send({ message : err });
       return;
     }
     else {

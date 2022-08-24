@@ -1,15 +1,9 @@
-const controller = require("../controllers/subject.controller");
+module.exports = app => {
+  const subject = require("../controllers/subject.controller");
+  var router = require("express").Router();
 
-module.exports = function(app) {
-    app.use(function(req, res, next) {
-        res.header(
-          "Access-Control-Allow-Headers",
-          "x-access-token, Origin, Content-Type, Accept"
-        );
-        next();
-      });
-    
-    app.get("/api/subject/view", controller.viewSubject);
+  // Create a new Subject
+  router.post("/create/:username", subject.createSubject);
 
-    app.post("/api/subject/create/:username", controller.createSubject);
+  app.use('/api/subject', router);
 };
