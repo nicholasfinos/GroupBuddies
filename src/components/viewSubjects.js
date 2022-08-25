@@ -69,7 +69,7 @@ class SubjectList extends Component {
           </Grid>
           <Grid item md={8}>
             {currentSubject ? (
-              <div className="beige-border" style={{ "marginLeft": "200px" }}>
+              <div style={{ "marginLeft": "200px" }}>
                 <br />
                 <div id="toPrint">
                   <h2>Subject</h2>
@@ -98,7 +98,6 @@ class SubjectList extends Component {
                 <br />
                 <p style={{ marginLeft: "100px" }}><i>Please click on a Subject...</i></p>
                 <div style={{ float: "left", width: "100%" }}>
-                  {/* <img src={Reserved} style={{ verticalAlign: "center", paddingLeft: 100, width: "500px", height: "300px" }} id="vibes" alt="" /> */}
                 </div>
               </div>
             )}
