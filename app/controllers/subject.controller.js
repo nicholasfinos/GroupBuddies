@@ -1,7 +1,16 @@
 const Subject = require("../models/subject.model");
 
-exports.viewSubject = (req, res) => {
-  res.status(200).send("test");
+exports.viewSubjects = (req, res) => {
+  Subject.find({subjectCoordinator: req.params.username})
+    .then((data) => {
+      res.status(200).send(data);
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while retrieving subjects.",
+      });
+    });
 };
 
 exports.createSubject = (req, res) => {

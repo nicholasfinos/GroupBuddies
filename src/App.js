@@ -16,7 +16,7 @@ import logo from "./media/groupbuddies-logo.png"
 import name from "./media/groupbuddies.png"
 import createSubject from "./components/createNewSubject";
 import viewTutors from "./components/viewTutors";
-import viewSubject from "./components/viewSubject";
+import viewSubject from "./components/viewSubjects";
 
 const App = () => {
   const [ShowSubjectCoordinator, setShowSubjectCoordinator] = useState(false);
@@ -68,8 +68,8 @@ const App = () => {
             {ShowSubjectCoordinator && (
               <li className="nav-item" style={{paddingLeft: "150px"}}>
                 <Link to={"/subject/create/" + currentUser?.username} className="nav-link">Create New Subject</Link>
-                <Link to={"/view-subject"} className="nav-link">View a Subject</Link>
-                <Link to={"/view-tutors"} className="nav-link">View Tutors</Link>
+                <Link to={"/subject/view/" + currentUser?.username} className="nav-link">View a Subject</Link>
+                <Link to={"/tutors/view"} className="nav-link">View Tutors</Link>
               </li>
             )}
 
@@ -112,7 +112,7 @@ const App = () => {
             <Route path="/student" component={BoardStudent} />
             <Route path="/tutor" component={BoardTutor} />
             <Route path={"/subject/create/" + currentUser?.username} component={createSubject} />
-            <Route path="/view-subject" component={viewSubject} />
+            <Route path={"/subject/view/" + currentUser?.username} component={viewSubject} />
             <Route path="/view-tutors" component={viewTutors} />
           </Switch>
         </div>

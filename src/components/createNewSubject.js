@@ -13,7 +13,6 @@ const required = (value) => {
   }
 };
 
-
 class CreateSubject extends React.Component {
   constructor(props) {
     super(props);
