@@ -1,6 +1,7 @@
 import React from "react";
-
+import "./studentProfile.css";
 import Form from "react-validation/build/form";
+import image from "../media/blank.webp";
 
 class StudentProfile extends React.Component {
   constructor(props) {
@@ -57,36 +58,44 @@ class StudentProfile extends React.Component {
 
     return (
       <Form style={{textAlign: "center", maxWidth: '100%', fontFamily: "Times New Roman"}} className="form">
-        <h3 style={{color: "light grey"}}>My Profile <i>{studentName}</i></h3>
-
-        <form>
-          <div>
-            <label>Name:</label>
-            <p> {this.state.studentName}</p>
+        <div className="big-container">
+          <div className="container">
+            <div className="title"> My Profile <i>{studentName}</i></div>
+            <div className="content">
+              <form action="#">
+              <div class="user-details">
+          <div class="input-box">
+            <span class="details">Full Name</span>
+            <input type="text" placeholder="Enter your name" required/>
           </div>
-          <div>
-            <label>Preferred Name:</label>
-            <input type='text' value={this.state.preferredName} onChange={this.handlePreferredNameChange}/>
+          <div class="input-box">
+            <span class="details">Preferred Name</span>
+            <input type="text" placeholder="Enter your email" required/>
           </div>
-          <div>
-            <label>Year:</label>
-            <select value={this.state.year} onChange={this.handleYearChange}>
+          <div class="input-box">
+          <label className="details">Year:</label>
+            <select className="info-card" value={this.state.year} onChange={this.handleYearChange}>
               <option value="yr1">Yr 1</option>
               <option value="yr2">Yr 2</option>
               <option value="yr3">Yr 3</option>
             </select>
-          </div>
-          <div>
-            <label>Degree:</label>
-            <select value={this.state.year} onChange={this.handleDegreeChange}>
+          </div>  
+          <div class="input-box">
+          <label className="details">Degree:</label>
+            <select className="info-card" value={this.state.degree} onChange={this.handleDegreeChange}>
               <option value="deg1">Software Engo</option>
               <option value="deg2">Finance</option>
               <option value="deg3">Philosophy</option>
             </select>
           </div>
-
-          <button type="submit"> Submit </button>
-        </form> 
+        </div>
+        <div class="button">
+          <input type="submit" value="Register"/>
+        </div>
+              </form>
+            </div>
+          </div>
+        </div>
       </Form>
     );
   };
