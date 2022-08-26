@@ -69,7 +69,7 @@ const App = () => {
               <li className="nav-item" style={{paddingLeft: "150px"}}>
                 <Link to={"/subject/create/" + currentUser?.username} className="nav-link">Create New Subject</Link>
                 <Link to={"/subject/view/" + currentUser?.username} className="nav-link">View a Subject</Link>
-                <Link to={"/tutors/view"} className="nav-link">View Tutors</Link>
+                <Link to={"/tutor/view"} className="nav-link">View Tutors</Link>
               </li>
             )}
 
@@ -110,10 +110,10 @@ const App = () => {
             <Route exact path="/login" component={Login} />
             <Route exact path="/account" component={Account} />
             <Route path="/student" component={BoardStudent} />
-            <Route path="/tutor" component={BoardTutor} />
+            <Route exact path="/tutor" component={BoardTutor} />
             <Route path={"/subject/create/" + currentUser?.username} component={createSubject} />
             <Route path={"/subject/view/" + currentUser?.username} component={viewSubject} />
-            <Route path="/view-tutors" component={viewTutors} />
+            <Route path="/tutor/view" component={viewTutors} />
           </Switch>
         </div>
       </div>

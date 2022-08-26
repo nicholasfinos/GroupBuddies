@@ -1,7 +1,7 @@
 import React from "react";
 import { Button } from "@material-ui/core";
+import TutorDataService from "../services/tutor-service";
 import SubjectDataService from "../services/subject-service";
-
 
 const required = (value) => {
   if (!value) {
@@ -30,7 +30,10 @@ class CreateSubject extends React.Component {
       semester: "",
       subjectTopics: "",
       username: "",
-      submitted: false
+      submitted: false,
+      tutors: [],
+      assignedTutor: "",
+      isChecked: false
     };
   }
 
@@ -38,6 +41,7 @@ class CreateSubject extends React.Component {
     const URL = String(this.props.match.path);
     const name = String(URL.substring(URL.lastIndexOf("/") + 1, URL.length));
     this.setState({username: name});
+    this.retrieveTutors(name);
   }
 
   onChangeGroupAssessment(e) {
@@ -60,6 +64,25 @@ class CreateSubject extends React.Component {
     this.setState({subjectTopics: e.target.value});
   }
 
+  toggleChange = () => {
+    this.setState({
+      isChecked: !this.state.isChecked,
+    });
+  }
+
+  retrieveTutors(username) {
+    TutorDataService.getTutors(username)
+    .then(response => {
+      this.setState({
+        tutors: response.data
+      });
+      console.log(response.data);
+    })
+    .catch(e => {
+      console.log(e);
+    });
+  }
+
   saveSubject = () => {
     var data;
     data = {
@@ -69,6 +92,7 @@ class CreateSubject extends React.Component {
       groupAssessment: this.state?.groupAssessment,
       semester: this.state?.semester,
       subjectTopics: this.state?.subjectTopics,
+      assignedTutor: this.state?.assignedTutors
     }
     console.log(data)
 
@@ -80,7 +104,8 @@ class CreateSubject extends React.Component {
           groupAssessment: response.data?.groupAssessment,
           semester: response.data?.semester,
           subjectTopics: response.data?.subjectTopics,
-          submitted: true
+          submitted: true,
+          assignedTutor: response.data?.assignedTutors
         });
         console.log(response.data);        
       })
@@ -98,12 +123,16 @@ class CreateSubject extends React.Component {
       semester: "",
       subjectTopics: "",
       username: "",
-      submitted: false
+      submitted: false,
+      tutors: [],
+      assignedTutor: ""
     });
     this.componentDidMount();
   }
 
   render() {
+    const { tutors } = this.state; 
+  
     return (
       <div style={{textAlign: "center", maxWidth: '100%', fontFamily: "Times New Roman"}} className="form">
         <h3>Create a New Subject</h3>
@@ -116,12 +145,12 @@ class CreateSubject extends React.Component {
           <div className="card">
               <div className="form-group">
                 <label htmlFor="subject-name">Subject Name: </label>
-                  <input className="form-control" style={{minWidth: '200px'}} type="text" name="subjectName" onChange={this.onChangeSubjectName} validations={[required]}/>
+                  <input className="form-control" style={{maxWidth: '500px'}} type="text" name="subjectName" onChange={this.onChangeSubjectName} validations={[required]}/>
               </div>
 
               <div className="form-group">
                 <label htmlFor="semester">Semester: </label>
-                  <input className="form-control" style={{minWidth: '200px'}} type="text" name="semester" onChange={this.onChangeSemester} validations={[required]}/>
+                  <input className="form-control" style={{maxWidth: '500px'}} type="text" name="semester" onChange={this.onChangeSemester} validations={[required]}/>
               </div>
                     
               <div className="form-group">
@@ -156,10 +185,14 @@ class CreateSubject extends React.Component {
               </div>
 
               <div className="form-group">
-                <label style={{marginLeft: "220px"}} htmlFor="subject-topics">Assign Tutors:</label>
-                <div id="checkboxes" style={{minWidth: "500px"}} >
-                  {/* to be made dynamic with list of tutor names*/}
-                  <label style={{display: "inline-flex"}}  for="one"><input style={{width: "auto"}} type="checkbox" id="one" value="John Doe"/>John Doe</label>
+                <label style={{marginLeft: "220px"}} htmlFor="subject-topics">Assign Tutor:</label>
+                <div id="checkboxes" style={{minWidth: "500px", placeContent: "start space-evenly"}}>
+                    {tutors && tutors.map((tutor, index) => (
+                      <div style={{display: "block", minWidth: "100px"}}>
+                        <input style={{width: "auto"}} type="checkbox" key={index} value={tutor?.username} defaultChecked={this.state.isChecked} onChange={this.toggleChange}/>
+                        <label>{tutor?.username}</label>
+                      </div>
+                    ))}
                 </div>
               </div>
           <Button size="small" variant="contained" onClick={this.saveSubject}>Submit</Button>

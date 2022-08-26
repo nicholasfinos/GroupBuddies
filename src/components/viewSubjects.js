@@ -71,7 +71,7 @@ class SubjectList extends Component {
             {currentSubject ? (
               <div style={{ "marginLeft": "200px" }}>
                 <br />
-                <div id="toPrint">
+                <div>
                   <h2>Subject</h2>
                   <div>
                     <label><strong>Subject Coordinator:</strong></label>{" "}{currentSubject.subjectCoordinator}
