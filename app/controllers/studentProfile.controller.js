@@ -30,5 +30,6 @@ exports.getStudentProfile = async (req, res) => {
         }
         console.log("added profile to studentProfiles collection");
       });
+      return res.status(200).send({ message: "Complete" });
     });
 }

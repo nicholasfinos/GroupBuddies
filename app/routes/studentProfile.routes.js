@@ -9,5 +9,5 @@ module.exports = function (app) {
     next();
   });
 
-  app.put("/api/studentProfile", controller.getStudentProfile);
+  app.post("/api/studentProfile", controller.getStudentProfile);
 }
