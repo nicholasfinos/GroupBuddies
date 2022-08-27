@@ -12,6 +12,8 @@ class SubjectList extends Component {
     this.state = {
       subjects: [],
       currentSubject: null,
+      groupAssessment: "",
+      subjectTopics: "",
       currentIndex: -1
     };
   }
@@ -45,10 +47,30 @@ class SubjectList extends Component {
   }
 
   setActiveSubject(subject, index) {
-    this.setState({
-      currentSubject: subject,
-      currentIndex: index
-    });
+    if(subject.groupAssessment === true) {
+      this.setState({
+        currentSubject: subject,
+        groupAssessment: "Yes",
+        currentIndex: index
+      });
+    }
+    else {
+      this.setState({
+        currentSubject: subject,
+        groupAssessment: "No",
+        currentIndex: index
+      });
+    }
+
+    if(subject.subjectTopics.size !== 0) {
+      var str = "";
+
+      for(let i = 0; i < subject.subjectTopics.length; i++) {
+        str += subject.subjectTopics[i]  + ",";
+      }
+
+      this.setState({ subjectTopics: str });
+    }
   }
 
   render() {
@@ -80,16 +102,16 @@ class SubjectList extends Component {
                     <label><strong>Subject Name:</strong></label>{" "}{currentSubject.subjectName}
                   </div>
                   <div>
-                    <label><strong>Number of Tutorials:</strong></label>{" "}{currentSubject.numberTutorals}
+                    <label><strong>Number of Tutorials:</strong></label>{" "}{currentSubject.tutorialNumbers}
                   </div>
                   <div>
                     <label><strong>Semester:</strong></label>{" "}{currentSubject.semester}
                   </div>
                   <div>
-                    <label><strong>Group Assessment:</strong></label>{" "}{currentSubject.groupAssessment}
+                    <label><strong>Group Assessment:</strong></label>{" "}{this.state.groupAssessment}
                   </div>
                   <div>
-                    <label><strong>Subject Topics:</strong></label>{" "}{currentSubject.subjectTopics}
+                    <label><strong>Subject Topics:</strong></label>{" "}{this.state.subjectTopics}
                   </div>
                 </div>
               </div>

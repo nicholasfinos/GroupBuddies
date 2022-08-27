@@ -7,7 +7,6 @@ exports.viewSubjects = (req, res) => {
     .then((data) => {
       Subject.find({subjectCoordinator : [data[0]._id]})
         .then((doc) => {
-          console.log(doc);
           res.status(200).send(doc);
         })
         .catch((err) => {
