@@ -1,5 +1,6 @@
 import React from "react";
 import { Button } from "@material-ui/core";
+import { Grid, ListItem } from "@material-ui/core"; 
 import TutorDataService from "../services/tutor-service";
 import SubjectDataService from "../services/subject-service";
 
@@ -21,6 +22,8 @@ class CreateSubject extends React.Component {
     this.onChangeTutorialNumbers = this.onChangeTutorialNumbers.bind(this);
     this.onChangeGroupAssessment = this.onChangeGroupAssessment.bind(this);
     this.onChangeSubjectTopics = this.onChangeSubjectTopics.bind(this);
+    this.retrieveTutors = this.retrieveTutors.bind(this);
+    this.refreshList = this.refreshList.bind(this);
     this.onChangeSemester = this.onChangeSemester.bind(this);
 
     this.state = {
@@ -33,7 +36,9 @@ class CreateSubject extends React.Component {
       submitted: false,
       tutors: [],
       assignedTutor: "",
-      isChecked: false,
+      currentItem: null,
+      currentIndex: -1,
+      addedtutors: [],
       message: ""
     };
   }
@@ -41,8 +46,8 @@ class CreateSubject extends React.Component {
   componentDidMount() {
     const URL = String(this.props.match.path);
     const name = String(URL.substring(URL.lastIndexOf("/") + 1, URL.length));
-    this.setState({ username: name });
-    this.retrieveTutors(name);
+    this.setState({username: name});
+    this.retrieveTutors();
   }
 
   onChangeGroupAssessment(e) {
@@ -71,17 +76,25 @@ class CreateSubject extends React.Component {
     });
   }
 
-  retrieveTutors(username) {
-    TutorDataService.getTutors(username)
-      .then(response => {
-        this.setState({
-          tutors: response.data
+  retrieveTutors() {
+    TutorDataService.view()
+    .then(response => {
+      this.setState({
+        tutors: response.data
         });
         console.log(response.data);
       })
       .catch(e => {
         console.log(e);
       });
+  }
+
+  refreshList() {
+    this.retrieveTutors();
+    this.setState({
+      currentTutor: null,
+      currentIndex: -1
+    });
   }
 
   saveSubject = () => {
@@ -142,9 +155,42 @@ class CreateSubject extends React.Component {
     this.componentDidMount();
   }
 
-  render() {
-    const { tutors } = this.state;
+  addTutor(index) {
+    //Create a tutor object
+    const listTutor = this.state.tutors
 
+    var data = {
+      username: listTutor[index].username,
+      email: listTutor[index].email,
+      password: listTutor[index].password,
+      name: listTutor[index].name,
+    };
+
+    //Push it to addedTutor list
+    const list = this.state.addedtutors;
+    list.push(data);
+
+    //Save value
+    this.setState({
+      addedtutors: list,
+      currentItem: null,
+    });
+  }
+
+  deleteTutor(index) {
+    //Pop the selected tutor
+    const list = this.state.addedtutors;
+    list.splice(index, 1);
+
+    //Save Value
+    this.setState({
+      addedtutors: list,
+      currentItem: null,
+    });
+  }
+
+  render() {
+    const { tutors, currentIndex, currentItem, addedtutors } = this.state; 
     return (
       <div style={{ textAlign: "center", maxWidth: '100%', fontFamily: "Times New Roman" }} className="form">
         <h3>Create a New Subject</h3>
@@ -155,60 +201,73 @@ class CreateSubject extends React.Component {
           </div>
         ) : (
           <div className="card">
-            <div className="form-group">
-              <label htmlFor="subject-name">Subject Name: </label>
-              <input className="form-control" style={{ maxWidth: '500px' }} type="text" name="subjectName" onChange={this.onChangeSubjectName} validations={[required]} />
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="semester">Semester: </label>
-              <input className="form-control" style={{ maxWidth: '500px' }} type="text" name="semester" onChange={this.onChangeSemester} validations={[required]} />
-            </div>
-
-            <div className="form-group">
-              <label style={{ marginLeft: "220px" }} htmlFor="tutorial numbers">Number of Tutorials:</label>
-              <select className="form-group border" style={{ minWidth: "500px" }} onChange={this.onChangeTutorialNumbers} validations={[required]}>
-                <option value="" disabled selected>Select your option</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-                <option value="8">8</option>
-                <option value="9">9</option>
-                <option value="10">10</option>
-              </select>
-            </div>
-
-            <div className="form-group">
-              <label style={{ marginLeft: "220px" }} htmlFor="group-assessment">Group Assessment:</label>
-              <select className="border" style={{ minWidth: "500px" }} onChange={this.onChangeGroupAssessment} validations={[required]}>
-                <option value="" disabled selected>Select your option</option>
-                <option value="Yes">Yes</option>
-                <option value="No">No</option>
-              </select>
-            </div>
-
-            <div className="form-group">
-              <label style={{ marginLeft: "220px" }} htmlFor="subject-topics">Subject Topics:</label>
-              <textarea className="border" style={{ minWidth: "500px" }} id="topics" name="topics" rows="5" placeholder="Please seperate each topic with a comma..." onChange={this.onChangeSubjectTopics} validations={[required]}></textarea>
-            </div>
-
-            <div className="form-group">
-              <label style={{ marginLeft: "220px" }} htmlFor="subject-topics">Assign Tutor:</label>
-              <div id="checkboxes" style={{ minWidth: "500px", placeContent: "start space-evenly" }}>
-                {tutors && tutors.map((tutor, index) => (
-                  <div style={{ display: "block", minWidth: "100px" }}>
-                    <input style={{ width: "auto" }} type="checkbox" key={index} value={tutor?.username} defaultChecked={this.state.isChecked} onChange={this.toggleChange} />
-                    <label>{tutor?.username}</label>
-                  </div>
-                ))}
+              <div className="form-group">
+                <label htmlFor="subject-name">Subject Name: </label>
+                  <input className="form-control" style={{maxWidth: '500px'}} type="text" name="subjectName" onChange={this.onChangeSubjectName} validations={[required]}/>
               </div>
-            </div>
-            <Button size="small" variant="contained" onClick={this.saveSubject}>Submit</Button>
-            <p>{this.state.message}</p>
+
+              <div className="form-group">
+                <label htmlFor="semester">Semester: </label>
+                  <input className="form-control" style={{maxWidth: '500px'}} type="text" name="semester" onChange={this.onChangeSemester} validations={[required]}/>
+              </div>
+                    
+              <div className="form-group">
+                <label style={{marginLeft: "220px"}} htmlFor="tutorial numbers">Number of Tutorials:</label>
+                <select className="form-group border" style={{minWidth: "500px"}} onChange={this.onChangeTutorialNumbers} validations={[required]}>
+                  <option value="" disabled selected>Select your option</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                  <option value="7">7</option>
+                  <option value="8">8</option>
+                  <option value="9">9</option>
+                  <option value="10">10</option>
+                </select>
+              </div>
+                    
+              <div className="form-group">
+                <label style={{marginLeft: "220px"}} htmlFor="group-assessment">Group Assessment:</label>
+                <select className="border" style={{minWidth: "500px"}} onChange={this.onChangeGroupAssessment} validations={[required]}>
+                  <option value="" disabled selected>Select your option</option>
+                  <option value="Yes">Yes</option>
+                  <option value="No">No</option>
+                </select>
+              </div>
+              
+              <div className="form-group">
+                <label style={{marginLeft: "220px"}} htmlFor="subject-topics">Subject Topics:</label>
+                <textarea className="border" style={{minWidth: "500px"}} id="topics" name="topics" rows="5" placeholder="Please seperate each topic with a comma..." onChange={this.onChangeSubjectTopics} validations={[required]}></textarea>
+              </div>
+
+              <div>
+                <Grid container>
+                  <Grid item md={4}>
+                    <h4>Tutors</h4>
+                    <div className="form-group">
+                      {tutors && tutors.map((tutor, index) => (
+                        <ListItem style={{ paddingP: "20px"}} selected={index === currentIndex} onClick={() => this.addTutor(index)} divider button key={index}>
+                            {"Name: " + tutor?.username}                     
+                        </ListItem>
+                      ))}
+                    </div>
+                  </Grid>
+                  <Grid item md={8}>
+                    <h4>Assigned Tutors to Tutorial Class</h4>
+                    <div className="form-group">
+                      {addedtutors.map((addedTutor, index) => (
+                        <ListItem style={{padding: "20px"}} selected={index === currentIndex} onClick={() => this.deleteTutor(index)} divider button key={index}>
+                          {"Name: " + addedTutor?.username}
+                        </ListItem>
+                      ))}
+                    </div>
+                  </Grid> 
+                </Grid>
+              </div>          
+          <Button size="small" variant="contained" onClick={this.saveSubject}>Submit</Button>
+          <p>{this.state.message}</p>
           </div>
         )}
       </div>
