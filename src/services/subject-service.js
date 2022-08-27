@@ -10,7 +10,7 @@ class SubjectDataService {
     }
 
     findOne(subjectName) {
-        return http.post(`/subject/create/${subjectName}`)
+        return http.get(`/subject/findOne/${subjectName}`)
     }
 }
 

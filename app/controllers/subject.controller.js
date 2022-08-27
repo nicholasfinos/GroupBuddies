@@ -1,3 +1,4 @@
+const { ConnectionPoolClosedEvent } = require("mongodb");
 const Subject = require("../models/subject.model");
 const User = require("../models/user.model");
 
@@ -17,6 +18,7 @@ exports.viewSubjects = (req, res) => {
 exports.findOneSubject = (req, res) => {
   Subject.findOne({subjectName: req.body.subjectName})
     .then((data) => {
+      console.log(data);
       res.send(data);
     })
     .catch((err) => {
