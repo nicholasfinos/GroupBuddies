@@ -4,7 +4,7 @@ const Subject = mongoose.model(
     "Subject",
     new mongoose.Schema({
         subjectName: String,
-        numberTutorials: Number,
+        tutorialNumbers: Number,
         semester: String,
         groupAssessment: Boolean,
         subjectTopics: Array,
@@ -12,11 +12,10 @@ const Subject = mongoose.model(
         //     type: mongoose.Schema.Types.ObjectId,
         //     ref: "Tutorial"
         // }],
-        subjectCoordinator: String
-        // [{
-        //     type: mongoose.Schema.Types.ObjectId,
-        //     ref: "User"
-        // }]
+        subjectCoordinator: [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "User"
+        }]
     })
 );
 

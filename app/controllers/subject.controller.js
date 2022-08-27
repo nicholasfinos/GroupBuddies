@@ -1,4 +1,5 @@
 const Subject = require("../models/subject.model");
+const User = require("../models/user.model");
 
 exports.viewSubjects = (req, res) => {
   Subject.find({subjectCoordinator: req.params.username})
@@ -19,18 +20,19 @@ exports.createSubject = (req, res) => {
     subjectCoordinator: req.params.username,
     subjectName: req.body.subjectName,
     groupAssessment: req.body.groupAssessment,
-    numberTutorials: req.body.numberTutorials,
-    topics: req.body.topics,
+    tutorialNumbers: parseInt(req.body.tutorialNumbers),
+    subjectTopics: req.body.subjectTopics,
     semester: req.body.semester,
   });
 
-  if(req.body.topics?.length !== 0){
-    const splitQuery = req.body.topics?.split(",")
+  if(req.body.subjectTopics?.length !== 0){
+    const splitQuery = req.body.subjectTopics?.split(",")
     var i = 0
     for (i = 0; i < splitQuery?.length; i++){
         subject.subjectTopics[i] = splitQuery[i].trim()
     }
   }
+
 
   // temp solution: (perm. soln to make all fields compulsory)
   if(req.body.numberTutorials === undefined){
@@ -39,25 +41,28 @@ exports.createSubject = (req, res) => {
     subject.numberTutorials = parseInt(req.body.numberTutorials);
   }
 
-  if(req.params.groupAssessment === "Yes") {
+  if(req.body.groupAssessment === "Yes") {
     subject.groupAssessment = true;
   } else {
     subject.groupAssessment = false;
   }
 
-  console.log(subject)
+  User.find({username: req.params.username})
+    .then((data) => {
+      subject.subjectCoordinator = data;
 
-  subject.save((err, subject) => {
-    if (err) {
-      res.status(500).send({ message : err });
-      return;
-    }
-    else {
-      res
-        .status(200)
-        .send({
-          message: "Subject " + subject.subjectName + " has been created for: " + req.params.username,
-        });
-    }
-  });
+      subject.save((err, subject) => {
+        if (err) {
+          res.status(500).send({ message : err });
+          return;
+        }
+        else {
+          res
+            .status(200)
+            .send({
+              message: "Subject " + subject.subjectName + " has been created for: " + req.params.username,
+            });
+        }
+      });
+    })
 };
