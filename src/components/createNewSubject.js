@@ -25,7 +25,7 @@ class CreateSubject extends React.Component {
     this.retrieveTutors = this.retrieveTutors.bind(this);
     this.refreshList = this.refreshList.bind(this);
     this.onChangeSemester = this.onChangeSemester.bind(this);
-    
+
     this.state = {
       subjectName: "",
       tutorialNumbers: "",
@@ -39,6 +39,7 @@ class CreateSubject extends React.Component {
       currentItem: null,
       currentIndex: -1,
       addedtutors: [],
+      message: ""
     };
   }
 
@@ -50,23 +51,23 @@ class CreateSubject extends React.Component {
   }
 
   onChangeGroupAssessment(e) {
-    this.setState({groupAssessment: e.target.value});
+    this.setState({ groupAssessment: e.target.value });
   }
-  
+
   onChangeSemester(e) {
-    this.setState({semester: e.target.value});
+    this.setState({ semester: e.target.value });
   }
 
   onChangeSubjectName(e) {
-    this.setState({subjectName: e.target.value});
+    this.setState({ subjectName: e.target.value });
   }
 
   onChangeTutorialNumbers(e) {
-    this.setState({tutorialNumbers: e.target.value});
+    this.setState({ tutorialNumbers: e.target.value });
   }
 
   onChangeSubjectTopics(e) {
-    this.setState({subjectTopics: e.target.value});
+    this.setState({ subjectTopics: e.target.value });
   }
 
   toggleChange = () => {
@@ -80,12 +81,12 @@ class CreateSubject extends React.Component {
     .then(response => {
       this.setState({
         tutors: response.data
+        });
+        console.log(response.data);
+      })
+      .catch(e => {
+        console.log(e);
       });
-      console.log(response.data);
-    })
-    .catch(e => {
-      console.log(e);
-    });
   }
 
   refreshList() {
@@ -109,22 +110,33 @@ class CreateSubject extends React.Component {
     }
     console.log(data)
 
-    SubjectDataService.create(data, data.username)
+    SubjectDataService.findOne(data.subjectName)
       .then((response) => {
-        this.setState({
-          subjectName: response.data?.subjectName,
-          tutorialNumbers: response.data?.tutorialNumbers,
-          groupAssessment: response.data?.groupAssessment,
-          semester: response.data?.semester,
-          subjectTopics: response.data?.subjectTopics,
-          submitted: true,
-          assignedTutor: response.data?.assignedTutors
-        });
-        console.log(response.data);        
+        console.log(response.data);
+        if (response.data === null) {
+          SubjectDataService.create(data, data.username)
+            .then((response) => {
+              this.setState({
+                subjectName: response.data?.subjectName,
+                tutorialNumbers: response.data?.tutorialNumbers,
+                groupAssessment: response.data?.groupAssessment,
+                semester: response.data?.semester,
+                subjectTopics: response.data?.subjectTopics,
+                submitted: true,
+                assignedTutor: response.data?.assignedTutors
+              });
+              console.log(response.data);
+            })
+            .catch((e) => {
+              console.log(e);
+            });
+        }
+        else {
+          this.setState({message: "Duplicate subject"})
+        }
       })
-      .catch((e) => {
-        console.log(e);
-      });
+
+
   }
 
   // Create new subject page
@@ -179,9 +191,8 @@ class CreateSubject extends React.Component {
 
   render() {
     const { tutors, currentIndex, currentItem, addedtutors } = this.state; 
-  
     return (
-      <div style={{textAlign: "center", maxWidth: '100%', fontFamily: "Times New Roman"}} className="form">
+      <div style={{ textAlign: "center", maxWidth: '100%', fontFamily: "Times New Roman" }} className="form">
         <h3>Create a New Subject</h3>
         {this.state.submitted ? (
           <div>
@@ -256,6 +267,7 @@ class CreateSubject extends React.Component {
                 </Grid>
               </div>          
           <Button size="small" variant="contained" onClick={this.saveSubject}>Submit</Button>
+          <p>{this.state.message}</p>
           </div>
         )}
       </div>

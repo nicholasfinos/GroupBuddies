@@ -8,5 +8,8 @@ module.exports = app => {
   // Create a new Subject
   router.post("/create/:username", subject.createSubject);
 
+  //Find one subject 
+  router.get("/findOne/:subjectName", subject.findOneSubject);
+
   app.use('/api/subject', router);
 };
