@@ -1,5 +1,6 @@
 import React from "react";
-import { Button, ListItem } from "@material-ui/core";
+import { Button } from "@material-ui/core";
+import { Grid, ListItem } from "@material-ui/core"; 
 import TutorDataService from "../services/tutor-service";
 import SubjectDataService from "../services/subject-service";
 
@@ -33,7 +34,9 @@ class CreateSubject extends React.Component {
       submitted: false,
       tutors: [],
       assignedTutor: "",
-      isChecked: false
+      currentItem: null,
+      currentIndex: -1,
+      addedtutors: [],
     };
   }
 
@@ -130,8 +133,40 @@ class CreateSubject extends React.Component {
     this.componentDidMount();
   }
 
+  addTutor(tutor) {
+    //Create a tutor object
+    var data = {
+      username: tutor.username,
+      email: tutor.email,
+      password: tutor.password,
+      name: tutor.name,
+    };
+
+    //Push it to addedTutor list
+    const list = this.state.addedtutors;
+    list.push(data);
+
+    //Save value
+    this.setState({
+      addedtutors: list,
+      currentItem: null,
+    });
+  }
+
+  deleteTutor(index) {
+    //Pop the selected tutor
+    const list = this.state.addedtutors;
+    list.splice(index, 1);
+
+    //Save Value
+    this.setState({
+      addedtutors: list,
+      currentItem: null,
+    });
+  }
+
   render() {
-    const { tutors } = this.state; 
+    const { tutors, currentIndex, currentItem, addedtutors } = this.state; 
   
     return (
       <div style={{textAlign: "center", maxWidth: '100%', fontFamily: "Times New Roman"}} className="form">
@@ -190,27 +225,41 @@ class CreateSubject extends React.Component {
                     <h4>Tutors</h4>
                     <div className="form-group">
                       {tutors && tutors.map((tutor, index) => (
-                        //<ListItem style={{ paddingP: "20px"}} selected={index === currentIndex} onClick={() => this.}
-                        //</ListItem>
+                        <ListItem style={{ paddingP: "20px"}} selected={index === currentIndex} onClick={() => this.retrieveTutors(tutor, index)} divider button key={index}>
+                            {" "}{tutor.name}{" "}                     
+                        </ListItem>
                       ))}
                     </div>
                   </Grid>
-                
-              {/*<div className="form-group">
-                <label style={{marginLeft: "220px"}} htmlFor="subject-topics">Assign Tutor:</label>
-                <div id="checkboxes" style={{minWidth: "500px", placeContent: "start space-evenly"}}>
-                    {tutors && tutors.map((tutor, index) => (
-                      <div style={{display: "block", minWidth: "100px"}}>
-                        <input style={{width: "auto"}} type="checkbox" key={index} value={tutor?.username} defaultChecked={this.state.isChecked} onChange={this.toggleChange}/>
-                        <label>{tutor?.username}</label>
+                  <Grid item md={4}>
+                    {currentItem ? (
+                      <div>
+                        <h4>Tutor Selected</h4>
+                        <div>
+                          <label><strong>Name:</strong></label>{" "}{currentItem.name}
+                        </div>
+                        <br />
+                        <Button
+                          style={{ backgroundColor: "#d3d3af", borderColor: "#d3d3af", WebkitTextFillColor: "white"}} size="small" variant="contained" onClick={() => this.addTutor(currentItem)}>
+                          Add Tutor
+                        </Button>
                       </div>
-                    ))}
-                </div>
-                    </div>*/}
-              
-          
-
-    
+                    ) : (
+                      <div></div>
+                    )}
+                  </Grid>
+                  <Grid item md={4}>
+                    <h4>Added Tutors</h4>
+                    <div className="form-group">
+                      {addedtutors.map((addedTutor, index) => (
+                        <ListItem style={{padding: "20px"}} selected={index === currentIndex} onClick={() => this.deleteTutor(index)} divider button key={index}>
+                          {" "}{addedTutor.name}{" "}
+                        </ListItem>
+                      ))}
+                    </div>
+                  </Grid> 
+                </Grid>
+              </div>          
           <Button size="small" variant="contained" onClick={this.saveSubject}>Submit</Button>
           </div>
         )}
