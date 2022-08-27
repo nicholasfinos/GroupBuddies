@@ -1,6 +1,6 @@
-const { ConnectionPoolClosedEvent } = require("mongodb");
 const Subject = require("../models/subject.model");
 const User = require("../models/user.model");
+const Tutorial = require("../models/tutorial.model");
 
 exports.viewSubjects = (req, res) => {
   Subject.find({subjectCoordinator: req.params.username})
@@ -16,7 +16,7 @@ exports.viewSubjects = (req, res) => {
 };
 
 exports.findOneSubject = (req, res) => {
-  Subject.findOne({subjectName: req.body.subjectName})
+  Subject.find({subjectName: req.params.subjectName})
     .then((data) => {
       console.log(data);
       res.send(data);
@@ -37,6 +37,7 @@ exports.createSubject = (req, res) => {
     tutorialNumbers: parseInt(req.body.tutorialNumbers),
     subjectTopics: req.body.subjectTopics,
     semester: req.body.semester,
+    tutorials: null
   });
 
   if(req.body.subjectTopics?.length !== 0){
@@ -47,19 +48,45 @@ exports.createSubject = (req, res) => {
     }
   }
 
-
-  // temp solution: (perm. soln to make all fields compulsory)
-  if(req.body.numberTutorials === undefined){
-    subject.numberTutorials = 0;
-  } else {
-    subject.numberTutorials = parseInt(req.body.numberTutorials);
-  }
-
   if(req.body.groupAssessment === "Yes") {
     subject.groupAssessment = true;
   } else {
     subject.groupAssessment = false;
   }
+  
+  
+  for(let i = 0; i < subject.tutorialNumbers; i++) {
+    
+    const tutorial = new Tutorial({
+      subjectName: req.body.subjectName,
+      number: (i + 1),
+      timeSlot: req.body.assignedTutor[i].timeSlot,
+      day: req.body.assignedTutor[i].day,
+      tutor: null,
+      allStudents: null
+    });
+
+
+    User.find({username: req.body.assignedTutor[i].username})
+    .then((data) => {
+      tutorial.tutor = data
+      tutorial.save((err, tutorial) => {
+        if(err) {
+          res.status(500).send({ message : err });
+          return;
+        }
+      })
+    });
+
+    if(i === 0) {
+      subject.tutorials = tutorial._id;
+    }
+    else {
+      subject.tutorials.push(tutorial._id);
+    }
+  }
+
+
 
   User.find({username: req.params.username})
     .then((data) => {
@@ -70,7 +97,7 @@ exports.createSubject = (req, res) => {
           res.status(500).send({ message : err });
           return;
         }
-        else {
+        else {          
           res
             .status(200)
             .send({
