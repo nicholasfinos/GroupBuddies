@@ -22,6 +22,8 @@ class CreateSubject extends React.Component {
     this.onChangeTutorialNumbers = this.onChangeTutorialNumbers.bind(this);
     this.onChangeGroupAssessment = this.onChangeGroupAssessment.bind(this);
     this.onChangeSubjectTopics = this.onChangeSubjectTopics.bind(this);
+    this.retrieveTutors = this.retrieveTutors.bind(this);
+    this.refreshList = this.refreshList.bind(this);
     this.onChangeSemester = this.onChangeSemester.bind(this);
     
     this.state = {
@@ -44,7 +46,7 @@ class CreateSubject extends React.Component {
     const URL = String(this.props.match.path);
     const name = String(URL.substring(URL.lastIndexOf("/") + 1, URL.length));
     this.setState({username: name});
-    this.retrieveTutors(name);
+    this.retrieveTutors();
   }
 
   onChangeGroupAssessment(e) {
@@ -83,6 +85,14 @@ class CreateSubject extends React.Component {
     })
     .catch(e => {
       console.log(e);
+    });
+  }
+
+  refreshList() {
+    this.retrieveTutors();
+    this.setState({
+      currentTutor: null,
+      currentIndex: -1
     });
   }
 
@@ -133,13 +143,15 @@ class CreateSubject extends React.Component {
     this.componentDidMount();
   }
 
-  addTutor(tutor) {
+  addTutor(index) {
     //Create a tutor object
+    const listTutor = this.state.tutors
+
     var data = {
-      username: tutor.username,
-      email: tutor.email,
-      password: tutor.password,
-      name: tutor.name,
+      username: listTutor[index].username,
+      email: listTutor[index].email,
+      password: listTutor[index].password,
+      name: listTutor[index].name,
     };
 
     //Push it to addedTutor list
@@ -225,35 +237,18 @@ class CreateSubject extends React.Component {
                     <h4>Tutors</h4>
                     <div className="form-group">
                       {tutors && tutors.map((tutor, index) => (
-                        <ListItem style={{ paddingP: "20px"}} selected={index === currentIndex} onClick={() => this.retrieveTutors(tutor, index)} divider button key={index}>
-                            {" "}{tutor.name}{" "}                     
+                        <ListItem style={{ paddingP: "20px"}} selected={index === currentIndex} onClick={() => this.addTutor(index)} divider button key={index}>
+                            {"Name: " + tutor?.username}                     
                         </ListItem>
                       ))}
                     </div>
                   </Grid>
-                  <Grid item md={4}>
-                    {currentItem ? (
-                      <div>
-                        <h4>Tutor Selected</h4>
-                        <div>
-                          <label><strong>Name:</strong></label>{" "}{currentItem.name}
-                        </div>
-                        <br />
-                        <Button
-                          style={{ backgroundColor: "#d3d3af", borderColor: "#d3d3af", WebkitTextFillColor: "white"}} size="small" variant="contained" onClick={() => this.addTutor(currentItem)}>
-                          Add Tutor
-                        </Button>
-                      </div>
-                    ) : (
-                      <div></div>
-                    )}
-                  </Grid>
-                  <Grid item md={4}>
-                    <h4>Added Tutors</h4>
+                  <Grid item md={8}>
+                    <h4>Assigned Tutors to Tutorial Class</h4>
                     <div className="form-group">
                       {addedtutors.map((addedTutor, index) => (
                         <ListItem style={{padding: "20px"}} selected={index === currentIndex} onClick={() => this.deleteTutor(index)} divider button key={index}>
-                          {" "}{addedTutor.name}{" "}
+                          {"Name: " + addedTutor?.username}
                         </ListItem>
                       ))}
                     </div>
