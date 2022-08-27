@@ -70,8 +70,8 @@ class CreateSubject extends React.Component {
     });
   }
 
-  retrieveTutors(username) {
-    TutorDataService.getTutors(username)
+  retrieveTutors() {
+    TutorDataService.view()
     .then(response => {
       this.setState({
         tutors: response.data
