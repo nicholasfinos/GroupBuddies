@@ -14,6 +14,18 @@ exports.viewSubjects = (req, res) => {
     });
 };
 
+exports.findOneSubject = (req, res) => {
+  Subject.findOne({subjectName: req.body.subjectName})
+    .then((data) => {
+      res.send(data);
+    })
+    .catch((err) => {
+      res
+        .status(500)
+        .send({ message: "Error retriving Subject with name " + req.body.subjectName});
+    })
+}
+
 exports.createSubject = (req, res) => {
   // Create Subject
   const subject = new Subject({

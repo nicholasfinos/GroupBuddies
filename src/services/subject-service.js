@@ -8,6 +8,10 @@ class SubjectDataService {
     create(data, username) {
         return http.post(`/subject/create/${username}`, data);
     }
+
+    findOne(subjectName) {
+        return http.post(`/subject/create/${subjectName}`)
+    }
 }
 
 export default new SubjectDataService();
