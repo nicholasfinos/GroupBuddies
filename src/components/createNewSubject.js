@@ -1,5 +1,5 @@
 import React from "react";
-import { Button } from "@material-ui/core";
+import { Button, ListItem } from "@material-ui/core";
 import TutorDataService from "../services/tutor-service";
 import SubjectDataService from "../services/subject-service";
 
@@ -184,7 +184,19 @@ class CreateSubject extends React.Component {
                 <textarea className="border" style={{minWidth: "500px"}} id="topics" name="topics" rows="5" placeholder="Please seperate each topic with a comma..." onChange={this.onChangeSubjectTopics} validations={[required]}></textarea>
               </div>
 
-              <div className="form-group">
+              <div>
+                <Grid container>
+                  <Grid item md={4}>
+                    <h4>Tutors</h4>
+                    <div className="form-group">
+                      {tutors && tutors.map((tutor, index) => (
+                        //<ListItem style={{ paddingP: "20px"}} selected={index === currentIndex} onClick={() => this.}
+                        //</ListItem>
+                      ))}
+                    </div>
+                  </Grid>
+                
+              {/*<div className="form-group">
                 <label style={{marginLeft: "220px"}} htmlFor="subject-topics">Assign Tutor:</label>
                 <div id="checkboxes" style={{minWidth: "500px", placeContent: "start space-evenly"}}>
                     {tutors && tutors.map((tutor, index) => (
@@ -194,7 +206,11 @@ class CreateSubject extends React.Component {
                       </div>
                     ))}
                 </div>
-              </div>
+                    </div>*/}
+              
+          
+
+    
           <Button size="small" variant="contained" onClick={this.saveSubject}>Submit</Button>
           </div>
         )}
