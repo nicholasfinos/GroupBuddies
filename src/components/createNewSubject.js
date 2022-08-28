@@ -221,7 +221,7 @@ class CreateSubject extends React.Component {
   render() {
     const { tutors, currentIndex, addedtutors, currentTutor } = this.state;
     return (
-      <div style={{ textAlign: "center", maxWidth: '100%', fontFamily: "Times New Roman" }} className="form">
+      <div style={{textAlign: "center", maxWidth: '90%', fontFamily: "Times New Roman", marginLeft: "110px"}} className="form">
         <h3>Create a New Subject</h3>
         {this.state.submitted ? (
           <div>
@@ -229,14 +229,14 @@ class CreateSubject extends React.Component {
             <Button size="small" variant="contained" onClick={this.newSubject}>{" "}Create a Subject{" "}</Button>
           </div>
         ) : (
-          <div className="card">
+          <div className="card" style={{maxWidth: "100%", marginLeft: "0px", paddingLeft: "0px", paddingRight: "120px"}}>
             <div className="form-group">
-              <label htmlFor="subject-name">Subject Name: </label>
+              <label htmlFor="subject-name" style={{marginLeft: '220px'}}>Subject Name: </label>
               <input className="form-control" style={{ maxWidth: '500px' }} type="text" name="subjectName" onChange={this.onChangeSubjectName} validations={[required]} />
             </div>
 
             <div className="form-group">
-              <label htmlFor="semester">Semester: </label>
+              <label htmlFor="semester" style={{marginLeft: '220px'}}>Semester: </label>
               <input className="form-control" style={{ maxWidth: '500px' }} type="text" name="semester" onChange={this.onChangeSemester} validations={[required]} />
             </div>
 
@@ -270,15 +270,17 @@ class CreateSubject extends React.Component {
               <label style={{ marginLeft: "220px" }} htmlFor="subject-topics">Subject Topics:</label>
               <textarea className="border" style={{ minWidth: "500px" }} id="topics" name="topics" rows="5" placeholder="Please seperate each topic with a comma..." onChange={this.onChangeSubjectTopics} validations={[required]}></textarea>
             </div>
-
+            <br/>
             <div>
-              <Grid container>
+              <br/>
+              <Grid container style={{minWidth: "600px", alignContent: "center", paddingLeft: "150px"}}>
                 <Grid item md={4}>
                   <h4>Tutors</h4>
-                  <div className="form-group">
+                  <i>Please select a tutor from the list:</i>
+                  <div className="form-group" style={{flexDirection: "column"}}>
                     {tutors && tutors.map((tutor, index) => (
-                      <ListItem style={{ paddingP: "20px" }} selected={index === currentIndex} onClick={() => this.setActiveAddItem(tutor, index)} divider button key={index}>
-                        {"Name: " + tutor?.username}
+                      <ListItem style={{ padding: "20px", marginLeft: "15px", maxWidth: "200px"}} selected={index === currentIndex} onClick={() => this.setActiveAddItem(tutor, index)} divider button key={index}>
+                        {tutor?.username}
                       </ListItem>
                     ))}
                   </div>
@@ -289,32 +291,33 @@ class CreateSubject extends React.Component {
                       <h4>Tutor Selected</h4>
                       <div>
                         <label><strong></strong></label>{"Name: " + currentTutor?.username}
+                      <div className="form-group" style={{flexDirection: "column"}}>
+                        <div className="form-group">
+                          <label htmlFor="Day" style={{paddingRight: "5px"}}>Day:</label>
+                          <select className="form-group border" style={{minWidth: "200px"}} onChange={this.onChangeDay} validations={[required]}>
+                            <option value="" disabled selected>Select a day</option>
+                            <option value="Monday">Monday</option>
+                            <option value="Tuesday">Tuesday</option>
+                            <option value="Wednesday">Wednesday</option>
+                            <option value="Thursday">Thursday</option>
+                            <option value="Friday">Friday</option>
+                          </select>
+                        </div>
+                        <div className="form-group">
+                          <label htmlFor="timeSlot" style={{paddingRight: "5px"}}>Time Slot: </label>
+                          <input className="form-control" style={{ maxWidth: '500px' }} type="text" name="timeSlot" onChange={this.onChangeTimeSlot} validations={[required]} />
+                        </div>
                       </div>
-                      <div className="form-group">
-                        <label style={{ marginLeft: "220px" }} htmlFor="Day">Day:</label>
-                        <select className="form-group border" style={{ minWidth: "500px" }} onChange={this.onChangeDay} validations={[required]}>
-                          <option value="" disabled selected>Select your option</option>
-                          <option value="Monday">Monday</option>
-                          <option value="Tuesday">Tuesday</option>
-                          <option value="Wednesday">Wednesday</option>
-                          <option value="Thursday">Thursday</option>
-                          <option value="Friday">Friday</option>
-                        </select>
-                      </div>
-                      <div className="form-group">
-                        <label htmlFor="timeSlot">Time Slot: </label>
-                        <input className="form-control" style={{ maxWidth: '500px' }} type="text" name="timeSlot" onChange={this.onChangeTimeSlot} validations={[required]} />
-                      </div>
-                      <br />
                       <Button size="small" variant="contained" onClick={() => this.addTutor(currentTutor, this.state.timeSlot, this.state.day)}>Add Tutorial</Button>
+                      </div>
                     </div>
                   ) : (
                     <div></div>
                   )}
                 </Grid>
-                <Grid item md={4}>
+                <Grid item md={4} style={{paddingRight: "120px"}}>
                   <h4>Assigned Tutors to Tutorial Class</h4>
-                  <div className="form-group">
+                  <div className="form-group" style={{flexDirection: "column"}}>
                     {addedtutors.map((addedTutor, index) => (
                       <ListItem style={{ padding: "20px" }} selected={index === currentIndex} onClick={() => this.deleteTutor(index)} divider button key={index}>
                         {"Name: " + addedTutor?.username + ", TimeSlot: " + addedTutor.timeSlot}
@@ -324,7 +327,9 @@ class CreateSubject extends React.Component {
                 </Grid>
               </Grid>
             </div>
-            <Button size="small" variant="contained" onClick={this.saveSubject}>Submit</Button>
+            <br />
+            <br />
+            <Button size="small" variant="contained" style={{maxWidth: "700px", marginLeft: "225px"}} onClick={this.saveSubject}>Submit</Button>
             <p>{this.state.message}</p>
           </div>
         )}
