@@ -16,6 +16,10 @@ class SubjectDataService {
     findTutorial(subjectName) {
         return http.get(`/subject/findTutorial/${subjectName}`)
     }
+
+    findTutorialByTutor(_id) {
+        return http.get(`/subject/findTutorialByTutor/${_id}`)
+    }
 }
 
 export default new SubjectDataService();

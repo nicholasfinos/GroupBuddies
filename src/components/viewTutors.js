@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import TutorDataService from "../services/tutor-service";
+import SubjectDataService from "../services/subject-service";
 import { Grid, ListItem } from "@material-ui/core";
 
 class TutorList extends Component {
@@ -12,7 +13,8 @@ class TutorList extends Component {
     this.state = {
       tutors: [],
       currentTutor: null,
-      currentIndex: -1
+      currentIndex: -1,
+      tutorials: []
     };
   }
 
@@ -47,10 +49,18 @@ class TutorList extends Component {
       currentTutor: tutor,
       currentIndex: index
     });
+    console.log(tutor._id);
+    SubjectDataService.findTutorialByTutor(tutor._id)
+      .then((response) => {
+        this.setState({ tutorials: response.data });
+      })
+      .catch((e) => {
+        console.log(e);
+      })
   }
 
   render() {
-    const { tutors, currentTutor, currentIndex } = this.state;
+    const { tutors, currentTutor, currentIndex, tutorials } = this.state;
 
     return (
       <div style={{ fontFamily: "Times New Roman", textAlign: "center", "width": "80%", "marginLeft": "130px" }}>
@@ -73,6 +83,13 @@ class TutorList extends Component {
                   <h2>Tutor</h2>
                   <div>
                     <label><strong>Tutor Name:</strong></label>{" "}{currentTutor?.username}
+                  </div>
+                  <br />
+                  <h2>Tutorial List</h2>
+                  <div className="list-group">
+                    {tutorials && tutorials.map((tutorial, index) => (
+                      <ListItem selected={index === currentIndex} divider button style={{ padding: "20px" }} key={index}> {"Subject: " + tutorial?.subjectName + " Number: " + tutorial?.number + ", Day " + tutorial?.day + ", Time Slot: " + tutorial?.timeSlot} </ListItem>
+                    ))}
                   </div>
                 </div>
               </div>
