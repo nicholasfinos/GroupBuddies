@@ -1,7 +1,6 @@
 import React from "react";
 import "./studentProfile.css";
 import Form from "react-validation/build/form";
-import image from "../media/blank.webp";
 
 class StudentProfile extends React.Component {
   constructor(props) {
@@ -54,7 +53,7 @@ class StudentProfile extends React.Component {
 
   render() {
 
-    const { studentName } = this.state;
+    // const { studentName } = this.state;
 
     return (
       <Form style={{textAlign: "center", maxWidth: '100%', fontFamily: "Times New Roman"}} className="form">
