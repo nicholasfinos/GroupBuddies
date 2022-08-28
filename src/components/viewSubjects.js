@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import SubjectDataService from "../services/subject-service";
+import TutorDataService from "../services/tutor-service";
 import { Grid, ListItem } from "@material-ui/core";
 
 class SubjectList extends Component {
@@ -11,10 +12,14 @@ class SubjectList extends Component {
 
     this.state = {
       subjects: [],
+      tutorials: [],
+      currentTutorial: null,
       currentSubject: null,
       groupAssessment: "",
       subjectTopics: "",
-      currentIndex: -1
+      currentIndex: -1,
+      subjectCoordinator: "",
+      tutor: ""
     };
   }
 
@@ -47,7 +52,7 @@ class SubjectList extends Component {
   }
 
   setActiveSubject(subject, index) {
-    if(subject.groupAssessment === true) {
+    if (subject.groupAssessment === true) {
       this.setState({
         currentSubject: subject,
         groupAssessment: "Yes",
@@ -62,19 +67,50 @@ class SubjectList extends Component {
       });
     }
 
-    if(subject.subjectTopics.size !== 0) {
+    if (subject.subjectTopics.size !== 0) {
       var str = "";
 
-      for(let i = 0; i < subject.subjectTopics.length; i++) {
-        str += subject.subjectTopics[i]  + ",";
+      for (let i = 0; i < subject.subjectTopics.length; i++) {
+        str += subject.subjectTopics[i] + ",";
       }
 
       this.setState({ subjectTopics: str });
     }
+
+    TutorDataService.getTutor(subject.subjectCoordinator)
+      .then((response) => {
+        this.setState({ subjectCoordinator: response.data.username });
+      })
+      .catch((e) => {
+        console.log(e);
+      })
+
+    SubjectDataService.findTutorial(subject.subjectName)
+      .then((response) => {
+        this.setState({ tutorials: response.data });
+      })
+      .catch((e) => {
+        console.log(e);
+      })
+  }
+
+  setActiveTutorial(tutorial, index) {
+    TutorDataService.getTutor(tutorial.tutor)
+      .then((response) => {
+        this.setState({ tutor: response.data.username });
+      })
+      .catch((e) => {
+        console.log(e);
+      })
+
+    this.setState({
+      currentTutorial: tutorial,
+      currentIndex: index
+    });
   }
 
   render() {
-    const { subjects, currentSubject, currentIndex } = this.state;
+    const { subjects, currentSubject, currentIndex, tutorials, currentTutorial, subjectCoordinator, tutor } = this.state;
 
     return (
       <div style={{ fontFamily: "Times New Roman", textAlign: "center", "width": "80%", "marginLeft": "130px" }}>
@@ -89,14 +125,14 @@ class SubjectList extends Component {
               ))}
             </div>
           </Grid>
-          <Grid item md={8}>
+          <Grid item md={4}>
             {currentSubject ? (
               <div style={{ "marginLeft": "200px" }}>
                 <br />
                 <div>
                   <h2>Subject</h2>
                   <div>
-                    <label><strong>Subject Coordinator:</strong></label>{" "}{currentSubject.subjectCoordinator}
+                    <label><strong>Subject Coordinator:</strong></label>{" "}{subjectCoordinator}
                   </div>
                   <div>
                     <label><strong>Subject Name:</strong></label>{" "}{currentSubject.subjectName}
@@ -113,6 +149,13 @@ class SubjectList extends Component {
                   <div>
                     <label><strong>Subject Topics:</strong></label>{" "}{this.state.subjectTopics}
                   </div>
+                  <br />
+                  <h2>Tutorial List</h2>
+                  <div className="list-group">
+                    {tutorials && tutorials.map((tutorial, index) => (
+                      <ListItem selected={index === currentIndex} onClick={() => this.setActiveTutorial(tutorial, index)} divider button style={{ padding: "20px" }} key={index}> {"Number: " + tutorial?.number + ", Day " + tutorial?.day + ", Time Slot: " + tutorial?.timeSlot} </ListItem>
+                    ))}
+                  </div>
                 </div>
               </div>
             ) : (
@@ -122,6 +165,30 @@ class SubjectList extends Component {
                 <div style={{ float: "left", width: "100%" }}>
                 </div>
               </div>
+            )}
+          </Grid>
+          <Grid item md={4}>
+            {currentTutorial ? (
+              <div style={{ "marginLeft": "200px" }}>
+                <br />
+                <div>
+                  <h2>Tutorial</h2>
+                  <div>
+                    <label><strong>Tutorial Number:</strong></label>{" "}{currentTutorial.number}
+                  </div>
+                  <div>
+                    <label><strong>Day:</strong></label>{" "}{currentTutorial.Day}
+                  </div>
+                  <div>
+                    <label><strong>Time Slot:</strong></label>{" "}{currentTutorial.timeSlot}
+                  </div>
+                  <div>
+                    <label><strong>Tutor:</strong></label>{" "}{tutor}
+                  </div>     
+                </div>
+              </div>
+            ) : (
+              <div></div>
             )}
           </Grid>
         </Grid>

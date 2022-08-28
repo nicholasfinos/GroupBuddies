@@ -6,7 +6,7 @@ module.exports = app => {
     router.get('/view', tutor.findAllTutors)
 
      // Retrieves all Tutors in the CreateNewSubject page
-     router.get('/create/:username', tutor.findAllTutors)
+     router.get('/find/:_id', tutor.findTutor)
   
     app.use('/api/tutor', router);
   };

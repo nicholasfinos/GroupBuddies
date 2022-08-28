@@ -24,3 +24,17 @@ exports.findAllTutors = (req, res) => {
     );
   });
 };
+
+exports.findTutor = (req, res) => {
+  User.findById(req.params._id)
+  .then(data => {
+    res.send(data);
+  })
+  .catch(err => {
+    res.status(500).send({
+      message:
+        err.message || "Some error occurred while retrieving role: tutor."
+    }
+  );
+});
+};

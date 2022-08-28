@@ -11,5 +11,8 @@ module.exports = app => {
   //Find one subject 
   router.get("/findOne/:subjectName", subject.findOneSubject);
 
+  //Find Tutorial assocaited to Subject 
+  router.get("/findTutorial/:subjectName", subject.findTutorial);
+
   app.use('/api/subject', router);
 };

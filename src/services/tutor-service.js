@@ -5,8 +5,8 @@ class TutorDataService {
         return http.get(`/tutor/view`);
     }
 
-    getTutors(username) {
-        return http.get(`/tutor/create/${username}`);
+    getTutor(_id) {
+        return http.get(`/tutor/find/${_id}`);
     }
 }
 

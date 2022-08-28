@@ -18,10 +18,21 @@ exports.viewSubjects = (req, res) => {
     })
 };
 
+exports.findTutorial = (req,res) => {
+  Tutorial.find({ subjectName: req.params.subjectName })
+    .then((data) => {
+      res.send(data);
+    })
+    .catch((err) => {
+      res
+        .status(500)
+        .send({ message: "Error retriving Tutorial related to " + req.body.subjectName });
+    })
+};
+
 exports.findOneSubject = (req, res) => {
   Subject.find({ subjectName: req.params.subjectName })
     .then((data) => {
-      console.log(data);
       res.send(data);
     })
     .catch((err) => {
@@ -29,7 +40,7 @@ exports.findOneSubject = (req, res) => {
         .status(500)
         .send({ message: "Error retriving Subject with name " + req.body.subjectName });
     })
-}
+};
 
 exports.createSubject = (req, res) => {
   // Create Subject
