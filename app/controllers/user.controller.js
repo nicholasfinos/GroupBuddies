@@ -21,7 +21,9 @@ exports.updateStudent = (req, res) => {
   User.findOneAndUpdate({
     username: req.body.username,
     year: req.body.year,
-    course: req.body.course
+    course: req.body.course,
+    studentName: req.body.studentName,
+    preferredName: req.body.preferredName
   })
     .exec(async (err, user) => {
       if (err) {
@@ -39,7 +41,9 @@ exports.updateStudent = (req, res) => {
 
       res.status(200).send({
         year: user.year,
-        course: user.course
+        course: user.course,
+        studentName: user.studentName,
+        preferredName: user.preferredName,
       });
     })
 }

@@ -13,7 +13,9 @@ const User = mongoose.model(
       }
     ],
     year: String,
-    course: String
+    course: String,
+    studentName: String,
+    preferredName: String,
   })
 );
 

@@ -1,19 +1,16 @@
 import React from "react";
 import "./studentProfile.css";
-import Form from "react-validation/build/form";
-// import image from "../media/blank.webp";
+import UserService from "../services/user.service"
 
 class StudentProfile extends React.Component {
   constructor(props) {
     super(props);
 
-    // this.onChangeGroupAssessment = this.onChangeGroupAssessment.bind(this);
-
     this.state = {
       studentName: "",
-      preferredName: '',
-      year: 'yr1',
-      degree: 'deg1',
+      preferredName: "",
+      year: '1',
+      course: 'Software Engineering',
     };
   }
 
@@ -23,10 +20,6 @@ class StudentProfile extends React.Component {
     this.setState({ studentName: name });
   }
 
-  // onChangeGroupAssessment(e) {
-  //   this.setState({groupAssessment: e.target.value});
-  // }
-
   newSubject = () => {
     this.setState = ({
       studentName: "",
@@ -34,9 +27,15 @@ class StudentProfile extends React.Component {
     this.componentDidMount();
   };
 
+  handleFullNameChange = (event) => {
+    this.setState({
+      studentName: event.target.value
+    })
+  }
+
   handlePreferredNameChange = (event) => {
     this.setState({
-      username: event.target.value
+      preferredName: event.target.value
     })
   }
 
@@ -46,25 +45,25 @@ class StudentProfile extends React.Component {
     })
   }
 
-  handleDegreeChange = (event) => {
+  handleCourseChange = (event) => {
     this.setState({
-      year: event.target.value
+      course: event.target.value
     })
   }
 
-  updateStudentProfile = () => { 
-    // not sure how to actually link front and back end
-    fetch('http://localhost:8080/api/student/', {
-      method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        username: "student",
-        year: this.state.year,
-        course: this.state.course
-      })
-    })
+  updateStudentProfile = (event) => {
+    event.preventDefault()
+
+    let data = {
+      username: "student",
+      year: this.state.year,
+      course: this.state.course,
+      studentName: this.state.studentName,
+      preferredName: this.state.preferredName
+    }
+    
+    console.log(data);
+    UserService.updateStudent(data);
   }
 
   render() {
@@ -81,26 +80,26 @@ class StudentProfile extends React.Component {
                 <div class="user-details">
                   <div class="input-box">
                     <span class="details">Full Name</span>
-                    <input type="text" placeholder="Enter your name" required />
+                    <input type="text" placeholder="Enter your name" required onChange={this.handleFullNameChange} />
                   </div>
                   <div class="input-box">
                     <span class="details">Preferred Name</span>
-                    <input type="text" placeholder="Enter your email" required />
+                    <input type="text" placeholder="Enter your email" required onChange={this.handlePreferredNameChange} />
                   </div>
                   <div class="input-box">
                     <label className="details">Year:</label>
                     <select className="info-card" value={this.state.year} onChange={this.handleYearChange}>
-                      <option value="yr1">Yr 1</option>
-                      <option value="yr2">Yr 2</option>
-                      <option value="yr3">Yr 3</option>
+                      <option value="1">Yr 1</option>
+                      <option value="2">Yr 2</option>
+                      <option value="3">Yr 3</option>
                     </select>
                   </div>
                   <div class="input-box">
                     <label className="details">Degree:</label>
-                    <select className="info-card" value={this.state.degree} onChange={this.handleDegreeChange}>
-                      <option value="deg1">Software Engo</option>
-                      <option value="deg2">Finance</option>
-                      <option value="deg3">Philosophy</option>
+                    <select className="info-card" value={this.state.course} onChange={this.handleCourseChange}>
+                      <option value="Software Engineering">Software Engo</option>
+                      <option value="Finance">Finance</option>
+                      <option value="Philosophy">Philosophy</option>
                     </select>
                   </div>
                 </div>
