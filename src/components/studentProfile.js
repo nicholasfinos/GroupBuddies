@@ -48,7 +48,7 @@ class StudentProfile extends React.Component {
 
   handleDegreeChange = (event) => {
     this.setState({
-      year: event.target.value
+      degree: event.target.value
     })
   }
 
@@ -60,17 +60,17 @@ class StudentProfile extends React.Component {
       <Form style={{textAlign: "center", maxWidth: '100%', fontFamily: "Times New Roman"}} className="form">
         <div className="big-container">
           <div className="container">
-            <div className="title"> My Profile <i>{studentName}</i></div>
+            <div className="title"> My Profile</div>
             <div className="content">
               <form action="#">
-              <div class="user-details">
+              <div className="user-details">
           <div class="input-box">
-            <span class="details">Full Name</span>
-            <input type="text" placeholder="Enter your name" required/>
+            <span className="details">Full Name</span>
+            <p>{this.state.studentName}</p>
           </div>
-          <div class="input-box">
-            <span class="details">Preferred Name</span>
-            <input type="text" placeholder="Enter your email" required/>
+          <div className="input-box">
+            <span className="details">Preferred Name</span>
+            <input type="text" placeholder= {this.state.studentName} required/>
           </div>
           <div class="input-box">
           <label className="details">Year:</label>
@@ -88,13 +88,24 @@ class StudentProfile extends React.Component {
               <option value="deg3">Philosophy</option>
             </select>
           </div>
+          <div class="input-box" style={{marginLeft:"35%"}}>
+            <label className="details" style={{marginRight:"30%"}}>Skills:</label>
+            <div style={{textAlign:"left"}}>
+            <label style={{display: "inline-flex"}}  for="one"><input style={{width: "auto"}} type="checkbox" />Critical thinking and problem solving</label><br></br>
+            <label style={{display: "inline-flex"}}  for="one"><input style={{width: "auto"}} type="checkbox" />Teamwork and collaboration</label><br></br>
+            <label style={{display: "inline-flex"}}  for="one"><input style={{width: "auto"}} type="checkbox" />Professionalism and strong work ethic</label><br></br>
+            <label style={{display: "inline-flex"}}  for="one"><input style={{width: "auto"}} type="checkbox" />Oral and written communications skills</label><br></br>
+            <label style={{display: "inline-flex"}}  for="one"><input style={{width: "auto"}} type="checkbox" />Leadership</label><br></br>
+            </div>  
+          </div>
+          
         </div>
-        <div class="button">
+        <div className="info-card" style={{background: "#fef1e5"}}>
           <input type="submit" value="Register"/>
         </div>
               </form>
             </div>
-          </div>
+          </div> 
         </div>
       </Form>
     );
