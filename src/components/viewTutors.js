@@ -49,7 +49,7 @@ class TutorList extends Component {
       currentTutor: tutor,
       currentIndex: index
     });
-    console.log(tutor._id);
+
     SubjectDataService.findTutorialByTutor(tutor._id)
       .then((response) => {
         this.setState({ tutorials: response.data });

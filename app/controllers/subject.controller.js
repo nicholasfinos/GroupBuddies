@@ -31,7 +31,6 @@ exports.findTutorial = (req,res) => {
 };
 
 exports.findTutorialByTutor = (req,res) => {
-  console.log(req.params._id);
   Tutorial.find({ tutor: [req.params._id] })
     .then((data) => {
       res.send(data);
