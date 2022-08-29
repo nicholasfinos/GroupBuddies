@@ -8,6 +8,10 @@ import { Theme } from "@material-ui/core";
 import { createTheme } from "@material-ui/core";
 import logo from "../media/groupbuddies-logo.png"
 import { Button } from "@material-ui/core";
+import Form from "react-validation/build/form";
+import Input from "react-validation/build/input";
+import CheckButton from "react-validation/build/button";
+
 
 
 
@@ -57,9 +61,9 @@ const Login = (props) => {
 
     setLoading(true);
 
-    form.current.validateAll();
+    //form.current.validateAll();
 
-    if (checkBtn.current.context._errors.length === 0) {
+    //if (checkBtn.current.context._errors.length === 0) {
       dispatch(login(username, password))
         .then(() => {
           props.history.push("/account");
@@ -68,9 +72,9 @@ const Login = (props) => {
         .catch(() => {
           setLoading(false);
         });
-    } else {
+    /*} else {
       setLoading(false);
-    }
+    }*/
   };
 
   if (isLoggedIn) {
@@ -90,13 +94,14 @@ const Login = (props) => {
             <Typography variant='subtitle2'> To begin, enter your UTS account details</Typography>
             </Grid>
             <form onSubmit={handleLogin}>
-            <TextField label = 'Email' placeholder= "enter email" fullWidth required onChange={onChangeUsername}/>
-            <TextField label = 'Password' placeholder= "enter password" fullWidth required  onChange={onChangePassword}/>
+              <TextField label = 'Email' placeholder= "enter email" fullWidth required onChange={onChangeUsername} /*validations={[required]}*//>
+              <TextField label = 'Password' placeholder= "enter password" fullWidth required  onChange={onChangePassword} /*validations={[required]}*//>
             
-            <Button type='submit' color="primary"   variant="contained" style={btnstyle} fullWidth>Sign in</Button>
+              <Button type='submit' color="primary"   variant="contained" style={btnstyle} fullWidth>Sign in</Button>
 
             </form>
           </Paper>
+
         
     </Grid>
 

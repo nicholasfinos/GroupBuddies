@@ -43,20 +43,66 @@ const App = () => {
   return (
     
     <Router history={history}>
-    <div className="container" style={{fontFamily: "Arial", }}>
-        
-         
+      <div className="container" style={{fontFamily: "Arial", }}>
+        <nav className="navbar navbar-expand-lg navbar-light bg-light" id="horizontal-style" style={{marginTop: 10, marginLeft: 10, marginRight: 10}}>
+              <a class="navbar-brand">
+                <img src={logo} id="groupbuddieslogo" height="60" alt=""/>
+              </a>
+              <Link to="/" className="navbar-brand">
+                  <img src={name} id="groupbuddies" width="350" alt=""/>
+                </Link>
+              <div className="navbar-nav mr-auto" style={{paddingLeft: "5vw"}}>
+                <li className="nav-item">
+                  <Link to={"/home"} className="nav-link">Home</Link>
+                </li>
 
-        <div className="container" style={{marginTop: 20}}>
-          <Switch>
-            <Route exact path={["/", "/home"]} component={Home} />
-            <Route exact path="/login" component={Login} />
-            <Route exact path="/account" component={Account} />
-            <Route path="/student" component={BoardStudent} />
-            <Route path="/tutor" component={BoardTutor} />
-            <Route path="/subjectcoordinator" component={BoardSubjectCoordinator} />
-          </Switch>
-        </div>
+                {showTutor && ( 
+                  <li className="nav-item" style={{paddingLeft: "150px"}}>
+                    <Link to={"/tutor"} className="nav-link">Tutor Board</Link>
+                  </li>
+                )}
+
+                {ShowSubjectCoordinator && (
+                  <li className="nav-item" style={{paddingLeft: "150px"}}>
+                    <Link to={"/subjectcoordinator"} className="nav-link">Subject Coordinator Board</Link>
+                  </li>
+                )}
+
+                {currentUser && (
+                  <li className="nav-item" style={{paddingLeft: "150px"}}>
+                    <Link to={"/user"} className="nav-link">User</Link>
+                  </li>
+                )}
+              </div>
+
+              {currentUser ? (
+                <div className="navbar-nav ml-auto navbar-spread-style">
+                  <li className="nav-item">
+                    <Link to={"/account"} className="nav-link">My Account</Link>
+                  </li>
+                  <li className="nav-item">
+                    <a href="/login" className="nav-link" onClick={logOut}>LogOut</a>
+                  </li>
+                </div>
+                ) : (
+              <div className="navbar-nav ml-auto navbar-spread-style">
+                <li className="nav-item">
+                  <Link to={"/login"} className="nav-link">Login</Link>
+                </li>
+              </div>
+              )}
+            </nav>
+
+            <div className="container" style={{marginTop: 20}}>
+              <Switch>
+                <Route exact path={["/", "/home"]} component={Home} />
+                <Route exact path="/login" component={Login} />
+                <Route exact path="/account" component={Account} />
+                <Route path="/student" component={BoardStudent} />
+                <Route path="/tutor" component={BoardTutor} />
+                <Route path="/subjectcoordinator" component={BoardSubjectCoordinator} />
+              </Switch>
+            </div>
       </div>
     </Router>
   );
