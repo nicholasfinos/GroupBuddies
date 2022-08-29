@@ -1,23 +1,24 @@
 import React from "react";
 import "./studentProfile.css";
 import UserService from "../services/user.service"
+import { Redirect } from 'react-router-dom';
 
-class StudentProfile extends React.Component {
+export default class StudentProfile extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      studentName: "",
+      username: "",
       preferredName: "",
-      year: '1',
-      course: 'Software Engineering',
+      year: "",
+      course: "",
     };
   }
 
   componentDidMount() {
     const URL = String(this.props.match.path);
     const name = String(URL.substring(URL.lastIndexOf("/") + 1, URL.length));
-    this.setState({ studentName: name });
+    this.setState({ username: name });
   }
 
   newSubject = () => {
@@ -26,12 +27,6 @@ class StudentProfile extends React.Component {
     });
     this.componentDidMount();
   };
-
-  handleFullNameChange = (event) => {
-    this.setState({
-      studentName: event.target.value
-    })
-  }
 
   handlePreferredNameChange = (event) => {
     this.setState({
@@ -55,7 +50,7 @@ class StudentProfile extends React.Component {
     event.preventDefault()
 
     let data = {
-      username: "student",
+      username: this.state.user,
       year: this.state.year,
       course: this.state.course,
       studentName: this.state.studentName,
@@ -64,6 +59,10 @@ class StudentProfile extends React.Component {
     
     console.log(data);
     UserService.updateStudent(data);
+  }
+
+  onSubmit = () => {
+    return <Redirect to={"/account/" + this.state.username} />;
   }
 
   render() {
@@ -79,24 +78,29 @@ class StudentProfile extends React.Component {
               <form onSubmit={this.updateStudentProfile}>
                 <div class="user-details">
                   <div class="input-box">
-                    <span class="details">Full Name</span>
-                    <input type="text" placeholder="Enter your name" required onChange={this.handleFullNameChange} />
+                    <span class="details">Username</span>
+                    <input type="text" disabled value={this.state.username}/>
                   </div>
                   <div class="input-box">
                     <span class="details">Preferred Name</span>
-                    <input type="text" placeholder="Enter your email" required onChange={this.handlePreferredNameChange} />
+                    <input type="text" placeholder="Enter your preferred name" required onChange={this.handlePreferredNameChange} />
                   </div>
                   <div class="input-box">
                     <label className="details">Year:</label>
                     <select className="info-card" value={this.state.year} onChange={this.handleYearChange}>
-                      <option value="1">Yr 1</option>
-                      <option value="2">Yr 2</option>
-                      <option value="3">Yr 3</option>
+                      <option value="" disabled selected>Select your option</option>
+                      <option value="1">Year 1</option>
+                      <option value="2">Year 2</option>
+                      <option value="3">Year 3</option>
+                      <option value="4">Year 4</option>
+                      <option value="5">Year 5</option>
+                      <option value="6">Year 6</option>
                     </select>
                   </div>
                   <div class="input-box">
                     <label className="details">Degree:</label>
                     <select className="info-card" value={this.state.course} onChange={this.handleCourseChange}>
+                      <option value="" disabled selected>Select your option</option>
                       <option value="Software Engineering">Software Engo</option>
                       <option value="Finance">Finance</option>
                       <option value="Philosophy">Philosophy</option>
@@ -104,7 +108,7 @@ class StudentProfile extends React.Component {
                   </div>
                 </div>
                 <div class="button">
-                  <input type="submit" value="Register" />
+                  <input type="submit" value="Submit" onClick={this.onSubmit}/>
                 </div>
               </form>
             </div>
@@ -114,5 +118,3 @@ class StudentProfile extends React.Component {
     );
   };
 }
-
-export default StudentProfile;
