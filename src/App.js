@@ -18,6 +18,7 @@ import createSubject from "./components/createNewSubject";
 import viewTutors from "./components/viewTutors";
 import viewSubject from "./components/viewSubjects";
 import viewTutorial from "./components/viewTutorial";
+import StudentProfile from "./components/studentProfile";
 
 const App = () => {
   const [ShowSubjectCoordinator, setShowSubjectCoordinator] = useState(false);
@@ -47,28 +48,28 @@ const App = () => {
 
   return (
     <Router history={history}>
-      <div className="container" style={{fontFamily: "Arial", }}>
-        <nav className="navbar navbar-expand-lg navbar-light bg-light" id="horizontal-style" style={{marginTop: 10, marginLeft: 10, marginRight: 10}}>
-              <a class="navbar-brand">
-                <img src={logo} id="groupbuddieslogo" height="60" alt=""/>
-              </a>
-              <Link to="/" className="navbar-brand">
-                  <img src={name} id="groupbuddies" width="350" alt=""/>
-                </Link>
-              <div className="navbar-nav mr-auto" style={{paddingLeft: "5vw"}}>
-                <li className="nav-item">
-                  <Link to={"/home"} className="nav-link">Home</Link>
-                </li>
+      <div className="container" style={{ fontFamily: "Arial", }}>
+        <nav className="navbar navbar-expand-lg navbar-light bg-light" id="horizontal-style" style={{ marginTop: 10, marginLeft: 10, marginRight: 10 }}>
+          <a class="navbar-brand">
+            <img src={logo} id="groupbuddieslogo" height="60" alt="" />
+          </a>
+          <Link to="/" className="navbar-brand">
+            <img src={name} id="groupbuddies" width="350" alt="" />
+          </Link>
+          <div className="navbar-nav mr-auto" style={{ paddingLeft: "5vw" }}>
+            <li className="nav-item">
+              <Link to={"/home"} className="nav-link">Home</Link>
+            </li>
 
-            {showTutor && ( 
-              <li className="nav-item" style={{paddingLeft: "150px"}}>
+            {showTutor && (
+              <li className="nav-item" style={{ paddingLeft: "150px" }}>
                 <Link to={"/tutor"} className="nav-link">Tutor Board</Link>
                 <Link to={"/tutor/viewTutorial/" + currentUser?.id} className="nav-link">View Tutorial Class</Link>
               </li>
             )}
 
             {ShowSubjectCoordinator && (
-              <li className="nav-item" style={{paddingLeft: "150px"}}>
+              <li className="nav-item" style={{ paddingLeft: "150px" }}>
                 <Link to={"/subject/create/" + currentUser?.username} className="nav-link">Create New Subject</Link>
                 <Link to={"/subject/view/" + currentUser?.username} className="nav-link">View a Subject</Link>
                 <Link to={"/tutor/view"} className="nav-link">View Tutors</Link>
@@ -76,47 +77,43 @@ const App = () => {
             )}
 
             {showStudent && (
-              <li className="nav-item" style={{paddingLeft: "150px"}}>
+              <li className="nav-item" style={{ paddingLeft: "150px" }}>
                 <Link to={"/student"} className="nav-link">Student Board</Link>
+                <Link to={"/profile/" + currentUser?.username} className="nav-link">My Profile</Link>
               </li>
             )}
-
-            {/* {currentUser && (
-              <li className="nav-item" style={{paddingLeft: "150px"}}>
-                <Link to={"/user"} className="nav-link">User</Link>
-              </li>
-            )} */}
           </div>
 
-              {currentUser ? (
-                <div className="navbar-nav ml-auto navbar-spread-style">
-                  <li className="nav-item">
-                    <Link to={"/account"} className="nav-link">My Account</Link>
-                  </li>
-                  <li className="nav-item">
-                    <a href="/login" className="nav-link" onClick={logOut}>LogOut</a>
-                  </li>
-                </div>
-                ) : (
-              <div className="navbar-nav ml-auto navbar-spread-style">
-                <li className="nav-item">
-                  <Link to={"/login"} className="nav-link">Login</Link>
-                </li>
-              </div>
-              )}
-            </nav>
+          {currentUser ? (
+            <div className="navbar-nav ml-auto navbar-spread-style">
+              <li className="nav-item">
+                <Link to={"/account"} className="nav-link">My Account</Link>
+              </li>
+              <li className="nav-item">
+                <a href="/login" className="nav-link" onClick={logOut}>LogOut</a>
+              </li>
+            </div>
+          ) : (
+            <div className="navbar-nav ml-auto navbar-spread-style">
+              <li className="nav-item">
+                <Link to={"/login"} className="nav-link">Login</Link>
+              </li>
+            </div>
+          )}
+        </nav>
 
-        <div className="container" style={{marginTop: 20}}>
+        <div className="container" style={{ marginTop: 20 }}>
           <Switch>
             <Route exact path={["/", "/home"]} component={Home} />
             <Route exact path="/login" component={Login} />
-            <Route exact path="/account" component={Account} />
+            <Route exact path={"/account/" + currentUser?.username} component={Account} />
             <Route path="/student" component={BoardStudent} />
             <Route exact path="/tutor" component={BoardTutor} />
             <Route path={"/subject/create/" + currentUser?.username} component={createSubject} />
             <Route path={"/subject/view/" + currentUser?.username} component={viewSubject} />
             <Route path="/tutor/view" component={viewTutors} />
             <Route path={"/tutor/viewTutorial/" + currentUser?.id} component={viewTutorial} />
+            <Route path={"/profile/" + currentUser?.username} component={StudentProfile} />
           </Switch>
         </div>
       </div>

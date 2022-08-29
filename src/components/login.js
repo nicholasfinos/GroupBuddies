@@ -49,7 +49,7 @@ const Login = (props) => {
 
     dispatch(login(username, password))
       .then(() => {
-        props.history.push("/account");
+        props.history.push("/account" + username);
         window.location.reload();
       })
       .catch(() => {
@@ -58,7 +58,7 @@ const Login = (props) => {
   };
 
   if (isLoggedIn) {
-    return <Redirect to="/account" />;
+    return <Redirect to={"/account" + username}/>;
   }
 
   return (

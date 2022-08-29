@@ -11,7 +11,11 @@ const User = mongoose.model(
         type: mongoose.Schema.Types.ObjectId,
         ref: "Role"
       }
-    ]
+    ],
+    year: String,
+    course: String,
+    studentName: String,
+    preferredName: String,
   })
 );
 

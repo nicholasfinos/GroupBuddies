@@ -20,8 +20,13 @@ const getManagerBoard = () => {
 };
 
 const getOwnerBoard = () => {
-    return axios.get(API_URL + "owner", { headers: authHeader() });
-  };
+  return axios.get(API_URL + "owner", { headers: authHeader() });
+};
+
+const updateStudent = async (data) => {
+  return await axios.patch("http://localhost:8080/api/student/", data);
+};
+
 // eslint-disable-next-line
 export default {
   getPublicContent,
@@ -29,4 +34,5 @@ export default {
   getStaffBoard,
   getManagerBoard,
   getOwnerBoard,
+  updateStudent
 };
