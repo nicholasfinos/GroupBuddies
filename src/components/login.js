@@ -15,12 +15,12 @@ import CheckButton from "react-validation/build/button";
 
 
 
-const paperStyling = {padding : 40, height: '60vh ', width: 420, margin: '20px auto', background: '#fff0e7', borderRadius: 20/*border: '2px solid'*/}
+const paperStyling = {padding : 40, height: '65vh ', width: 420, margin: '20px auto', background: '#fff0e7', borderRadius: 20/*border: '2px solid'*/}
 const btnstyle={margin:'40px 0', borderRadius: 10,}
 const typ1={fontWeight: 600, fontFamily: "Arial" }
 const type2={margin:'5px 0', fontWeight: 60,}
 
- document.body.style = 'background: #101c2c;';
+ // document.body.style = 'background: #101c2c;';
 
 
 const required = (value) => {
@@ -94,7 +94,7 @@ const Login = (props) => {
             <Typography variant='subtitle2'> To begin, enter your UTS account details</Typography>
             </Grid>
             <form onSubmit={handleLogin}>
-              <TextField label = 'Email' placeholder= "enter email" fullWidth required onChange={onChangeUsername} /*validations={[required]}*//>
+              <TextField label = 'Username' placeholder= "enter username" fullWidth required onChange={onChangeUsername} /*validations={[required]}*//>
               <TextField label = 'Password' placeholder= "enter password" fullWidth required  onChange={onChangePassword} /*validations={[required]}*//>
             
               <Button type='submit' color="primary"   variant="contained" style={btnstyle} fullWidth>Sign in</Button>
