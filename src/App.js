@@ -106,7 +106,7 @@ const App = () => {
           <Switch>
             <Route exact path={["/", "/home"]} component={Home} />
             <Route exact path="/login" component={Login} />
-            <Route exact path={"/account/" + currentUser?.username} component={Account} />
+            <Route path={"/account/" + currentUser?.username} component={Account} />
             <Route path="/student" component={BoardStudent} />
             <Route exact path="/tutor" component={BoardTutor} />
             <Route path={"/subject/create/" + currentUser?.username} component={createSubject} />

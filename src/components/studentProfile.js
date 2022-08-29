@@ -52,8 +52,9 @@ export default class StudentProfile extends React.Component {
   }
 
   onSubmit = () => {
+    const username = this.state.username
     this.updateStudentProfile();
-    return <Redirect to={"/account/" + this.state.username} />;
+    return <Redirect to={"/account/" + username} />;
   }
 
   render() {
