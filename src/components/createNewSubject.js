@@ -54,31 +54,31 @@ class CreateSubject extends React.Component {
   }
 
   onChangeGroupAssessment(e) {
-    this.setState({ groupAssessment: e.target.value });
+    this.setState({ groupAssessment: e.target.value, message: "" });
   }
 
   onChangeSemester(e) {
-    this.setState({ semester: e.target.value });
+    this.setState({ semester: e.target.value, message: "" });
   }
 
   onChangeSubjectName(e) {
-    this.setState({ subjectName: e.target.value });
+    this.setState({ subjectName: e.target.value, message: "" });
   }
 
   onChangeTutorialNumbers(e) {
-    this.setState({ tutorialNumbers: e.target.value });
+    this.setState({ tutorialNumbers: e.target.value, message: "" });
   }
 
   onChangeSubjectTopics(e) {
-    this.setState({ subjectTopics: e.target.value });
+    this.setState({ subjectTopics: e.target.value, message: "" });
   }
 
   onChangeTimeSlot(e) {
-    this.setState({ timeSlot: e.target.value });
+    this.setState({ timeSlot: e.target.value, message: "" });
   }
 
   onChangeDay(e) {
-    this.setState({ day: e.target.value });
+    this.setState({ day: e.target.value, message: "" });
   }
 
   retrieveTutors() {
@@ -112,24 +112,29 @@ class CreateSubject extends React.Component {
   }
 
   addTutor(tutor, tutorTimeSlot, tutorDay) {
-
-    var data = {
-      username: tutor.username,
-      email: tutor.email,
-      password: tutor.password,
-      timeSlot: tutorTimeSlot,
-      day: tutorDay
-    };
-
-    //Push it to addedTutor list
-    const list = this.state.addedtutors;
-    list.push(data);
-
-    //Save value
-    this.setState({
-      addedtutors: list,
-      currentTutor: null,
-    });
+    if(tutorTimeSlot.length !== 0 || tutorDay.length !== 0) {
+      var data = {
+        username: tutor.username,
+        email: tutor.email,
+        password: tutor.password,
+        timeSlot: tutorTimeSlot,
+        day: tutorDay
+      };
+  
+      //Push it to addedTutor list
+      const list = this.state.addedtutors;
+      list.push(data);
+  
+      //Save value
+      this.setState({
+        addedtutors: list,
+        currentTutor: null,
+        message: ""
+      });
+    }
+    else {
+      this.setState({ message: "Please fill Time Slot and Day before adding Tutorial"})
+    }
   }
 
   deleteTutor(index) {
@@ -141,6 +146,7 @@ class CreateSubject extends React.Component {
     this.setState({
       addedtutors: list,
       currentTutor: null,
+      message: ""
     });
   }
 
@@ -171,7 +177,8 @@ class CreateSubject extends React.Component {
                       semester: response.data?.semester,
                       subjectTopics: response.data?.subjectTopics,
                       submitted: true,
-                      assignedTutor: response.data?.assignedTutors
+                      assignedTutor: response.data?.assignedTutors,
+                      message: ""
                     });
                     console.log(response.data);
                   })
