@@ -177,7 +177,7 @@ class SubjectList extends Component {
                     <label><strong>Tutorial Number:</strong></label>{" "}{currentTutorial.number}
                   </div>
                   <div>
-                    <label><strong>Day:</strong></label>{" "}{currentTutorial.Day}
+                    <label><strong>Day:</strong></label>{" "}{currentTutorial.day}
                   </div>
                   <div>
                     <label><strong>Time Slot:</strong></label>{" "}{currentTutorial.timeSlot}
