@@ -1,11 +1,15 @@
+import { Grid, Paper, TextField } from "@material-ui/core";
 import React, { useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from 'react-router-dom';
-
-import Form from "react-validation/build/form";
-import Input from "react-validation/build/input";
-import CheckButton from "react-validation/build/button";
 import { login } from "../actions/auth";
+import { Typography } from "@material-ui/core";
+import logo from "../media/groupbuddies-logo.png"
+import { Button } from "@material-ui/core";
+
+const paperStyling = { padding: 40, height: '65vh ', width: 420, margin: '20px auto', background: '#fff0e7', borderRadius: 20/*border: '2px solid'*/ }
+const btnstyle = { margin: '40px 0', borderRadius: 10, }
+const typ1 = { fontWeight: 600, fontFamily: "Arial" }
 
 const required = (value) => {
   if (!value) {
@@ -18,8 +22,6 @@ const required = (value) => {
 };
 
 const Login = (props) => {
-  const form = useRef();
-  const checkBtn = useRef();
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -45,20 +47,14 @@ const Login = (props) => {
 
     setLoading(true);
 
-    form.current.validateAll();
-
-    if (checkBtn.current.context._errors.length === 0) {
-      dispatch(login(username, password))
-        .then(() => {
-          props.history.push("/account");
-          window.location.reload();
-        })
-        .catch(() => {
-          setLoading(false);
-        });
-    } else {
-      setLoading(false);
-    }
+    dispatch(login(username, password))
+      .then(() => {
+        props.history.push("/account");
+        window.location.reload();
+      })
+      .catch(() => {
+        setLoading(false);
+      });
   };
 
   if (isLoggedIn) {
@@ -66,34 +62,21 @@ const Login = (props) => {
   }
 
   return (
-      <Form style={{textAlign: "center", maxWidth: '100%', fontFamily: "Times New Roman"}} className="form" onSubmit={handleLogin} ref={form}>
-        <h3 style={{color: "light grey"}}>Login</h3>
-        <div>
-            <label htmlFor="username">Username</label>
-            <Input type="text" className="form-control" name="username" value={username} onChange={onChangeUsername} validations={[required]}/>
-        </div>
-        <div>
-            <label htmlFor="password">Password</label>
-            <Input type="password" className="form-control" name="password" value={password} onChange={onChangePassword} validations={[required]}/>
-        </div>
-        <span style={{display: "inline-block"}} class="password"><a href="/login">Forgot password?</a></span>
-        <div>
-            <button className="btn btn-primary btn-block" disabled={loading}>
-            {loading && (
-                <span className="spinner-border spinner-border-sm"></span>
-            )}
-            <span>Login</span>
-            </button>
-        </div>
+    <Grid>
+      <Paper bgcolor sx={{ borderColor: 'black' }} elevation={10} style={paperStyling} >
+        <Grid align='center' >
+          <img src={logo} id="groupbuddieslogo" height="100" alt="" />
+          <Typography variant='h4' fontFamily='BlinkMacSystemFont' style={typ1}> Group Buddies </Typography>
+          <Typography variant='subtitle2'> To begin, enter your UTS account details</Typography>
+        </Grid>
+        <form onSubmit={handleLogin}>
+          <TextField label='Username' placeholder="enter username" fullWidth required onChange={onChangeUsername} />
+          <TextField label='Password' placeholder="enter password" fullWidth required onChange={onChangePassword} />
+          <Button type='submit' color="primary" variant="contained" style={btnstyle} fullWidth>Sign in</Button>
+        </form>
+      </Paper>
+    </Grid >
+  )
 
-        {message && (
-            <div className="form-group">
-            <div className="alert alert-danger" role="alert">{message}</div>
-            </div>
-        )}
-        <CheckButton style={{ display: "none" }} ref={checkBtn} />
-    </Form>
-  );
-};
-
+}
 export default Login;

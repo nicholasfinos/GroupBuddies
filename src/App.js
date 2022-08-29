@@ -47,18 +47,18 @@ const App = () => {
 
   return (
     <Router history={history}>
-      <div className="container" style={{fontFamily: "Times New Roman"}}>
+      <div className="container" style={{fontFamily: "Arial", }}>
         <nav className="navbar navbar-expand-lg navbar-light bg-light" id="horizontal-style" style={{marginTop: 10, marginLeft: 10, marginRight: 10}}>
-          <a class="navbar-brand">
-            <img src={logo} id="groupbuddieslogo" height="60" alt=""/>
-          </a>
-          <Link to="/" className="navbar-brand">
-              <img src={name} id="groupbuddies" width="350" alt=""/>
-            </Link>
-          <div className="navbar-nav mr-auto" style={{paddingLeft: "5vw"}}>
-            <li className="nav-item">
-              <Link to={"/home"} className="nav-link">Home</Link>
-            </li>
+              <a class="navbar-brand">
+                <img src={logo} id="groupbuddieslogo" height="60" alt=""/>
+              </a>
+              <Link to="/" className="navbar-brand">
+                  <img src={name} id="groupbuddies" width="350" alt=""/>
+                </Link>
+              <div className="navbar-nav mr-auto" style={{paddingLeft: "5vw"}}>
+                <li className="nav-item">
+                  <Link to={"/home"} className="nav-link">Home</Link>
+                </li>
 
             {showTutor && ( 
               <li className="nav-item" style={{paddingLeft: "150px"}}>
@@ -88,23 +88,23 @@ const App = () => {
             )} */}
           </div>
 
-          {currentUser ? (
-            <div className="navbar-nav ml-auto navbar-spread-style">
-              <li className="nav-item">
-                <Link to={"/account"} className="nav-link">My Account</Link>
-              </li>
-              <li className="nav-item">
-                <a href="/login" className="nav-link" onClick={logOut}>LogOut</a>
-              </li>
-            </div>
-            ) : (
-          <div className="navbar-nav ml-auto navbar-spread-style">
-            <li className="nav-item">
-              <Link to={"/login"} className="nav-link">Login</Link>
-            </li>
-          </div>
-          )}
-        </nav>
+              {currentUser ? (
+                <div className="navbar-nav ml-auto navbar-spread-style">
+                  <li className="nav-item">
+                    <Link to={"/account"} className="nav-link">My Account</Link>
+                  </li>
+                  <li className="nav-item">
+                    <a href="/login" className="nav-link" onClick={logOut}>LogOut</a>
+                  </li>
+                </div>
+                ) : (
+              <div className="navbar-nav ml-auto navbar-spread-style">
+                <li className="nav-item">
+                  <Link to={"/login"} className="nav-link">Login</Link>
+                </li>
+              </div>
+              )}
+            </nav>
 
         <div className="container" style={{marginTop: 20}}>
           <Switch>
