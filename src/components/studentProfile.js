@@ -21,13 +21,6 @@ export default class StudentProfile extends React.Component {
     this.setState({ username: name });
   }
 
-  newSubject = () => {
-    this.setState = ({
-      studentName: "",
-    });
-    this.componentDidMount();
-  };
-
   handlePreferredNameChange = (event) => {
     this.setState({
       preferredName: event.target.value
@@ -46,36 +39,31 @@ export default class StudentProfile extends React.Component {
     })
   }
 
-  updateStudentProfile = (event) => {
-    event.preventDefault()
-
+  updateStudentProfile = () => {
     let data = {
-      username: this.state.user,
+      username: this.state.username,
       year: this.state.year,
       course: this.state.course,
-      studentName: this.state.studentName,
-      preferredName: this.state.preferredName
+      preferredName: this.state.preferredName,
+      studentName: this.state.username,
     }
     
-    console.log(data);
     UserService.updateStudent(data);
   }
 
   onSubmit = () => {
+    this.updateStudentProfile();
     return <Redirect to={"/account/" + this.state.username} />;
   }
 
   render() {
-
-    // const { studentName } = this.state;
-
     return (
       <div style={{ textAlign: "center", maxWidth: '100%', fontFamily: "Times New Roman" }} className="form">
         <div className="big-container">
           <div className="container">
             <div className="title"> My Profile</div>
             <div className="content">
-              <form onSubmit={this.updateStudentProfile}>
+              <form onSubmit={this.onSubmit}>
                 <div class="user-details">
                   <div class="input-box">
                     <span class="details">Username</span>
@@ -108,7 +96,7 @@ export default class StudentProfile extends React.Component {
                   </div>
                 </div>
                 <div class="button">
-                  <input type="submit" value="Submit" onClick={this.onSubmit}/>
+                  <input type="submit" value="Submit"/>
                 </div>
               </form>
             </div>
