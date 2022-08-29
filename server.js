@@ -17,10 +17,12 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 const db = require("./app/models");
 const User = require("./app/models/user.model");
+const Subject = require("./app/models/subject.model");
+const Tutorial = require("./app/models/tutorial.model");
 const Role = db.role;
 
 db.mongoose
-  .connect(`mongodb://localhost:27017/GroupBuddies`, {
+  .connect(`mongodb://127.0.0.1:27017/GroupBuddies`, {
     useNewUrlParser: true,
     useUnifiedTopology: true
   })
@@ -48,6 +50,8 @@ app.get("/", (req, res) => {
 // routes
 require('./app/routes/auth.routes')(app);
 require('./app/routes/user.routes')(app);
+require('./app/routes/subject.routes')(app);
+require('./app/routes/tutor.routes')(app);
 require('./app/routes/studentProfile.routes')(app);
 
 // set port, listen for requests
@@ -106,31 +110,71 @@ function initial() {
               console.log("added 'tutor' to Users collection");
             });
           })
-      });
 
-      new Role({
-        name: "subjectcoordinator"
-      }).save(err => {
-        if (err) {
-          console.log("error", err);
-        }
-        console.log("added 'subjectcoordinator' to roles collection");
-        Role.find({ name: "subjectcoordinator" })
+        Role.find({ name: "tutor" })
           .then(data => {
-            const subjectcoordinatorId = data[0]._id
+            const tutorId = data[0]._id
             new User({
-              username: "subjectcoordinator",
-              email: "subjectcoordinator@uts.edu.au",
-              password: bcrypt.hashSync("subcord", 8),
-              roles: [subjectcoordinatorId]
+              username: "shengshen",
+              email: "shengshen@uts.edu.au",
+              password: bcrypt.hashSync("shen", 8),
+              roles: [tutorId]
             }).save(err => {
               if (err) {
                 console.log("error", err);
               }
-              console.log("added 'subjectcoordinator' to Users collection");
+              console.log("added Tutor: 'Sheng Shen' to Users collection");
             });
-          })
-      });
+
+            new User({
+              username: "tutor2",
+              email: "tutor2@uts.edu.au",
+              password: bcrypt.hashSync("tutor", 8),
+              roles: [tutorId]
+            }).save(err => {
+              if (err) {
+                console.log("error", err);
+              }
+              console.log("added Tutor: 'Tutor 2' to Users collection");
+            });
+          });
+
+        new Role({
+          name: "subjectcoordinator"
+        }).save(err => {
+          if (err) {
+            console.log("error", err);
+          }
+          console.log("added 'subjectcoordinator' to roles collection");
+          Role.find({ name: "subjectcoordinator" })
+            .then(data => {
+              const subjectcoordinatorId = data[0]._id
+              new User({
+                username: "subjectcoordinator",
+                email: "subjectcoordinator@uts.edu.au",
+                password: bcrypt.hashSync("subcord", 8),
+                roles: [subjectcoordinatorId]
+              }).save(err => {
+                if (err) {
+                  console.log("error", err);
+                }
+                console.log("added 'subjectcoordinator' to Users collection");
+              });
+
+              new User({
+                username: "tianqingzhu",
+                email: "tianqingzhu@uts.edu.au",
+                password: bcrypt.hashSync("zhu", 8),
+                roles: [subjectcoordinatorId]
+              }).save(err => {
+                if (err) {
+                  console.log("error", err);
+                }
+                console.log("added Subject Coordinator: 'Tianqing Zhu' to Users collection");
+              });
+            })
+        });
+      })
     }
   });
 }

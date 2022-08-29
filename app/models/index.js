@@ -8,6 +8,8 @@ db.mongoose = mongoose;
 db.user = require("./user.model");
 db.role = require("./role.model");
 db.studentProfile = require("./studentProfile.model");
+db.subject = require("./subject.model");
+db.tutorial = require("./tutorial.model");
 db.refreshToken = require("./refreshToken.model");
 
 db.ROLES = ["student", "tutor", "subjectcoordinator"];
