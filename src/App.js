@@ -7,6 +7,7 @@ import "./App.css";
 import Login from "./components/login";
 import Home from "./components/home";
 import Account from "./components/account";
+import AccountTried from "./components/account2ndtry";
 import { logout } from "./actions/auth";
 import { clearMessage } from "./actions/message";
 import { history } from "./helpers/history";
@@ -106,7 +107,7 @@ const App = () => {
           <Switch>
             <Route exact path={["/", "/home"]} component={Home} />
             <Route exact path="/login" component={Login} />
-            <Route path={"/account/" + currentUser?.username} component={Account} />
+            <Route path={"/account/" + currentUser?.username} component={AccountTried} />
             <Route path="/student" component={BoardStudent} />
             <Route exact path="/tutor" component={BoardTutor} />
             <Route path={"/subject/create/" + currentUser?.username} component={createSubject} />

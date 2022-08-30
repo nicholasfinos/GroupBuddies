@@ -17,6 +17,7 @@ const Account = () => {
     if (firstLogin) {
       setFirstLogin(!currentUser.hasOwnProperty("course"));
     }
+    
   }, [firstLogin]);
 
   if (!currentUser) {
@@ -29,15 +30,6 @@ const Account = () => {
 
   return (
     <div className="container" style={{fontFamily: "Times New Roman"}}>
-      {/* {firstLogin && (
-        <div>First Login</div>
-      )}
-
-      {showStudent && (
-        <div>Student</div>
-      )}
-     */}
-     
       {currentUser && (
         <>
           <header className="jumbotron" style={{ textAlign: "center" }}>
