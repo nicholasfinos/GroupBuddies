@@ -43,8 +43,8 @@ class Account extends Component {
                 }
                 else {
                     this.setState({
-                    student: true,
-                    firstLogin: false
+                        student: true,
+                        firstLogin: false
                     })
                 }
             } else {
@@ -66,15 +66,15 @@ class Account extends Component {
     const { currentUser, student, firstLogin } = this.state;
 
     return (
-        <div>
-            {!firstLogin || !student? (
+        <><div>
+            {!firstLogin ? (
                 <div>
-                    <div className="container" style={{fontFamily: "Times New Roman"}}>
+                    <div className="container" style={{ fontFamily: "Times New Roman" }}>
                         <><header className="jumbotron" style={{ textAlign: "center" }}>
                             {/* <h3><strong>{currentUser[0].username}</strong></h3> */}
                             <h3><strong>{currentUser[0].username}'s</strong> Account</h3>
                             {/* .charAt(0).toUpperCase() + currentUser[0].username.slice(1) */}
-                            </header>
+                        </header>
                             <p>
                                 <strong>Id:</strong> {currentUser[0]._id}
                             </p>
@@ -88,10 +88,10 @@ class Account extends Component {
                         </>
                     </div>
                 </div>
-            ) : 
-            (<></>
-         )}
-        </div>
+            ) :
+                (<></>)}
+            </div>
+        </>
     );
   }
 }
