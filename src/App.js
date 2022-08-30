@@ -88,7 +88,7 @@ const App = () => {
           {currentUser ? (
             <div className="navbar-nav ml-auto navbar-spread-style">
               <li className="nav-item">
-                <Link to={"/account"} className="nav-link">My Account</Link>
+                <Link to={"/account/" + currentUser?.username} className="nav-link">My Account</Link>
               </li>
               <li className="nav-item">
                 <a href="/login" className="nav-link" onClick={logOut}>LogOut</a>
