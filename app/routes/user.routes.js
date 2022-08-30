@@ -27,4 +27,6 @@ module.exports = function(app) {
     [authJwt.verifyToken, authJwt.isSubjectCoordinator],
     controller.SubjectCoordinatorBoard
   );
+
+  app.get("/api/user/:username", controller.getUser)
 };

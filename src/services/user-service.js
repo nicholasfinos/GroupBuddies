@@ -27,6 +27,11 @@ const updateStudent = async (data) => {
   return await axios.patch("http://localhost:8080/api/student/", data);
 };
 
+
+const getUser = (username) => {
+  return axios.get("http://localhost:8080/api/user/" + username);
+};
+
 // eslint-disable-next-line
 export default {
   getPublicContent,
@@ -34,5 +39,6 @@ export default {
   getStaffBoard,
   getManagerBoard,
   getOwnerBoard,
-  updateStudent
+  updateStudent,
+  getUser
 };
