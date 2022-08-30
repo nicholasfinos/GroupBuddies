@@ -21,7 +21,7 @@ exports.viewSubjects = (req, res) => {
 exports.findTutorial = (req,res) => {
   Tutorial.find({ subjectName: req.params.subjectName })
     .then((data) => {
-      res.send(data);
+      res.status(200).send(data);
     })
     .catch((err) => {
       res
@@ -38,7 +38,7 @@ exports.findTutorialByTutor = (req,res) => {
     .catch((err) => {
       res
         .status(500)
-        .send({ message: "Error retriving Tutorial " });
+        .send({ message: "Error retreiving Tutorial " });
     })
 };
 
@@ -50,7 +50,19 @@ exports.findOneSubject = (req, res) => {
     .catch((err) => {
       res
         .status(500)
-        .send({ message: "Error retriving Subject with name " + req.body.subjectName });
+        .send({ message: "Error retreiving Subject with name " + req.body.subjectName });
+    })
+};
+
+exports.findSubjectById = (req, res) => {
+  Subject.find({ _id: req.params.id })
+    .then((data) => {
+      res.send(data);
+    })
+    .catch((err) => {
+      res
+        .status(500)
+        .send({ message: "Error retreiving Subject with name " + req.body.subjectName });
     })
 };
 

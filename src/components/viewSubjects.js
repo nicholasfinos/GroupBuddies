@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import SubjectDataService from "../services/subject-service";
 import TutorDataService from "../services/tutor-service";
 import { Grid, ListItem } from "@material-ui/core";
+import EditSubject from "./editSubject";
+import { Link, Switch, Route } from "react-router-dom";
 
 class SubjectList extends Component {
   constructor(props) {
@@ -42,7 +44,7 @@ class SubjectList extends Component {
       }
       );
   }
-
+  
   refreshList() {
     this.retrieveSubjects();
     this.setState({
@@ -127,7 +129,7 @@ class SubjectList extends Component {
           </Grid>
           <Grid item md={4}>
             {currentSubject ? (
-              <div style={{ "marginLeft": "200px" }}>
+              <div style={{ "marginLeft": "100px" }}>
                 <br />
                 <div>
                   <h2>Subject</h2>
@@ -156,6 +158,13 @@ class SubjectList extends Component {
                       <ListItem selected={index === currentIndex} onClick={() => this.setActiveTutorial(tutorial, index)} divider button style={{ padding: "20px" }} key={index}> {"Number: " + tutorial?.number + ", Day " + tutorial?.day + ", Time Slot: " + tutorial?.timeSlot} </ListItem>
                     ))}
                   </div>
+                  <br/>
+                  <div>
+                    <Link style={{WebkitTextFillColor: "black"}} to={"/subject/" + this.state.subjectCoordinator + "/" + currentSubject._id}>Edit</Link>
+                    <Switch>
+                      <Route exact path={"/subject/" + this.state.subjectCoordinator + "/" + currentSubject?._id} component={EditSubject}/>
+                    </Switch>
+                  </div>
                 </div>
               </div>
             ) : (
@@ -165,30 +174,6 @@ class SubjectList extends Component {
                 <div style={{ float: "left", width: "100%" }}>
                 </div>
               </div>
-            )}
-          </Grid>
-          <Grid item md={4}>
-            {currentTutorial ? (
-              <div style={{ "marginLeft": "200px" }}>
-                <br />
-                <div>
-                  <h2>Tutorial</h2>
-                  <div>
-                    <label><strong>Tutorial Number:</strong></label>{" "}{currentTutorial.number}
-                  </div>
-                  <div>
-                    <label><strong>Day:</strong></label>{" "}{currentTutorial.day}
-                  </div>
-                  <div>
-                    <label><strong>Time Slot:</strong></label>{" "}{currentTutorial.timeSlot}
-                  </div>
-                  <div>
-                    <label><strong>Tutor:</strong></label>{" "}{tutor}
-                  </div>     
-                </div>
-              </div>
-            ) : (
-              <div></div>
             )}
           </Grid>
         </Grid>
