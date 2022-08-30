@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import SubjectDataService from "../services/subject-service";
 import TutorDataService from "../services/tutor-service";
-import { Grid, ListItem } from "@material-ui/core";
 import { Link, Switch, Route } from "react-router-dom";
 import { Button, Input } from "@material-ui/core";
 import viewSubject from "../components/viewSubjects";
@@ -22,6 +21,7 @@ class EditSubject extends Component {
     this.retrieveSubjects = this.retrieveSubjects.bind(this);
     this.refreshList = this.refreshList.bind(this);
     // this.setActiveSubject = this.setActiveSubject.bind(this);
+    this.getSubject =this.getSubject.bind(this);
     this.updateSubject = this.updateSubject.bind(this);
    
     this.state = {
@@ -44,8 +44,12 @@ class EditSubject extends Component {
   }
 
   componentDidMount() {
-    // this.retrieveSubjects();
-    this.getSubject();
+    //Finding Booking through URL
+    const URL = String(this.props.location.pathname);
+    const subjectId = String(
+      URL.substring(URL.lastIndexOf("/") + 1, URL.length)
+    );
+    this.getSubject(subjectId);
   }
 
   retrieveSubjects() {
@@ -72,10 +76,12 @@ class EditSubject extends Component {
     });
   }
 
-  getSubject() {
-    const URL = String(this.props.match.path);
+  getSubject(subjectId) {
+    const URL = String(this.props.match.path).slice(0, -1);
+    // console.log(this.props.match.path)
     const username = String(URL.substring(URL.lastIndexOf("/") + 1, URL.length));
-    SubjectDataService.view(username)
+    // const username = String(URL.substring(URL.lastIndexOf("/") + 1, URL.length));
+    SubjectDataService.findSubjectById(username, subjectId)
       .then((response) => {
         this.setState({
           currentSubject: response.data,
@@ -238,92 +244,83 @@ class EditSubject extends Component {
     const { currentSubject } = this.state;
 
     return (
-      <div>
-        {currentSubject ? (
-          <div style={{ fontFamily: "Times New Roman", textAlign: "center" }}>
-            <h3>{this.state.currentSubject.subjectName}</h3>
-            <form>
-              <div>
-                <label htmlFor="username">Subject Name</label>
-                <Input style={{fontFamily: "Times New Roman"}} type="text" className="form-control" name="subject-name" value={currentSubject?.subjectName} disabled />
-              </div>
-              <div>
-                <label htmlFor="semester">Semester</label>
-                <Input style={{fontFamily: "Times New Roman"}} type="text" className="form-control" name="semester" value={currentSubject?.semester} disabled />
-              </div>
-              {/* <div>
-                <Grid container>
-                  <Grid item md={4}>
-                    <h4>Menu</h4>
-                    <div className="list-group">
-                      {menus &&
-                        menus.map((menu, index) => (
-                          <ListItem style={{ padding: "20px" }} selected={index === currentIndex} onClick={() => this.setActiveAddItem(menu, index)} divider button key={index}>
-                            {" "}{menu.name}, ${menu.price}{" "}
-                          </ListItem>
-                        ))}
-                    </div>
-                  </Grid>
-                  <Grid item md={4}>
-                    {currentItem ? (
-                      <div>
-                        <h4>Item Selected</h4>
-                        <div>
-                          <label><strong>Name:</strong></label>{" "}
-                          {currentItem.name}
-                        </div>
-                        <div>
-                          <label htmlFor="quantity">Quantity</label>
-                          <Input aria-label="quantity" role="textbox" type="number" className="form-control" name="quantity" value={this.state.quantity} onChange={this.onChangeQuantity} required />
-                          {this.state.verQuantity ? (
-                            <div className="alert alert-danger" role="alert">Please enter numbers only.</div>
-                          ) : (
-                            <div></div>
-                          )}
-                        </div>
-                        <br />
-                        <Button
-                          style={{ backgroundColor: "#d3d3af", borderColor: "#d3d3af", WebkitTextFillColor: "white" }} size="small" variant="contained" onClick={() => this.addItem(currentItem, this.state.quantity)}>
-                          Add Item
-                        </Button>
-                      </div>
-                    ) : (
-                      <div></div>
-                    )}
-                  </Grid>
-                  <Grid item md={4}>
-                    <h4>Added Items</h4>
-                    <div className="list-group">
-                      {currentBooking.meals.map((meal, index) => (
-                        <ListItem style={{ padding: "20px" }} selected={index === currentIndex} onClick={() => this.deleteItem(index)} divider button key={index}>
-                          {" "}{meal.name}, qty:{meal.quantity}, ${meal.price}{" "}
+        <div style={{ fontFamily: "Times New Roman", textAlign: "center" }}>
+          <h3>{currentSubject.subjectName}</h3>
+          <form>
+            <div>
+              <label htmlFor="username">Subject Name</label>
+              <Input style={{fontFamily: "Times New Roman"}} type="text" className="form-control" name="subject-name" value={currentSubject.subjectName} disabled />
+            </div>
+            <div>
+              <label htmlFor="semester">Semester</label>
+              <Input style={{fontFamily: "Times New Roman"}} type="text" className="form-control" name="semester" value={currentSubject.semester} disabled />
+            </div>
+            {/* <div>
+              <Grid container>
+                <Grid item md={4}>
+                  <h4>Menu</h4>
+                  <div className="list-group">
+                    {menus &&
+                      menus.map((menu, index) => (
+                        <ListItem style={{ padding: "20px" }} selected={index === currentIndex} onClick={() => this.setActiveAddItem(menu, index)} divider button key={index}>
+                          {" "}{menu.name}, ${menu.price}{" "}
                         </ListItem>
                       ))}
-                    </div>
-                  </Grid>
+                  </div>
                 </Grid>
-              </div> */}
-              <br />
-              <div style={{ display: "inline-block" }}>
-                <Link style={{ WebkitTextFillColor: "black" }} to={"/subject/" + currentSubject.username}>
-                  Go Back?
-                </Link>
-                <Switch>
-                  <Route exact path={"/subject/" + currentSubject.username} component={viewSubject} />
-                </Switch>
-              </div>
-            </form>
-            <p>{this.state.message}</p>
-          </div>
-        ) : (
-          <div>
+                <Grid item md={4}>
+                  {currentItem ? (
+                    <div>
+                      <h4>Item Selected</h4>
+                      <div>
+                        <label><strong>Name:</strong></label>{" "}
+                        {currentItem.name}
+                      </div>
+                      <div>
+                        <label htmlFor="quantity">Quantity</label>
+                        <Input aria-label="quantity" role="textbox" type="number" className="form-control" name="quantity" value={this.state.quantity} onChange={this.onChangeQuantity} required />
+                        {this.state.verQuantity ? (
+                          <div className="alert alert-danger" role="alert">Please enter numbers only.</div>
+                        ) : (
+                          <div></div>
+                        )}
+                      </div>
+                      <br />
+                      <Button
+                        style={{ backgroundColor: "#d3d3af", borderColor: "#d3d3af", WebkitTextFillColor: "white" }} size="small" variant="contained" onClick={() => this.addItem(currentItem, this.state.quantity)}>
+                        Add Item
+                      </Button>
+                    </div>
+                  ) : (
+                    <div></div>
+                  )}
+                </Grid>
+                <Grid item md={4}>
+                  <h4>Added Items</h4>
+                  <div className="list-group">
+                    {currentBooking.meals.map((meal, index) => (
+                      <ListItem style={{ padding: "20px" }} selected={index === currentIndex} onClick={() => this.deleteItem(index)} divider button key={index}>
+                        {" "}{meal.name}, qty:{meal.quantity}, ${meal.price}{" "}
+                      </ListItem>
+                    ))}
+                  </div>
+                </Grid>
+              </Grid>
+            </div> */}
             <br />
-            <p>Please click on a Subject...</p>
-          </div>
-        )}
+            <div style={{ display: "inline-block" }}>
+              <Link style={{ WebkitTextFillColor: "black" }} to={"/subject/" + currentSubject.username}>
+                Go Back?
+              </Link>
+              <Switch>
+                <Route exact path={"/subject/" + currentSubject.username} component={viewSubject} />
+              </Switch>
+            </div>
+          </form>
+          <p>{this.state.message}</p>
       </div>
     );
   }
 }
 
-export default EditSubject
+export default EditSubject;

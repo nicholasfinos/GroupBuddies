@@ -12,7 +12,7 @@ module.exports = app => {
   router.get("/findOne/:subjectName", subject.findOneSubject);
 
   // Retrieves a subject by id
-  router.get("/:username/:id", subject.findSubjectById);
+  router.get("/:username/:subjectId", subject.findSubjectById);
 
   //Find Tutorial assocaited to Subject 
   router.get("/findTutorial/:subjectName", subject.findTutorial);

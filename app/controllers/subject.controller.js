@@ -55,7 +55,7 @@ exports.findOneSubject = (req, res) => {
 };
 
 exports.findSubjectById = (req, res) => {
-  Subject.find({ _id: req.params.id })
+  Subject.find({ _id: req.params.subjectId })
     .then((data) => {
       res.send(data);
     })
