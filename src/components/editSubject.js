@@ -4,6 +4,7 @@ import TutorDataService from "../services/tutor-service";
 import { Link, Switch, Route } from "react-router-dom";
 import { Button, Input } from "@material-ui/core";
 import viewSubject from "../components/viewSubjects";
+import { Grid, ListItem } from "@material-ui/core";
 
 const required = (value) => {
   if (!value) {
@@ -25,7 +26,7 @@ class EditSubject extends Component {
     this.updateSubject = this.updateSubject.bind(this);
    
     this.state = {
-      currentSubject: {
+      // currentSubject: {
         id: null,
         tutorials: [],
         subjectName: "",
@@ -35,10 +36,11 @@ class EditSubject extends Component {
         subjectCoordinator: "",
         tutors: [],
         addedtutors: [],
-      },
+        username: "",
+      // },
       message: "",
-      subjects: [],
-      currentItem: null,
+      // subjects: [],
+      // currentItem: null,
       currentIndex: -1
       }
   }
@@ -80,11 +82,23 @@ class EditSubject extends Component {
     const URL = String(this.props.match.path).slice(0, -1);
     // console.log(this.props.match.path)
     const username = String(URL.substring(URL.lastIndexOf("/") + 1, URL.length));
+    this.setState({
+      username: username
+    })
     // const username = String(URL.substring(URL.lastIndexOf("/") + 1, URL.length));
     SubjectDataService.findSubjectById(username, subjectId)
       .then((response) => {
         this.setState({
-          currentSubject: response.data,
+          // currentSubject: response.data,
+          id: response.data[0]._id,
+          tutorials: response.data[0].tutorials,
+          subjectName: response.data[0].subjectName,
+          tutorialNumbers: response.data[0].tutorialNumbers,
+          semester: response.data[0].semester,
+          groupAssessment: response.data[0].groupAssessment,
+          subjectTopics: response.data[0].subjectTopics,
+          subjectCoordinator: response.data[0].subjectCoordinator,
+          tutors: response.data[0].tutors,
         });
         console.log(response.data);
         })
@@ -240,21 +254,72 @@ class EditSubject extends Component {
     // something
   }
 
+  goBack = (username) => {
+    this.props.history.push("/subject/" + username);
+    window.location.reload();
+  }
+
   render() {
-    const { currentSubject } = this.state;
+    const { subjectName, tutorials, semester, groupAssessment, subjectTopics, tutorialNumbers, subjectCoordinator, tutors, username } = this.state;
 
     return (
         <div style={{ fontFamily: "Times New Roman", textAlign: "center" }}>
-          <h3>{currentSubject.subjectName}</h3>
+          <h3>{subjectName}</h3>
           <form>
             <div>
               <label htmlFor="username">Subject Name</label>
-              <Input style={{fontFamily: "Times New Roman"}} type="text" className="form-control" name="subject-name" value={currentSubject.subjectName} disabled />
+              <Input style={{fontFamily: "Times New Roman"}} type="text" className="form-control" name="subject-name" value={subjectName} disabled />
             </div>
             <div>
               <label htmlFor="semester">Semester</label>
-              <Input style={{fontFamily: "Times New Roman"}} type="text" className="form-control" name="semester" value={currentSubject.semester} disabled />
+              <Input style={{fontFamily: "Times New Roman"}} type="text" className="form-control" name="semester" value={semester} disabled />
             </div>
+            <div className="form-group">
+              <label style={{ marginLeft: "220px" }} htmlFor="tutorial numbers">Number of Tutorials:</label>
+              <select className="form-group border" style={{ minWidth: "500px" }} value={tutorialNumbers} onChange={this.onChangeTutorialNumbers} validations={[required]}>
+                <option value="" disabled selected>Select your option</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+              </select>
+            </div>
+
+            <div className="form-group">
+              <label style={{ marginLeft: "220px" }} htmlFor="group-assessment">Group Assessment:</label>
+              <select className="border" style={{ minWidth: "500px" }} value={groupAssessment} onChange={this.onChangeGroupAssessment} validations={[required]}>
+                <option value="" disabled selected>Select your option</option>
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+              </select>
+            </div>
+
+            <div className="form-group">
+              <label style={{ marginLeft: "220px" }} htmlFor="subject-topics">Subject Topics:</label>
+              <textarea className="border" style={{ minWidth: "500px" }} id="topics" name="topics" value={subjectTopics} rows="5" placeholder="Please seperate each topic with a comma..." onChange={this.onChangeSubjectTopics} validations={[required]}></textarea>
+            </div>
+            <br/>
+            <div>
+              <br/>
+              {/* <Grid container style={{minWidth: "600px", alignContent: "center", paddingLeft: "150px"}}>
+                <Grid item md={4}>
+                  <h4>Tutors</h4>
+                  <i>Please select a tutor from the list:</i>
+                  <div className="form-group" style={{flexDirection: "column"}}>
+                    {tutors && tutors.map((tutor, index) => (
+                      <ListItem style={{ padding: "20px", marginLeft: "15px", maxWidth: "200px"}} selected={index === currentIndex} onClick={() => this.setActiveAddItem(tutor, index)} divider button key={index}>
+                        {tutor?.username}
+                      </ListItem>
+                    ))}
+                  </div>
+                </Grid>
+              </Grid> */}
             {/* <div>
               <Grid container>
                 <Grid item md={4}>
@@ -305,15 +370,14 @@ class EditSubject extends Component {
                     ))}
                   </div>
                 </Grid>
-              </Grid>
-            </div> */}
+              </Grid> */}
+            </div> 
             <br />
             <div style={{ display: "inline-block" }}>
-              <Link style={{ WebkitTextFillColor: "black" }} to={"/subject/" + currentSubject.username}>
-                Go Back?
-              </Link>
+              {/* <button  style={{ WebkitTextFillColor: "black" }} onClick={this.goBack(username)}>Go Back?</button> */}
+              <Link style={{ WebkitTextFillColor: "black" }} to={"/subject/view/" + username}>Go Back?</Link>
               <Switch>
-                <Route exact path={"/subject/" + currentSubject.username} component={viewSubject} />
+                <Route path={"/subject/view/" + username} component={viewSubject} />
               </Switch>
             </div>
           </form>

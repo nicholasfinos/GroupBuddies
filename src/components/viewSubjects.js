@@ -116,7 +116,6 @@ class SubjectList extends Component {
 
     return (
       <div style={{ fontFamily: "Times New Roman", textAlign: "center", "width": "80%", "marginLeft": "130px" }}>
-        <hr className="new5"></hr>
         <h3>Subjects</h3>
         <Grid container>
           <Grid item md={4}>
