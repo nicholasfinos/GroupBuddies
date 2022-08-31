@@ -47,13 +47,14 @@ export default class StudentProfile extends React.Component {
       preferredName: this.state.preferredName,
       studentName: this.state.username,
     }
-    
     UserService.updateStudent(data);
   }
 
   onSubmit = () => {
+    const username = this.state.username;
     this.updateStudentProfile();
-    return <Redirect to={"/account/" + this.state.username} />;
+    this.props.history.push("/account/" + username);
+    window.location.reload();
   }
 
   render() {
@@ -95,7 +96,7 @@ export default class StudentProfile extends React.Component {
                     </select>
                   </div>
                 </div>
-                <div class="button">
+                <div class="button" onSubmit={this.onSubmit}>
                   <input type="submit" value="Submit"/>
                 </div>
               </form>

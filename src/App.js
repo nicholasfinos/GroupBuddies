@@ -87,7 +87,7 @@ const App = () => {
           {currentUser ? (
             <div className="navbar-nav ml-auto navbar-spread-style">
               <li className="nav-item">
-                <Link to={"/account"} className="nav-link">My Account</Link>
+                <Link to={"/account/" + currentUser?.username} className="nav-link">My Account</Link>
               </li>
               <li className="nav-item">
                 <a href="/login" className="nav-link" onClick={logOut}>LogOut</a>
@@ -106,7 +106,7 @@ const App = () => {
           <Switch>
             <Route exact path={["/", "/home"]} component={Home} />
             <Route exact path="/login" component={Login} />
-            <Route exact path={"/account/" + currentUser?.username} component={Account} />
+            <Route path={"/account/" + currentUser?.username} component={Account} />
             <Route path="/student" component={BoardStudent} />
             <Route exact path="/tutor" component={BoardTutor} />
             <Route path={"/subject/create/" + currentUser?.username} component={createSubject} />

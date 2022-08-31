@@ -17,6 +17,20 @@ exports.SubjectCoordinatorBoard = (req, res) => {
   res.status(200).send("Subject Coordinator Content.");
 };
 
+exports.getUser = (req, res) => {
+  User.find({
+    username: req.params.username
+  })
+  .then((data) => {
+    res.send(data);
+  })
+  .catch((err) => {
+    res
+      .status(500)
+      .send({ message: "Error retreiving User related to " + req.params.username });
+  })
+}
+
 exports.updateStudent = (req, res) => {
   User.findOneAndUpdate({
     username: req.body.username,
