@@ -30,8 +30,8 @@ class SubjectDataService {
         return http.get(`/subject/findTutorialByTutor/${_id}`)
     }
 
-    updateSubject(username, subjectId) {
-        return http.put(`/subject/${username}/${subjectId}`)
+    updateSubject(data) {
+        return http.put(`/subject/updateSubject/`, data)
     }
 }
 

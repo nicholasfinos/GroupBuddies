@@ -19,7 +19,8 @@ module.exports = app => {
 
   router.get("/findTutorialByTutor/:_id", subject.findTutorialByTutor)
 
-  router.put("/:username/:subjectId", subject.updateSubject);
+  //Update Subject with id
+  router.put("/updateSubject", subject.updateSubject);
 
   app.use('/api/subject', router);
 };

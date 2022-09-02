@@ -23,6 +23,9 @@ class EditSubject extends Component {
     this.refreshList = this.refreshList.bind(this);
     this.getSubject =this.getSubject.bind(this);
     this.updateSubject = this.updateSubject.bind(this);
+    this.onChangeGroupAssessment = this.onChangeGroupAssessment.bind(this);
+    this.onChangeTutorialNumbers = this.onChangeTutorialNumbers.bind(this);
+    this.onChangeSubjectTopics = this.onChangeSubjectTopics.bind(this);
    
     this.state = {
       id: null,
@@ -32,6 +35,7 @@ class EditSubject extends Component {
       groupAssessment: "",
       subjectTopics: "",
       subjectCoordinator: "",
+      tutorialNumbers: "",
       tutors: [],
       addedtutors: [],
       username: "",
@@ -88,11 +92,20 @@ class EditSubject extends Component {
           subjectName: response.data[0].subjectName,
           tutorialNumbers: response.data[0].tutorialNumbers,
           semester: response.data[0].semester,
-          groupAssessment: response.data[0].groupAssessment,
+          //groupAssessment: response.data[0].groupAssessment,
           subjectTopics: response.data[0].subjectTopics,
           subjectCoordinator: response.data[0].subjectCoordinator,
           tutors: response.data[0].tutors,
         });
+
+
+        if(response.data[0].groupAssessment === true) {
+          this.setState({ groupAssessment: "Yes"});
+        }
+        else {
+          this.setState({ groupAssessment: "No"})
+        }
+
         console.log(response.data);
         })
       .catch((e) => {
@@ -160,10 +173,12 @@ class EditSubject extends Component {
   }
 
   onChangeGroupAssessment(e) {
+    console.log(e.target.value);
     this.setState({ groupAssessment: e.target.value, message: "" });
   }
 
   onChangeTutorialNumbers(e) {
+    console.log(e.target.value);
     this.setState({ tutorialNumbers: e.target.value, message: "" });
   }
 
@@ -235,12 +250,17 @@ class EditSubject extends Component {
     }
   }
 
-  updateSubject(username) {
-    const URL = String(this.props.location.pathname);
-    const subjectId = String(
-      URL.substring(URL.lastIndexOf("/") + 1, URL.length)
-    );
-    SubjectDataService.updateSubject(username, subjectId)
+  updateSubject() {
+    var data =  {
+      id: this.state?.id,
+      subjectName: this.state?.subjectName,
+      tutorialNumbers: this.state?.tutorialNumbers,
+      groupAssessment: this.state?.groupAssessment,
+      semester: this.state?.semester,
+      subjectTopics: this.state?.subjectTopics
+    };
+
+    SubjectDataService.updateSubject(data)
       .then((response) => {
         this.setState({
           subjectName: response.data?.subjectName,
@@ -256,7 +276,7 @@ class EditSubject extends Component {
       .catch((e) => {
         console.log(e);
       });
-    }
+  }
 
   goBack = (username) => {
     this.props.history.push("/subject/" + username);
@@ -276,7 +296,7 @@ class EditSubject extends Component {
             </div>
             <div>
               <label htmlFor="semester">Semester</label>
-              <Input style={{fontFamily: "Times New Roman"}} type="text" className="form-control" name="semester" value={semester} disabled />
+              <Input style={{fontFamily: "Times New Roman"}} type="text" className="form-control" name="semester" value={semester} />
             </div>
             <div className="form-group">
               <label style={{ marginLeft: "220px" }} htmlFor="tutorial numbers">Number of Tutorials:</label>
@@ -377,7 +397,7 @@ class EditSubject extends Component {
               </Grid> */}
             </div> 
             <br />
-            <Button size="small" variant="contained" style={{maxWidth: "700px", marginLeft: "225px"}} onClick={this.updateSubject(username)}>Save</Button>
+            <Button size="small" variant="contained" style={{maxWidth: "700px", marginLeft: "225px"}} onClick={this.updateSubject}>Save</Button>
             <div style={{ display: "inline-block" }}>
               {/* <button  style={{ WebkitTextFillColor: "black" }} onClick={this.goBack(username)}>Go Back?</button> */}
               <Link style={{ WebkitTextFillColor: "black" }} to={"/subject/view/" + username}>Go Back?</Link>

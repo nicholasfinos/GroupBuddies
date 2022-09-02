@@ -2,6 +2,7 @@ const Subject = require("../models/subject.model");
 const User = require("../models/user.model");
 const Tutorial = require("../models/tutorial.model");
 const { ObjectId } = require("mongodb");
+const ArrayList = require("arraylist");
 
 exports.viewSubjects = (req, res) => {
   User.find({ username: req.params.username })
@@ -150,14 +151,25 @@ exports.updateSubject = (req, res) => {
     });
   }
 
-  Subject.updateOne({_id: ObjectId(req.params.subjectId)},
-    {$set: {
-      "subjectTopics": req.body.subjectTopics,
-      "tutorials": req.body.tutorials,
-      "groupAssessment": req.body.groupAssessment, 
-      "tutorialNumbers": req.body.tutorialNumbers,
-      "semester": req.body.semester,
-    }})
+  
+  if (req.body.groupAssessment === "Yes") {
+    req.body.groupAssessment = true;
+  } else {
+    req.body.groupAssessment = false;
+  }
+
+  if (req.body.subjectTopics?.length !== 0) {
+    var str = new ArrayList();
+    const splitQuery = req.body.subjectTopics?.split(",")
+    var i = 0
+    for (i = 0; i < splitQuery?.length; i++) {
+      str[i] = splitQuery[i].trim()
+    }
+    req.body.subjectTopics = str;
+  }
+
+
+  Subject.findByIdAndUpdate(req.body.id, req.body, { useFindAndModify: false })
     .then((data) => {
       if (!data) {
         res.status(404).send({
