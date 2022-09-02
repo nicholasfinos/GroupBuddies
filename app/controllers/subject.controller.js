@@ -145,12 +145,12 @@ exports.createSubject = (req, res) => {
 };
 
 exports.updateSubject = (req, res) => {
+
   if (Object.keys(req.body).length === 0){
     return res.status(400).send({
       message: "Data to update can not be empty!",
     });
   }
-
   
   if (req.body.groupAssessment === "Yes") {
     req.body.groupAssessment = true;
@@ -158,7 +158,8 @@ exports.updateSubject = (req, res) => {
     req.body.groupAssessment = false;
   }
 
-  if (req.body.subjectTopics?.length !== 0) {
+
+  if (req.body.subjectTopics?.length !== 0 && req.body.subjectTopics[0].length === 1) {
     var str = new ArrayList();
     const splitQuery = req.body.subjectTopics?.split(",")
     var i = 0
@@ -167,6 +168,7 @@ exports.updateSubject = (req, res) => {
     }
     req.body.subjectTopics = str;
   }
+
 
 
   Subject.findByIdAndUpdate(req.body.id, req.body, { useFindAndModify: false })
