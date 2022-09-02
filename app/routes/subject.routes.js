@@ -19,5 +19,7 @@ module.exports = app => {
 
   router.get("/findTutorialByTutor/:_id", subject.findTutorialByTutor)
 
+  router.put("/:username/:subjectId", subject.updateSubject);
+
   app.use('/api/subject', router);
 };

@@ -1,11 +1,12 @@
 const Subject = require("../models/subject.model");
 const User = require("../models/user.model");
 const Tutorial = require("../models/tutorial.model");
+const { ObjectId } = require("mongodb");
 
 exports.viewSubjects = (req, res) => {
   User.find({ username: req.params.username })
     .then((data) => {
-      Subject.find({subjectCoordinator : [data[0]._id]})
+      Subject.find({ subjectCoordinator: [data[0]._id] })
         .then((doc) => {
           res.status(200).send(doc);
         })
@@ -18,7 +19,7 @@ exports.viewSubjects = (req, res) => {
     })
 };
 
-exports.findTutorial = (req,res) => {
+exports.findTutorial = (req, res) => {
   Tutorial.find({ subjectName: req.params.subjectName })
     .then((data) => {
       res.status(200).send(data);
@@ -30,7 +31,7 @@ exports.findTutorial = (req,res) => {
     })
 };
 
-exports.findTutorialByTutor = (req,res) => {
+exports.findTutorialByTutor = (req, res) => {
   Tutorial.find({ tutor: [req.params._id] })
     .then((data) => {
       res.send(data);
@@ -94,7 +95,6 @@ exports.createSubject = (req, res) => {
 
 
   for (let i = 0; i < subject.tutorialNumbers; i++) {
-
     const tutorial = new Tutorial({
       subjectName: req.body.subjectName,
       number: (i + 1),
@@ -103,7 +103,6 @@ exports.createSubject = (req, res) => {
       tutor: null,
       allStudents: null
     });
-
 
     User.find({ username: req.body.assignedTutor[i].username })
       .then((data) => {
@@ -124,8 +123,6 @@ exports.createSubject = (req, res) => {
     }
   }
 
-
-
   User.find({ username: req.params.username })
     .then((data) => {
       subject.subjectCoordinator = data;
@@ -144,4 +141,33 @@ exports.createSubject = (req, res) => {
         }
       });
     })
+};
+
+exports.updateSubject = (req, res) => {
+  if (Object.keys(req.body).length === 0){
+    return res.status(400).send({
+      message: "Data to update can not be empty!",
+    });
+  }
+
+  Subject.updateOne({_id: ObjectId(req.params.subjectId)},
+    {$set: {
+      "subjectTopics": req.body.subjectTopics,
+      "tutorials": req.body.tutorials,
+      "groupAssessment": req.body.groupAssessment, 
+      "tutorialNumbers": req.body.tutorialNumbers,
+      "semester": req.body.semester,
+    }})
+    .then((data) => {
+      if (!data) {
+        res.status(404).send({
+          message: `Cannot update Subject!`,
+        });
+      } else res.send({ message: "Subject was updated successfully." });
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: "Error updating Subject",
+      });
+    });
 };

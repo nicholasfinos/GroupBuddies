@@ -17,6 +17,7 @@ class SubjectDataService {
     //     return http.get(`/subject/${subjectName}`)
     // }
 
+
     findSubjectById(username, subjectId) {
         return http.get(`/subject/${username}/${subjectId}`)
     }
@@ -27,6 +28,10 @@ class SubjectDataService {
 
     findTutorialByTutor(_id) {
         return http.get(`/subject/findTutorialByTutor/${_id}`)
+    }
+
+    updateSubject(username, subjectId) {
+        return http.put(`/subject/${username}/${subjectId}`)
     }
 }
 

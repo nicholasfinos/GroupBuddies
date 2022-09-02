@@ -21,32 +21,26 @@ class EditSubject extends Component {
     super(props);
     this.retrieveSubjects = this.retrieveSubjects.bind(this);
     this.refreshList = this.refreshList.bind(this);
-    // this.setActiveSubject = this.setActiveSubject.bind(this);
     this.getSubject =this.getSubject.bind(this);
     this.updateSubject = this.updateSubject.bind(this);
    
     this.state = {
-      // currentSubject: {
-        id: null,
-        tutorials: [],
-        subjectName: "",
-        semester: "",
-        groupAssessment: "",
-        subjectTopics: "",
-        subjectCoordinator: "",
-        tutors: [],
-        addedtutors: [],
-        username: "",
-      // },
+      id: null,
+      tutorials: [],
+      subjectName: "",
+      semester: "",
+      groupAssessment: "",
+      subjectTopics: "",
+      subjectCoordinator: "",
+      tutors: [],
+      addedtutors: [],
+      username: "",
       message: "",
-      // subjects: [],
-      // currentItem: null,
       currentIndex: -1
-      }
+    }
   }
 
   componentDidMount() {
-    //Finding Booking through URL
     const URL = String(this.props.location.pathname);
     const subjectId = String(
       URL.substring(URL.lastIndexOf("/") + 1, URL.length)
@@ -85,7 +79,6 @@ class EditSubject extends Component {
     this.setState({
       username: username
     })
-    // const username = String(URL.substring(URL.lastIndexOf("/") + 1, URL.length));
     SubjectDataService.findSubjectById(username, subjectId)
       .then((response) => {
         this.setState({
@@ -170,14 +163,6 @@ class EditSubject extends Component {
     this.setState({ groupAssessment: e.target.value, message: "" });
   }
 
-  onChangeSemester(e) {
-    this.setState({ semester: e.target.value, message: "" });
-  }
-
-  onChangeSubjectName(e) {
-    this.setState({ subjectName: e.target.value, message: "" });
-  }
-
   onChangeTutorialNumbers(e) {
     this.setState({ tutorialNumbers: e.target.value, message: "" });
   }
@@ -250,9 +235,28 @@ class EditSubject extends Component {
     }
   }
 
-  updateSubject() {
-    // something
-  }
+  updateSubject(username) {
+    const URL = String(this.props.location.pathname);
+    const subjectId = String(
+      URL.substring(URL.lastIndexOf("/") + 1, URL.length)
+    );
+    SubjectDataService.updateSubject(username, subjectId)
+      .then((response) => {
+        this.setState({
+          subjectName: response.data?.subjectName,
+          tutorialNumbers: response.data?.tutorialNumbers,
+          groupAssessment: response.data?.groupAssessment,
+          semester: response.data?.semester,
+          subjectTopics: response.data?.subjectTopics,
+          assignedTutor: response.data?.assignedTutors,
+          message: ""
+        });
+        console.log(response.data);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+    }
 
   goBack = (username) => {
     this.props.history.push("/subject/" + username);
@@ -373,6 +377,7 @@ class EditSubject extends Component {
               </Grid> */}
             </div> 
             <br />
+            <Button size="small" variant="contained" style={{maxWidth: "700px", marginLeft: "225px"}} onClick={this.updateSubject(username)}>Save</Button>
             <div style={{ display: "inline-block" }}>
               {/* <button  style={{ WebkitTextFillColor: "black" }} onClick={this.goBack(username)}>Go Back?</button> */}
               <Link style={{ WebkitTextFillColor: "black" }} to={"/subject/view/" + username}>Go Back?</Link>
