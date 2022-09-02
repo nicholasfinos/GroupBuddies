@@ -159,7 +159,7 @@ exports.updateSubject = (req, res) => {
   }
 
 
-  if (req.body.subjectTopics?.length !== 0 && req.body.subjectTopics[0].length === 1) {
+ /* if (req.body.subjectTopics?.length !== 0 && req.body.subjectTopics[0].length === 1) {
     var str = new ArrayList();
     const splitQuery = req.body.subjectTopics?.split(",")
     var i = 0
@@ -167,7 +167,7 @@ exports.updateSubject = (req, res) => {
       str[i] = splitQuery[i].trim()
     }
     req.body.subjectTopics = str;
-  }
+  }*/
 
 
 

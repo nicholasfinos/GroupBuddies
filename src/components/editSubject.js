@@ -296,11 +296,11 @@ class EditSubject extends Component {
             </div>
             <div>
               <label htmlFor="semester">Semester</label>
-              <Input style={{fontFamily: "Times New Roman"}} type="text" className="form-control" name="semester" value={semester} />
+              <Input style={{fontFamily: "Times New Roman"}} type="text" className="form-control" name="semester" value={semester} disabled/>
             </div>
             <div className="form-group">
               <label style={{ marginLeft: "220px" }} htmlFor="tutorial numbers">Number of Tutorials:</label>
-              <select className="form-group border" style={{ minWidth: "500px" }} value={tutorialNumbers} onChange={this.onChangeTutorialNumbers} validations={[required]}>
+              <select className="form-group border" style={{ minWidth: "500px" }} value={tutorialNumbers} onChange={this.onChangeTutorialNumbers} validations={[required]} disabled>
                 <option value="" disabled selected>Select your option</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
@@ -317,7 +317,7 @@ class EditSubject extends Component {
 
             <div className="form-group">
               <label style={{ marginLeft: "220px" }} htmlFor="group-assessment">Group Assessment:</label>
-              <select className="border" style={{ minWidth: "500px" }} value={groupAssessment} onChange={this.onChangeGroupAssessment} validations={[required]}>
+              <select className="border" style={{ minWidth: "500px" }} value={groupAssessment} onChange={this.onChangeGroupAssessment} validations={[required]} >
                 <option value="" disabled selected>Select your option</option>
                 <option value="Yes">Yes</option>
                 <option value="No">No</option>
@@ -326,80 +326,13 @@ class EditSubject extends Component {
 
             <div className="form-group">
               <label style={{ marginLeft: "220px" }} htmlFor="subject-topics">Subject Topics:</label>
-              <textarea className="border" style={{ minWidth: "500px" }} id="topics" name="topics" value={subjectTopics} rows="5" placeholder="Please seperate each topic with a comma..." onChange={this.onChangeSubjectTopics} validations={[required]}></textarea>
+              <textarea className="border" style={{ minWidth: "500px" }} id="topics" name="topics" value={subjectTopics} rows="5" placeholder="Please seperate each topic with a comma..." disabled ></textarea>
             </div>
+            {/* onChange={this.onChangeSubjectTopics} validations={[required]}> */}
             <br/>
             <div>
               <br/>
-              {/* <Grid container style={{minWidth: "600px", alignContent: "center", paddingLeft: "150px"}}>
-                <Grid item md={4}>
-                  <h4>Tutors</h4>
-                  <i>Please select a tutor from the list:</i>
-                  <div className="form-group" style={{flexDirection: "column"}}>
-                    {tutors && tutors.map((tutor, index) => (
-                      <ListItem style={{ padding: "20px", marginLeft: "15px", maxWidth: "200px"}} selected={index === currentIndex} onClick={() => this.setActiveAddItem(tutor, index)} divider button key={index}>
-                        {tutor?.username}
-                      </ListItem>
-                    ))}
-                  </div>
-                </Grid>
-              </Grid> */}
-            {/* <div>
-              <Grid container>
-                <Grid item md={4}>
-                  <h4>Menu</h4>
-                  <div className="list-group">
-                    {menus &&
-                      menus.map((menu, index) => (
-                        <ListItem style={{ padding: "20px" }} selected={index === currentIndex} onClick={() => this.setActiveAddItem(menu, index)} divider button key={index}>
-                          {" "}{menu.name}, ${menu.price}{" "}
-                        </ListItem>
-                      ))}
-                  </div>
-                </Grid>
-                <Grid item md={4}>
-                  {currentItem ? (
-                    <div>
-                      <h4>Item Selected</h4>
-                      <div>
-                        <label><strong>Name:</strong></label>{" "}
-                        {currentItem.name}
-                      </div>
-                      <div>
-                        <label htmlFor="quantity">Quantity</label>
-                        <Input aria-label="quantity" role="textbox" type="number" className="form-control" name="quantity" value={this.state.quantity} onChange={this.onChangeQuantity} required />
-                        {this.state.verQuantity ? (
-                          <div className="alert alert-danger" role="alert">Please enter numbers only.</div>
-                        ) : (
-                          <div></div>
-                        )}
-                      </div>
-                      <br />
-                      <Button
-                        style={{ backgroundColor: "#d3d3af", borderColor: "#d3d3af", WebkitTextFillColor: "white" }} size="small" variant="contained" onClick={() => this.addItem(currentItem, this.state.quantity)}>
-                        Add Item
-                      </Button>
-                    </div>
-                  ) : (
-                    <div></div>
-                  )}
-                </Grid>
-                <Grid item md={4}>
-                  <h4>Added Items</h4>
-                  <div className="list-group">
-                    {currentBooking.meals.map((meal, index) => (
-                      <ListItem style={{ padding: "20px" }} selected={index === currentIndex} onClick={() => this.deleteItem(index)} divider button key={index}>
-                        {" "}{meal.name}, qty:{meal.quantity}, ${meal.price}{" "}
-                      </ListItem>
-                    ))}
-                  </div>
-                </Grid>
-              </Grid> */}
-            </div> 
-            <br />
-            <Button size="small" variant="contained" style={{maxWidth: "700px", marginLeft: "225px"}} onClick={this.updateSubject}>Save</Button>
-            <div style={{ display: "inline-block" }}>
-              {/* <button  style={{ WebkitTextFillColor: "black" }} onClick={this.goBack(username)}>Go Back?</button> */}
+              <Button size="small" variant="contained" style={{maxWidth: "700px", marginLeft: "225px"}} onClick={this.updateSubject}>Save</Button>
               <Link style={{ WebkitTextFillColor: "black" }} to={"/subject/view/" + username}>Go Back?</Link>
               <Switch>
                 <Route path={"/subject/view/" + username} component={viewSubject} />
