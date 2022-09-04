@@ -3,6 +3,7 @@ const User = require("../models/user.model");
 const Tutorial = require("../models/tutorial.model");
 
 exports.viewSubjects = (req, res) => {
+  //Display all of the subject that is associated to User
   User.find({ username: req.params.username })
     .then((data) => {
       Subject.find({subjectCoordinator : [data[0]._id]})
@@ -19,6 +20,7 @@ exports.viewSubjects = (req, res) => {
 };
 
 exports.findTutorial = (req,res) => {
+  //Find Tutoirals which is associated to Subject
   Tutorial.find({ subjectName: req.params.subjectName })
     .then((data) => {
       res.send(data);
@@ -31,6 +33,7 @@ exports.findTutorial = (req,res) => {
 };
 
 exports.findTutorialByTutor = (req,res) => {
+  //Find all Tutorial that is associated to Tutor
   Tutorial.find({ tutor: [req.params._id] })
     .then((data) => {
       res.send(data);
@@ -43,6 +46,7 @@ exports.findTutorialByTutor = (req,res) => {
 };
 
 exports.findOneSubject = (req, res) => {
+  //Find a particular subject
   Subject.find({ subjectName: req.params.subjectName })
     .then((data) => {
       res.send(data);
@@ -66,6 +70,7 @@ exports.createSubject = (req, res) => {
     tutorials: null
   });
 
+  //Convert the String topics into array
   if (req.body.subjectTopics?.length !== 0) {
     const splitQuery = req.body.subjectTopics?.split(",")
     var i = 0
@@ -74,6 +79,7 @@ exports.createSubject = (req, res) => {
     }
   }
 
+  //Convert string group Assessment to boolean
   if (req.body.groupAssessment === "Yes") {
     subject.groupAssessment = true;
   } else {
@@ -81,6 +87,7 @@ exports.createSubject = (req, res) => {
   }
 
 
+  //Adding Tutorial class into Subject
   for (let i = 0; i < subject.tutorialNumbers; i++) {
 
     const tutorial = new Tutorial({
@@ -93,6 +100,7 @@ exports.createSubject = (req, res) => {
     });
 
 
+    //Assign Tutor to tutorial
     User.find({ username: req.body.assignedTutor[i].username })
       .then((data) => {
         tutorial.tutor = data
@@ -114,6 +122,7 @@ exports.createSubject = (req, res) => {
 
 
 
+  //Assign subject Coordinator to Subject and save
   User.find({ username: req.params.username })
     .then((data) => {
       subject.subjectCoordinator = data;
