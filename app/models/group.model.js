@@ -1,18 +1,17 @@
 const mongoose = require("mongoose");
 
-const StudentProfile = mongoose.model(
-  "StudentProfile",
+const Group = mongoose.model(
+  "Group",
   new mongoose.Schema({
-    student: {
+    students: [{
       type: mongoose.Schema.Types.ObjectId,
       ref: "User"
-    },
-    username: String,
+  }],
     subjectName: String,
     tutorialNumber: String,
-    GroupNumber: String,
-    subjectTopcis: Array,
+    groupNumber: String,
+    groupTopics: Array
   })
 );
 
-module.exports = StudentProfile;
+module.exports = Group;
