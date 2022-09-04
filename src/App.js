@@ -19,6 +19,7 @@ import viewTutors from "./components/viewTutors";
 import viewSubject from "./components/viewSubjects";
 import viewTutorial from "./components/viewTutorial";
 import StudentProfile from "./components/studentProfile";
+import { AppBar, Button } from "@material-ui/core";
 
 const App = () => {
   const [ShowSubjectCoordinator, setShowSubjectCoordinator] = useState(false);
@@ -48,18 +49,11 @@ const App = () => {
 
   return (
     <Router history={history}>
-      <div className="container" style={{ fontFamily: "Arial", }}>
-        <nav className="navbar navbar-expand-lg navbar-light bg-light" id="horizontal-style" style={{ marginTop: 10, marginLeft: 10, marginRight: 10 }}>
-          <a class="navbar-brand">
-            <img src={logo} id="groupbuddieslogo" height="60" alt="" />
-          </a>
-          <Link to="/" className="navbar-brand">
-            <img src={name} id="groupbuddies" width="350" alt="" />
-          </Link>
-          <div className="navbar-nav mr-auto" style={{ paddingLeft: "5vw" }}>
-            <li className="nav-item">
-              <Link to={"/home"} className="nav-link">Home</Link>
-            </li>
+      <>
+      <AppBar style={{background: '#fff0e7', textColor: 'black'}} justifyContent="space-between" position="static" fullwidth>
+        <toolbar style={{textColor: ''}} justifyContent="space-between">
+        <img src={logo} id="groupbuddieslogo" height="100" alt="" />
+            <Button  component={Link} to={"/home"}>Home</Button>
 
             {showTutor && (
               <li className="nav-item" style={{ paddingLeft: "150px" }}>
@@ -77,30 +71,24 @@ const App = () => {
             )}
 
             {showStudent && (
-              <li className="nav-item" style={{ paddingLeft: "150px" }}>
-                <Link to={"/student"} className="nav-link">Student Board</Link>
-                <Link to={"/profile/" + currentUser?.username} className="nav-link">My Profile</Link>
-              </li>
+              
+              <><Button  component={Link} to={"/student"}>Student Board</Button><Button  component={Link} to={"/profile/" + currentUser?.username}>My Profile</Button></>
+              
+              
             )}
-          </div>
 
           {currentUser ? (
-            <div className="navbar-nav ml-auto navbar-spread-style">
-              <li className="nav-item">
-                <Link to={"/account/" + currentUser?.username} className="nav-link">My Account</Link>
-              </li>
-              <li className="nav-item">
-                <a href="/login" className="nav-link" onClick={logOut}>LogOut</a>
-              </li>
-            </div>
+    
+              <><Button  component={Link} to={"/account/"}>My Account</Button><Button  onClick={logOut}>Logout </Button></> 
+              
+           
           ) : (
-            <div className="navbar-nav ml-auto navbar-spread-style">
-              <li className="nav-item">
-                <Link to={"/login"} className="nav-link">Login</Link>
-              </li>
-            </div>
+            
+              <Button  component={Link} to={"/login"}>Login</Button>
+            
           )}
-        </nav>
+          </toolbar>
+        </AppBar>
 
         <div className="container" style={{ marginTop: 20 }}>
           <Switch>
@@ -116,7 +104,7 @@ const App = () => {
             <Route path={"/profile/" + currentUser?.username} component={StudentProfile} />
           </Switch>
         </div>
-      </div>
+      </>
     </Router>
   );
 };
