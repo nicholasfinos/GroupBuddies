@@ -19,6 +19,7 @@ import viewTutors from "./components/viewTutors";
 import viewSubject from "./components/viewSubjects";
 import viewTutorial from "./components/viewTutorial";
 import StudentProfile from "./components/studentProfile";
+import tutorialPage from "./components/tutorialPage";
 
 const App = () => {
   const [ShowSubjectCoordinator, setShowSubjectCoordinator] = useState(false);
@@ -65,6 +66,7 @@ const App = () => {
               <li className="nav-item" style={{ paddingLeft: "150px" }}>
                 <Link to={"/tutor"} className="nav-link">Tutor Board</Link>
                 <Link to={"/tutor/viewTutorial/" + currentUser?.id} className="nav-link">View Tutorial Class</Link>
+                <Link to={"/tutor/tutorialPage/"} className="nav-link">Tutorial Page</Link>
               </li>
             )}
 
@@ -114,6 +116,7 @@ const App = () => {
             <Route path="/tutor/view" component={viewTutors} />
             <Route path={"/tutor/viewTutorial/" + currentUser?.id} component={viewTutorial} />
             <Route path={"/profile/" + currentUser?.username} component={StudentProfile} />
+            <Route path={"/tutor/tutorialPage/"} component={tutorialPage} />
           </Switch>
         </div>
       </div>

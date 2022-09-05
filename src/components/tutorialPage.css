@@ -1,0 +1,26 @@
+.main {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  width: 20%;
+  height: 600px;
+}
+
+.button {
+  background-color: white;
+  margin-top: 10px;
+  padding: 5px;
+}
+
+.button:hover {
+  background-color: #bbbcbd;
+}
+
+.box {
+  border: solid black 2px;
+}
