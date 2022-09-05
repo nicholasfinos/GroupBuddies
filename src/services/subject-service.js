@@ -20,6 +20,10 @@ class SubjectDataService {
     findTutorialByTutor(_id) {
         return http.get(`/subject/findTutorialByTutor/${_id}`)
     }
+
+    getPeers(username) {
+        return http.get(`/request/view/${username}`)
+    }
 }
 
 export default new SubjectDataService();

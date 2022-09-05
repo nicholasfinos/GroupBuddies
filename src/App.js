@@ -19,6 +19,8 @@ import viewTutors from "./components/viewTutors";
 import viewSubject from "./components/viewSubjects";
 import viewTutorial from "./components/viewTutorial";
 import StudentProfile from "./components/studentProfile";
+import viewPeerRequests from "./components/viewPeerRequests";
+import CreatePeerRequest from "./components/createPeerRequest";
 
 const App = () => {
   const [ShowSubjectCoordinator, setShowSubjectCoordinator] = useState(false);
@@ -63,7 +65,7 @@ const App = () => {
 
             {showTutor && (
               <li className="nav-item" style={{ paddingLeft: "150px" }}>
-                <Link to={"/tutor"} className="nav-link">Tutor Board</Link>
+                <Link to={"/request/view/" + currentUser?.username} className="nav-link">View Peer Requests</Link>
                 <Link to={"/tutor/viewTutorial/" + currentUser?.id} className="nav-link">View Tutorial Class</Link>
               </li>
             )}
@@ -78,7 +80,8 @@ const App = () => {
 
             {showStudent && (
               <li className="nav-item" style={{ paddingLeft: "150px" }}>
-                <Link to={"/student"} className="nav-link">Student Board</Link>
+                <Link to={"/request/create/" + currentUser?.username} className="nav-link">Create Peer Request</Link>
+                <Link to={"/request/view/" + currentUser?.username} className="nav-link">My Peer Requests</Link>
                 <Link to={"/profile/" + currentUser?.username} className="nav-link">My Profile</Link>
               </li>
             )}
@@ -114,6 +117,8 @@ const App = () => {
             <Route path="/tutor/view" component={viewTutors} />
             <Route path={"/tutor/viewTutorial/" + currentUser?.id} component={viewTutorial} />
             <Route path={"/profile/" + currentUser?.username} component={StudentProfile} />
+            <Route path={"/request/view/" + currentUser?.username} component={viewPeerRequests} />
+            <Route path={"/request/create/" + currentUser?.username} component={CreatePeerRequest} />
           </Switch>
         </div>
       </div>

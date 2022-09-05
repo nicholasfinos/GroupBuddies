@@ -19,6 +19,7 @@ const db = require("./app/models");
 const User = require("./app/models/user.model");
 const Subject = require("./app/models/subject.model");
 const Tutorial = require("./app/models/tutorial.model");
+const PeerRequest = require("./app/models/peerRequest.model");
 const Role = db.role;
 
 db.mongoose
@@ -54,6 +55,7 @@ require('./app/routes/subject.routes')(app);
 require('./app/routes/tutor.routes')(app);
 require('./app/routes/studentProfile.routes')(app);
 require('./app/routes/role.routes')(app);
+require('./app/routes/peerRequest.routes')(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;
