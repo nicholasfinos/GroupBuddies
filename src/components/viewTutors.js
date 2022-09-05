@@ -82,7 +82,7 @@ class TutorList extends Component {
                 <div>
                   <h2>Tutor</h2>
                   <div>
-                    <label><strong>Tutor Name:</strong></label>{" "}{currentTutor?.username}
+                    <label><strong>tutor Name:</strong></label>{" "}{currentTutor?.username}
                   </div>
                   <br />
                   <h2>Tutorial List</h2>
