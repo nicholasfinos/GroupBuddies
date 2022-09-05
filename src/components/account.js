@@ -1,6 +1,14 @@
 import React, { Component } from "react";
+import "./studentProfile.css";
 import UserDataService from '../services/user-service';
 import RoleDataService from '../services/role-service';
+import { Grid, Paper, Divider} from "@material-ui/core";
+import { Typography } from "@material-ui/core";
+import { Button } from "@material-ui/core";
+
+const paperStyling = { padding: 40, height: '60vh ', width: '80%', margin: '20px auto', background: '#fff0e7', borderRadius: 20/*border: '2px solid'*/ }
+const btnstyle = { margin: '40px 0', borderRadius: 10, width: '75%', align:'center', marginLeft:'13%'}
+const typ1 = { fontWeight: 600, fontFamily: "Arial" }
 
 class Account extends Component {
   constructor(props) {
@@ -59,38 +67,51 @@ class Account extends Component {
             console.log(e);
         }
     );
-
   }
 
   render() {
     const { currentUser, student, firstLogin } = this.state;
 
     return (
-        <><div>
-            {!firstLogin ? (
-                <div>
-                    <div className="container" style={{ fontFamily: "Times New Roman" }}>
-                        <><header className="jumbotron" style={{ textAlign: "center" }}>
-                            {/* <h3><strong>{currentUser[0].username}</strong></h3> */}
-                            <h3><strong>{currentUser[0].username}'s</strong> Account</h3>
-                            {/* .charAt(0).toUpperCase() + currentUser[0].username.slice(1) */}
-                        </header>
-                            <p>
-                                <strong>Id:</strong> {currentUser[0]._id}
-                            </p>
-                            <p>
-                                <strong>Email:</strong> {currentUser[0].email}
-                            </p>
-                            {/* <strong>Authorities:</strong><ul>
-                            {currentUser[0].roles &&
-                                currentUser[0].roles.map((role, index) => <li key={index}>{role}</li>)}
-                            </ul> */}
-                        </>
-                    </div>
-                </div>
+      <><Grid>
+            {!firstLogin ? ( 
+                <Paper bgcolor sx={{ borderColor: 'black' }} elevation={10} style={paperStyling} >
+                  <Grid align='center' direction="column" spacing={5}>
+                    <Typography variant='h4' fontFamily='BlinkMacSystemFont' style={typ1}> {currentUser[0].username}'s Account </Typography>
+                  </Grid>
+                  <br></br>
+                  <Grid container spacing ={5}>
+                    <Grid item xs={6}>
+                      <Grid container direction="column" spacing={5}>
+                        <Grid item>
+                          <Typography variant='h6' fontFamily='BlinkMacSystemFont' style={typ1}> Preferred Name: </Typography>
+                          <Typography variant='body2' fontFamily='BlinkMacSystemFont' style={typ1}> {currentUser[0].preferredName} </Typography>
+                          <Divider />
+                        </Grid>
+                        <Grid item>
+                          <Typography variant='h6' fontFamily='BlinkMacSystemFont' style={typ1}> Year: </Typography>
+                          <Typography variant='body2' fontFamily='BlinkMacSystemFont' style={typ1}> {currentUser[0].year} </Typography>
+                          <Divider />
+                        </Grid>
+                        <Grid item>
+                          <Typography variant='h6' fontFamily='BlinkMacSystemFont' style={typ1}> Degree: </Typography>
+                          <Typography variant='body2' fontFamily='BlinkMacSystemFont' style={typ1}> {currentUser[0].course} </Typography>
+                          <Divider />
+                        </Grid>
+                      </Grid>
+                    </Grid>
+                    <Grid item xs={6}>
+                      <div className="skills-box">
+                        <p>skills gonna go here</p>
+                      </div>
+                    </Grid>
+                  </Grid>
+                  <br></br>
+                  <Button type='submit' color="primary" variant="contained" style={btnstyle} fullWidth>Edit</Button>
+                </Paper>
             ) :
                 (<></>)}
-            </div>
+            </Grid>
         </>
     );
   }
