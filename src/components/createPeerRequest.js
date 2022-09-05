@@ -116,8 +116,25 @@ class CreatePeerRequest extends React.Component {
             </div>
 
             <div className="form-group">
-              <label style={{ marginLeft: "220px" }} htmlFor="yes-peers">Peers I am Happy to be grouped with:</label>
+              <label style={{ marginLeft: "220px" }} htmlFor="yes-peers">Peers I wish to be grouped with:</label>
               <select className="form-group border" style={{ minWidth: "500px" }} onChange={this.onChangeYesPeers} validations={[required]}>
+                <option value="" disabled selected>Select your option</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+              </select>
+            </div>
+
+            <div className="form-group">
+              <label style={{ marginLeft: "220px" }} htmlFor="yes-peers">Peers I don't wish to be grouped with:</label>
+              <select className="form-group border" style={{ minWidth: "500px" }} onChange={this.onChangeNoPeers} validations={[required]}>
                 <option value="" disabled selected>Select your option</option>
                 <option value="1">1</option>
                 <option value="2">2</option>

@@ -1,4 +1,5 @@
 const PeerRequest = require("../models/peerRequest.model");
+const Subject = require("../models/subject.model");
 
 exports.getPeerRequests = (req, res) => {
     PeerRequest.find({username: req.params.username})
@@ -36,9 +37,9 @@ exports.createPeerRequests = (req, res) => {
 };
 
 exports.getPeers = (req, res) => {
-    PeerRequest.find({subjectName: req.params.subjectName})
+    Subject.find({subjectName: req.params.subjectName})
     .then((data) => {
-      res.send(data);
+      res.send(data[0].studentList);
     //   res.send(data.students);
     })
     .catch((err) => {
