@@ -39,6 +39,7 @@ exports.getPeers = (req, res) => {
     PeerRequest.find({subjectName: req.params.subjectName})
     .then((data) => {
       res.send(data);
+    //   res.send(data.students);
     })
     .catch((err) => {
       res
