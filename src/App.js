@@ -56,18 +56,14 @@ const App = () => {
             <Button  component={Link} to={"/home"}>Home</Button>
 
             {showTutor && (
-              <li className="nav-item" style={{ paddingLeft: "150px" }}>
-                <Link to={"/tutor"} className="nav-link">Tutor Board</Link>
-                <Link to={"/tutor/viewTutorial/" + currentUser?.id} className="nav-link">View Tutorial Class</Link>
-              </li>
+            <><Button  component={Link} to={"/tutor"}>Tutor Board</Button>
+            <Button  component={Link} to={"/tutor/viewTutorial/" + currentUser?.id}>View Tutorial Class</Button></>
+
             )}
 
             {ShowSubjectCoordinator && (
-              <li className="nav-item" style={{ paddingLeft: "150px" }}>
-                <Link to={"/subject/create/" + currentUser?.username} className="nav-link">Create New Subject</Link>
-                <Link to={"/subject/view/" + currentUser?.username} className="nav-link">View a Subject</Link>
-                <Link to={"/tutor/view"} className="nav-link">View Tutors</Link>
-              </li>
+              <><Button component={Link} to={"/subject/create/" + currentUser?.username}>Create New Subject</Button><Button component={Link} to={"/subject/view/" + currentUser?.username}>View a Subject</Button><Button component={Link} to={"/tutor/view"}>View Tutors</Button></>
+
             )}
 
             {showStudent && (
