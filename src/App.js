@@ -43,11 +43,19 @@ const App = () => {
     }
   }, [currentUser]);
 
-  const logOut = () => {
+  const logOut = (e) => {
+    history.push("/");
+    window.location.reload();
     dispatch(logout());
+    // .then(() => {
+    //   history.push("/home");
+    //   window.location.reload();
+    // })
   };
 
+
   return (
+    
     <Router history={history}>
       <>
       <AppBar style={{background: '#fff0e7', textColor: 'black'}} justifyContent="space-between" position="static" fullwidth>
@@ -56,8 +64,7 @@ const App = () => {
             <Button  component={Link} to={"/home"}>Home</Button>
 
             {showTutor && (
-            <><Button  component={Link} to={"/tutor"}>Tutor Board</Button>
-            <Button  component={Link} to={"/tutor/viewTutorial/" + currentUser?.id}>View Tutorial Class</Button></>
+            <><>Button  component={Link} to={"/tutor"}>Tutor Board</><Button component={Link} to={"/tutor/viewTutorial/" + currentUser?.id}>View Tutorial Class</Button></>
 
             )}
 
@@ -75,7 +82,9 @@ const App = () => {
 
           {currentUser ? (
     
-              <><Button  component={Link} to={"/account/"}>My Account</Button><Button  onClick={logOut}>Logout </Button></> 
+              <><Button  component={Link} to={"/account/"}>My Account</Button>
+              <Button component={Link} to={"/"} onClick={logOut}>Logout </Button>
+              </> 
               
            
           ) : (
