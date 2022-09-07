@@ -25,8 +25,8 @@ exports.createEnrollmentRequest = (req, res) => {
     })
 };
 
-exports.getAll = (req, res) => {
-    Enrollment.find()
+exports.viewEnrollmentByUsername = (req, res) => {
+    Enrollment.find({username: req.params.username})
     .then((data) => {
         res.send(data);
       })

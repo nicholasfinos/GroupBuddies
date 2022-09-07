@@ -9,7 +9,11 @@ class EnrollmentDataService {
         return http.get(`/enrollment/create/${username}`);
     }
 
-    getAll(username){
+    // getAll(username){
+    //     return http.get(`/enrollment/view/${username}`);
+    // }
+
+    viewEnrollmentByUsername(username){
         return http.get(`/enrollment/view/${username}`);
     }
 }

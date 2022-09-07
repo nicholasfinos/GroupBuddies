@@ -26,7 +26,7 @@ class ViewSubjectEnrollment extends Component {
   retrieveEnrollments() {
     const URL = String(this.props.match.path);
     const username = String(URL.substring(URL.lastIndexOf("/") + 1, URL.length));
-    EnrollmentDataService.getAll(username)
+    EnrollmentDataService.viewEnrollmentByUsername(username)
       .then(response => {
         this.setState({
           enrollments: response.data
