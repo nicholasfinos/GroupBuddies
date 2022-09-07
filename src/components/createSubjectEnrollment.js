@@ -1,19 +1,7 @@
 import React from "react";
 import { Button, Input } from "@material-ui/core";
 import { Grid, ListItem } from "@material-ui/core";
-import TutorDataService from "../services/tutor-service";
-import SubjectDataService from "../services/subject-service";
 import EnrollmentDataService from "../services/enrollment-service";
-
-const required = (value) => {
-  if (!value) {
-    return (
-      <div className="alert alert-danger" role="alert">
-        This field is required!
-      </div>
-    );
-  }
-};
 
 class CreateSubjectEnrollment extends React.Component {
   constructor(props) {
