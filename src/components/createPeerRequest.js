@@ -34,6 +34,7 @@ class CreatePeerRequest extends React.Component {
       yesPeers: [],
       noPeers: [],
       message: "",
+      peers: [],
     };
   }
 
@@ -45,7 +46,7 @@ class CreatePeerRequest extends React.Component {
 
   onChangeSubjectName(e) {
     this.setState({ subjectName: e.target.value, message: "" });
-    this.retrievePeers({subjectName: e.target.value});
+    this.retrievePeers(this.state.subjectName);
   }
 
   onChangeYesPeers(e) {
@@ -57,10 +58,10 @@ class CreatePeerRequest extends React.Component {
   }
 
   retrievePeers(subjectName) {
-    SubjectDataService.getPeers(subjectName)
+    PeerRequestDataService.getPeers(this.state.username, subjectName)
     .then((res) => 
       this.setState({
-        // ...
+        peers: res.data
       })
     )
   }

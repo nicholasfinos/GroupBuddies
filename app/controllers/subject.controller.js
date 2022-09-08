@@ -62,6 +62,7 @@ exports.createSubject = (req, res) => {
     groupAssessment: req.body.groupAssessment,
     tutorialNumbers: parseInt(req.body.tutorialNumbers),
     subjectTopics: req.body.subjectTopics,
+    students: req.body.students,
     semester: req.body.semester,
     tutorials: null
   });

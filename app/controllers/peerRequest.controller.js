@@ -37,7 +37,7 @@ exports.createPeerRequests = (req, res) => {
 };
 
 exports.getPeers = (req, res) => {
-    Subject.find({subjectName: req.params.subjectName})
+    Subject.find({subjectName: req.body.subjectName})
     .then((data) => {
       res.send(data[0].studentList);
     //   res.send(data.students);
