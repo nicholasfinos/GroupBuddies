@@ -4,10 +4,11 @@ const Subject = mongoose.model(
     "Subject",
     new mongoose.Schema({
         subjectName: String,
+
         tutorialNumbers: Number,
         semester: String,
         groupAssessment: Boolean,
-        subjectTopics: String,
+        subjectTopics: [String],
         tutorials: [{
             type: mongoose.Schema.Types.ObjectId,
             ref: "Tutorial"
