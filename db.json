@@ -1,0 +1,60 @@
+{
+  "groups": [
+    {
+      "id": "0",
+      "groupNumber": 0,
+      "groupMembers": [
+        {
+          "id": "0",
+          "username": "Nick",
+          "subjectName": "",
+          "tutorialNumber": 1,
+          "GroupNumber": "",
+          "subjectTopcis": ["frontend", "backend"]
+        },
+        {
+          "id": "5",
+          "username": "MAK",
+          "subjectName": "",
+          "tutorialNumber": 1,
+          "GroupNumber": "",
+          "subjectTopcis": ["lol"]
+        }
+      ]
+    }
+  ],
+  "studentList": [
+    {
+      "id": "1",
+      "username": "Luka",
+      "subjectName": "",
+      "tutorialNumber": 1,
+      "GroupNumber": "",
+      "subjectTopcis": ["business analyst", "backend"]
+    },
+    {
+      "id": "2",
+      "username": "Yeran",
+      "subjectName": "",
+      "tutorialNumber": 1,
+      "GroupNumber": "",
+      "subjectTopcis": ["backend"]
+    },
+    {
+      "id": "3",
+      "username": "Grace",
+      "subjectName": "",
+      "tutorialNumber": 1,
+      "GroupNumber": "",
+      "subjectTopcis": ["fullstack"]
+    },
+    {
+      "id": "4",
+      "username": "Ashish",
+      "subjectName": "",
+      "tutorialNumber": 1,
+      "GroupNumber": "",
+      "subjectTopcis": ["fullstack"]
+    }
+  ]
+}

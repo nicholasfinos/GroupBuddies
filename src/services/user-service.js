@@ -27,7 +27,6 @@ const updateStudent = async (data) => {
   return await axios.patch("http://localhost:8080/api/student/", data);
 };
 
-
 const getUser = (username) => {
   return axios.get("http://localhost:8080/api/user/" + username);
 };
