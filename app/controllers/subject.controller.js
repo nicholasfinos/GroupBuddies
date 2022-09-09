@@ -71,13 +71,13 @@ exports.createSubject = (req, res) => {
   });
 
   //Convert the String topics into array
-  // if (req.body.subjectTopics?.length !== 0) {
-  //   const splitQuery = req.body.subjectTopics?.split(",")
-  //   var i = 0
-  //   for (i = 0; i < splitQuery?.length; i++) {
-  //     subject.subjectTopics[i] = splitQuery[i].trim()
-  //   }
-  // }
+  if (req.body.subjectTopics?.length !== 0) {
+    const splitQuery = req.body.subjectTopics?.split(",")
+    var i = 0
+    for (i = 0; i < splitQuery?.length; i++) {
+      subject.subjectTopics[i] = splitQuery[i].trim()
+    }
+  }
 
   //Convert string group Assessment to boolean
   if (req.body.groupAssessment === "Yes") {
