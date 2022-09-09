@@ -5,14 +5,8 @@ const PeerRequest = mongoose.model(
   new mongoose.Schema({
     username: String,
     subjectName: String, 
-    yesPeers: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User"
-    }],
-    noPeers: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User"
-    }]
+    yesPeers: [String],
+    noPeers: [String]
   })
 );
 

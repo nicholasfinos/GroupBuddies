@@ -113,8 +113,6 @@ exports.createSubject = (req, res) => {
     }
   }
 
-
-
   User.find({ username: req.params.username })
     .then((data) => {
       subject.subjectCoordinator = data;
@@ -145,4 +143,29 @@ exports.getAll = (req, res) => {
         .status(500)
         .send({ message: "Error retrieving Subjects"});
     })
+};
+
+// exports.getPeerUsername = (req, res) => {
+//   User.find({_id: req.params.peerId})
+//   .then((data) => {
+//     res.send(data);
+//   })
+//   .catch((err) => {
+//     res
+//       .status(500)
+//       .send({ message: "Error retrieving Peer's Username"});
+//   })
+// };
+
+exports.getPeers = (req, res) => {
+  Subject.find({subjectName: req.body.subjectName})
+  .then((data) => {
+    res.send(data[0].studentList);
+  //   res.send(data.students);
+  })
+  .catch((err) => {
+    res
+      .status(500)
+      .send({ message: "Error retreiving Peers in " + req.params.subjectName });
+  })
 };

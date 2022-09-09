@@ -11,7 +11,11 @@ module.exports = function(app) {
 
   app.get("/api/request/view/:username", controller.getPeerRequests);
 
-  app.get("/api/request/create/:username", controller.getPeers);
+  app.get("/api/request/create/:username", controller.getAllSubjects);
+
+  // app.get("/api/request/create/:username/:peerId", controller.getPeerUsername)
+
+  // app.get("/api/request/create/:username", controller.getPeers);
 
   app.post("/api/request/create/:username", controller.createPeerRequests);
 };

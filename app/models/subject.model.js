@@ -13,18 +13,23 @@ const Subject = mongoose.model(
             type: mongoose.Schema.Types.ObjectId,
             ref: "Tutorial"
         }],
-        subjectCoordinator: {
+        subjectCoordinator: [{
             type: mongoose.Schema.Types.ObjectId,
             ref: "User"
-        },
+        }],
         tutors: [{ 
             type: mongoose.Schema.Types.ObjectId,
             ref: "User"
         }],
-        students: [{
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "User"
-        }]
+        // students: [{
+        //     type: mongoose.Schema.Types.ObjectId,
+        //     ref: "User"
+        // }]
+        // students: [[
+        //     { String }, 
+        //     {String}
+        // ]]
+        students: [String],
     })
 );
 
