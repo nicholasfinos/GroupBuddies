@@ -1,8 +1,13 @@
 import axios from "axios";
+import http from "../http-common";
 
 class TutorialDataService {
   getTutorial = () => {
     return axios.get("http://localhost:8080/api/viewTutorial/:id")
+  }
+
+  getTutorial(id) {
+    return http.get(`/tutorial/viewTutorial/${id}`)
   }
 
   getGroups = () => {
@@ -11,6 +16,18 @@ class TutorialDataService {
 
   getStudents = () => {
     return axios.get("http://localhost:4000/studentList/");
+  }
+
+  getUnselectedStudent(data) {
+    return http.get(`/tutorial/getUnselectedStudent`, data)
+  }
+
+  addGroup(data) {
+    return http.post(`/tutorial/addGroup`, data)
+  }
+
+  removeGroup(data) {
+    return http.post(`/tutorial/removeGroup`, data)
   }
 }
 

@@ -33,3 +33,15 @@ exports.getStudentProfile = async (req, res) => {
       return res.status(200).send({ message: "Complete" });
     });
 }
+
+exports.getStudentUsername = (req, res) => {
+  StudentProfile.find({username: req.body.username})
+  .then((data) => {
+    res.send(data);
+  })
+  .catch((err) => {
+    res
+      .status(500)
+      .send({ message: "Error retriving Student Profile" });
+  })
+}

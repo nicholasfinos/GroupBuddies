@@ -11,3 +11,13 @@ module.exports = function (app) {
 
   app.post("/api/studentProfile", controller.getStudentProfile);
 }
+
+module.exports = app => {
+  const studentProfile = require("../controllers/studentProfile.controller");
+  var router = require("express").Router();
+
+  //Get Student Profile
+  router.get("/getStudent", studentProfile.getStudentUsername)
+
+  app.use('/api/studentProfile', router);
+}

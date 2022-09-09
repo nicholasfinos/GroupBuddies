@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import SubjectDataService from "../services/subject-service";
 import { Grid, ListItem } from "@material-ui/core";
+import TutorialPage from "./tutorialPageDemo";
+import { Link, Switch, Route } from "react-router-dom";
 
 class TutorialList extends Component {
   constructor(props) {
@@ -81,6 +83,12 @@ class TutorialList extends Component {
                   </div>
                   <div>
                     <label><strong>Time Slot:</strong></label>{" "}{currentTutorial.timeSlot}
+                  </div>
+                  <div>
+                  <Link style={{WebkitTextFillColor: "black"}} to={"/tutorial/" + currentTutorial._id}>Edit Tutorial</Link>
+                    <Switch>
+                      <Route exact path={"/tutorial/" + currentTutorial.id} component={TutorialPage}/>
+                    </Switch>
                   </div>   
                 </div>
               </div>

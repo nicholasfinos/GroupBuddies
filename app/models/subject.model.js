@@ -12,10 +12,10 @@ const Subject = mongoose.model(
             type: mongoose.Schema.Types.ObjectId,
             ref: "Tutorial"
         }],
-        subjectCoordinator: [{
+        subjectCoordinator: {
             type: mongoose.Schema.Types.ObjectId,
             ref: "User"
-        }]
+        }
     })
 );
 
