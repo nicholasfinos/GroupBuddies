@@ -5,8 +5,9 @@ import RoleDataService from '../services/role-service';
 import { Grid, Paper, Divider} from "@material-ui/core";
 import { Typography } from "@material-ui/core";
 import { Button } from "@material-ui/core";
+import { Link } from "react-router-dom";
 
-const paperStyling = { padding: 40, height: '60vh ', width: '80%', margin: '20px auto', background: '#fff0e7', borderRadius: 20/*border: '2px solid'*/ }
+const paperStyling = { padding: 40, height: '70vh', width: '80%', margin: '20px auto', background: '#fff0e7', borderRadius: 20/*border: '2px solid'*/ }
 const btnstyle = { margin: '40px 0', borderRadius: 10, width: '75%', align:'center', marginLeft:'13%'}
 const typ1 = { fontWeight: 600, fontFamily: "Arial" }
 
@@ -107,7 +108,7 @@ class Account extends Component {
                     </Grid>
                   </Grid>
                   <br></br>
-                  <Button type='submit' color="primary" variant="contained" style={btnstyle} fullWidth>Edit</Button>
+                  <Button component={Link} to={"/profile/" + currentUser[0].username} color="primary" variant="contained" style={btnstyle} fullWidth>Edit</Button>
                 </Paper>
             ) :
                 (<></>)}
