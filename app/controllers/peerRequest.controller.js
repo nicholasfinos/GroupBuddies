@@ -41,6 +41,7 @@ exports.createPeerRequests = (req, res) => {
     subjectName: req.body.subjectName,
     yesPeers: req.body.yesPeers,
     noPeers: req.body.noPeers,
+    status: req.body.status,
   });
 
   peerRequest.save((err, peerRequest) => {
@@ -62,7 +63,6 @@ exports.getPeers = (req, res) => {
   Subject.find({ subjectName: req.body.subjectName })
     .then((data) => {
       res.send(data[0].studentList);
-      //   res.send(data.students);
     })
     .catch((err) => {
       res
@@ -70,18 +70,6 @@ exports.getPeers = (req, res) => {
         .send({ message: "Error retreiving Peers in " + req.params.subjectName });
     })
 };
-
-// exports.getPeerUsername = (req, res) => {
-//   User.find({_id: req.params.peerId})
-//   .then((data) => {
-//     res.send(data);
-//   })
-//   .catch((err) => {
-//     res
-//       .status(500)
-//       .send({ message: "Error retrieving Peer's Username"});
-//   })
-// };
 
 exports.getAllSubjects = (req, res) => {
   Subject.find()
@@ -94,3 +82,37 @@ exports.getAllSubjects = (req, res) => {
         .send({ message: "Error retrieving Subjects" });
     })
 };
+
+exports.getPeerRequest = (req, res) => {
+  PeerRequest.find({_id: req.params.requestId})
+  .then((data) => {
+    res.send(data);
+  })
+  .catch((err) => {
+    res
+      .status(500)
+      .send({ message: "Error retrieving Peer Request with ID: " + req.params.requestId });
+  })
+};
+
+exports.updatePeerRequest = (req, res) => {
+  if (Object.keys(req.body).length === 0){
+    return res.status(400).send({
+      message: "Data to update can not be empty!",
+    });
+  }
+
+  PeerRequest.findByIdAndUpdate(req.body.id, req.body, { useFindAndModify: false })
+    .then((data) => {
+      if (!data) {
+        res.status(404).send({
+          message: `Cannot update  Peer Request!`,
+        });
+      } else res.send({ message: " Peer Request was updated successfully." });
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: "Error updating Peer Request",
+      });
+  });
+}

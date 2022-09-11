@@ -13,6 +13,10 @@ module.exports = function(app) {
 
   app.get("/api/request/create/:username", controller.getAllSubjects);
 
+  app.get("/api/request/edit/:username/:requestId", controller.getPeerRequest)
+
+  app.put("/api/request/edit/:username/:requestId", controller.updatePeerRequest)
+
   // app.get("/api/request/create/:username/:peerId", controller.getPeerUsername)
 
   // app.get("/api/request/create/:username", controller.getPeers);

@@ -742,7 +742,8 @@ async function settingUpSubjects() {
     semester: "Autumn 2020",
     groupAssessment: false,
     tutorials: [],
-    tutorialNumbers: 1
+    tutorialNumbers: 1,
+    status: false,
   })
   console.log('creating MM1 - the subject')
 
@@ -765,7 +766,8 @@ async function settingUpSubjects() {
     semester: "Spring 2020",
     groupAssessment: false,
     tutorials: [],
-    tutorialNumbers: 1
+    tutorialNumbers: 1,
+    status: false,
   })
   console.log('creating MM2 - the subject')
 
@@ -785,7 +787,8 @@ async function settingUpSubjects() {
     semester: "Autumn 2020",
     groupAssessment: true,
     tutorials: [],
-    tutorialNumbers: 4
+    tutorialNumbers: 4,
+    status: false,
   })
   console.log('creating Eng Com - the subject')
 
@@ -806,7 +809,8 @@ async function settingUpSubjects() {
     semester: "Spring 2021",
     groupAssessment: true,
     tutorials: [],
-    tutorialNumbers: 4
+    tutorialNumbers: 4,
+    status: false,
   })
   console.log('creating DIF - the subject')
 
@@ -833,7 +837,8 @@ async function settingUpSubjects() {
     semester: "Autumn 2021",
     groupAssessment: false,
     tutorials: [],
-    tutorialNumbers: 1
+    tutorialNumbers: 1,
+    status: false,
   })
   console.log('creating Phys Mod - the subject')
 }

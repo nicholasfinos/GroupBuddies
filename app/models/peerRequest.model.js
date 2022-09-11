@@ -6,7 +6,8 @@ const PeerRequest = mongoose.model(
     username: String,
     subjectName: String, 
     yesPeers: [String],
-    noPeers: [String]
+    noPeers: [String],
+    status: Boolean,
   })
 );
 

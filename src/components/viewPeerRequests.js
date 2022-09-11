@@ -3,6 +3,8 @@ import { Grid, ListItem } from "@material-ui/core";
 import PeerRequestDataService from "../services/peer-request-service";
 import UserDataService from '../services/user-service';
 import RoleDataService from '../services/role-service';
+import EditPeerRequest from "./editPeerRequest";
+import { Link, Switch, Route } from "react-router-dom"; 
 
 class viewPeerRequests extends Component {
   constructor(props) {
@@ -14,17 +16,20 @@ class viewPeerRequests extends Component {
 
     this.state = {
       requests: [],
-      currentRequest: null,
+      request: null,
       currentIndex: -1,
       yesPeers: [],
       noPeers: [],
       isTutor: null,
+      username: null,
+      status: null,
     };
   }
 
   componentDidMount() {
     const URL = String(this.props.match.path);
     const username = String(URL.substring(URL.lastIndexOf("/") + 1, URL.length));
+    this.setState({username: username})
     this.retrievePeerRequests(username);
     this.checkUser(username)
   }
@@ -78,22 +83,25 @@ class viewPeerRequests extends Component {
   refreshList() {
     this.setActiveRequest();
     this.setState({
-      currentRequest: null,
+      request: null,
       currentIndex: -1
     });
   }
 
   setActiveRequest(request, index) {
     this.setState({
-      currentRequest: request,
+      request: request,
       currentIndex: index,
       yesPeers: request.yesPeers,
       noPeers: request.noPeers,
+      status: request.status,
     });
+    window.location.reload();
   }
+  
 
   render() {
-    const { requests, isTutor, currentRequest, yesPeers, noPeers, currentIndex } = this.state;
+    const { requests, isTutor, status, username, request, subjectName, yesPeers, noPeers, currentIndex } = this.state;
 
     return (
       <div style={{ fontFamily: "Times New Roman", textAlign: "center", "width": "80%", "marginLeft": "130px" }}>
@@ -110,13 +118,13 @@ class viewPeerRequests extends Component {
                 </div>
               </Grid>
               <Grid item md={4}>
-                {currentRequest ? (
-                  <div style={{ "marginLeft": "200px" }}>
+                {request ? (
+                  <div style={{ "marginLeft": "50px", "minWidth": "450px"}}>
                     <br />
                     <div>
                       <h2>Peer Request</h2>
                       <div>
-                        <label><strong>Subject Name:</strong></label>{" "}{currentRequest.subjectName}
+                        <label><strong>Subject Name:</strong></label>{" "}{subjectName}
                       </div>
 
                       <br />
@@ -164,13 +172,13 @@ class viewPeerRequests extends Component {
               </div>
             </Grid>
             <Grid item md={4}>
-              {currentRequest ? (
-                <div style={{ "marginLeft": "200px" }}>
+              {request ? (
+                 <div style={{ "marginLeft": "50px", "minWidth": "450px"}}>
                   <br />
                   <div>
                     <h2>Peer Request</h2>
                     <div>
-                      <label><strong>Subject Name:</strong></label>{" "}{currentRequest.subjectName}
+                      <label><strong>Subject Name:</strong></label>{" "}{request.subjectName}
                     </div>
 
                     <br />
@@ -192,6 +200,22 @@ class viewPeerRequests extends Component {
                         </ListItem>
                       ))}
                     </div>
+                  </div>
+
+                  <div>
+                      {!status ? (
+                        <label><strong>Status:</strong> Idle</label>
+                      ) : (
+                        <label><strong>Status:</strong> Actioned</label>
+                      )}
+                    </div>
+
+                  <br/>
+                  <div>
+                    <Link style={{WebkitTextFillColor: "black"}} to={"/request/edit/" + username + "/" + request._id}>Edit</Link>
+                    <Switch>
+                      <Route exact path={"/request/edit/" + username + "/" + request._id} component={EditPeerRequest}/>
+                    </Switch>
                   </div>
                 </div>
               ) : (

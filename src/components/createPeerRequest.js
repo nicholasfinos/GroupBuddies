@@ -57,9 +57,8 @@ class CreatePeerRequest extends React.Component {
 
   savePeerRequest = () => {
     if (this.state.currentSubject.subjectName.length !==0){
-      if (this.state.addedYesPeers.length !== 0 || this.state.addedNoPeers[0].length !== 0){
-        var data;
-        data = {
+      if ((this.state.addedYesPeers.length !== 0) || (this.state.addedNoPeers[0].length !== 0)){
+        var data = {
           username: this.state?.username,
           subjectName: this.state?.currentSubject.subjectName,
           yesPeers: this.state?.addedYesPeers,
@@ -77,7 +76,7 @@ class CreatePeerRequest extends React.Component {
             }
           ))
       } else {
-        this.setState({ message: "Peer Preferences must be filled out!" })
+        this.setState({ message: "A Peer Preference must be filled out!" })
       }
     } else {
       this.setState({ message: "A subject must be selected!" })
