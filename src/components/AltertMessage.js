@@ -3,7 +3,7 @@ import Snackbar from "@material-ui/core/Snackbar";
 import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
 
-export default function AlertMassage({ message }) {
+export default function AlertMessage({ message }) {
   const [open, setOpen] = React.useState(true);
   function handleClose(event, reason) {
     if (reason === "clickaway") {
@@ -13,14 +13,14 @@ export default function AlertMassage({ message }) {
   }
 
   return (
-    <div>
+    <div> 
       <Snackbar
         anchorOrigin={{
           vertical: "bottom",
           horizontal: "center"
         }}
         open={open}
-        autoHideDuration={2000}
+        autoHideDuration={6900}
         onClose={handleClose}
         variant="warning"
         ContentProps={{

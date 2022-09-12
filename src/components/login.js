@@ -6,7 +6,7 @@ import { login } from "../actions/auth";
 import { Typography } from "@material-ui/core";
 import logo from "../media/groupbuddies-logo.png"
 import { Button } from "@material-ui/core";
-import AlertMassage from "./AltertMassage";
+import AlertMessage from "./AltertMessage";
 
 const paperStyling = { padding: 40, height: '50h ', width: 420, margin: '20px auto', background: '#fff0e7', borderRadius: 20/*border: '2px solid'*/ }
 const btnstyle = { margin: '40px 0', borderRadius: 10, }
@@ -81,7 +81,7 @@ const Login = (props) => {
           <Button type='submit' color="primary" variant="contained" style={btnstyle} fullWidth>Sign in</Button>
         </form>
       </Paper>
-      {status ? <AlertMassage key={status.key} message={status.msg} /> : null}
+      {status ? <AlertMessage key={status.key} message={status.msg} /> : null}
     </Grid >
   )
 

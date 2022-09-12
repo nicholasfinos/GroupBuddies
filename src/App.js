@@ -47,10 +47,6 @@ const App = () => {
     history.push("/");
     window.location.reload();
     dispatch(logout());
-    // .then(() => {
-    //   history.push("/home");
-    //   window.location.reload();
-    // })
   };
 
 
