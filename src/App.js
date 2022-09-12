@@ -20,6 +20,12 @@ import viewSubject from "./components/viewSubjects";
 import viewTutorial from "./components/viewTutorial";
 import StudentProfile from "./components/studentProfile";
 import { AppBar, Button } from "@material-ui/core";
+import viewPeerRequests from "./components/viewPeerRequests";
+import CreatePeerRequest from "./components/createPeerRequest";
+import CreateSubjectEnrollment from "./components/createSubjectEnrollment";
+import ViewSubjectEnrollment from "./components/viewEnrollment";
+import EditPeerRequest from "./components/editPeerRequest";
+import EditSubject from "./components/editSubject";
 
 const App = () => {
   const [ShowSubjectCoordinator, setShowSubjectCoordinator] = useState(false);
@@ -60,8 +66,11 @@ const App = () => {
             <Button  component={Link} to={"/home"}>Home</Button>
 
             {showTutor && (
-            <><>Button  component={Link} to={"/tutor"}>Tutor Board</><Button component={Link} to={"/tutor/viewTutorial/" + currentUser?.id}>View Tutorial Class</Button></>
 
+            <>
+              <>Button  component={Link} to={"/request/view/" + currentUser?.username}>View Peer Requests</>
+              <Button component={Link} to={"/tutor/viewTutorial/" + currentUser?.id}>View Tutorial Class</Button>
+             </>
             )}
 
             {ShowSubjectCoordinator && (
@@ -70,10 +79,18 @@ const App = () => {
             )}
 
             {showStudent && (
+
               
-              <><Button  component={Link} to={"/student"}>Student Board</Button><Button  component={Link} to={"/profile/" + currentUser?.username}>My Profile</Button></>
+              <>
+              <Button  component={Link} to={"/request/create/" + currentUser?.username}>Create Peer Request</Button>
+              <Button  component={Link} to={"/request/view/" + currentUser?.username}>My Peer Requests</Button>
+              <Button  component={Link} to={"/enrollment/create/" + currentUser?.username}>Create a Subject Enrollment</Button>
+              <Button  component={Link} to={"/enrollment/view/" + currentUser?.username}>View Subject Enrollments</Button>
+              <Button  component={Link} to={"/profile/" + currentUser?.username}>My Profile</Button>
+              </>
               
               
+
             )}
 
           {currentUser ? (
@@ -103,6 +120,12 @@ const App = () => {
             <Route path="/tutor/view" component={viewTutors} />
             <Route path={"/tutor/viewTutorial/" + currentUser?.id} component={viewTutorial} />
             <Route path={"/profile/" + currentUser?.username} component={StudentProfile} />
+            <Route path={"/request/view/" + currentUser?.username} component={viewPeerRequests} />
+            <Route path={"/request/edit/" + currentUser?.username + "/"} component={EditPeerRequest} />
+            <Route path={"/request/create/" + currentUser?.username} component={CreatePeerRequest} />
+            <Route path={"/enrollment/create/" + currentUser?.username} component={CreateSubjectEnrollment} />
+            <Route path={"/enrollment/view/" + currentUser?.username} component={ViewSubjectEnrollment} />
+            <Route path={"/subject/" + currentUser?.username + "/"} component={EditSubject} />
           </Switch>
         </div>
       </>
