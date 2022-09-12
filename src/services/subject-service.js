@@ -30,6 +30,14 @@ class SubjectDataService {
         return http.get(`/subject/findTutorialByTutor/${_id}`)
     }
 
+    // getPeerUsername(username) {
+    //     return http.get(`/request/create/${username}`)
+    // }
+
+    getPeers(username, subjectName) {
+        return http.get(`/request/create/${username}`, subjectName)
+    }
+    
     updateSubject(data) {
         return http.put(`/subject/updateSubject/`, data)
     }

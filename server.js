@@ -19,6 +19,7 @@ const db = require("./app/models");
 const User = require("./app/models/user.model");
 const Subject = require("./app/models/subject.model");
 const Tutorial = require("./app/models/tutorial.model");
+const PeerRequest = require("./app/models/peerRequest.model");
 const { Promise } = require("mongodb");
 const Role = db.role;
 
@@ -55,6 +56,8 @@ require('./app/routes/subject.routes')(app);
 require('./app/routes/tutor.routes')(app);
 require('./app/routes/studentProfile.routes')(app);
 require('./app/routes/role.routes')(app);
+require('./app/routes/enrollment.routes')(app);
+require('./app/routes/peerRequest.routes')(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;
@@ -739,7 +742,8 @@ async function settingUpSubjects() {
     semester: "Autumn 2020",
     groupAssessment: false,
     tutorials: [],
-    tutorialNumbers: 1
+    tutorialNumbers: 1,
+    status: false,
   })
   console.log('creating MM1 - the subject')
 
@@ -762,7 +766,8 @@ async function settingUpSubjects() {
     semester: "Spring 2020",
     groupAssessment: false,
     tutorials: [],
-    tutorialNumbers: 1
+    tutorialNumbers: 1,
+    status: false,
   })
   console.log('creating MM2 - the subject')
 
@@ -782,7 +787,8 @@ async function settingUpSubjects() {
     semester: "Autumn 2020",
     groupAssessment: true,
     tutorials: [],
-    tutorialNumbers: 4
+    tutorialNumbers: 4,
+    status: false,
   })
   console.log('creating Eng Com - the subject')
 
@@ -803,7 +809,8 @@ async function settingUpSubjects() {
     semester: "Spring 2021",
     groupAssessment: true,
     tutorials: [],
-    tutorialNumbers: 4
+    tutorialNumbers: 4,
+    status: false,
   })
   console.log('creating DIF - the subject')
 
@@ -830,7 +837,8 @@ async function settingUpSubjects() {
     semester: "Autumn 2021",
     groupAssessment: false,
     tutorials: [],
-    tutorialNumbers: 1
+    tutorialNumbers: 1,
+    status: false,
   })
   console.log('creating Phys Mod - the subject')
 }
