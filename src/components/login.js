@@ -8,7 +8,7 @@ import logo from "../media/groupbuddies-logo.png"
 import { Button } from "@material-ui/core";
 import AlertMassage from "./AltertMassage";
 
-const paperStyling = { padding: 40, height: '65vh ', width: 420, margin: '20px auto', background: '#fff0e7', borderRadius: 20/*border: '2px solid'*/ }
+const paperStyling = { padding: 40, height: '50h ', width: 420, margin: '20px auto', background: '#fff0e7', borderRadius: 20/*border: '2px solid'*/ }
 const btnstyle = { margin: '40px 0', borderRadius: 10, }
 const typ1 = { fontWeight: 600, fontFamily: "Arial" }
 
