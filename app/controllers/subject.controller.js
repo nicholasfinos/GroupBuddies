@@ -80,10 +80,10 @@ exports.createSubject = (req, res) => {
     tutorials: null
   });
 
-  if (req.body.subjectTopics?.length !== 0) {
-    const splitQuery = req.body.subjectTopics?.split(",")
+  if (req.body.subjectTopics.length !== 0) {
+    const splitQuery = req.body.subjectTopics.split(",")
     var i = 0
-    for (i = 0; i < splitQuery?.length; i++) {
+    for (i = 0; i < splitQuery.length; i++) {
       subject.subjectTopics[i] = splitQuery[i].trim()
     }
   }
