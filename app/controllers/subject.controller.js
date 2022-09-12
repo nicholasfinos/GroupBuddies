@@ -1,11 +1,13 @@
 const Subject = require("../models/subject.model");
 const User = require("../models/user.model");
 const Tutorial = require("../models/tutorial.model");
+const { ObjectId } = require("mongodb");
+const ArrayList = require("arraylist");
 
 exports.viewSubjects = (req, res) => {
   User.find({ username: req.params.username })
     .then((data) => {
-      Subject.find({subjectCoordinator : [data[0]._id]})
+      Subject.find({ subjectCoordinator: [data[0]._id] })
         .then((doc) => {
           res.status(200).send(doc);
         })
@@ -18,10 +20,10 @@ exports.viewSubjects = (req, res) => {
     })
 };
 
-exports.findTutorial = (req,res) => {
+exports.findTutorial = (req, res) => {
   Tutorial.find({ subjectName: req.params.subjectName })
     .then((data) => {
-      res.send(data);
+      res.status(200).send(data);
     })
     .catch((err) => {
       res
@@ -30,7 +32,7 @@ exports.findTutorial = (req,res) => {
     })
 };
 
-exports.findTutorialByTutor = (req,res) => {
+exports.findTutorialByTutor = (req, res) => {
   Tutorial.find({ tutor: [req.params._id] })
     .then((data) => {
       res.send(data);
@@ -38,7 +40,7 @@ exports.findTutorialByTutor = (req,res) => {
     .catch((err) => {
       res
         .status(500)
-        .send({ message: "Error retriving Tutorial " });
+        .send({ message: "Error retreiving Tutorial " });
     })
 };
 
@@ -50,7 +52,19 @@ exports.findOneSubject = (req, res) => {
     .catch((err) => {
       res
         .status(500)
-        .send({ message: "Error retriving Subject with name " + req.body.subjectName });
+        .send({ message: "Error retreiving Subject with name " + req.body.subjectName });
+    })
+};
+
+exports.findSubjectById = (req, res) => {
+  Subject.find({ _id: req.params.subjectId })
+    .then((data) => {
+      res.send(data);
+    })
+    .catch((err) => {
+      res
+        .status(500)
+        .send({ message: "Error retreiving Subject with name " + req.body.subjectName });
     })
 };
 
@@ -83,7 +97,6 @@ exports.createSubject = (req, res) => {
 
 
   for (let i = 0; i < subject.tutorialNumbers; i++) {
-
     const tutorial = new Tutorial({
       subjectName: req.body.subjectName,
       number: (i + 1),
@@ -92,7 +105,6 @@ exports.createSubject = (req, res) => {
       tutor: null,
       allStudents: null
     });
-
 
     User.find({ username: req.body.assignedTutor[i].username })
       .then((data) => {
@@ -168,4 +180,46 @@ exports.getPeers = (req, res) => {
       .status(500)
       .send({ message: "Error retreiving Peers in " + req.params.subjectName });
   })
+}
+
+exports.updateSubject = (req, res) => {
+
+  if (Object.keys(req.body).length === 0){
+    return res.status(400).send({
+      message: "Data to update can not be empty!",
+    });
+  }
+  
+  if (req.body.groupAssessment === "Yes") {
+    req.body.groupAssessment = true;
+  } else {
+    req.body.groupAssessment = false;
+  }
+
+
+ /* if (req.body.subjectTopics?.length !== 0 && req.body.subjectTopics[0].length === 1) {
+    var str = new ArrayList();
+    const splitQuery = req.body.subjectTopics?.split(",")
+    var i = 0
+    for (i = 0; i < splitQuery?.length; i++) {
+      str[i] = splitQuery[i].trim()
+    }
+    req.body.subjectTopics = str;
+  }*/
+
+
+
+  Subject.findByIdAndUpdate(req.body.id, req.body, { useFindAndModify: false })
+    .then((data) => {
+      if (!data) {
+        res.status(404).send({
+          message: `Cannot update Subject!`,
+        });
+      } else res.send({ message: "Subject was updated successfully." });
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: "Error updating Subject",
+      });
+    });
 };

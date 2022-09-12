@@ -38,7 +38,7 @@ db.mongoose
     process.exit();
   });
 
-db.mongoose.set('useFindAndModify', false); // to use findOneAndUpdate
+  db.mongoose.set('useFindAndModify', false); // to use findOneAndUpdate
 
 var corsOptions = {
   origin: "http://localhost:8081"
