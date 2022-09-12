@@ -74,6 +74,7 @@ exports.createSubject = (req, res) => {
     groupAssessment: req.body.groupAssessment,
     tutorialNumbers: parseInt(req.body.tutorialNumbers),
     subjectTopics: req.body.subjectTopics,
+    students: req.body.students,
     semester: req.body.semester,
     tutorials: null
   });
@@ -152,6 +153,34 @@ exports.getAll = (req, res) => {
         .status(500)
         .send({ message: "Error retrieving Subjects"});
     })
+};
+
+// exports.getPeerUsername = (req, res) => {
+//   User.find({_id: req.params.peerId})
+//   .then((data) => {
+//     res.send(data);
+//   })
+//   .catch((err) => {
+//     res
+//       .status(500)
+//       .send({ message: "Error retrieving Peer's Username"});
+//   })
+// };
+
+exports.getPeers = (req, res) => {
+  Subject.find({subjectName: req.body.subjectName})
+  .then((data) => {
+    res.send(data[0].studentList);
+  //   res.send(data.students);
+  })
+  .catch((err) => {
+    res
+      .status(500)
+      .send({ message: "Error retreiving Peers in " + req.params.subjectName });
+  })
+}
+
+exports.updateSubject = (req, res) => {
 }
 
 exports.updateSubject = (req, res) => {
@@ -190,4 +219,4 @@ exports.updateSubject = (req, res) => {
         message: "Error updating Subject",
       });
     });
-}
+};

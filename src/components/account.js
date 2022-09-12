@@ -59,7 +59,6 @@ class Account extends Component {
             console.log(e);
         }
     );
-
   }
 
   render() {
