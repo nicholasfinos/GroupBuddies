@@ -21,6 +21,7 @@ import viewTutorial from "./components/viewTutorial";
 import StudentProfile from "./components/studentProfile";
 import CreateSubjectEnrollment from "./components/createSubjectEnrollment";
 import ViewSubjectEnrollment from "./components/viewEnrollment";
+import EditSubject from "./components/editSubject";
 
 const App = () => {
   const [ShowSubjectCoordinator, setShowSubjectCoordinator] = useState(false);
@@ -119,6 +120,7 @@ const App = () => {
             <Route path={"/profile/" + currentUser?.username} component={StudentProfile} />
             <Route path={"/enrollment/create/" + currentUser?.username} component={CreateSubjectEnrollment} />
             <Route path={"/enrollment/view/" + currentUser?.username} component={ViewSubjectEnrollment} />
+            <Route path={"/subject/" + currentUser?.username + "/"} component={EditSubject} />
           </Switch>
         </div>
       </div>
