@@ -19,6 +19,8 @@ import viewTutors from "./components/viewTutors";
 import viewSubject from "./components/viewSubjects";
 import viewTutorial from "./components/viewTutorial";
 import StudentProfile from "./components/studentProfile";
+import CreateSubjectEnrollment from "./components/createSubjectEnrollment";
+import ViewSubjectEnrollment from "./components/viewEnrollment";
 import EditSubject from "./components/editSubject";
 
 const App = () => {
@@ -79,7 +81,8 @@ const App = () => {
 
             {showStudent && (
               <li className="nav-item" style={{ paddingLeft: "150px" }}>
-                <Link to={"/student"} className="nav-link">Student Board</Link>
+                <Link to={"/enrollment/create/" + currentUser?.username} className="nav-link">Create a Subject Enrollment</Link>
+                <Link to={"/enrollment/view/" + currentUser?.username} className="nav-link">View Subject Enrollments</Link>
                 <Link to={"/profile/" + currentUser?.username} className="nav-link">My Profile</Link>
               </li>
             )}
@@ -115,6 +118,8 @@ const App = () => {
             <Route path="/tutor/view" component={viewTutors} />
             <Route path={"/tutor/viewTutorial/" + currentUser?.id} component={viewTutorial} />
             <Route path={"/profile/" + currentUser?.username} component={StudentProfile} />
+            <Route path={"/enrollment/create/" + currentUser?.username} component={CreateSubjectEnrollment} />
+            <Route path={"/enrollment/view/" + currentUser?.username} component={ViewSubjectEnrollment} />
             <Route path={"/subject/" + currentUser?.username + "/"} component={EditSubject} />
           </Switch>
         </div>
