@@ -6,6 +6,7 @@ import { login } from "../actions/auth";
 import { Typography } from "@material-ui/core";
 import logo from "../media/groupbuddies-logo.png"
 import { Button } from "@material-ui/core";
+import AlertMassage from "./AltertMassage";
 
 const paperStyling = { padding: 40, height: '65vh ', width: 420, margin: '20px auto', background: '#fff0e7', borderRadius: 20/*border: '2px solid'*/ }
 const btnstyle = { margin: '40px 0', borderRadius: 10, }
@@ -42,6 +43,8 @@ const Login = (props) => {
     setPassword(password);
   };
 
+  const [status, setStatusBase] = React.useState("");
+
   const handleLogin = (e) => {
     e.preventDefault();
 
@@ -54,8 +57,11 @@ const Login = (props) => {
       })
       .catch(() => {
         setLoading(false);
+        setStatusBase({ msg: "Incorrect login credentials please try again", key: Math.random() });
       });
+     
   };
+  
 
   if (isLoggedIn) {
     return <Redirect to={"/account/" + username}/>;
@@ -71,10 +77,11 @@ const Login = (props) => {
         </Grid>
         <form onSubmit={handleLogin}>
           <TextField label='Username' placeholder="enter username" fullWidth required onChange={onChangeUsername} />
-          <TextField label='Password' placeholder="enter password" fullWidth required onChange={onChangePassword} />
+          <TextField label='Password' type="password" placeholder="enter password" fullWidth required onChange={onChangePassword} />
           <Button type='submit' color="primary" variant="contained" style={btnstyle} fullWidth>Sign in</Button>
         </form>
       </Paper>
+      {status ? <AlertMassage key={status.key} message={status.msg} /> : null}
     </Grid >
   )
 
