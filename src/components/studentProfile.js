@@ -1,7 +1,6 @@
 import React from "react";
 import "./studentProfile.css";
-import UserService from "../services/user-service"
-import { Redirect } from 'react-router-dom';
+import UserService from "../services/user-service";
 
 export default class StudentProfile extends React.Component {
   constructor(props) {

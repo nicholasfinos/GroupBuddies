@@ -9,8 +9,17 @@ class SubjectDataService {
         return http.post(`/subject/create/${username}`, data);
     }
 
-    findOne(subjectName) {
+    findSubjectByName(subjectName) {
         return http.get(`/subject/findOne/${subjectName}`)
+    }
+
+    // findSubjectByUserName(subjectName) {
+    //     return http.get(`/subject/${subjectName}`)
+    // }
+
+
+    findSubjectById(username, subjectId) {
+        return http.get(`/subject/${username}/${subjectId}`)
     }
 
     findTutorial(subjectName) {
@@ -19,6 +28,10 @@ class SubjectDataService {
 
     findTutorialByTutor(_id) {
         return http.get(`/subject/findTutorialByTutor/${_id}`)
+    }
+
+    updateSubject(data) {
+        return http.put(`/subject/updateSubject/`, data)
     }
 }
 
