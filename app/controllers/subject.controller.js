@@ -71,7 +71,7 @@ exports.findSubjectById = (req, res) => {
 exports.createSubject = (req, res) => {
   // Create Subject
   const subject = new Subject({
-    subjectCoordinator: req.params.username,
+    subjectCoordinator: null,
     subjectName: req.body.subjectName,
     groupAssessment: req.body.groupAssessment,
     tutorialNumbers: parseInt(req.body.tutorialNumbers),
@@ -99,10 +99,10 @@ exports.createSubject = (req, res) => {
     const tutorial = new Tutorial({
       subjectName: req.body.subjectName,
       number: (i + 1),
-      timeSlot: req.body.assignedTutor[i].timeSlot,
-      day: req.body.assignedTutor[i].day,
       tutor: null,
-      allStudents: null
+      allStudents: null,
+      timeSlot: req.body.assignedTutor[i].timeSlot,
+      day: req.body.assignedTutor[i].day
     });
 
     User.find({ username: req.body.assignedTutor[i].username })
@@ -126,7 +126,7 @@ exports.createSubject = (req, res) => {
 
   User.find({ username: req.params.username })
     .then((data) => {
-      subject.subjectCoordinator = data;
+      subject.subjectCoordinator = data._id;
 
       subject.save((err, subject) => {
         if (err) {
