@@ -19,6 +19,7 @@ import viewTutors from "./components/viewTutors";
 import viewSubject from "./components/viewSubjects";
 import viewTutorial from "./components/viewTutorial";
 import StudentProfile from "./components/studentProfile";
+import { AppBar, Button } from "@material-ui/core";
 import viewPeerRequests from "./components/viewPeerRequests";
 import CreatePeerRequest from "./components/createPeerRequest";
 import CreateSubjectEnrollment from "./components/createSubjectEnrollment";
@@ -48,68 +49,64 @@ const App = () => {
     }
   }, [currentUser]);
 
-  const logOut = () => {
+  const logOut = (e) => {
+    history.push("/");
+    window.location.reload();
     dispatch(logout());
   };
 
+
   return (
+    
     <Router history={history}>
-      <div className="container" style={{ fontFamily: "Arial", }}>
-        <nav className="navbar navbar-expand-lg navbar-light bg-light" id="horizontal-style" style={{ marginTop: 10, marginLeft: 10, marginRight: 10 }}>
-          <a class="navbar-brand">
-            <img src={logo} id="groupbuddieslogo" height="60" alt="" />
-          </a>
-          <Link to="/" className="navbar-brand">
-            <img src={name} id="groupbuddies" width="350" alt="" />
-          </Link>
-          <div className="navbar-nav mr-auto" style={{ paddingLeft: "5vw" }}>
-            <li className="nav-item">
-              <Link to={"/home"} className="nav-link">Home</Link>
-            </li>
+      <>
+      <AppBar style={{background: '#fff0e7', textColor: 'black'}} justifyContent="space-between" position="static" fullwidth>
+        <toolbar style={{textColor: ''}} justifyContent="space-between">
+        <img src={logo} id="groupbuddieslogo" height="100" alt="" />
+            <Button  component={Link} to={"/home"}>Home</Button>
 
             {showTutor && (
-              <li className="nav-item" style={{ paddingLeft: "150px" }}>
-                <Link to={"/request/view/" + currentUser?.username} className="nav-link">View Peer Requests</Link>
-                <Link to={"/tutor/viewTutorial/" + currentUser?.id} className="nav-link">View Tutorial Class</Link>
-              </li>
+
+            <>
+              <>Button  component={Link} to={"/request/view/" + currentUser?.username}>View Peer Requests</>
+              <Button component={Link} to={"/tutor/viewTutorial/" + currentUser?.id}>View Tutorial Class</Button>
+             </>
             )}
 
             {ShowSubjectCoordinator && (
-              <li className="nav-item" style={{ paddingLeft: "150px" }}>
-                <Link to={"/subject/create/" + currentUser?.username} className="nav-link">Create New Subject</Link>
-                <Link to={"/subject/view/" + currentUser?.username} className="nav-link">View a Subject</Link>
-                <Link to={"/tutor/view"} className="nav-link">View Tutors</Link>
-              </li>
+              <><Button component={Link} to={"/subject/create/" + currentUser?.username}>Create New Subject</Button><Button component={Link} to={"/subject/view/" + currentUser?.username}>View a Subject</Button><Button component={Link} to={"/tutor/view"}>View Tutors</Button></>
+
             )}
 
             {showStudent && (
-              <li className="nav-item" style={{ paddingLeft: "150px" }}>
-                <Link to={"/request/create/" + currentUser?.username} className="nav-link">Create Peer Request</Link>
-                <Link to={"/request/view/" + currentUser?.username} className="nav-link">My Peer Requests</Link>
-                <Link to={"/enrollment/create/" + currentUser?.username} className="nav-link">Create a Subject Enrollment</Link>
-                <Link to={"/enrollment/view/" + currentUser?.username} className="nav-link">View Subject Enrollments</Link>
-                <Link to={"/profile/" + currentUser?.username} className="nav-link">My Profile</Link>
-              </li>
+
+              
+              <>
+              <Button  component={Link} to={"/request/create/" + currentUser?.username}>Create Peer Request</Button>
+              <Button  component={Link} to={"/request/view/" + currentUser?.username}>My Peer Requests</Button>
+              <Button  component={Link} to={"/enrollment/create/" + currentUser?.username}>Create a Subject Enrollment</Button>
+              <Button  component={Link} to={"/enrollment/view/" + currentUser?.username}>View Subject Enrollments</Button>
+              <Button  component={Link} to={"/profile/" + currentUser?.username}>My Profile</Button>
+              </>
+              
+              
+
             )}
-          </div>
 
           {currentUser ? (
-            <div className="navbar-nav ml-auto navbar-spread-style">
-              <li className="nav-item">
-                <Link to={"/account/" + currentUser?.username} className="nav-link">My Account</Link>
-              </li>
-              <li className="nav-item">
-                <a href="/login" className="nav-link" onClick={logOut}>LogOut</a>
-              </li>
-            </div>
+    
+              <><Button  component={Link} to={"/account/"}>My Account</Button>
+              <Button component={Link} to={"/"} onClick={logOut}>Logout </Button>
+              </> 
+              
+           
           ) : (
-            <div className="navbar-nav ml-auto navbar-spread-style">
-              <li className="nav-item">
-                <Link to={"/login"} className="nav-link">Login</Link>
-              </li>
-            </div>
+            
+              <Button  component={Link} to={"/login"}>Login</Button>
+            
           )}
-        </nav>
+          </toolbar>
+        </AppBar>
 
         <div className="container" style={{ marginTop: 20 }}>
           <Switch>
@@ -131,7 +128,7 @@ const App = () => {
             <Route path={"/subject/" + currentUser?.username + "/"} component={EditSubject} />
           </Switch>
         </div>
-      </div>
+      </>
     </Router>
   );
 };
