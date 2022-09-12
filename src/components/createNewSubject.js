@@ -153,31 +153,69 @@ class CreateSubject extends React.Component {
   saveSubject = () => {
     if (this.state.subjectName.length !== 0 || this.state.semester !== 0) {
       if (parseInt(this.state.tutorialNumbers) === this.state.addedtutors.length) {
-        if (this.state.groupAssessment === "Yes" && this.state.subjectTopics.length !== 0) {
+        if ((this.state.groupAssessment === "Yes") && (this.state.subjectTopics.length !== 0)) {
           var data;
           data = {
-            username: this.state?.username,
-            subjectName: this.state?.subjectName,
-            tutorialNumbers: this.state?.tutorialNumbers,
-            groupAssessment: this.state?.groupAssessment,
-            semester: this.state?.semester,
-            subjectTopics: this.state?.subjectTopics,
-            assignedTutor: this.state?.addedtutors
+            username: this.state.username,
+            subjectName: this.state.subjectName,
+            tutorialNumbers: this.state.tutorialNumbers,
+            groupAssessment: this.state.groupAssessment,
+            semester: this.state.semester,
+            subjectTopics: this.state.subjectTopics,
+            assignedTutor: this.state.addedtutors
           }
 
-          SubjectDataService.findOne(data.subjectName)
+          SubjectDataService.findSubjectByName(data.subjectName)
             .then((response) => {
               if (response.data.length === 0) {
                 SubjectDataService.create(data, data.username)
                   .then((response) => {
                     this.setState({
-                      subjectName: response.data?.subjectName,
-                      tutorialNumbers: response.data?.tutorialNumbers,
-                      groupAssessment: response.data?.groupAssessment,
-                      semester: response.data?.semester,
-                      subjectTopics: response.data?.subjectTopics,
+                      subjectName: response.data.subjectName,
+                      tutorialNumbers: response.data.tutorialNumbers,
+                      groupAssessment: response.data.groupAssessment,
+                      semester: response.data.semester,
+                      subjectTopics: response.data.subjectTopics,
                       submitted: true,
-                      assignedTutor: response.data?.assignedTutors,
+                      assignedTutor: response.data.assignedTutors,
+                      message: ""
+                    });
+                    console.log(response.data);
+                  })
+                  .catch((e) => {
+                    console.log(e);
+                  });
+              }
+              else {
+                this.setState({ message: "Duplicate subject" })
+              }
+            })
+        }
+        else if (this.state.groupAssessment === "No"){
+          var data;
+          data = {
+            username: this.state.username,
+            subjectName: this.state.subjectName,
+            tutorialNumbers: this.state.tutorialNumbers,
+            groupAssessment: this.state.groupAssessment,
+            semester: this.state.semester,
+            subjectTopics: this.state.subjectTopics,
+            assignedTutor: this.state.addedtutors
+          }
+
+          SubjectDataService.findSubjectByName(data.subjectName)
+            .then((response) => {
+              if (response.data.length === 0) {
+                SubjectDataService.create(data, data.username)
+                  .then((response) => {
+                    this.setState({
+                      subjectName: response.data.subjectName,
+                      tutorialNumbers: response.data.tutorialNumbers,
+                      groupAssessment: response.data.groupAssessment,
+                      semester: response.data.semester,
+                      subjectTopics: response.data.subjectTopics,
+                      submitted: true,
+                      assignedTutor: response.data.assignedTutors,
                       message: ""
                     });
                     console.log(response.data);
