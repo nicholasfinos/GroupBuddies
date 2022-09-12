@@ -1,6 +1,13 @@
 import React from "react";
 import "./studentProfile.css";
-import UserService from "../services/user-service";
+import UserService from "../services/user-service"
+import { Grid, Paper, TextField } from "@material-ui/core";
+import { Typography } from "@material-ui/core";
+import { Button } from "@material-ui/core";
+
+const paperStyling = { padding: 40, height: '80vh ', width: '65%', margin: '20px auto', background: '#fff0e7', borderRadius: 20/*border: '2px solid'*/ }
+const btnstyle = { margin: '40px 0', borderRadius: 10, width: '75%', align:'center'}
+const typ1 = { fontWeight: 600, fontFamily: "Arial" }
 
 export default class StudentProfile extends React.Component {
   constructor(props) {
@@ -58,51 +65,46 @@ export default class StudentProfile extends React.Component {
 
   render() {
     return (
-      <div style={{ textAlign: "center", maxWidth: '100%', fontFamily: "Times New Roman" }} className="form">
-        <div className="big-container">
-          <div className="container">
-            <div className="title"> My Profile</div>
-            <div className="content">
-              <form onSubmit={this.onSubmit}>
-                <div class="user-details">
-                  <div class="input-box">
-                    <span class="details">Username</span>
-                    <input type="text" disabled value={this.state.username}/>
-                  </div>
-                  <div class="input-box">
-                    <span class="details">Preferred Name</span>
-                    <input type="text" placeholder="Enter your preferred name" required onChange={this.handlePreferredNameChange} />
-                  </div>
-                  <div class="input-box">
-                    <label className="details">Year:</label>
-                    <select className="info-card" value={this.state.year} onChange={this.handleYearChange}>
-                      <option value="" disabled selected>Select your option</option>
-                      <option value="1">Year 1</option>
-                      <option value="2">Year 2</option>
-                      <option value="3">Year 3</option>
-                      <option value="4">Year 4</option>
-                      <option value="5">Year 5</option>
-                      <option value="6">Year 6</option>
-                    </select>
-                  </div>
-                  <div class="input-box">
-                    <label className="details">Degree:</label>
-                    <select className="info-card" value={this.state.course} onChange={this.handleCourseChange}>
-                      <option value="" disabled selected>Select your option</option>
-                      <option value="Software Engineering">Software Engo</option>
-                      <option value="Finance">Finance</option>
-                      <option value="Philosophy">Philosophy</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="button" onSubmit={this.onSubmit}>
-                  <input type="submit" value="Submit"/>
-                </div>
-              </form>
-            </div>
-          </div> 
-        </div>
-      </div>
+      <Grid >
+        <form onSubmit={this.onSubmit}>
+          <Paper bgcolor sx={{ borderColor: 'black' }} elevation={10} style={paperStyling} >
+            <Grid align='center'>
+              <Typography variant='h4' fontFamily='BlinkMacSystemFont' style={typ1}> My Profile </Typography>
+              <Typography variant='subtitle2'> Please complete the form to set up account</Typography>
+            </Grid>
+            <Grid container spacing={5}>
+              <Grid item xs={4}>
+                <TextField label='Username' disabled value={this.state.username} fullWidth required  />
+              </Grid>
+              <Grid item xs={8}>
+                <TextField label='Preferred Name' placeholder="enter preferred name" onChange={this.handlePreferredNameChange} fullWidth required  />
+              </Grid>
+              <Grid item xs={12}>
+                <label>Year:</label>
+                <select className="info-card" value={this.state.year} onChange={this.handleYearChange}>
+                  <option value="" disabled selected>Select your option</option>
+                  <option value="1">Year 1</option>
+                  <option value="2">Year 2</option>
+                  <option value="3">Year 3</option>
+                  <option value="4">Year 4</option>
+                  <option value="5">Year 5</option>
+                  <option value="6">Year 6</option>
+                </select>
+              </Grid>
+              <Grid item xs={12}>
+                <label className="details">Degree:</label>
+                <select className="info-card" value={this.state.course} onChange={this.handleCourseChange}>
+                  <option value="" disabled selected>Select your option</option>
+                  <option value="Software Engineering">Software Engo</option>
+                  <option value="Finance">Finance</option>
+                  <option value="Philosophy">Philosophy</option>
+                </select>
+              </Grid>
+            </Grid>
+            <Button type='submit' color="primary" variant="contained" style={btnstyle} fullWidth>Submit</Button>
+          </Paper>
+        </form>
+      </Grid >
     );
   };
 }
