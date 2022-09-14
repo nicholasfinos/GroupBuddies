@@ -16,7 +16,7 @@ const Subject = mongoose.model(
         subjectCoordinator: {
             type: mongoose.Schema.Types.ObjectId,
             ref: "User"
-        }],
+        },
         tutors: [{ 
             type: mongoose.Schema.Types.ObjectId,
             ref: "User"

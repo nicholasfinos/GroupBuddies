@@ -7,7 +7,7 @@ exports.createEnrollmentRequest = (req, res) => {
         subjectName: req.body.subjectName,
         username: req.params.username,
         strengths: req.body.strengths,
-        weaknesses: req.body?.weaknesses,
+        weaknesses: req.body.weaknesses,
     })
 
     enrollment.save((err, enrollment) => {
