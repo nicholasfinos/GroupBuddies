@@ -2,23 +2,33 @@ import React, { useEffect, useState } from "react";
 import "./tutorialPage.css";
 import { ListItem } from "@material-ui/core";
 import tutorialService from "../services/tutorial-service";
+import enrollmentService from "../services/enrollment-service";
 
 const TutorialPage = () => {
+  const [tutorial, setTutorial] = useState();
   const [studentList, setStudentList] = useState([]);
   const [groupList, setGroupList] = useState([]);
   const [currentStudent, setCurrentStudent] = useState();
   const [currentGroup, setCurrentGroup] = useState();
 
   useEffect(() => {
-    tutorialService.getStudents()
+    // tutorialService.getTutorial()
+    //   .then(data => {
+    //     setTutorial(data)
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   })
+
+    enrollmentService.getTutorialEnrollments()
       .then(data => {
         setStudentList(data.data);
       });
 
-    tutorialService.getGroups()
-      .then(data => {
-        setGroupList(data.data);
-      })
+    // tutorialService.getGroups()
+    //   .then(data => {
+    //     setGroupList(data.data);
+    //   })
 
   }, []);
 
@@ -48,11 +58,11 @@ const TutorialPage = () => {
         <div className="column">
           <label>Groups</label>
           <div className="box">
-            {groupList && groupList.map((group, index) => (
+            {/* {groupList && groupList.map((group, index) => (
               <ListItem key={index} onClick={() => { setCurrentGroup(group) }}>
                 {"Group " + group.groupNumber}
               </ListItem>
-            ))}
+            ))} */}
           </div>
           <button className="button" onClick={() => { addGroup() }}>Add Group</button>
           <button className="button" onClick={() => { removeGroup() }}>Remove Group</button>
@@ -61,11 +71,11 @@ const TutorialPage = () => {
         <div className="column">
           <label>Members</label>
           <div className="box">
-            {currentGroup && currentGroup.groupMembers.map((member, index) => (
+            {/* {currentGroup && currentGroup.groupMembers.map((member, index) => (
               <ListItem key={index} onClick={() => { setCurrentStudent(member) }}>
                 {member.username}
               </ListItem>
-            ))}
+            ))} */}
           </div>
           <button className="button">Remove from Group</button>
           <label>Topics</label>
@@ -85,7 +95,7 @@ const TutorialPage = () => {
           <label>Student Info</label>
           <div className="box">
             <ListItem>
-              {currentStudent && ("Name: " + currentStudent.username)}
+              {currentStudent && "Name: " + currentStudent.username}
             </ListItem>
           </div>
           <button className="button">Add to Group</button>

@@ -69,21 +69,17 @@ const App = () => {
             {showTutor && (
 
             <>
-              <>Button  component={Link} to={"/request/view/" + currentUser?.username}>View Peer Requests</>
+              <Button  component={Link} to={"/request/view/" + currentUser?.username}>View Peer Requests</Button>
               <Button component={Link} to={"/tutor/viewTutorial/" + currentUser?.id}>View Tutorial Class</Button>
-              <Link to={"/tutor/tutorialPage/"} className="nav-link">Tutorial Page</Link>
-
+              <Button component={Link} to={"/tutor/tutorialPage/" + currentUser?.id}>Tutorial Page</Button>
              </>
             )}
 
             {ShowSubjectCoordinator && (
               <><Button component={Link} to={"/subject/create/" + currentUser?.username}>Create New Subject</Button><Button component={Link} to={"/subject/view/" + currentUser?.username}>View a Subject</Button><Button component={Link} to={"/tutor/view"}>View Tutors</Button></>
-
             )}
 
             {showStudent && (
-
-              
               <>
               <Button  component={Link} to={"/request/create/" + currentUser?.username}>Create Peer Request</Button>
               <Button  component={Link} to={"/request/view/" + currentUser?.username}>My Peer Requests</Button>
@@ -91,9 +87,6 @@ const App = () => {
               <Button  component={Link} to={"/enrollment/view/" + currentUser?.username}>View Subject Enrollments</Button>
               <Button  component={Link} to={"/profile/" + currentUser?.username}>My Profile</Button>
               </>
-              
-              
-
             )}
 
           {currentUser ? (
