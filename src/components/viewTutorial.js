@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import SubjectDataService from "../services/subject-service";
+import TutorDataService from "../services/tutor-service";
 import { Grid, ListItem } from "@material-ui/core";
 import TutorialPage from "./tutorialPageDemo";
 import { Link, Switch, Route } from "react-router-dom";
@@ -25,17 +26,17 @@ class TutorialList extends Component {
   retrieveTutorial() {
     const URL = String(this.props.match.path);
     const _id = String(URL.substring(URL.lastIndexOf("/") + 1, URL.length));
-    console.log(_id);
-    SubjectDataService.findTutorialByTutor(_id)
-      .then(response => {
-        this.setState({
-          tutorials: response.data
-        });
-      })
-      .catch(e => {
-        console.log(e);
-      }
-      );
+
+    TutorDataService.getTutorials(_id)
+    .then(response => {
+      this.setState({
+        tutorials: response.data
+      });
+    })
+    .catch(e => {
+      console.log(e);
+    }
+    );
   }
 
   refreshList() {

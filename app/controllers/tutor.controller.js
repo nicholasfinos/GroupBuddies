@@ -1,5 +1,6 @@
 const User = require("../models/user.model");
 const Role = require("../models/role.model");
+const Tutoiral = require("../models/tutorial.model");
 
 exports.findAllTutors = (req, res) => {
     Role.find({ name: "tutor" })
@@ -25,7 +26,7 @@ exports.findAllTutors = (req, res) => {
   });
 };
 
-exports.findTutor = (req, res) => {
+exports.getTutor = (req, res) => {
   User.findById(req.params._id)
   .then(data => {
     res.send(data);
@@ -37,4 +38,17 @@ exports.findTutor = (req, res) => {
     }
   );
 });
+};
+
+exports.findTutorial = (req, res) => {
+    //Find all Tutorial that is associated to Tutor
+    Tutoiral.find({ tutor: [req.params._id] })
+    .then((data) => {
+      res.send(data);
+    })
+    .catch((err) => {
+      res
+        .status(500)
+        .send({ message: "Error retreiving Tutorial " });
+    })
 };

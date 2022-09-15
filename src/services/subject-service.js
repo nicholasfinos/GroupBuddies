@@ -13,6 +13,11 @@ class SubjectDataService {
         return http.get(`/subject/findOne/${subjectName}`)
     }
 
+    findTutorial(subjectName) {
+        return http.get(`/subject/findTutorial/${subjectName}`)
+    }
+
+
     // findSubjectByUserName(subjectName) {
     //     return http.get(`/subject/${subjectName}`)
     // }
@@ -20,10 +25,6 @@ class SubjectDataService {
 
     findSubjectById(username, subjectId) {
         return http.get(`/subject/${username}/${subjectId}`)
-    }
-
-    findTutorial(subjectName) {
-        return http.get(`/subject/findTutorial/${subjectName}`)
     }
 
     findTutorialByTutor(_id) {

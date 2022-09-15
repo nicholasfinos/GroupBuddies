@@ -5,6 +5,10 @@ class TutorDataService {
         return http.get(`/tutor/view`);
     }
 
+    getTutorials(_id) {
+        return http.get(`/tutor/findTutorials/${_id}`);
+    }
+
     getTutor(_id) {
         return http.get(`/tutor/find/${_id}`);
     }

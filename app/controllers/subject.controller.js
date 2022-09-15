@@ -20,33 +20,7 @@ exports.viewSubjects = (req, res) => {
     })
 };
 
-exports.findTutorial = (req,res) => {
-  //Find Tutoirals which is associated to Subject
-  Tutorial.find({ subjectName: req.params.subjectName })
-    .then((data) => {
-      res.status(200).send(data);
-    })
-    .catch((err) => {
-      res
-        .status(500)
-        .send({ message: "Error retriving Tutorial related to " + req.body.subjectName });
-    })
-};
-
-exports.findTutorialByTutor = (req,res) => {
-  //Find all Tutorial that is associated to Tutor
-  Tutorial.find({ tutor: [req.params._id] })
-    .then((data) => {
-      res.send(data);
-    })
-    .catch((err) => {
-      res
-        .status(500)
-        .send({ message: "Error retreiving Tutorial " });
-    })
-};
-
-exports.findOneSubject = (req, res) => {
+exports.findSubject = (req,res) => {
   //Find a particular subject
   Subject.find({ subjectName: req.params.subjectName })
     .then((data) => {
@@ -56,6 +30,18 @@ exports.findOneSubject = (req, res) => {
       res
         .status(500)
         .send({ message: "Error retreiving Subject with name " + req.body.subjectName });
+    })
+};
+
+exports.findTutorial = (req, res) => {
+  Tutorial.find({ subjectName: req.params.subjectName })
+    .then((data) => {
+      res.status(200).send(data);
+    })
+    .catch((err) => {
+      res
+        .status(500)
+        .send({ message: "Error retriving Tutorial related to " + req.body.subjectName });
     })
 };
 
