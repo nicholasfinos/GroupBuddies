@@ -8,6 +8,7 @@ exports.viewSubjects = (req, res) => {
     .then((data) => {
       Subject.find({ subjectCoordinator: [data[0]._id] })
         .then((doc) => {
+          console.log(doc);
           res.status(200).send(doc);
         })
         .catch((err) => {
@@ -83,6 +84,7 @@ exports.createSubject = (req, res) => {
     tutorials: null
   });
 
+
   //Convert the String topics into array
   if (req.body.subjectTopics.length !== 0) {
     const splitQuery = req.body.subjectTopics.split(",")
@@ -115,7 +117,7 @@ exports.createSubject = (req, res) => {
     //Assign Tutor to tutorial
     User.find({ username: req.body.assignedTutor[i].username })
       .then((data) => {
-        tutorial.tutor = data
+        tutorial.tutor = data[0].id
         tutorial.save((err, tutorial) => {
           if (err) {
             res.status(500).send({ message: err });
@@ -125,20 +127,17 @@ exports.createSubject = (req, res) => {
       });
 
     if (i === 0) {
-      subject.tutorials = tutorial._id;
+      subject.tutorials = tutorial.id;
     }
     else {
-      subject.tutorials.push(tutorial._id);
+      subject.tutorials.push(tutorial.id);
     }
   }
-
-
 
   //Assign subject Coordinator to Subject and save
   User.find({ username: req.params.username })
     .then((data) => {
-      subject.subjectCoordinator = data._id;
-
+      subject.subjectCoordinator = data[0]._id;
       subject.save((err, subject) => {
         if (err) {
           res.status(500).send({ message: err });
