@@ -1,7 +1,13 @@
 import React from "react";
-import { Button, Input } from "@material-ui/core";
+import { Button} from "@material-ui/core";
 import { Grid, ListItem } from "@material-ui/core";
 import EnrollmentDataService from "../services/enrollment-service";
+import { Paper} from "@material-ui/core";
+
+const paperStyling = { padding: 40, height: '100%', width: '90%', margin: '20px auto', background: '#fff0e7', borderRadius: 20/*border: '2px solid'*/ }
+const subjectScrollable = {overflowY: 'auto', overflowX:'hidden', maxHeight:'450px', marginLeft:'30%', width:'400px'}
+const skillsScrollable = {overflowY: 'auto', overflowX:'hidden', maxHeight:'400px', width:'100%', flexDirection: "column", minWidth: "400px", padding:"20px"}  
+
 
 class CreateSubjectEnrollment extends React.Component {
   constructor(props) {
@@ -166,26 +172,35 @@ class CreateSubjectEnrollment extends React.Component {
   render() {
     const { topics, currentIndex, addedTopics, currentTopicIndex, currentSubject, subjects } = this.state;
     return (
-      <div style={{ textAlign: "center", maxWidth: '90%', fontFamily: "Times New Roman", marginLeft: "110px" }} className="form">
-        <h3>Create a Subject Enrollment</h3>
+      <div>
+        <h3 style={{textAlign:'center'}}>Create a Subject Enrollment</h3>
+      <Paper bgcolor sx={{ borderColor: 'black' }} elevation={10} style={paperStyling}>
+        <form>
+      <div>
+        
         {this.state.submitted ? (
           <div>
             <p><i>You created a subject enrollment successfully!</i></p>
-            <Button size="small" variant="contained" onClick={this.newEnrollment}>{" "}Create a Subject Enrollment{" "}</Button>
+            <Button size="small" color="primary" variant="contained" onClick={this.newEnrollment}>{" "}Create a Subject Enrollment{" "}</Button>
           </div>
         ) : (
-          <div className="card" style={{ maxWidth: "100%", marginLeft: "0px", paddingLeft: "0px", paddingRight: "120px" }}>
+          <Grid>
             {!this.state.selectedSubject ? (
-              <div>
-                <label htmlFor="subject-name" style={{ marginLeft: '210px' }}><i>Please select a Subject to enroll into:</i></label>
+              <Grid>
+                <label htmlFor="subject-name" ><i>Please select a Subject to enroll into:</i></label>
+                <br/>
+                <br/>
+              <div style={subjectScrollable}>
                 {subjects && subjects.map((subject, index) => (
                   <ListItem style={{ padding: "20px", marginLeft: "15px", maxWidth: "400px" }} selected={index === currentIndex} onClick={() => this.setActiveAddSubject(subject, index)} divider button key={index}>
                     {subject.subjectName}
                   </ListItem>
                 ))}
               </div>
+              </Grid>
             ) : (
-              <div>
+              <Grid container>
+                <Grid item md={12}>
                 <br />
                 <div style={{ alignContent: "space-between" }}>
                   <h4>Selected Subject: </h4>
@@ -193,15 +208,16 @@ class CreateSubjectEnrollment extends React.Component {
                   </i>
                 </div>
                 <br />
-                <Grid container style={{ maxWidth: "1000px" }}>
-                  <Grid item md={4}>
-                    {currentSubject ? (
-                      <Grid item md={4} style={{ minWidth: "400px" }}>
+                </Grid>
+                <Grid item md={6}>
+                {currentSubject ? (
+                      <Grid style={{ minWidth: "400px" }}>
                         <h4>Subject Topics</h4>
                         <i>Please select your strengths from the list:</i>
-                        <div style={{ flexDirection: "column", minWidth: "400px" }}>
+                        <br />
+                        <div style={skillsScrollable}>
                           {topics && topics.map((topic, index) => (
-                            <ListItem style={{ padding: "20px", marginLeft: "15px", maxWidth: "400px" }} selected={index === currentTopicIndex} onClick={() => this.addTopic(topic, index)} divider button key={index}>
+                            <ListItem style={{ padding: "20px", marginLeft: "15px"}} selected={index === currentTopicIndex} onClick={() => this.addTopic(topic, index)} divider button key={index}>
                               {topic}
                             </ListItem>
                           ))}
@@ -210,29 +226,32 @@ class CreateSubjectEnrollment extends React.Component {
                     ) : (
                       <div></div>
                     )}
-                  </Grid>
-                  <Grid item md={4} style={{ paddingLeft: "100px", minWidth: "400px" }}>
-                    <h4 style={{ paddingLeft: "50px" }}>Subject Strengths</h4>
-                    <div style={{ paddingLeft: "50px" }}>
+                </Grid>
+                <Grid item md={6}>
+                <h4 >Subject Strengths</h4>
+                <i>Click on strengths below to remove them:</i>
+                <br />
+                    <div style={skillsScrollable}>
                       {addedTopics.map((addedTopic, index) => (
                         <ListItem style={{ padding: "20px", minWidth: "300px" }} selected={index === currentIndex} onClick={() => this.deleteTopic(index)} divider button key={index}>
                           {" "}{addedTopic}
                         </ListItem>
                       ))}
                     </div>
-                  </Grid>
-                  <br />
-                  <br />
                 </Grid>
-                <div className="form-group">
-                  <Button size="small" variant="contained" style={{ maxWidth: "700px", marginLeft: "225px" }} onClick={this.saveEnrollment}>Submit</Button>
-                  <Button size="small" variant="contained" onClick={() => window.location.reload()}>{" "}Back{" "}</Button>
-                </div>
-              </div>
+                <Grid item md={12} spacing={8}>
+                  <br />
+                  <Button size="small" color="primary" variant="contained" style={{ maxWidth: "700px", marginRight:'10px'}} onClick={this.saveEnrollment}>Submit</Button>
+                  <Button size="small" color="primary" variant="contained" style={{marginLeft:'10px'}} onClick={() => window.location.reload()}>{" "}Back{" "}</Button>
+                </Grid>
+              </Grid>
             )}
             <p>{this.state.message}</p>
-          </div>
+          </Grid>
         )}
+      </div>
+      </form>
+      </Paper>
       </div>
     );
   };
