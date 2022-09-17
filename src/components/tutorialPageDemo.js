@@ -214,7 +214,16 @@ class TutorialPage extends React.Component {
   }
 
   autoSort() {
-    console.log("AutoSorted!!!");
+    var data = {
+      studentList: this.state.studentList
+    }
+    TutorDataService.autoSort(this.state.tutorial.id, data)
+        .then(response => {
+          this.retrieveListStduents(this.state.tutorial.id);
+        })
+        .catch(e => {
+          console.log(e);
+        });
   }
 
   render() {

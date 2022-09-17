@@ -29,6 +29,10 @@ class TutorDataService {
         return http.post(`/tutor/addGroup`, data)
     }
 
+    autoSort(id, data) {
+        return http.post(`/tutor/autoSort/${id}`, data)
+    }
+
     removeGroup(data) {
         return http.post(`/tutor/removeGroup`, data)
     }
