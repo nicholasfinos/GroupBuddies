@@ -1,18 +1,19 @@
 import React from "react";
 import { ListItem } from "@material-ui/core";
-import TutorialDataService from "../services/tutorial-service";
-import GroupDataService from "../services/tutorial-service";
+import GroupDataService from "../services/group-service";
+import TutorDataService from "../services/tutor-service";
 import StudentProfileDataServcie from "../services/studentProfile-service";
+import viewTutorial from "../components/viewTutorial";
 
 const required = (value) => {
-    if (!value) {
-      return (
-        <div className="alert alert-danger" role="alert">
-          This field is required!
-        </div>
-      );
-    }
-  };
+  if (!value) {
+    return (
+      <div className="alert alert-danger" role="alert">
+        This field is required!
+      </div>
+    );
+  }
+};
 
 class TutorialPage extends React.Component {
   constructor(props) {
@@ -20,7 +21,9 @@ class TutorialPage extends React.Component {
 
     this.retrieveListStduents = this.retrieveListStduents.bind(this);
     this.retrieveListGroups = this.retrieveListGroups.bind(this);
-    
+    this.retriveTutorial = this.retriveTutorial.bind(this);
+    this.retriveTutor = this.retriveTutor.bind(this);
+
 
     this.state = {
       studentList: [],
@@ -30,45 +33,82 @@ class TutorialPage extends React.Component {
       groupMembers: [],
       tutorial: null,
       tutor: null,
-    }
-  };
+      currentIndex: null
+    };
+  }
 
   componentDidMount() {
-    const URL = String(this.props.match.path);
-    const tutorialID = String(URL.substring(URL.lastIndexOf("/") + 1, URL.length));
-    TutorialDataService.getTutorial(tutorialID)
+    const URL = String(this.props.location.pathname);
+    const id = String(URL.substring(URL.lastIndexOf("/") + 1, URL.length));
+
+    const URL2 = String(this.props.match.path).slice(0, -1);;
+    const username = String(URL.substring(URL2.lastIndexOf("/") + 1, URL2.length));
+
+    this.retriveTutorial(id, username);
+  }
+
+  retriveTutorial(id, username) {
+    TutorDataService.getTutorial(id)
       .then(response => {
         this.setState({
-          tutorial: response.data,
-          tutor: response.data.tutor
+          tutorial: response.data
         });
       })
       .catch(e => {
         console.log(e);
       });
 
-      this.retrieveListStduents();
-      this.retrieveListGroups();
+    this.retriveTutor(id, username);
   }
 
-  retrieveListStduents() {
-    TutorialDataService.getUnselectedStudent(this.state.tutorial)
+  retriveTutor(id, username) {
+    TutorDataService.getTutor(username)
       .then(response => {
         this.setState({
-          studentList: response.data
+          tutor: response.data
         });
       })
       .catch(e => {
         console.log(e);
       });
+
+    this.retrieveListStduents(id);
   }
 
-  retrieveListGroups() {
-    TutorialDataService.listGroups(this.state.tutorial)
+  retrieveListStduents(id) {
+    TutorDataService.getUnListedStudent(id)
       .then(response => {
-        this.setState({
-          groupList: response.data
-        });
+        for (let i = 0; i < response.data.length; i++) {
+          StudentProfileDataServcie.getProfile(response.data[i])
+            .then(response => {
+              this.state.studentList.push(response.data);
+            })
+            .catch(e => {
+              console.log(e);
+            });
+        }
+      })
+      .catch(e => {
+        console.log(e);
+      });
+
+    this.retrieveListGroups(id);
+  }
+
+  retrieveListGroups(id) {
+    TutorDataService.getlistGroups(id)
+      .then(response => {
+        if (response.data.size !== 0) {
+          for (let i = 0; i < response.data.length; i++) {
+            GroupDataService.getGroup(response.data[i])
+              .then(response => {
+                this.state.groupList.push(response.data);
+              })
+              .catch(e => {
+                console.log(e);
+              });
+          }
+        }
       })
       .catch(e => {
         console.log(e);
@@ -76,58 +116,101 @@ class TutorialPage extends React.Component {
   }
 
   setCurrentGroup(group) {
-    this.setState({
-      currentGroup: group
-    });
-
-    GroupDataService.viewStudent(group)
-    .then(response => {
-      this.setState({
-        groupMembers: response.data
+    GroupDataService.getGroup(group.id)
+      .then(response => {
+        this.setState({
+          currentGroup: response.data
+        });
+        for (let i = 0; i < response.data.students.length; i++) {
+          StudentProfileDataServcie.getProfile(response.data.students[i])
+            .then(response => {
+              this.state.groupMembers.push(response.data);
+            })
+            .catch(e => {
+              console.log(e);
+            });
+        }
+      })
+      .catch(e => {
+        console.log(e);
       });
-    })
-    .catch(e => {
-      console.log(e);
-    });
   }
 
   setCurrentStudent(member) {
-    StudentProfileDataServcie.getStudent(member)
-    .then(response => {
-      this.setState({
-        currentStudent: response.data
+    StudentProfileDataServcie.getProfile(member.id)
+      .then(response => {
+        this.setState({
+          currentStudent: response.data
+        });
+      })
+      .catch(e => {
+        console.log(e);
       });
-    })
-    .catch(e => {
-      console.log(e);
-    });
   }
 
   addGroup() {
-    TutorialDataService.addGroup(this.state.tutorial)
-    .then(response => {
-      this.setCurrentGroup(response.data);
-      this.retrieveListGroups();
-    })
-    .catch(e => {
-      console.log(e);
-    });
+    TutorDataService.addGroup(this.state.tutorial)
+      .then(response => {
+        //How do you refresh page
+        this.setCurrentGroup(response.data);
+        this.retrieveListGroups(this.state.tutorial.id);
+      })
+      .catch(e => {
+        console.log(e);
+      });
+  }
+
+  addStudentGroup() {
+    if (this.state.currentStudent !== null && this.state.currentGroup) {
+      var data = {
+        student: this.state.currentStudent,
+        group: this.state.currentGroup
+      }
+
+      TutorDataService.addStudentGroup(data)
+        .then(response => {
+          this.setCurrentGroup(this.state.currentGroup);
+          this.retrieveListStduents(this.state.tutorial.id);
+        })
+        .catch(e => {
+          console.log(e);
+        });
+    }
   }
 
   removeGroup() {
-    TutorialDataService.removeGroup(this.state.currentGroup)
-    .then(response => {
-      this.setState({
-        currentGroup: null,
-        currentStudent: null
-      })
+    if (this.state.currentGroup !== null) {
+      TutorDataService.removeGroup(this.state.currentGroup)
+        .then(response => {
+          this.setState({
+            currentGroup: null,
+            currentStudent: null
+          })
 
-      this.retrieveListStduents();
-      this.retrieveListGroups();
-    })
-    .catch(e => {
-      console.log(e);
-    });
+          this.retrieveListStduents(this.state.tutorial.id);
+        })
+        .catch(e => {
+          console.log(e);
+        });
+    }
+  }
+
+  removeStudentGroup() {
+    if (this.state.currentStudent !== null && this.state.currentGroup) {
+      var data = {
+        student: this.state.currentStudent,
+        group: this.state.currentGroup
+      }
+
+      TutorDataService.removeStudentGroup(data)
+        .then(response => {
+          this.setCurrentGroup(this.state.currentGroup);
+          this.retrieveListStduents(this.state.tutorial.id);
+        })
+        .catch(e => {
+          console.log(e);
+        });
+    }
   }
 
   autoSort() {
@@ -135,7 +218,7 @@ class TutorialPage extends React.Component {
   }
 
   render() {
-    const {studentList, groupList, currentStudent, currentGroup, groupMembers} = this.state;
+    const { studentList, groupList, currentStudent, currentGroup, groupMembers, currentIndex } = this.state;
     return (
       <div className="layout">
         <div className="header">
@@ -147,7 +230,7 @@ class TutorialPage extends React.Component {
             <label>Groups</label>
             <div className="box">
               {groupList && groupList.map((group, index) => (
-                <ListItem key={index} onClick={() => { this.setCurrentGroup(group) }}>
+                <ListItem style={{ padding: "20px", marginLeft: "15px", maxWidth: "200px" }} selected={index === currentIndex} onClick={() => this.setCurrentGroup(group)} divider button key={index}>
                   {"Group " + group.groupNumber}
                 </ListItem>
               ))}
@@ -160,12 +243,12 @@ class TutorialPage extends React.Component {
             <label>Members</label>
             <div className="box">
               {groupMembers && groupMembers.map((member, index) => (
-                <ListItem key={index} onClick={() => { this.setCurrentStudent(member) }}>
+                <ListItem style={{ padding: "20px", marginLeft: "15px", maxWidth: "200px" }} selected={index === currentIndex} onClick={() => this.setCurrentStudent(member)} divider button key={index}>
                   {member.username}
                 </ListItem>
               ))}
             </div>
-            <button className="button">Remove from Group</button>
+            <button className="button" onClick={() => { this.removeStudentGroup() }}>Remove from Group</button>
             <label>Topics</label>
             <div className="box">
               <ListItem>
@@ -186,13 +269,13 @@ class TutorialPage extends React.Component {
                 {currentStudent && ("Name: " + currentStudent.username)}
               </ListItem>
             </div>
-            <button className="button">Add to Group</button>
+            <button className="button" onClick={() => { this.addStudentGroup() }}>Add to Group</button>
           </div>
           <div className="column">
             <label>Students</label>
             <div className="box">
               {studentList && studentList.map((student, index) => (
-                <ListItem onClick={() => { this.setCurrentStudent(student) }}>
+                <ListItem style={{ padding: "20px", marginLeft: "15px", maxWidth: "200px" }} selected={index === currentIndex} onClick={() => this.setCurrentStudent(student)} divider button key={index}>
                   {student.username}
                 </ListItem>
               ))}

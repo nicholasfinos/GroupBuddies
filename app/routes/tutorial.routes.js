@@ -9,7 +9,7 @@ module.exports = app => {
     router.post("/createManually/:id", tutorial.sortManually);
 
     // Find Tutorial
-    router.get("/viewTutorial/:id", tutorial.viewTutorial);
+    router.get("/getTutorial/:id", tutorial.getTutorial);
 
     // Find Unselected Students
     router.get("/getUnselectedStudent", tutorial.getUnselectedStudent);

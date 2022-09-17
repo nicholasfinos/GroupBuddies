@@ -19,5 +19,7 @@ module.exports = app => {
   //Get Student Profile
   router.get("/getStudent", studentProfile.getStudentUsername)
 
+  router.get("/getProfile/:id", studentProfile.getProfile)
+
   app.use('/api/studentProfile', router);
 }

@@ -20,6 +20,7 @@ const User = require("./app/models/user.model");
 const Subject = require("./app/models/subject.model");
 const Tutorial = require("./app/models/tutorial.model");
 const PeerRequest = require("./app/models/peerRequest.model");
+const StudentProfile = require("./app/models/studentProfile.model");
 const { Promise } = require("mongodb");
 const Role = db.role;
 
@@ -716,7 +717,98 @@ async function initial() {
     }
   })
 
-  settingUpSubjects();
+  //settingUpSubjects();
+  settingUpProfile();
+}
+
+async function settingUpProfile() {
+  // StudentProfile.create({
+  //   student: "6322e72c188f6e93043d5c76",
+  //   username: "student",
+  //   subjectName: "Yeran Test Group",
+  //   tutorialNumber: "1",
+  //   GroupNumber: null,
+  //   subjectTopcis: ["test"],
+  // })
+
+  // StudentProfile.create({
+  //   student: "6322e72c188f6e93043d5c77",
+  //   username: "graceBilliris",
+  //   subjectName: "Yeran Test Group",
+  //   tutorialNumber: "1",
+  //   GroupNumber: null,
+  //   subjectTopcis: ["yeran"],
+  // })
+
+  // StudentProfile.create({
+  //   student: "6322e72c188f6e93043d5c78",
+  //   username: "yeran",
+  //   subjectName: "Yeran Test Group",
+  //   tutorialNumber: "1",
+  //   GroupNumber: null,
+  //   subjectTopcis: ["why"],
+  // })
+
+  // StudentProfile.create({
+  //   student: "6322e72c188f6e93043d5c79",
+  //   username: "nicholasFinos",
+  //   subjectName: "Yeran Test Group",
+  //   tutorialNumber: "1",
+  //   GroupNumber: null,
+  //   subjectTopcis: ["test"],
+  // })
+
+  // StudentProfile.create({
+  //   student: "6322e72c188f6e93043d5c7a",
+  //   username: "jeromeSario",
+  //   subjectName: "Yeran Test Group",
+  //   tutorialNumber: "1",
+  //   GroupNumber: null,
+  //   subjectTopcis: ["yeran"],
+  // })
+
+  // StudentProfile.create({
+  //   student: "6322e72c188f6e93043d5c7b",
+  //   username: "ashishChadha",
+  //   subjectName: "Yeran Test Group",
+  //   tutorialNumber: "1",
+  //   GroupNumber: null,
+  //   subjectTopcis: ["why"],
+  // })
+
+  // StudentProfile.create({
+  //   student: "6322e72c188f6e93043d5c7c",
+  //   username: "lukaRyan",
+  //   subjectName: "Yeran Test Group",
+  //   tutorialNumber: "1",
+  //   GroupNumber: null,
+  //   subjectTopcis: ["test"],
+  // })
+
+  // StudentProfile.create({
+  //   student: "6322e72c188f6e93043d5c7d",
+  //   username: "lachlanSinclair",
+  //   subjectName: "Yeran Test Group",
+  //   tutorialNumber: "1",
+  //   GroupNumber: null,
+  //   subjectTopcis: ["yeran"],
+  // })
+
+  // StudentProfile.find({ username: "student" })
+  //   .then((x) => {
+  //     Tutorial.updateOne(
+  //       { subjectName: "Yeran Test Group" },
+  //       {
+  //         $push: {
+  //           UnselectedStudents: x,
+  //           allStudents: x
+  //         }
+  //       }
+  //     )
+  //       .then((data) => {
+  //         console.log(data);
+  //       })
+  //   })
 }
 
 async function settingUpSubjects() {

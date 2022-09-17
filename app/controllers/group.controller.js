@@ -1,14 +1,14 @@
 const Group = require("../models/group.model");
 
 exports.viewGroup = (req, res) => {
-  Group.findById(req.body.id)
+  Group.findById(req.params.id)
     .then((data) => {
       res.send(data);
     })
     .catch((err) => {
       res
         .status(500)
-        .send({ message: "Error retriving Group related to " + req.body.id });
+        .send({ message: "Error retriving Group related to " + req.params.id });
     })
 };
 

@@ -207,7 +207,8 @@ exports.sortManually = (req, res) => {
   }
 };
 
-exports.viewTutorial = (req, res) => {
+exports.getTutorial = (req, res) => {
+  console.log(req.body)
   Tutorial.findById(req.body.id)
   .then((data) => {
     res.send(data);

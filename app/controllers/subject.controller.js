@@ -94,7 +94,6 @@ exports.createSubject = (req, res) => {
       subjectName: req.body.subjectName,
       number: (i + 1),
       tutor: null,
-      allStudents: null,
       timeSlot: req.body.assignedTutor[i].timeSlot,
       day: req.body.assignedTutor[i].day
     });
