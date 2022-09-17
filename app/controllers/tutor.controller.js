@@ -154,7 +154,7 @@ exports.removeGroup = (req, res) => {
       $inc: { numberGroups: -1 },
     }).then((e) => { console.log(e) });
 
-  Group.remove({id: req.body.id});
+  Group.deleteOne({id: req.body.id});
 }
 
 exports.getTutorial = (req, res) => {

@@ -10,15 +10,6 @@ module.exports = app => {
 
     // Find Tutorial
     router.get("/getTutorial/:id", tutorial.getTutorial);
-
-    // Find Unselected Students
-    router.get("/getUnselectedStudent", tutorial.getUnselectedStudent);
-
-    // Add Group
-    router.post("/addGroup", tutorial.addGroup);
-
-    // Remove Group
-    router.post("/removeGroup", tutorial.removeGroup);
   
     app.use('/api/tutorial', router);
 };

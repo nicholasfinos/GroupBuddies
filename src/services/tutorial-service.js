@@ -17,18 +17,6 @@ class TutorialDataService {
   // getStudents = () => {
   //   return axios.get("http://localhost:4000/studentList/");
   // }
-
-  getUnselectedStudent(data) {
-    return http.get(`/tutorial/getUnselectedStudent`, data)
-  }
-
-  addGroup(data) {
-    return http.post(`/tutorial/addGroup`, data)
-  }
-
-  removeGroup(data) {
-    return http.post(`/tutorial/removeGroup`, data)
-  }
 }
 
 export default new TutorialDataService();
