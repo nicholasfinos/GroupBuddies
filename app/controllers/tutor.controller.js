@@ -183,7 +183,7 @@ exports.findTutorials = (req, res) => {
     })
 };
 
-exports.sortAutomatically = (req, res) => {//req: list students, number groups, tutorial id 
+exports.autoSort = (req, res) => {//req: list students, number groups, tutorial id 
   var tutorial;
   var subject;
   var studentList = req.body.studentList;
@@ -358,4 +358,16 @@ exports.sortAutomatically = (req, res) => {//req: list students, number groups, 
     }
     k = start;
   }
+
+  Tutorial.findById(req.params._id)
+    .then(data => {
+      res.send(data);
+    })
+    .catch(err => {
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while retrieving role: tutor."
+      }
+      );
+    });
 };

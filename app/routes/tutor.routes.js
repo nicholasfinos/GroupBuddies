@@ -16,10 +16,10 @@ module.exports = app => {
 
      router.get('/getlistGroups/:_id', tutor.getlistGroups)
 
+     router.post("/autoSort/:id", tutor.autoSort);
+
     // Add Group
     router.post("/addGroup", tutor.addGroup);
-
-    router.post("/autoSort/:id", tutor.autoSort);
 
     // Remove Group
     router.post("/removeGroup", tutor.removeGroup);
