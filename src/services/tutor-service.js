@@ -25,6 +25,10 @@ class TutorDataService {
         return http.get(`/tutor/getlistGroups/${_id}`);
     }
 
+    getGroup(_id) {
+        return http.get(`/tutor/getGroup/${_id}`);
+    }
+
     addGroup(data) {
         return http.post(`/tutor/addGroup`, data)
     }

@@ -16,6 +16,8 @@ module.exports = app => {
 
      router.get('/getlistGroups/:_id', tutor.getlistGroups)
 
+     router.get('/getGroup/:_id', tutor.getGroup)
+
      router.post("/autoSort/:id", tutor.autoSort);
 
     // Add Group

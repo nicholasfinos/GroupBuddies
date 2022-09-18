@@ -1,6 +1,5 @@
 import React from "react";
 import { ListItem } from "@material-ui/core";
-import GroupDataService from "../services/group-service";
 import TutorDataService from "../services/tutor-service";
 import StudentProfileDataServcie from "../services/studentProfile-service";
 import viewTutorial from "../components/viewTutorial";
@@ -80,8 +79,8 @@ class TutorialPage extends React.Component {
       .then(response => {
         for (let i = 0; i < response.data.length; i++) {
           StudentProfileDataServcie.getProfile(response.data[i])
-            .then(response => {
-              this.state.studentList.push(response.data);
+            .then(y => {
+              this.state.studentList.push(y.data);
             })
             .catch(e => {
               console.log(e);
@@ -98,16 +97,17 @@ class TutorialPage extends React.Component {
   retrieveListGroups(id) {
     TutorDataService.getlistGroups(id)
       .then(response => {
-        if (response.data.size !== 0) {
+        if (response.data.length !== 0) {
           for (let i = 0; i < response.data.length; i++) {
-            GroupDataService.getGroup(response.data[i])
-              .then(response => {
-                this.state.groupList.push(response.data);
+            TutorDataService.getGroup(response.data[i])
+              .then(x => {
+                this.state.groupList.push(x.data);
               })
               .catch(e => {
                 console.log(e);
               });
           }
+          console.log(this.state);
         }
       })
       .catch(e => {
@@ -116,7 +116,7 @@ class TutorialPage extends React.Component {
   }
 
   setCurrentGroup(group) {
-    GroupDataService.getGroup(group.id)
+    TutorDataService.getGroup(group.id)
       .then(response => {
         this.setState({
           currentGroup: response.data

@@ -72,6 +72,18 @@ exports.getlistGroups = (req, res) => {
     });
 };
 
+exports.getGroup = (req, res) => {
+  Group.findById(req.params._id)
+    .then((data) => {
+      res.send(data);
+    })
+    .catch((err) => {
+      res
+        .status(500)
+        .send({ message: "Error retriving Group related to " + req.params.id });
+    })
+};
+
 exports.addGroup = (req, res) => {
   var group = new Group({
     subjectName: req.body.subjectName,

@@ -1,17 +1,5 @@
 const Group = require("../models/group.model");
 
-exports.viewGroup = (req, res) => {
-  Group.findById(req.params.id)
-    .then((data) => {
-      res.send(data);
-    })
-    .catch((err) => {
-      res
-        .status(500)
-        .send({ message: "Error retriving Group related to " + req.params.id });
-    })
-};
-
 exports.addStudent = (req, res) => {
   //Add student into group //Need to figure out how to add group topics
   Group.updateOne(
