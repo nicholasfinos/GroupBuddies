@@ -46,6 +46,13 @@ class TutorialPage extends React.Component {
     this.retriveTutorial(id, username);
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    // Typical usage (don't forget to compare props):
+    if (this.state.groupList !== prevState.groupList) {
+      this.setState(this.state.groupList);
+    }
+  }
+
   retriveTutorial(id, username) {
     TutorDataService.getTutorial(id)
       .then(response => {
@@ -98,15 +105,20 @@ class TutorialPage extends React.Component {
     TutorDataService.getlistGroups(id)
       .then(response => {
         if (response.data.length !== 0) {
+          var list = [];
           for (let i = 0; i < response.data.length; i++) {
             TutorDataService.getGroup(response.data[i])
               .then(x => {
-                this.state.groupList.push(x.data);
+                list.push(x.data);
               })
               .catch(e => {
                 console.log(e);
               });
           }
+
+          this.setState({groupList: list})
+
+          this.state.groupList.length = list.length;
           console.log(this.state);
         }
       })
@@ -283,6 +295,7 @@ class TutorialPage extends React.Component {
           <div className="column">
             <label>Students</label>
             <div className="box">
+              {console.log(studentList)}
               {studentList && studentList.map((student, index) => (
                 <ListItem style={{ padding: "20px", marginLeft: "15px", maxWidth: "200px" }} selected={index === currentIndex} onClick={() => this.setCurrentStudent(student)} divider button key={index}>
                   {student.username}

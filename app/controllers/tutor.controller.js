@@ -47,7 +47,7 @@ exports.getTutor = (req, res) => {
 exports.getUnListedStudent = (req, res) => {
   Tutorial.findById(req.params._id)
     .then(data => {
-      res.send(data.UnselectedStudents);
+      res.send(data);
     })
     .catch(err => {
       res.status(500).send({
@@ -90,7 +90,7 @@ exports.addGroup = (req, res) => {
     tutorialNumber: req.body.number,
     groupNumber: req.body.numberGroups + 1
   })
-  
+
   Tutorial.updateOne(
     { id: req.body.id },
     {
@@ -109,16 +109,16 @@ exports.addGroup = (req, res) => {
 
 exports.addStudentGroup = (req, res) => {
   StudentProfile.updateOne(
-    {id: req.body.student.id},
+    { id: req.body.student.id },
     {
-      $set: {GroupNumber: req.body.group.groupNumber}
+      $set: { GroupNumber: req.body.group.groupNumber }
     }
   ).then((h) => console.log(h));
 
   Group.updateOne(
-    {id: req.body.group.id},
+    { id: req.body.group.id },
     {
-      $push: {students: req.body.student.id}
+      $push: { students: req.body.student.id }
     }
   ).then((g) => console.log(g));
 }
@@ -130,14 +130,14 @@ exports.removeStudentGroup = (req, res) => {
       tutorialNumber: req.body.group.tutorialNumber
     },
     {
-      $push: {UnselectedStudents: req.body.student.id}
+      $push: { UnselectedStudents: req.body.student.id }
     }
   ).then((h) => console.log(h));
 
   Group.updateOne(
-    {id: req.body.group.id},
+    { id: req.body.group.id },
     {
-      $pull: {students: req.body.student.id}
+      $pull: { students: req.body.student.id }
     }
   ).then((g) => console.log(g));
 }
@@ -167,7 +167,7 @@ exports.removeGroup = (req, res) => {
       $inc: { numberGroups: -1 },
     }).then((e) => { console.log(e) });
 
-  Group.deleteOne({id: req.body.id});
+  Group.deleteOne({ id: req.body.id });
 }
 
 exports.getTutorial = (req, res) => {
@@ -220,47 +220,47 @@ exports.autoSort = (req, res) => {//req: list students, number groups, tutorial 
   topicList.add(topic8);
   topicList.add(topic9);
   topicList.add(topic10);
-  
+
   //Setting Tutorial and Subject
   Tutorial.findById(req.body.tutorialID)
-      .then((data) => {
-        tutorial = data;
+    .then((data) => {
+      tutorial = data;
 
-        Subject.find({subjectName: data.subjectName})
+      Subject.find({ subjectName: data.subjectName })
         .then((x) => {
           subject = x;
         })
-      })
+    })
 
   //Adding students into Topic List
-  for(let i = 0; i < studentList.size; i++) {
-      var x = 0;
-      for(let j = 0; j < subject.subjectTopics.size; j++) {
-        if(subject.subjectTopics[j] === studentList[i].subjectTopics[x]) {
-          if(x === 0) {
-            topicList[j].add(0, studentList[i]);
-          }
-          else if(x === 1) {
-            topicList[j].add(((topicList[j].size - 1)/2), studentList[i]);
-          }
-          else {
-            topicList[j].add(studentList[i]);
-            break;
-          }
-          x++;
+  for (let i = 0; i < studentList.size; i++) {
+    var x = 0;
+    for (let j = 0; j < subject.subjectTopics.size; j++) {
+      if (subject.subjectTopics[j] === studentList[i].subjectTopics[x]) {
+        if (x === 0) {
+          topicList[j].add(0, studentList[i]);
         }
+        else if (x === 1) {
+          topicList[j].add(((topicList[j].size - 1) / 2), studentList[i]);
+        }
+        else {
+          topicList[j].add(studentList[i]);
+          break;
+        }
+        x++;
       }
+    }
   }
 
   //Remove Topic list that are empty
   var removeList = new ArrayList();
-  for(let i = 0; i < topicList.size; i++) {
-    if(topicList[i].size === 0) {
+  for (let i = 0; i < topicList.size; i++) {
+    if (topicList[i].size === 0) {
       removeList.add(i);
     }
   }
 
-  for(let j = 0; j < removeList.size; j++) {
+  for (let j = 0; j < removeList.size; j++) {
     topicList.remove(removeList[j]);
   }
 
@@ -268,7 +268,7 @@ exports.autoSort = (req, res) => {//req: list students, number groups, tutorial 
   var groupSize = parseInt(req.body.numberGroups);
   var groupID = new ArrayList();
 
-  for(let i = 1; i <= groupSize; i++) {
+  for (let i = 1; i <= groupSize; i++) {
     var group = {
       subjectName: subject.subjectName,
       tutorialNumber: tutorial.number,
@@ -288,36 +288,36 @@ exports.autoSort = (req, res) => {//req: list students, number groups, tutorial 
   var k = 0;
   var start = 0;
   //If their is equal topic and group size then do else statement
-  if(topicList.size !== groupSize) {
-    while(studentList.size !== 0) {
-      for(let i = 0; i < groupID.size; i++) {
+  if (topicList.size !== groupSize) {
+    while (studentList.size !== 0) {
+      for (let i = 0; i < groupID.size; i++) {
         var student = topicList[k];
-  
+
         //Add student into group
         Group.updateOne(
-          {_id: groupID[i]},
-          {$push: { students: student.id}}
+          { _id: groupID[i] },
+          { $push: { students: student.id } }
         );
-        
+
         //Incase topic is empty after removing student
         var removeTopic = new ArrayList();
-  
+
         //Remove student from all list
-        for(let j = 0; j < topicList.size; j++) {
+        for (let j = 0; j < topicList.size; j++) {
           topicList[j].remove(student);
-          if(topicList[j].size === 0) {
+          if (topicList[j].size === 0) {
             removeTopic.add(j);
           }
         }
-  
-        for(let m = 0; m < removeTopic.size; m++) {
+
+        for (let m = 0; m < removeTopic.size; m++) {
           topicList.remove(removeTopic[m]);
         }
-  
+
         studentList.remove(student);
-  
+
         //If K is at end of topic list then restart to beginning
-        if(k === topicList.size - 1) {
+        if (k === topicList.size - 1) {
           k = 0;
         }
         else {
@@ -327,36 +327,36 @@ exports.autoSort = (req, res) => {//req: list students, number groups, tutorial 
     }
   }
   else {
-    while(studentList.size !== 0) {
-      for(let i = 0; i < groupID.size; i++) {
+    while (studentList.size !== 0) {
+      for (let i = 0; i < groupID.size; i++) {
         var student = topicList[k];
-  
+
         //Add student into group //Need to figure out how to add group topics
         Group.updateOne(
-          {_id: groupID[i]},
-          {$push: { students: student.id}},
-          {$inc: {groupTopics: 1}}
+          { _id: groupID[i] },
+          { $push: { students: student.id } },
+          { $inc: { groupTopics: 1 } }
         );
-        
+
         //Incase topic is empty after removing student
         var removeTopic = new ArrayList();
-  
+
         //Remove student from all list
-        for(let j = 0; j < topicList.size; j++) {
+        for (let j = 0; j < topicList.size; j++) {
           topicList[j].remove(student);
-          if(topicList[j].size === 0) {
+          if (topicList[j].size === 0) {
             removeTopic.add(j);
           }
         }
-  
-        for(let m = 0; m < removeTopic.size; m++) {
+
+        for (let m = 0; m < removeTopic.size; m++) {
           topicList.remove(removeTopic[m]);
         }
-  
+
         studentList.remove(student);
-  
+
         //If K is at end of topic list then restart to beginning
-        if(k === topicList.size - 1) {
+        if (k === topicList.size - 1) {
           k = 0;
         }
         else {
@@ -365,7 +365,7 @@ exports.autoSort = (req, res) => {//req: list students, number groups, tutorial 
       }
     }
     start++;
-    if(start === topicList.size) {
+    if (start === topicList.size) {
       start = 0;
     }
     k = start;

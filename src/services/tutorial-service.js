@@ -9,14 +9,6 @@ class TutorialDataService {
   getTutorial(id) {
     return http.get(`/tutorial/getTutorial/${id}`)
   }
-
-  // getGroups = () => {
-  //   return axios.get("http://localhost:4000/groups/");
-  // };
-
-  // getStudents = () => {
-  //   return axios.get("http://localhost:4000/studentList/");
-  // }
 }
 
 export default new TutorialDataService();

@@ -27,7 +27,7 @@ import CreateSubjectEnrollment from "./components/createSubjectEnrollment";
 import ViewSubjectEnrollment from "./components/viewEnrollment";
 import EditPeerRequest from "./components/editPeerRequest";
 import EditSubject from "./components/editSubject";
-import TutorialPageDemo from "./components/tutorialPageDemo";
+import Test from "./components/test";
 
 const App = () => {
   const [ShowSubjectCoordinator, setShowSubjectCoordinator] = useState(false);
@@ -124,7 +124,7 @@ const App = () => {
             <Route path={"/enrollment/create/" + currentUser?.username} component={CreateSubjectEnrollment} />
             <Route path={"/enrollment/view/" + currentUser?.username} component={ViewSubjectEnrollment} />
             <Route path={"/subject/" + currentUser?.username + "/"} component={EditSubject} />
-            <Route path={"/tutorial/" + currentUser?.id + "/"} component={TutorialPageDemo} />
+            <Route path={"/tutorial/" + currentUser?.id + "/"} component={Test} />
           </Switch>
         </div>
       </>

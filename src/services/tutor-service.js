@@ -1,5 +1,7 @@
 import http from "../http-common";
 import axios from "axios";
+import StudentProfileDataServcie from "../services/studentProfile-service";
+
 class TutorDataService {
     view() {
         return http.get(`/tutor/view`);
@@ -18,7 +20,25 @@ class TutorDataService {
     }
 
     getUnListedStudent(_id) {
-        return http.get(`/tutor/getUnListedStudent/${_id}`);
+        http.get(`/tutor/getUnListedStudent/${_id}`)
+        .then((data)=>{
+            let list = [];
+            console.log(data);
+            for (let i = 0; i < data.length; i++) {
+                StudentProfileDataServcie.getProfile(data[i])
+                    .then(y => {
+                    console.log(y);
+                    list.push(y);
+                    })
+                    .catch(e => {
+                    console.log(e);
+                    });
+            }
+
+            return list;
+        }).catch(error => {
+            console.error(error);
+        });
     }
 
     getlistGroups(_id) {
@@ -47,15 +67,6 @@ class TutorDataService {
 
     removeStudentGroup(data) {
         return http.post(`/tutor/removeStudentGroup`, data)
-    }
-
-    // getCurrentTutorial
-    getGroups = () => {
-        return axios.get("http://localhost:4000/groups/");
-    };
-
-    getStudents = () => {
-        return axios.get("http://localhost:4000/studentList/");
     }
 
 }
