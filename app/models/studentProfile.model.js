@@ -11,7 +11,7 @@ const StudentProfile = mongoose.model(
     subjectName: String,
     tutorialNumber: String,
     groupNumber: String,
-    subjectTopcis: Array,
+    subjectTopics: Array,
   })
 );
 

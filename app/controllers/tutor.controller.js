@@ -170,8 +170,9 @@ exports.removeStudentGroup = (req, res) => {
   })
     .then((tut) => {
       var stu = {
-        id: req.body.student._id,
-        username: req.body.student.username
+        _id: req.body.student._id,
+        username: req.body.student.username,
+        subjectTopics: req.body.student.subjectTopics
       }
       
       Tutorial.updateOne(
@@ -225,10 +226,8 @@ exports.removeGroup = (req, res) => {
     _id: req.body.tutorial._id
   })
     .then((data) => {
-      console.log(removedGroup);
       var list = data[0].groups.filter(group => group.groupNumber !== removedGroup.groupNumber);
 
-      console.log(list);
       Tutorial.updateOne({
         _id: req.body.tutorial._id
       },
@@ -271,62 +270,56 @@ exports.findTutorials = (req, res) => {
 };
 
 exports.autoSort = (req, res) => {//req: list students, number groups, tutorial id 
-  console.log(req.body);
-  // var tutorial;
-  // var subject;
-  // var studentList = req.body.studentList;
-  // var topic1 = new ArrayList();
-  // var topic2 = new ArrayList();
-  // var topic3 = new ArrayList();
-  // var topic4 = new ArrayList();
-  // var topic5 = new ArrayList();
-  // var topic6 = new ArrayList();
-  // var topic7 = new ArrayList();
-  // var topic8 = new ArrayList();
-  // var topic9 = new ArrayList();
-  // var topic10 = new ArrayList();
-  // var topicList = new ArrayList();
-  // topicList.add(topic1);
-  // topicList.add(topic2);
-  // topicList.add(topic3);
-  // topicList.add(topic4);
-  // topicList.add(topic5);
-  // topicList.add(topic6);
-  // topicList.add(topic7);
-  // topicList.add(topic8);
-  // topicList.add(topic9);
-  // topicList.add(topic10);
-
-  // //Setting Tutorial and Subject
-  // Tutorial.findById(req.body.tutorialID)
-  //   .then((data) => {
-  //     tutorial = data;
-
-  //     Subject.find({ subjectName: data.subjectName })
-  //       .then((x) => {
-  //         subject = x;
-  //       })
-  //   })
-
-  // //Adding students into Topic List
-  // for (let i = 0; i < studentList.size; i++) {
-  //   var x = 0;
-  //   for (let j = 0; j < subject.subjectTopics.size; j++) {
-  //     if (subject.subjectTopics[j] === studentList[i].subjectTopics[x]) {
-  //       if (x === 0) {
-  //         topicList[j].add(0, studentList[i]);
-  //       }
-  //       else if (x === 1) {
-  //         topicList[j].add(((topicList[j].size - 1) / 2), studentList[i]);
-  //       }
-  //       else {
-  //         topicList[j].add(studentList[i]);
-  //         break;
-  //       }
-  //       x++;
-  //     }
-  //   }
-  // }
+  //console.log(req.body);
+  var tutorial = req.body.tutorial;
+  var subject = req.body.subject;
+  var studentList = req.body.studentList;
+  var groupSize = req.body.groupSize;
+  var topic1 = [];
+  var topic2 = [];
+  var topic3 = [];
+  var topic4 = [];
+  var topic5 = [];
+  var topic6 = [];
+  var topic7 = [];
+  var topic8 = [];
+  var topic9 = [];
+  var topic10 = [];
+  var topicList = [];
+  topicList.push(topic1);
+  topicList.push(topic2);
+  topicList.push(topic3);
+  topicList.push(topic4);
+  topicList.push(topic5);
+  topicList.push(topic6);
+  topicList.push(topic7);
+  topicList.push(topic8);
+  topicList.push(topic9);
+  topicList.push(topic10);
+  //Adding students into Topic List
+  for (let i = 0; i < 1; i++) {
+    StudentProfile.findById(studentList[i]._id)
+      .then((stu) => {
+        var x = 0;
+        for (let j = 0; j < subject.subjectTopics.length; j++) {
+          if (subject.subjectTopics[j] === stu.subjectTopcis[x]) { //Remeber to change
+            if (x === 0) {
+              topicList[j].push(0, stu);
+            }
+            // else if (x === 1) {
+            //   topicList[j].add(((topicList[j].length - 1) / 2), stu);
+            // }
+            // else {
+            //   topicList[j].add(stu);
+            //   break;
+            // }
+            x++;
+          }
+      }
+      console.log(topicList);
+    })
+    }
+    console.log(topicList);
 
   // //Remove Topic list that are empty
   // var removeList = new ArrayList();

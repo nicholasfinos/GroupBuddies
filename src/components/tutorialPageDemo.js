@@ -2,6 +2,7 @@ import React from "react";
 import { ListItem } from "@material-ui/core";
 import TutorDataService from "../services/tutor-service";
 import StudentProfileDataServcie from "../services/studentProfile-service";
+import SubjectDataService from "../services/subject-service";
 import viewTutorial from "../components/viewTutorial";
 
 const required = (value) => {
@@ -184,17 +185,24 @@ class TutorialPage extends React.Component {
   }
 
   autoSort() {
-    var data = {
-      studentList: this.state.studentList,
-      tutorial: this.state.tutorial,
-      groupSize: this.state.groupSize
-    }
-    TutorDataService.autoSort(this.state.tutorial.id, data)
-      .then(response => {
-      })
-      .catch(e => {
-        console.log(e);
-      });
+    SubjectDataService.findSubjectByName(this.state.tutorial.subjectName)
+    .then(response => {
+      var data = {
+        studentList: this.state.studentList,
+        tutorial: this.state.tutorial,
+        groupSize: this.state.groupSize,
+        subject: response.data[0]
+      }
+      TutorDataService.autoSort(this.state.tutorial.id, data)
+        .then(response => {
+        })
+        .catch(e => {
+          console.log(e);
+        });
+    })
+    .catch(e => {
+      console.log(e);
+    });
   }
 
   render() {
@@ -251,7 +259,7 @@ class TutorialPage extends React.Component {
             <label>Student Info</label>
             <div className="box">
               <ListItem>
-                {currentStudent && ("Name: " + currentStudent.username)}
+                {currentStudent && ("Name: " + currentStudent.username, "Subject Topics: " + currentStudent.subjectTopics)}
               </ListItem>
             </div>
             <button className="button" onClick={() => { this.addStudentGroup() }}>Add to Group</button>
