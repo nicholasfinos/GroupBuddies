@@ -95,7 +95,7 @@ const App = () => {
 
           {currentUser ? (
     
-              <><Button  component={Link} to={"/account/"}>My Account</Button>
+              <><Button  component={Link} to={"/account/" + currentUser?.username}>My Account</Button>
               <Button component={Link} to={"/"} onClick={logOut}>Logout </Button>
               </> 
               
