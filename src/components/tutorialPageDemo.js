@@ -2,23 +2,11 @@ import React from "react";
 import { ListItem } from "@material-ui/core";
 import TutorDataService from "../services/tutor-service";
 import StudentProfileDataServcie from "../services/studentProfile-service";
-import viewTutorial from "../components/viewTutorial";
-
-const required = (value) => {
-  if (!value) {
-    return (
-      <div className="alert alert-danger" role="alert">
-        This field is required!
-      </div>
-    );
-  }
-};
 
 class TutorialPage extends React.Component {
   constructor(props) {
     super(props);
 
-    this.retriveTutorial = this.retriveTutorial.bind(this);
     this.onChangeGroupSize = this.onChangeGroupSize.bind(this);
 
 
@@ -38,17 +26,6 @@ class TutorialPage extends React.Component {
     const URL = String(this.props.location.pathname);
     const id = String(URL.substring(URL.lastIndexOf("/") + 1, URL.length));
 
-    this.retriveTutorial(id);
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    // Typical usage (don't forget to compare props):
-    if (this.state.groupList !== prevState.groupList) {
-      this.setState({ groupList: this.state.groupList });
-    }
-  }
-
-  retriveTutorial(id) {
     TutorDataService.getTutorial(id)
       .then(response => {
         this.setState({
@@ -88,7 +65,7 @@ class TutorialPage extends React.Component {
   }
 
   setCurrentStudent(member) {
-    StudentProfileDataServcie.getProfile(member.id)
+    StudentProfileDataServcie.getProfile(member._id)
       .then(response => {
         this.setState({
           currentStudent: response.data
@@ -107,7 +84,6 @@ class TutorialPage extends React.Component {
           groupList: response.data.groups
         })
 
-        window.location.reload(false);
         // this.setCurrentGroup(response.data.groups[response.data.groups.length - 1]);
       })
       .catch(e => {
@@ -130,6 +106,7 @@ class TutorialPage extends React.Component {
         .catch(e => {
           console.log(e);
         });
+      window.location.reload();
     }
   }
 
@@ -150,7 +127,6 @@ class TutorialPage extends React.Component {
             currentGroup: null
           })
 
-          window.location.reload(false);
           // this.setCurrentGroup(response.data.groups[response.data.groups.length - 1]);
         })
         .catch(e => {
@@ -180,7 +156,7 @@ class TutorialPage extends React.Component {
   }
 
   onChangeGroupSize(e) {
-    this.setState({ groupSize: e.target.value});
+    this.setState({ groupSize: e.target.value });
   }
 
   autoSort() {
@@ -189,16 +165,16 @@ class TutorialPage extends React.Component {
       tutorial: this.state.tutorial,
       groupSize: this.state.groupSize
     }
-    TutorDataService.autoSort(this.state.tutorial.id, data)
-      .then(response => {
-      })
-      .catch(e => {
-        console.log(e);
-      });
+    // TutorDataService.autoSort(this.state.tutorial.id, data)
+    //   .then(response => {
+    //   })
+    //   .catch(e => {
+    //     console.log(e);
+    //   });
   }
 
   render() {
-    const { studentList, groupList, currentStudent, currentGroup, groupMembers, currentIndex } = this.state;
+    const { studentList, groupList, currentStudent, currentGroup, currentIndex } = this.state;
     return (
       <div className="layout">
         <div className="header">
@@ -227,7 +203,7 @@ class TutorialPage extends React.Component {
             <label>Members</label>
             <div>{currentGroup && `Group ${currentGroup.groupNumber}`}</div>
             <div className="box">
-              {groupMembers && groupMembers.map((member, index) => (
+              {this.state.groupMembers && this.state.groupMembers.map((member, index) => (
                 <ListItem style={{ padding: "20px", marginLeft: "15px", maxWidth: "200px" }} selected={index === currentIndex} onClick={() => this.setCurrentMember(member)} divider button key={index}>
                   {member && member.username}
                 </ListItem>

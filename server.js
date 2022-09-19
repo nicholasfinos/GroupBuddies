@@ -794,25 +794,25 @@ async function settingUpProfile() {
   //   subjectTopcis: ["yeran"],
   // })
 
-  StudentProfile.find({ username: "lachlanSinclair" })
-    .then((x) => {
-      var data = {
-        _id: x[0]._id,
-        username: x[0].username
-      };
-      Tutorial.updateOne(
-        { subjectName: "Yeran Test Group" },
-        {
-          $push: {
-            UnselectedStudents: data,
-            allStudents: data
-          }
-        }
-      )
-        .then((h) => {
-          console.log(h);
-        })
-    })
+  // StudentProfile.find({ username: "lachlanSinclair" })
+  //   .then((x) => {
+  //     var data = {
+  //       _id: x[0]._id,
+  //       username: x[0].username
+  //     };
+  //     Tutorial.updateOne(
+  //       { subjectName: "Yeran Test Group" },
+  //       {
+  //         $push: {
+  //           UnselectedStudents: data,
+  //           allStudents: data
+  //         }
+  //       }
+  //     )
+  //       .then((h) => {
+  //         console.log(h);
+  //       })
+  //   })
 }
 
 async function settingUpSubjects() {
