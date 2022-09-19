@@ -19,6 +19,7 @@ class TutorialPage extends React.Component {
     super(props);
 
     this.retriveTutorial = this.retriveTutorial.bind(this);
+    this.onChangeGroupSize = this.onChangeGroupSize.bind(this);
 
 
     this.state = {
@@ -28,7 +29,8 @@ class TutorialPage extends React.Component {
       currentGroup: null,
       groupMembers: [],
       tutorial: null,
-      currentIndex: null
+      currentIndex: null,
+      groupSize: null
     };
   }
 
@@ -42,7 +44,7 @@ class TutorialPage extends React.Component {
   componentDidUpdate(prevProps, prevState) {
     // Typical usage (don't forget to compare props):
     if (this.state.groupList !== prevState.groupList) {
-      this.setState({groupList: this.state.groupList});
+      this.setState({ groupList: this.state.groupList });
     }
   }
 
@@ -61,7 +63,7 @@ class TutorialPage extends React.Component {
   }
 
   setCurrentGroup(group) {
-    TutorDataService.getGroup(group.id)
+    TutorDataService.getGroup(group._id)
       .then(response => {
         this.setState({
           currentGroup: response.data,
@@ -104,7 +106,7 @@ class TutorialPage extends React.Component {
           tutorial: response.data,
           groupList: response.data.groups
         })
-        
+
         window.location.reload(false);
         // this.setCurrentGroup(response.data.groups[response.data.groups.length - 1]);
       })
@@ -139,21 +141,21 @@ class TutorialPage extends React.Component {
         studentList: this.state.groupMembers
       }
       TutorDataService.removeGroup(data)
-      .then(response => {
-        //How do you refresh page
-        console.log(response);
-        this.setState({
-          groupList: response.data.groups,
-          tutorial: response.data,
-          currentGroup: null
+        .then(response => {
+          //How do you refresh page
+          console.log(response);
+          this.setState({
+            groupList: response.data.groups,
+            tutorial: response.data,
+            currentGroup: null
+          })
+
+          window.location.reload(false);
+          // this.setCurrentGroup(response.data.groups[response.data.groups.length - 1]);
         })
-        
-        window.location.reload(false);
-        // this.setCurrentGroup(response.data.groups[response.data.groups.length - 1]);
-      })
-      .catch(e => {
-        console.log(e);
-      });
+        .catch(e => {
+          console.log(e);
+        });
     }
   }
 
@@ -161,7 +163,7 @@ class TutorialPage extends React.Component {
     if (this.state.currentStudent !== null && this.state.currentGroup) {
       var data = {
         student: this.state.currentStudent,
-        group: this.state.currentGroup, 
+        group: this.state.currentGroup,
         tutorial: this.state.tutorial
       }
 
@@ -177,17 +179,22 @@ class TutorialPage extends React.Component {
     }
   }
 
+  onChangeGroupSize(e) {
+    this.setState({ groupSize: e.target.value});
+  }
+
   autoSort() {
     var data = {
-      studentList: this.state.studentList
+      studentList: this.state.studentList,
+      tutorial: this.state.tutorial,
+      groupSize: this.state.groupSize
     }
     TutorDataService.autoSort(this.state.tutorial.id, data)
-        .then(response => {
-          this.retrieveListStduents(this.state.tutorial.id);
-        })
-        .catch(e => {
-          console.log(e);
-        });
+      .then(response => {
+      })
+      .catch(e => {
+        console.log(e);
+      });
   }
 
   render() {
@@ -210,6 +217,10 @@ class TutorialPage extends React.Component {
             </div>
             <button className="button" onClick={() => { this.addGroup() }}>Add Group</button>
             <button className="button" onClick={() => { this.removeGroup() }}>Remove Group</button>
+            <div>
+              <label htmlFor="groupSize" >Group Size: </label>
+              <input className="form-control" style={{ maxWidth: '500px' }} type="text" name="groupSize" onChange={this.onChangeGroupSize} />
+            </div>
             <button className="button" onClick={() => { this.autoSort() }}>Automatic Sort</button>
           </div>
           <div className="column">
