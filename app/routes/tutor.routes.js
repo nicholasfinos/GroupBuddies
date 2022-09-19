@@ -21,7 +21,7 @@ module.exports = app => {
      router.post("/autoSort/:id", tutor.autoSort);
 
     // Add Group
-    router.post("/addGroup", tutor.addGroup);
+    router.put("/addGroup", tutor.addGroup);
 
     // Remove Group
     router.post("/removeGroup", tutor.removeGroup);

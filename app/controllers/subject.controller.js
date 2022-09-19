@@ -95,7 +95,8 @@ exports.createSubject = (req, res) => {
       number: (i + 1),
       tutor: null,
       timeSlot: req.body.assignedTutor[i].timeSlot,
-      day: req.body.assignedTutor[i].day
+      day: req.body.assignedTutor[i].day,
+      numberGroups: 0
     });
 
 

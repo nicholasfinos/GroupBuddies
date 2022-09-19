@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import SubjectDataService from "../services/subject-service";
 import TutorDataService from "../services/tutor-service";
 import { Grid, ListItem } from "@material-ui/core";
-import Test from "./test";
+import Test from "./tutorialPageDemo";
 import { Link, Switch, Route } from "react-router-dom";
 
 class TutorialList extends Component {

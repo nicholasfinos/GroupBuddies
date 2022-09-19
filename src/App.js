@@ -27,7 +27,7 @@ import CreateSubjectEnrollment from "./components/createSubjectEnrollment";
 import ViewSubjectEnrollment from "./components/viewEnrollment";
 import EditPeerRequest from "./components/editPeerRequest";
 import EditSubject from "./components/editSubject";
-import Test from "./components/test";
+import Test from "./components/tutorialPageDemo";
 
 const App = () => {
   const [ShowSubjectCoordinator, setShowSubjectCoordinator] = useState(false);

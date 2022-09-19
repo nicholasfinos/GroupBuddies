@@ -727,7 +727,7 @@ async function settingUpProfile() {
   //   username: "student",
   //   subjectName: "Yeran Test Group",
   //   tutorialNumber: "1",
-  //   GroupNumber: null,
+  //   groupNumber: "",
   //   subjectTopcis: ["test"],
   // })
 
@@ -736,7 +736,7 @@ async function settingUpProfile() {
   //   username: "graceBilliris",
   //   subjectName: "Yeran Test Group",
   //   tutorialNumber: "1",
-  //   GroupNumber: null,
+  //   groupNumber: "",
   //   subjectTopcis: ["yeran"],
   // })
 
@@ -745,7 +745,7 @@ async function settingUpProfile() {
   //   username: "yeran",
   //   subjectName: "Yeran Test Group",
   //   tutorialNumber: "1",
-  //   GroupNumber: null,
+  //   groupNumber: "",
   //   subjectTopcis: ["why"],
   // })
 
@@ -754,7 +754,7 @@ async function settingUpProfile() {
   //   username: "nicholasFinos",
   //   subjectName: "Yeran Test Group",
   //   tutorialNumber: "1",
-  //   GroupNumber: null,
+  //   groupNumber: "",
   //   subjectTopcis: ["test"],
   // })
 
@@ -763,7 +763,7 @@ async function settingUpProfile() {
   //   username: "jeromeSario",
   //   subjectName: "Yeran Test Group",
   //   tutorialNumber: "1",
-  //   GroupNumber: null,
+  //   groupNumber: "",
   //   subjectTopcis: ["yeran"],
   // })
 
@@ -772,7 +772,7 @@ async function settingUpProfile() {
   //   username: "ashishChadha",
   //   subjectName: "Yeran Test Group",
   //   tutorialNumber: "1",
-  //   GroupNumber: null,
+  //   groupNumber: "",
   //   subjectTopcis: ["why"],
   // })
 
@@ -781,7 +781,7 @@ async function settingUpProfile() {
   //   username: "lukaRyan",
   //   subjectName: "Yeran Test Group",
   //   tutorialNumber: "1",
-  //   GroupNumber: null,
+  //   groupNumber: "",
   //   subjectTopcis: ["test"],
   // })
 
@@ -790,23 +790,27 @@ async function settingUpProfile() {
   //   username: "lachlanSinclair",
   //   subjectName: "Yeran Test Group",
   //   tutorialNumber: "1",
-  //   GroupNumber: null,
+  //   groupNumber: "",
   //   subjectTopcis: ["yeran"],
   // })
 
-  // StudentProfile.find({ username: "student" })
+  // StudentProfile.find({ username: "jeromeSario" })
   //   .then((x) => {
+  //     var data = {
+  //       _id: x[0]._id,
+  //       username: x[0].username
+  //     };
   //     Tutorial.updateOne(
   //       { subjectName: "Yeran Test Group" },
   //       {
   //         $push: {
-  //           UnselectedStudents: x,
-  //           allStudents: x
+  //           UnselectedStudents: data,
+  //           allStudents: data
   //         }
   //       }
   //     )
-  //       .then((data) => {
-  //         console.log(data);
+  //       .then((h) => {
+  //         console.log(h);
   //       })
   //   })
 }

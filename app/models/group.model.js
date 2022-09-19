@@ -3,10 +3,7 @@ const mongoose = require("mongoose");
 const Group = mongoose.model(
   "Group",
   new mongoose.Schema({
-    students: [{
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "StudentProfile"
-    }],
+    students: Array,
     subjectName: String,
     tutorialNumber: String,
     groupNumber: String,

@@ -50,7 +50,7 @@ class TutorDataService {
     }
 
     addGroup(data) {
-        return http.post(`/tutor/addGroup`, data)
+        return http.put(`/tutor/addGroup`, data)
     }
 
     autoSort(id, data) {

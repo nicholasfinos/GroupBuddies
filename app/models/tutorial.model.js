@@ -11,19 +11,10 @@ const Tutorial = mongoose.model(
             type: mongoose.Schema.Types.ObjectId,
             ref: "User"
         },
-        allStudents: [{
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "StudentProfile"
-        }],
-        UnselectedStudents: [{
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "StudentProfile"
-        }],
+        allStudents: Array,
+        UnselectedStudents: Array,
         numberGroups: Number,
-        groups: [{
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "Group"
-        }]
+        groups: Array
     })
 );
 

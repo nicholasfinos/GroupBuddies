@@ -85,19 +85,25 @@ exports.getGroup = (req, res) => {
 };
 
 exports.addGroup = (req, res) => {
-  var group = new Group({
-    subjectName: req.body.subjectName,
-    tutorialNumber: req.body.number,
-    groupNumber: req.body.numberGroups + 1
-  })
+  if(req.body.groups.length !== 0) {
+    var group = new Group({
+      subjectName: req.body.subjectName,
+      tutorialNumber: req.body.number,
+      groupNumber: parseInt(req.body.groups[req.body.groups.length - 1].groupNumber) + 1
+    })
+  }
+  else {
+    var group = new Group({
+      subjectName: req.body.subjectName,
+      tutorialNumber: req.body.number,
+      groupNumber: 1
+    })
+  }
 
-  Tutorial.updateOne(
-    { id: req.body.id },
-    {
-      $inc: { numberGroups: 1 },
-      $push: { groups: group.id }
-    }
-  ).then((y) => { })
+  var data = {
+    _id: group._id,
+    groupNumber: group.groupNumber
+  }
 
   group.save((err, group) => {
     if (err) {
@@ -105,69 +111,138 @@ exports.addGroup = (req, res) => {
       return;
     }
   })
+
+  Tutorial.updateOne(
+    { id: req.body.id },
+    {
+      $inc: { numberGroups: 1 },
+      $push: { groups: data }
+    }
+  ).then((y) => { })
+
+  Tutorial.find({id: req.body._id})
+  .then((data) => {
+    res.send(data);
+  })
+  .catch((err) => {
+    res
+      .status(500)
+      .send({ message: "Error retriving Tutorial" });
+  })
 }
 
 exports.addStudentGroup = (req, res) => {
   StudentProfile.updateOne(
-    { id: req.body.student.id },
+    { username: req.body.student.username },
     {
-      $set: { GroupNumber: req.body.group.groupNumber }
+      $set: { groupNumber: req.body.group.groupNumber }
+    }
+  ).then((h) => console.log(h));
+
+  var addedStudent = {
+    _id: req.body.student._id,
+    username: req.body.student.username
+  }
+
+  var ungroupedList = req.body.tutorial.UnselectedStudents.filter(student => student.username !== req.body.student.username);
+
+  Tutorial.updateOne(
+    {
+      _id: req.body.tutorial._id
+    },
+    {
+      $set: { UnselectedStudents: ungroupedList }
     }
   ).then((h) => console.log(h));
 
   Group.updateOne(
-    { id: req.body.group.id },
+    { _id: req.body.group._id },
     {
-      $push: { students: req.body.student.id }
+      $push: { students: addedStudent }
     }
   ).then((g) => console.log(g));
 }
 
 exports.removeStudentGroup = (req, res) => {
-  Tutorial.updateOne(
-    {
-      subjectName: req.body.group.subjectName,
-      tutorialNumber: req.body.group.tutorialNumber
-    },
-    {
-      $push: { UnselectedStudents: req.body.student.id }
-    }
-  ).then((h) => console.log(h));
+  Tutorial.find({
+    subjectName: req.body.group.subjectName,
+    tutorialNumber: req.body.group.tutorialNumber
+  })
+    .then((tut) => {
+      var stu = {
+        id: req.body.student._id,
+        username: req.body.student.username
+      }
+      
+      Tutorial.updateOne(
+        {
+          _id: req.body.tutorial._id
+        },
+        {
+          $push: { UnselectedStudents: stu }
+         }
+      ).then((h) => console.log(h));
+    })
+
+  var studentListlist = req.body.group.students.filter(student => student.username !== req.body.student.username);
 
   Group.updateOne(
-    { id: req.body.group.id },
+    { 
+      _id: req.body.group._id
+    },
     {
-      $pull: { students: req.body.student.id }
+      $set: { students: studentListlist }
     }
   ).then((g) => console.log(g));
+
+  StudentProfile.updateOne(
+    { username: req.body.student.username },
+    {
+      $set: { groupNumber: "" }
+    }
+  ).then((h) => console.log(h));
 }
 
 exports.removeGroup = (req, res) => {
-  if (req.body.students.size !== 0) {
-    var listStudent = new ArrayList();
-    listStudent = req.body.students;
-
-    for (let i = 0; i < listStudent.size; i++) {
+  if (req.body.studentList.length !== 0) {
+    for (let i = 0; i < req.body.studentList.length; i++) {
+      console.log(req.body.studentList[i]);
       Tutorial.updateOne(
         {
-          subjectName: req.body.subjectName,
-          tutorialNumber: req.body.tutorialNumber
+          _id: req.body.tutorial._id
         },
-        { $push: { UnselectedStudents: listStudent[i] } }
-      )
+        { $push: { UnselectedStudents: req.body.studentList[i] } }
+      ).then((g) => console.log(g));
     }
   }
 
-  Tutorial.updateOne({
-    subjectName: req.body.subjectName,
-    number: req.body.tutorialNumber
-  },
-    {
-      $pull: { groups: req.body.id },
-      $inc: { numberGroups: -1 },
-    }).then((e) => { console.log(e) });
+  var removedGroup = {
+    _id: req.body.group._id,
+    groupNumber: req.body.group.groupNumber
+  }
 
-  Group.deleteOne({ id: req.body.id });
+  Tutorial.find({
+    _id: req.body.tutorial._id
+  })
+    .then((data) => {
+      console.log(removedGroup);
+      var list = data[0].groups.filter(group => group._id !== removedGroup._id);
+
+      console.log(list);
+      Tutorial.updateOne({
+        _id: req.body.tutorial._id
+      },
+        {
+          $set: { groups: list },
+          $inc: { numberGroups: -1 },
+        }).then(  
+          Group.deleteOne({ 
+            subjectName: req.body.group.subjectName,
+            tutorialNumber: req.body.group.tutorialNumber,
+            groupNumber: req.body.group.groupNumber
+           }).then((g) => console.log(g))
+        ).catch((e) => { console.log(e) });
+    })
 }
 
 exports.getTutorial = (req, res) => {
