@@ -9,8 +9,7 @@ class TutorialPage extends React.Component {
 
     this.onChangeGroupSize = this.onChangeGroupSize.bind(this);
 
-
-    this.state = {
+    this.state = JSON.parse(window.localStorage.getItem('state')) || {
       studentList: [],
       groupList: [],
       currentStudent: null,
@@ -20,6 +19,11 @@ class TutorialPage extends React.Component {
       currentIndex: null,
       groupSize: null
     };
+  }
+
+  setState(state) {
+    window.localStorage.setItem('state', JSON.stringify(state));
+    super.setState(state);
   }
 
   componentDidMount() {
@@ -84,11 +88,13 @@ class TutorialPage extends React.Component {
           groupList: response.data.groups
         })
 
+
         // this.setCurrentGroup(response.data.groups[response.data.groups.length - 1]);
       })
       .catch(e => {
         console.log(e);
       });
+    window.location.reload();
   }
 
   addStudentGroup() {
@@ -106,7 +112,6 @@ class TutorialPage extends React.Component {
         .catch(e => {
           console.log(e);
         });
-      window.location.reload();
     }
   }
 
@@ -120,18 +125,16 @@ class TutorialPage extends React.Component {
       TutorDataService.removeGroup(data)
         .then(response => {
           //How do you refresh page
-          console.log(response);
           this.setState({
             groupList: response.data.groups,
             tutorial: response.data,
             currentGroup: null
           })
-
-          // this.setCurrentGroup(response.data.groups[response.data.groups.length - 1]);
         })
         .catch(e => {
           console.log(e);
         });
+      window.location.reload();
     }
   }
 
