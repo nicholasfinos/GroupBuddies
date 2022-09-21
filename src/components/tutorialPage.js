@@ -34,6 +34,7 @@ class TutorialPage extends React.Component {
 
     TutorDataService.getTutorial(_id)
       .then(response => {
+        console.log(response.data);
         this.setState({
           tutorial: response.data,
           studentList: response.data.UnselectedStudents,
@@ -239,7 +240,7 @@ class TutorialPage extends React.Component {
             <label>Student Info</label>
             <div className="box">
               <ListItem>
-                {currentStudent && ("Name: " + currentStudent.username, "Subject Topics: " + currentStudent.subjectTopics)}
+                {currentStudent && ("Name: " + currentStudent.username +  " | Subject Topics: " + currentStudent.subjectTopics)}
               </ListItem>
             </div>
             <button className="button" onClick={() => { this.addStudentGroup() }}>Add to Group</button>

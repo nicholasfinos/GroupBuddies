@@ -71,7 +71,7 @@ const App = () => {
 
             <>
               <Button  component={Link} to={"/request/view/" + currentUser?.username}>View Peer Requests</Button>
-              <Button component={Link} to={"/tutor/viewTutorial/" + currentUser?._id}>View Tutorial Class</Button>
+              <Button component={Link} to={"/tutor/viewTutorial/" + currentUser?.id}>View Tutorial Class</Button>
              </>
             )}
 

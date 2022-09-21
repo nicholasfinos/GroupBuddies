@@ -85,7 +85,7 @@ exports.getGroup = (req, res) => {
 };
 
 exports.addGroup = (req, res) => {
-  if(req.body.groups.length !== 0) {
+  if (req.body.groups.length !== 0) {
     var group = new Group({
       subjectName: req.body.subjectName,
       tutorialNumber: req.body.number,
@@ -120,15 +120,15 @@ exports.addGroup = (req, res) => {
     }
   ).then((y) => { })
 
-  Tutorial.find({_id: req.body._id})
-  .then((data) => {
-    res.send(data);
-  })
-  .catch((err) => {
-    res
-      .status(500)
-      .send({ message: "Error retriving Tutorial" });
-  })
+  Tutorial.find({ _id: req.body._id })
+    .then((data) => {
+      res.send(data);
+    })
+    .catch((err) => {
+      res
+        .status(500)
+        .send({ message: "Error retriving Tutorial" });
+    })
 }
 
 exports.addStudentGroup = (req, res) => {
@@ -141,7 +141,8 @@ exports.addStudentGroup = (req, res) => {
 
   var addedStudent = {
     _id: req.body.student._id,
-    username: req.body.student.username
+    username: req.body.student.username,
+    subjectTopics: req.body.student.subjectTopics
   }
 
   var ungroupedList = req.body.tutorial.UnselectedStudents.filter(student => student.username !== req.body.student.username);
@@ -174,21 +175,21 @@ exports.removeStudentGroup = (req, res) => {
         username: req.body.student.username,
         subjectTopics: req.body.student.subjectTopics
       }
-      
+
       Tutorial.updateOne(
         {
           _id: req.body.tutorial._id
         },
         {
           $push: { UnselectedStudents: stu }
-         }
+        }
       ).then((h) => console.log(h));
     })
 
   var studentListlist = req.body.group.students.filter(student => student.username !== req.body.student.username);
 
   Group.updateOne(
-    { 
+    {
       _id: req.body.group._id
     },
     {
@@ -207,7 +208,6 @@ exports.removeStudentGroup = (req, res) => {
 exports.removeGroup = (req, res) => {
   if (req.body.studentList.length !== 0) {
     for (let i = 0; i < req.body.studentList.length; i++) {
-      console.log(req.body.studentList[i]);
       Tutorial.updateOne(
         {
           _id: req.body.tutorial._id
@@ -234,12 +234,12 @@ exports.removeGroup = (req, res) => {
         {
           $set: { groups: list },
           $inc: { numberGroups: -1 },
-        }).then(  
-          Group.deleteOne({ 
+        }).then(
+          Group.deleteOne({
             subjectName: req.body.group.subjectName,
             tutorialNumber: req.body.group.tutorialNumber,
             groupNumber: req.body.group.groupNumber
-           }).then((g) => console.log(g))
+          }).then((g) => console.log(g))
         ).catch((e) => { console.log(e) });
     })
 }
@@ -269,186 +269,204 @@ exports.findTutorials = (req, res) => {
     })
 };
 
-exports.autoSort = (req, res) => {//req: list students, number groups, tutorial _id 
-  //console.log(req.body);
+exports.autoSort = (req, res) => {
   var tutorial = req.body.tutorial;
   var subject = req.body.subject;
   var studentList = req.body.studentList;
-  var groupSize = req.body.groupSize;
-  var topic1 = [];
-  var topic2 = [];
-  var topic3 = [];
-  var topic4 = [];
-  var topic5 = [];
-  var topic6 = [];
-  var topic7 = [];
-  var topic8 = [];
-  var topic9 = [];
-  var topic10 = [];
-  var topicList = [];
-  topicList.push(topic1);
-  topicList.push(topic2);
-  topicList.push(topic3);
-  topicList.push(topic4);
-  topicList.push(topic5);
-  topicList.push(topic6);
-  topicList.push(topic7);
-  topicList.push(topic8);
-  topicList.push(topic9);
-  topicList.push(topic10);
+  var groupSize = parseInt(req.body.groupSize);
+  var topicList = [[], [], [], [], [], [], [], [], [], []];
+
   //Adding students into Topic List
-  for (let i = 0; i < 1; i++) {
-    StudentProfile.findById(studentList[i]._id)
-      .then((stu) => {
-        var x = 0;
-        for (let j = 0; j < subject.subjectTopics.length; j++) {
-          if (subject.subjectTopics[j] === stu.subjectTopcis[x]) { //Remeber to change
-            if (x === 0) {
-              topicList[j].push(0, stu);
-            }
-            // else if (x === 1) {
-            //   topicList[j].add(((topicList[j].length - 1) / 2), stu);
-            // }
-            // else {
-            //   topicList[j].add(stu);
-            //   break;
-            // }
-            x++;
-          }
+  for (let i = 0; i < studentList.length; i++) {
+    var x = 0;
+    for (let j = 0; j < subject.subjectTopics.length; j++) {
+      if (subject.subjectTopics[j] === studentList[i].subjectTopics[x]) {
+        if (x === 0) {
+          topicList[j].push(studentList[i]);
+        }
+        else if (x === 1) {
+          topicList[j].splcie(((topicList[j].length - 1) / 2), 0, studentList[i]);
+        }
+        else {
+          topicList[j].splcie(topicList[j].length - 1, 0, studentList[i])
+          break;
+        }
+        x++;
       }
-      console.log(topicList);
-    })
     }
-    console.log(topicList);
+  }
 
-  // //Remove Topic list that are empty
-  // var removeList = new ArrayList();
-  // for (let i = 0; i < topicList.size; i++) {
-  //   if (topicList[i].size === 0) {
-  //     removeList.add(i);
-  //   }
-  // }
+  //Remove Topic list that are empty
+  var z = 0;
+  while (z < topicList.length) {
+    if (topicList[z].length === 0) {
+      topicList.splice(z, 1);
+    }
+    else {
+      z++;
+    }
+  }
 
-  // for (let j = 0; j < removeList.size; j++) {
-  //   topicList.remove(removeList[j]);
-  // }
+  //Creating Groups for Tutorial
+  var groupID = [];
 
-  // //Creating Groups for Tutorial
-  // var groupSize = parseInt(req.body.numberGroups);
-  // var groupID = new ArrayList();
+  for (let i = 1; i <= groupSize; i++) {
+    var group = new Group({
+      subjectName: subject.subjectName,
+      tutorialNumber: tutorial.number,
+      groupNumber: i
+    })
 
-  // for (let i = 1; i <= groupSize; i++) {
-  //   var group = {
-  //     subjectName: subject.subjectName,
-  //     tutorialNumber: tutorial.number,
-  //     groupNumber: i
-  //   }
+    group.save((err, group) => {
+      if (err) {
+        res.status(500).send({ message: err });
+        return;
+      }
+    })
 
-  //   group.save((err, group) => {
-  //     if (err) {
-  //       res.status(500).send({ message: err });
-  //       return;
-  //     }
-  //     groupID.add(group._id);
-  //   })
-  // }
+    var data = {
+      _id: group._id,
+      groupNumber: group.groupNumber
+    }
 
-  // //Adding Students into Groups
-  // var k = 0;
-  // var start = 0;
-  // //If their is equal topic and group size then do else statement
-  // if (topicList.size !== groupSize) {
-  //   while (studentList.size !== 0) {
-  //     for (let i = 0; i < groupID.size; i++) {
-  //       var student = topicList[k];
+    groupID.push(data);
+  }
 
-  //       //Add student into group
-  //       Group.updateOne(
-  //         { _id: groupID[i] },
-  //         { $push: { students: student._id } }
-  //       );
+  Tutorial.updateOne(
+    { 
+      _id: tutorial._id
+    },
+    { 
+      $push: { groups: groupID },
+      $inc: {numberGroups: groupID.length}
+    }
+  ).then((a) => console.log(a));
 
-  //       //Incase topic is empty after removing student
-  //       var removeTopic = new ArrayList();
+  //Adding Students into Groups
+  var k = 0;
+  var start = 0;
+  var groupList = []
 
-  //       //Remove student from all list
-  //       for (let j = 0; j < topicList.size; j++) {
-  //         topicList[j].remove(student);
-  //         if (topicList[j].size === 0) {
-  //           removeTopic.add(j);
-  //         }
-  //       }
+  for(let i = 0; i < groupSize; i++) {
+    groupList.push([]);
+  }
 
-  //       for (let m = 0; m < removeTopic.size; m++) {
-  //         topicList.remove(removeTopic[m]);
-  //       }
+  //If their is equal topic and group size then do else statement
+  if (topicList.length !== groupSize) {
+    while (topicList.length !== 0) {
+      for (let i = 0; i < groupID.length; i++) {
+        var student = topicList[k][0];
+        console.log("1st")
+        console.log("Student: ", student);
 
-  //       studentList.remove(student);
+        //Add Student Group
+        console.log("2nd");
+        groupList[i].push(student);
+        console.log("GroupList", groupList)
 
-  //       //If K is at end of topic list then restart to beginning
-  //       if (k === topicList.size - 1) {
-  //         k = 0;
-  //       }
-  //       else {
-  //         k++;
-  //       }
-  //     }
-  //   }
-  // }
-  // else {
-  //   while (studentList.size !== 0) {
-  //     for (let i = 0; i < groupID.size; i++) {
-  //       var student = topicList[k];
+        StudentProfile.updateOne(
+          { 
+            username: student.username
+          },
+          { $set: { groupNumber: groupID[i].groupNumber } }
+        ).then((u) => console.log(u));
 
-  //       //Add student into group //Need to figure out how to add group topics
-  //       Group.updateOne(
-  //         { _id: groupID[i] },
-  //         { $push: { students: student._id } },
-  //         { $inc: { groupTopics: 1 } }
-  //       );
+        //Remove Student and Topic
+        var z = 0;
+        while (z < topicList.length) {
+          var y = 0;
+          while (y < topicList[z].length) {
+            if(topicList[z][y].username === student.username) {
+              console.log("3rd");
+              console.log("List: ", z + " Pos: ", y);
+              topicList[z].splice(y, 1);
+            }
+            else {
+              y++;
+            }
+          }
+          if (topicList[z].length === 0) {
+            console.log("4th")
+            console.log("Remove List", z);
+            topicList.splice(z, 1);
+          }
+          else {
+            z++;
+          }
+        }
 
-  //       //Incase topic is empty after removing student
-  //       var removeTopic = new ArrayList();
+        //If K is at end of topic list then restart to beginning
+        if (k >= topicList.length - 1) {
+          console.log("5th restart list")
+          k = 0;
+        }
+        else {
+          k++;
+          console.log("6th k: ", k)
+        }
+      }
+    }
+  }
+  else {
+    while (studentList.size !== 0) {
+      for (let i = 0; i < groupID.size; i++) {
+        var student = topicList[k];
 
-  //       //Remove student from all list
-  //       for (let j = 0; j < topicList.size; j++) {
-  //         topicList[j].remove(student);
-  //         if (topicList[j].size === 0) {
-  //           removeTopic.add(j);
-  //         }
-  //       }
+        //Add Student Group
+        console.log("2nd");
+        groupList[i].push(student);
+        console.log("GroupList", groupList)
 
-  //       for (let m = 0; m < removeTopic.size; m++) {
-  //         topicList.remove(removeTopic[m]);
-  //       }
+        //Remove Student and Topic
+        var z = 0;
+        while (z < topicList.length) {
+          var y = 0;
+          while (y < topicList[z].length) {
+            if(topicList[z][y].username === student.username) {
+              console.log("3rd");
+              console.log("List: ", z + " Pos: ", y);
+              topicList[z].splice(y, 1);
+            }
+            else {
+              y++;
+            }
+          }
+          if (topicList[z].length === 0) {
+            console.log("4th")
+            console.log("Remove List", z);
+            topicList.splice(z, 1);
+          }
+          else {
+            z++;
+          }
+        }
 
-  //       studentList.remove(student);
+        //If K is at end of topic list then restart to beginning
+        if (k >= topicList.size - 1) {
+          k = 0;
+        }
+        else {
+          k++;
+        }
+      }
+    }
+    start++;
+    if (start >= topicList.size) {
+      start = 0;
+    }
+    k = start;
+  }
 
-  //       //If K is at end of topic list then restart to beginning
-  //       if (k === topicList.size - 1) {
-  //         k = 0;
-  //       }
-  //       else {
-  //         k++;
-  //       }
-  //     }
-  //   }
-  //   start++;
-  //   if (start === topicList.size) {
-  //     start = 0;
-  //   }
-  //   k = start;
-  // }
+  console.log(groupList);
 
-  // Tutorial.findById(req.params._id)
-  //   .then(data => {
-  //     res.send(data);
-  //   })
-  //   .catch(err => {
-  //     res.status(500).send({
-  //       message:
-  //         err.message || "Some error occurred while retrieving role: tutor."
-  //     }
-  //     );
-  //   });
+  for(let i = 0; i < groupList.length; i++) {
+    Group.updateOne(
+      { 
+        subjectName: subject.subjectName,
+        tutorialNumber: tutorial.number,
+        groupNumber: groupID[i].groupNumber
+      },
+      { $set: { students: groupList[i] } }
+    ).then((u) => console.log(u));
+  }
 };

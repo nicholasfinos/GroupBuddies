@@ -797,7 +797,7 @@ async function settingUpProfile() {
   // StudentProfile.find({ username: "lachlanSinclair" })
   //   .then((x) => {
   //     var data = {
-  //       _id: x[0]._id,
+  //       _id: x[0].id,
   //       username: x[0].username,
   //       subjectTopics: x[0].subjectTopics        
   //     };
