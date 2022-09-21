@@ -17,5 +17,4 @@ const Tutorial = mongoose.model(
         groups: Array
     })
 );
-
 module.exports = Tutorial;

@@ -728,7 +728,7 @@ async function settingUpProfile() {
   //   subjectName: "Yeran Test Group",
   //   tutorialNumber: "1",
   //   groupNumber: "",
-  //   subjectTopcis: ["test"],
+  //   subjectTopics: ["test"],
   // })
 
   // StudentProfile.create({
@@ -737,7 +737,7 @@ async function settingUpProfile() {
   //   subjectName: "Yeran Test Group",
   //   tutorialNumber: "1",
   //   groupNumber: "",
-  //   subjectTopcis: ["yeran"],
+  //   subjectTopics: ["yeran"],
   // })
 
   // StudentProfile.create({
@@ -746,7 +746,7 @@ async function settingUpProfile() {
   //   subjectName: "Yeran Test Group",
   //   tutorialNumber: "1",
   //   groupNumber: "",
-  //   subjectTopcis: ["why"],
+  //   subjectTopics: ["why"],
   // })
 
   // StudentProfile.create({
@@ -755,7 +755,7 @@ async function settingUpProfile() {
   //   subjectName: "Yeran Test Group",
   //   tutorialNumber: "1",
   //   groupNumber: "",
-  //   subjectTopcis: ["test"],
+  //   subjectTopics: ["test"],
   // })
 
   // StudentProfile.create({
@@ -764,7 +764,7 @@ async function settingUpProfile() {
   //   subjectName: "Yeran Test Group",
   //   tutorialNumber: "1",
   //   groupNumber: "",
-  //   subjectTopcis: ["yeran"],
+  //   subjectTopics: ["yeran"],
   // })
 
   // StudentProfile.create({
@@ -773,7 +773,7 @@ async function settingUpProfile() {
   //   subjectName: "Yeran Test Group",
   //   tutorialNumber: "1",
   //   groupNumber: "",
-  //   subjectTopcis: ["why"],
+  //   subjectTopics: ["why"],
   // })
 
   // StudentProfile.create({
@@ -782,7 +782,7 @@ async function settingUpProfile() {
   //   subjectName: "Yeran Test Group",
   //   tutorialNumber: "1",
   //   groupNumber: "",
-  //   subjectTopcis: ["test"],
+  //   subjectTopics: ["test"],
   // })
 
   // StudentProfile.create({
@@ -791,14 +791,15 @@ async function settingUpProfile() {
   //   subjectName: "Yeran Test Group",
   //   tutorialNumber: "1",
   //   groupNumber: "",
-  //   subjectTopcis: ["yeran"],
+  //   subjectTopics: ["yeran"],
   // })
 
   // StudentProfile.find({ username: "lachlanSinclair" })
   //   .then((x) => {
   //     var data = {
   //       _id: x[0]._id,
-  //       username: x[0].username
+  //       username: x[0].username,
+  //       subjectTopics: x[0].subjectTopics        
   //     };
   //     Tutorial.updateOne(
   //       { subjectName: "Yeran Test Group" },
