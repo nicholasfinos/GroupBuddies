@@ -19,6 +19,7 @@ exports.viewSubjects = (req, res) => {
 };
 
 exports.findTutorial = (req, res) => {
+  console.log(req);
   Tutorial.find({ subjectName: req.params.subjectName })
     .then((data) => {
       res.status(200).send(data);

@@ -16,6 +16,10 @@ class EnrollmentDataService {
     viewEnrollmentByUsername(username){
         return http.get(`/enrollment/view/${username}`);
     }
+
+    findTutorial(subjectName) {
+        return http.get(`/enrollment/findTutorial/${subjectName}`)
+    }
 }
 
 export default new EnrollmentDataService();

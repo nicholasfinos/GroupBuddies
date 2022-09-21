@@ -1,13 +1,17 @@
 const Enrollment = require("../models/enrollment.model");
 const User = require("../models/user.model");
 const Subject = require("../models/subject.model");
+const Tutorial = require("../models/tutorial.model");
 
 exports.createEnrollmentRequest = (req, res) => {
+  console.log(req.body)
     const enrollment = new Enrollment({
+
         subjectName: req.body.subjectName,
         username: req.params.username,
-        strengths: req.body.strengths,
-        weaknesses: req.body?.weaknesses,
+        subjectTopics: req.body.subjectTopics,
+        tutorialNumber: req.body.tutorialNumber,
+        status: "Pending",
     })
 
     enrollment.save((err, enrollment) => {
@@ -36,6 +40,19 @@ exports.viewEnrollmentByUsername = (req, res) => {
           .send({ message: "Error retreiving Enrollments"});
       })
 }
+
+exports.findTutorial = (req, res) => {
+  console.log(req);
+  Tutorial.find({ subjectName: req.params.subjectName })
+    .then((data) => {
+      res.status(200).send(data);
+    })
+    .catch((err) => {
+      res
+        .status(500)
+        .send({ message: "Error retriving Tutorial related to " + req.body.subjectName });
+    })
+};
 
 //     Role.find({ name: "tutor" })
 //     .then(data => {

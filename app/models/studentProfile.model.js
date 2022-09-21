@@ -3,9 +3,15 @@ const mongoose = require("mongoose");
 const StudentProfile = mongoose.model(
   "StudentProfile",
   new mongoose.Schema({
-    userId: String,
-    strengths: [],
-    weaknesses: []
+    student: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User"
+    },
+    username: String,
+    subjectName: String,
+    tutorialNumber: String,
+    GroupNumber: String,
+    subjectTopics: Array,
   })
 );
 

@@ -9,6 +9,8 @@ module.exports = app => {
     router.get(`/create/:username`, subject.getAll)
 
     router.get(`/view/:username`, enrollment.viewEnrollmentByUsername)
+
+    router.get("/findTutorial/:subjectName", enrollment.findTutorial);
   
     app.use('/api/enrollment', router);
 };
