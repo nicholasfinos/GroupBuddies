@@ -314,7 +314,7 @@ exports.autoSort = (req, res) => {
     var group = new Group({
       subjectName: subject.subjectName,
       tutorialNumber: tutorial.number,
-      groupNumber: i
+      groupNumber: parseInt(parseInt(tutorial.groupNumber) + i)
     })
 
     group.save((err, group) => {
