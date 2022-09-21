@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import SubjectDataService from "../services/subject-service";
 import TutorDataService from "../services/tutor-service";
 import { Grid, ListItem } from "@material-ui/core";
-import Test from "./tutorialPageDemo";
+import TutorialPage from "./tutorialPage";
 import { Link, Switch, Route } from "react-router-dom";
 
 class TutorialList extends Component {
@@ -89,7 +89,7 @@ class TutorialList extends Component {
                   <div>
                   <Link style={{WebkitTextFillColor: "black"}} to={"/tutorial/" + id + "/" + currentTutorial._id}>Edit Tutorial</Link>
                     <Switch>
-                      <Route exact path={"/tutorial/" + id + "/" + currentTutorial?._id} component={Test}/>
+                      <Route exact path={"/tutorial/" + id + "/" + currentTutorial?._id} component={TutorialPage}/>
                     </Switch>
                   </div>   
                 </div>
