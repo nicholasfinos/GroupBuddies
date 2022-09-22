@@ -4,9 +4,10 @@ const PeerRequest = mongoose.model(
   "PeerRequest",
   new mongoose.Schema({
     username: String,
-    subjectName: String, 
-    yesPeers: [String],
-    noPeers: [String],
+    subjectName: String,
+    tutorialNumber: String, 
+    yesPeers: Array,
+    noPeers: Array,
     status: Boolean,
   })
 );

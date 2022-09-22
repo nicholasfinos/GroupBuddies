@@ -76,7 +76,11 @@ const App = () => {
             )}
 
             {ShowSubjectCoordinator && (
-              <><Button component={Link} to={"/subject/create/" + currentUser?.username}>Create New Subject</Button><Button component={Link} to={"/subject/view/" + currentUser?.username}>View a Subject</Button><Button component={Link} to={"/tutor/view"}>View Tutors</Button></>
+              <>
+              <Button component={Link} to={"/subject/create/" + currentUser?.username}>Create New Subject</Button>
+              <Button component={Link} to={"/subject/view/" + currentUser?.username}>View a Subject</Button>
+              <Button component={Link} to={"/tutor/view"}>View Tutors</Button>
+              </>
             )}
 
             {showStudent && (
