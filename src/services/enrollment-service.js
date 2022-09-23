@@ -20,6 +20,18 @@ class EnrollmentDataService {
     findTutorial(subjectName) {
         return http.get(`/enrollment/findTutorial/${subjectName}`)
     }
+
+    view(username) {
+        return http.get(`/enrollment/request/${username}`);
+    }
+    
+    viewEnrollmentBySubjectName(subjectName){
+        return http.get(`/enrollment/viewEnrollment/${subjectName}`);
+    }
+
+    updateEnrollment(data){
+        return http.put("/enrollment/updateEnrollment/", data);
+    }
 }
 
 export default new EnrollmentDataService();

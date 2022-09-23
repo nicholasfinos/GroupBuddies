@@ -8,6 +8,7 @@ const Enrollment = mongoose.model(
         subjectTopics: Array,
         tutorialNumber: String,
         status: String,
+        reason: String
     })
 );
 

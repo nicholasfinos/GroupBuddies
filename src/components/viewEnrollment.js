@@ -56,7 +56,7 @@ class ViewSubjectEnrollment extends Component {
   }
 
   render() {
-    const { enrollments, currentEnrollment, currentIndex, subjectTopics} = this.state;
+    const { enrollments, currentEnrollment, currentIndex, subjectTopics } = this.state;
 
     return (
       <div style={{ fontFamily: "Times New Roman", textAlign: "center", "width": "80%", "marginLeft": "130px" }}>
@@ -75,21 +75,29 @@ class ViewSubjectEnrollment extends Component {
             {currentEnrollment ? (
               <div style={{ "marginLeft": "200px" }}>
                 <br />
-                 <div style={{minWidth: "400px"}}>
-                    <label><strong>Subject Name:</strong></label>{" "}{currentEnrollment.subjectName}
-                    <br/>
-                    <label><strong>Username:</strong></label>{" "}{currentEnrollment.username}
-                    <br/>
-                    <label><strong>Subject Topics:</strong></label>
-                    <div className="list-group" >
-                      {subjectTopics && subjectTopics.map((topic, index) => (
-                        <ListItem selected={index === currentIndex} divider style={{ padding: "20px" }} key={index}> {topic}{" "} </ListItem>
-                      ))} 
+                <div style={{ minWidth: "400px" }}>
+                  <label><strong>Subject Name:</strong></label>{" "}{currentEnrollment.subjectName}
+                  <br />
+                  <label><strong>Username:</strong></label>{" "}{currentEnrollment.username}
+                  <br />
+                  <label><strong>Subject Topics:</strong></label>
+                  <div className="list-group" >
+                    {subjectTopics && subjectTopics.map((topic, index) => (
+                      <ListItem selected={index === currentIndex} divider style={{ padding: "20px" }} key={index}> {topic}{" "} </ListItem>
+                    ))}
+                  </div>
+                  <br />
+                  <label><strong>Tutorial:</strong></label>{" "}{currentEnrollment.tutorialNumber}
+                  <br />
+                  <label><strong>Status:</strong></label>{" "}{currentEnrollment.status}
+                  <br />
+                  {currentEnrollment.reason ? (
+                    <div>
+                      <label><strong>Reason for Declined Request:</strong></label>{" "}{currentEnrollment.reason}
                     </div>
-                    <br/>
-                    <label><strong>Tutorial:</strong></label>{" "}{currentEnrollment.tutorialNumber}
-                    <br/>
-                    <label><strong>Status:</strong></label>{" "}{currentEnrollment.status}
+                  ) : (
+                    <div></div>
+                  )}
                 </div>
               </div>
             ) : (

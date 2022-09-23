@@ -3,10 +3,12 @@ const User = require("../models/user.model");
 const Tutorial = require("../models/tutorial.model");
 
 exports.viewSubjects = (req, res) => {
+  //Display all of the subject that is associated to User
   User.find({ username: req.params.username })
     .then((data) => {
       Subject.find({ subjectCoordinator: [data[0]._id] })
         .then((doc) => {
+          console.log(doc);
           res.status(200).send(doc);
         })
         .catch((err) => {
@@ -18,32 +20,8 @@ exports.viewSubjects = (req, res) => {
     })
 };
 
-exports.findTutorial = (req, res) => {
-  console.log(req);
-  Tutorial.find({ subjectName: req.params.subjectName })
-    .then((data) => {
-      res.status(200).send(data);
-    })
-    .catch((err) => {
-      res
-        .status(500)
-        .send({ message: "Error retriving Tutorial related to " + req.body.subjectName });
-    })
-};
-
-exports.findTutorialByTutor = (req, res) => {
-  Tutorial.find({ tutor: [req.params._id] })
-    .then((data) => {
-      res.send(data);
-    })
-    .catch((err) => {
-      res
-        .status(500)
-        .send({ message: "Error retreiving Tutorial " });
-    })
-};
-
-exports.findOneSubject = (req, res) => {
+exports.findSubject = (req,res) => {
+  //Find a particular subject
   Subject.find({ subjectName: req.params.subjectName })
     .then((data) => {
       res.send(data);
@@ -52,6 +30,18 @@ exports.findOneSubject = (req, res) => {
       res
         .status(500)
         .send({ message: "Error retreiving Subject with name " + req.body.subjectName });
+    })
+};
+
+exports.findTutorial = (req, res) => {
+  Tutorial.find({ subjectName: req.params.subjectName })
+    .then((data) => {
+      res.status(200).send(data);
+    })
+    .catch((err) => {
+      res
+        .status(500)
+        .send({ message: "Error retriving Tutorial related to " + req.body.subjectName });
     })
 };
 
@@ -80,6 +70,8 @@ exports.createSubject = (req, res) => {
     tutorials: null
   });
 
+
+  //Convert the String topics into array
   if (req.body.subjectTopics.length !== 0) {
     const splitQuery = req.body.subjectTopics.split(",")
     var i = 0
@@ -88,6 +80,7 @@ exports.createSubject = (req, res) => {
     }
   }
 
+  //Convert string group Assessment to boolean
   if (req.body.groupAssessment === "Yes") {
     subject.groupAssessment = true;
   } else {
@@ -95,19 +88,22 @@ exports.createSubject = (req, res) => {
   }
 
 
+  //Adding Tutorial class into Subject
   for (let i = 0; i < subject.tutorialNumbers; i++) {
     const tutorial = new Tutorial({
       subjectName: req.body.subjectName,
       number: (i + 1),
       tutor: null,
-      allStudents: null,
       timeSlot: req.body.assignedTutor[i].timeSlot,
-      day: req.body.assignedTutor[i].day
+      day: req.body.assignedTutor[i].day,
+      numberGroups: 0
     });
 
+
+    //Assign Tutor to tutorial
     User.find({ username: req.body.assignedTutor[i].username })
       .then((data) => {
-        tutorial.tutor = data
+        tutorial.tutor = data[0].id
         tutorial.save((err, tutorial) => {
           if (err) {
             res.status(500).send({ message: err });
@@ -117,17 +113,17 @@ exports.createSubject = (req, res) => {
       });
 
     if (i === 0) {
-      subject.tutorials = tutorial._id;
+      subject.tutorials = tutorial.id;
     }
     else {
-      subject.tutorials.push(tutorial._id);
+      subject.tutorials.push(tutorial.id);
     }
   }
 
+  //Assign subject Coordinator to Subject and save
   User.find({ username: req.params.username })
     .then((data) => {
-      subject.subjectCoordinator = data._id;
-
+      subject.subjectCoordinator = data[0]._id;
       subject.save((err, subject) => {
         if (err) {
           res.status(500).send({ message: err });
