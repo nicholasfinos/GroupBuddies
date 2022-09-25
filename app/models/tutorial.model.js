@@ -7,15 +7,14 @@ const Tutorial = mongoose.model(
         number: String,
         timeSlot: String,
         day: String,
-        tutor: [{
+        tutor: {
             type: mongoose.Schema.Types.ObjectId,
             ref: "User"
-        }],
-        allStudents: [{
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "User"
-        }]
+        },
+        allStudents: Array,
+        UnselectedStudents: Array,
+        numberGroups: Number,
+        groups: Array
     })
 );
-
 module.exports = Tutorial;

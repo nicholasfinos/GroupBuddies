@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import SubjectDataService from "../services/subject-service";
+import TutorDataService from "../services/tutor-service";
 import { Grid, ListItem } from "@material-ui/core";
+import TutorialPage from "./tutorialPage";
+import { Link, Switch, Route } from "react-router-dom";
 
 class TutorialList extends Component {
   constructor(props) {
@@ -11,6 +14,7 @@ class TutorialList extends Component {
 
     this.state = {
       currentTutorial: null,
+      id: null,
       currentIndex: -1,
       tutorials: []
     };
@@ -23,17 +27,17 @@ class TutorialList extends Component {
   retrieveTutorial() {
     const URL = String(this.props.match.path);
     const _id = String(URL.substring(URL.lastIndexOf("/") + 1, URL.length));
-    console.log(_id);
-    SubjectDataService.findTutorialByTutor(_id)
-      .then(response => {
-        this.setState({
-          tutorials: response.data
-        });
-      })
-      .catch(e => {
-        console.log(e);
-      }
-      );
+    this.setState({id: _id});
+    TutorDataService.getTutorials(_id)
+    .then(response => {
+      this.setState({
+        tutorials: response.data
+      });
+    })
+    .catch(e => {
+      console.log(e);
+    }
+    );
   }
 
   refreshList() {
@@ -52,7 +56,7 @@ class TutorialList extends Component {
   }
 
   render() {
-    const { currentIndex, tutorials, currentTutorial } = this.state;
+    const { currentIndex, tutorials, currentTutorial, id } = this.state;
 
     return (
       <div style={{ fontFamily: "Times New Roman", textAlign: "center", "width": "80%", "marginLeft": "130px" }}>
@@ -81,6 +85,12 @@ class TutorialList extends Component {
                   </div>
                   <div>
                     <label><strong>Time Slot:</strong></label>{" "}{currentTutorial.timeSlot}
+                  </div>
+                  <div>
+                  <Link style={{WebkitTextFillColor: "black"}} to={"/tutorial/" + id + "/" + currentTutorial._id}>Edit Tutorial</Link>
+                    <Switch>
+                      <Route exact path={"/tutorial/" + id + "/" + currentTutorial?._id} component={TutorialPage}/>
+                    </Switch>
                   </div>   
                 </div>
               </div>

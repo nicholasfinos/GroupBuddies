@@ -161,7 +161,7 @@ class EditPeerRequest extends Component {
                         <div className="list-group">
                             {yesPeers && yesPeers.map((yesPeer, index) => (
                             <ListItem divider button style={{ padding: "20px" }} key={index}>
-                                {"Name: " + yesPeer}
+                                {"Name: " + yesPeer.username}
                             </ListItem>
                             ))}
                         </div>
@@ -172,7 +172,7 @@ class EditPeerRequest extends Component {
                         <div className="list-group">
                             {noPeers && noPeers.map((noPeer, index) => (
                             <ListItem divider button style={{ padding: "20px" }} key={index}>
-                                {"Name: " + noPeer}
+                                {"Name: " + noPeer.username}
                             </ListItem>
                             ))}
                         </div>

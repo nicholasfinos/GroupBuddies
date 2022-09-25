@@ -3,38 +3,49 @@ const User = require("../models/user.model");
 const Subject = require("../models/subject.model");
 
 exports.createEnrollmentRequest = (req, res) => {
-    const enrollment = new Enrollment({
-        subjectName: req.body.subjectName,
-        username: req.params.username,
-        strengths: req.body.strengths,
-        weaknesses: req.body?.weaknesses,
-    })
+  const enrollment = new Enrollment({
+    subjectName: req.body.subjectName,
+    username: req.params.username,
+    strengths: req.body.strengths,
+    weaknesses: req.body.weaknesses,
+  })
 
-    enrollment.save((err, enrollment) => {
-        if (err) {
-          res.status(500).send({ message: err });
-          return;
-        }
-        else {
-          res
-            .status(200)
-            .send({
-              message: "Enrollment " + enrollment.subjectName + " has been created for: " + req.params.username,
-            });
-        }
-    })
+  enrollment.save((err, enrollment) => {
+    if (err) {
+      res.status(500).send({ message: err });
+      return;
+    }
+    else {
+      res
+        .status(200)
+        .send({
+          message: "Enrollment " + enrollment.subjectName + " has been created for: " + req.params.username,
+        });
+    }
+  })
 };
 
 exports.viewEnrollmentByUsername = (req, res) => {
-    Enrollment.find({username: req.params.username})
+  Enrollment.find({ username: req.params.username })
     .then((data) => {
-        res.send(data);
-      })
-      .catch((err) => {
-        res
-          .status(500)
-          .send({ message: "Error retreiving Enrollments"});
-      })
+      res.send(data);
+    })
+    .catch((err) => {
+      res
+        .status(500)
+        .send({ message: "Error retreiving Enrollments" });
+    })
+}
+
+exports.getTutorialEnrollments = (req, res) => {
+  const enrollments = Enrollment.find()
+    .then((data) => {
+      res.send(data);
+    }).catch((err) => {
+      res
+        .status(500)
+        .send({ message: "Error retreiving tutorialEnrollments" });
+    });
 }
 
 //     Role.find({ name: "tutor" })

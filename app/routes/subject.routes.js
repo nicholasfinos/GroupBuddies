@@ -10,18 +10,15 @@ module.exports = app => {
   router.post("/create/:username", subject.createSubject);
 
   //Find one subject 
-  router.get("/findOne/:subjectName", subject.findOneSubject);
+  router.get("/findOne/:subjectName", subject.findSubject);
+
+  router.get("/findTutorial/:subjectName", subject.findTutorial);
 
   //Find Tutorial associated to Subject 
   // Retrieves a subject by id
   router.get("/:username/:subjectId", subject.findSubjectById);
 
-  //Find Tutorial assocaited to Subject 
-  router.get("/findTutorial/:subjectName", subject.findTutorial);
-
   router.get(`/create/:username`, subject.getAll)
-
-  router.get("/findTutorialByTutor/:_id", subject.findTutorialByTutor)
 
   // app.get("/api/request/create/:username", subject.getPeers)
   //Update Subject with id
