@@ -480,7 +480,6 @@ exports.autoSort = (req, res) => {
   }
 
   var t = [];
-  console.log(tutorial);
 
   Tutorial.updateOne(
     {
