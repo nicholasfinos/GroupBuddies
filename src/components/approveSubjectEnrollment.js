@@ -110,11 +110,11 @@ class ApproveSubjectEnrollment extends React.Component {
     EnrollmentDataService.updateEnrollment(data)
         .then((response) => {
           console.log(response.data);
-          window.location.reload(false);
         })
         .catch((e) => {
           console.log(e);
         })
+        window.location.reload();
   }
 
 
