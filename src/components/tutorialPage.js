@@ -3,6 +3,7 @@ import { ListItem } from "@material-ui/core";
 import TutorDataService from "../services/tutor-service";
 import StudentProfileDataServcie from "../services/studentProfile-service";
 import SubjectDataService from "../services/subject-service";
+import styles from "./tutorialPage.css";
 import viewTutorial from "../components/viewTutorial";
 
 class TutorialPage extends React.Component {
