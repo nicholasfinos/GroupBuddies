@@ -295,7 +295,6 @@ exports.autoSort = (req, res) => {
       }
     }
   }
-
   //Remove Topic list that are empty
   var z = 0;
   while (z < topicList.length) {
@@ -309,20 +308,28 @@ exports.autoSort = (req, res) => {
 
   //Creating Groups for Tutorial
   var groupID = [];
+  var groups = []
 
   for (let i = 1; i <= groupSize; i++) {
-    var group = new Group({
-      subjectName: subject.subjectName,
-      tutorialNumber: tutorial.number,
-      groupNumber: parseInt(parseInt(tutorial.groupNumber) + i)
-    })
+    var group;
+    if (tutorial.groups.length === 0) {
+      group = new Group({
+        subjectName: subject.subjectName,
+        tutorialNumber: tutorial.number,
+        groupNumber: i,
+        students: ""
+      })
+    }
+    else {
+      group = new Group({
+        subjectName: subject.subjectName,
+        tutorialNumber: tutorial.number,
+        groupNumber: parseInt(tutorial.groups[tutorial.groups.length - 1].groupNumber) + i,
+        students: ""
+      })
+    }
 
-    group.save((err, group) => {
-      if (err) {
-        res.status(500).send({ message: err });
-        return;
-      }
-    })
+    groups.push(group);
 
     var data = {
       _id: group._id,
@@ -333,12 +340,12 @@ exports.autoSort = (req, res) => {
   }
 
   Tutorial.updateOne(
-    { 
+    {
       _id: tutorial._id
     },
-    { 
+    {
       $push: { groups: groupID },
-      $inc: {numberGroups: groupID.length}
+      $inc: { numberGroups: groupID.length }
     }
   ).then((a) => console.log(a));
 
@@ -347,7 +354,7 @@ exports.autoSort = (req, res) => {
   var start = 0;
   var groupList = []
 
-  for(let i = 0; i < groupSize; i++) {
+  for (let i = 0; i < groupSize; i++) {
     groupList.push([]);
   }
 
@@ -355,17 +362,20 @@ exports.autoSort = (req, res) => {
   if (topicList.length !== groupSize) {
     while (topicList.length !== 0) {
       for (let i = 0; i < groupID.length; i++) {
+        if (topicList.length === 0) {
+          break;
+        }
         var student = topicList[k][0];
-        console.log("1st")
-        console.log("Student: ", student);
+        //console.log("1st")
+        //console.log("Student: ", student);
 
         //Add Student Group
-        console.log("2nd");
+        //console.log("2nd");
         groupList[i].push(student);
-        console.log("GroupList", groupList)
+        //console.log("GroupList", groupList)
 
         StudentProfile.updateOne(
-          { 
+          {
             username: student.username
           },
           { $set: { groupNumber: groupID[i].groupNumber } }
@@ -376,9 +386,9 @@ exports.autoSort = (req, res) => {
         while (z < topicList.length) {
           var y = 0;
           while (y < topicList[z].length) {
-            if(topicList[z][y].username === student.username) {
-              console.log("3rd");
-              console.log("List: ", z + " Pos: ", y);
+            if (topicList[z][y].username === student.username) {
+              // console.log("3rd");
+              //console.log("List: ", z + " Pos: ", y);
               topicList[z].splice(y, 1);
             }
             else {
@@ -386,8 +396,8 @@ exports.autoSort = (req, res) => {
             }
           }
           if (topicList[z].length === 0) {
-            console.log("4th")
-            console.log("Remove List", z);
+            //console.log("4th")
+            //console.log("Remove List", z);
             topicList.splice(z, 1);
           }
           else {
@@ -397,12 +407,12 @@ exports.autoSort = (req, res) => {
 
         //If K is at end of topic list then restart to beginning
         if (k >= topicList.length - 1) {
-          console.log("5th restart list")
+          //console.log("5th restart list")
           k = 0;
         }
         else {
           k++;
-          console.log("6th k: ", k)
+          //console.log("6th k: ", k)
         }
       }
     }
@@ -422,7 +432,7 @@ exports.autoSort = (req, res) => {
         while (z < topicList.length) {
           var y = 0;
           while (y < topicList[z].length) {
-            if(topicList[z][y].username === student.username) {
+            if (topicList[z][y].username === student.username) {
               console.log("3rd");
               console.log("List: ", z + " Pos: ", y);
               topicList[z].splice(y, 1);
@@ -457,16 +467,27 @@ exports.autoSort = (req, res) => {
     k = start;
   }
 
-  console.log(groupList);
+  for (let i = 0; i < groupList.length; i++) {
 
-  for(let i = 0; i < groupList.length; i++) {
-    Group.updateOne(
-      { 
-        subjectName: subject.subjectName,
-        tutorialNumber: tutorial.number,
-        groupNumber: groupID[i].groupNumber
-      },
-      { $set: { students: groupList[i] } }
-    ).then((u) => console.log(u));
+    groups[i].students = groupList[i];
+
+    groups[i].save((err, groups) => {
+      if (err) {
+        res.status(500).send({ message: err });
+        return;
+      }
+    })
   }
+
+  var t = [];
+  console.log(tutorial);
+
+  Tutorial.updateOne(
+    {
+      _id: tutorial._id
+    },
+    {
+      $set: { UnselectedStudents: t }
+    }
+  ).then((h) => console.log(h));
 };

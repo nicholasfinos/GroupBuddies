@@ -8,7 +8,7 @@ const Subject = mongoose.model(
         tutorialNumbers: Number,
         semester: String,
         groupAssessment: Boolean,
-        subjectTopics: [String],
+        subjectTopics: Array,
         tutorials: [{
             type: mongoose.Schema.Types.ObjectId,
             ref: "Tutorial"
@@ -17,15 +17,7 @@ const Subject = mongoose.model(
             type: mongoose.Schema.Types.ObjectId,
             ref: "User"
         },
-        // students: [{
-        //     type: mongoose.Schema.Types.ObjectId,
-        //     ref: "User"
-        // }]
-        // students: [[
-        //     { String }, 
-        //     {String}
-        // ]]
-        students: [String],
+        students: Array,
     })
 );
 
