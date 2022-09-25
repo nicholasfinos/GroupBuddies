@@ -208,7 +208,7 @@ class TutorialPage extends React.Component {
             <button className="button" onClick={() => { this.addGroup() }}>Add Group</button>
             <button className="button" onClick={() => { this.removeGroup() }}>Remove Group</button>
             <div>
-              <label htmlFor="groupSize" >Group Size: </label>
+              <label htmlFor="groupSize" >Number of Groups to Create: </label>
               <input className="form-control" style={{ maxWidth: '500px' }} type="text" name="groupSize" onChange={this.onChangeGroupSize} />
             </div>
             <button className="button" onClick={() => { this.autoSort() }}>Automatic Sort</button>
