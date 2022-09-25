@@ -716,7 +716,7 @@ async function initial() {
     }
   })
 
-  settingUpSubjects();
+  //settingUpSubjects();
 }
 
 async function settingUpSubjects() {

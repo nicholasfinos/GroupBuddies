@@ -105,6 +105,44 @@ exports.updateEnrollment = (req, res) => {
         groupNumber: "",
         subjectTopics: req.body.enrollment.subjectTopics,
       })
+
+      console.log(studentProfile);
+
+      var student = {
+        _id: studentProfile._id,
+        username: studentProfile.username,
+        subjectTopics: studentProfile.subjectTopics
+      }
+
+      console.log(student);
+
+      Tutorial.updateOne(
+        {
+          subjectName: req.body.enrollment.subjectName,
+          number: req.body.enrollment.tutorialNumber
+        },
+        {
+          $push: {
+            UnselectedStudents: student,
+            allStudents: student
+          }
+        }
+      ).then((h) => {
+          console.log(h);
+        })
+
+        Subject.updateOne(
+        {
+          subjectName: req.body.enrollment.subjectName
+        },
+        {
+          $push: {
+            students: student
+          }
+        }
+      ).then((h) => {
+          console.log(h);
+        })
   
       studentProfile.save((err, studentProfile) => {
         if (err) {
@@ -113,43 +151,5 @@ exports.updateEnrollment = (req, res) => {
         }
       })
     })
-  
-  
-    StudentProfile.find({ username: req.body.enrollment.username })
-      .then((x) => {
-        var data = {
-          _id: x[0].id,
-          username: x[0].username,
-          subjectTopics: x[0].subjectTopics
-        };
-  
-        Tutorial.updateOne(
-          {
-            subjectName: req.body.enrollment.subjectName,
-            number: req.body.enrollment.tutorialNumber
-          },
-          {
-            $push: {
-              UnselectedStudents: data,
-              allStudents: data
-            }
-          }
-        ).then((h) => {
-            console.log(h);
-          })
-  
-          Subject.updateOne(
-          {
-            subjectName: req.body.enrollment.subjectName
-          },
-          {
-            $push: {
-              students: data
-            }
-          }
-        ).then((h) => {
-            console.log(h);
-          })
-      })
   }
 }
