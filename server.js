@@ -720,6 +720,7 @@ async function initial() {
   //settingUpSubjects();
   // settingUpProfile();
   // addStudentsToSubject();
+
 }
 
 async function settingUpProfile() {
