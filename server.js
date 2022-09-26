@@ -725,6 +725,12 @@ async function initial() {
   1. Uncomment "settingUpProfiles();" and run node server.js
   2. Comment "settingUpProfiles"
   3. Create subject with details matching profiles created
+   - Subject name - Yeran Test Group
+   - Tutorial Number - 1
+   - Topics: test,why,yeran
+   - Tutor - Tutor
+  Make sure to pick these option, if you want to do something else then make sure to edit both function below 
+  
   4. Uncomment "addStudentsToSubject();" and run node server.js
   5. Comment "addStudentsToSubject();"
   */
