@@ -719,7 +719,7 @@ async function initial() {
 
   //settingUpSubjects();
   // settingUpProfile();
-  addStudentsToSubject();
+  //addStudentsToSubject();
 }
 
 async function settingUpProfile() {

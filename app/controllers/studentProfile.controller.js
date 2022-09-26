@@ -1,38 +1,21 @@
 const db = require("../models");
-const { user: User, studentProfile: StudentProfile } = db;
+const StudentProfile = require("../models/studentProfile.model");
 
 exports.getStudentProfile = async (req, res) => {
-  // need a user, strengths, weaknesses
-  console.log("Yes");
-
-  if (!req.body._id) {
-    return res.status(400).json({ message: "No User" })
-  }
-
-  if (!req.body.strengths) {
-    return res.status(400).json({ message: "No Strengths" })
-  }
-
-  if (!req.body.weaknesses) {
-    return res.status(400).json({ message: "No Weaknesses" })
-  }
-
-  User.findOne({
-    _id: req.body._id
+  const studentProfile = new StudentProfile ({
+    student: req.body.id,
+    username: req.body.username,
+    subjectName: req.body.subjectName,
+    tutorialNumber: req.body.tutorialNumber,
+    subjectTopics: req.body.subjectTopics
   })
-    .then(async (data) => {
-      await new StudentProfile({
-        userId: data._id,
-        strengths: [req.body.strengths],
-        weaknesses: [req.body.weaknesses]
-      }).save(err => {
-        if (err) {
-          console.log("error", err);
-        }
-        console.log("added profile to studentProfiles collection");
-      });
-      return res.status(200).send({ message: "Complete" });
-    });
+
+  studentProfile.save((err, studentProfile) => {
+    if (err) {
+      res.status(500).send({ message: err });
+      return;
+    }
+  })
 }
 
 exports.getStudentUsername = (req, res) => {

@@ -27,6 +27,7 @@ import CreateSubjectEnrollment from "./components/createSubjectEnrollment";
 import ViewSubjectEnrollment from "./components/viewEnrollment";
 import EditPeerRequest from "./components/editPeerRequest";
 import EditSubject from "./components/editSubject";
+import ApproveSubjectEnrollment from "./components/approveSubjectEnrollment";
 import TutorialPage from "./components/tutorialPage";
 
 const App = () => {
@@ -80,6 +81,7 @@ const App = () => {
               <Button component={Link} to={"/subject/create/" + currentUser?.username}>Create New Subject</Button>
               <Button component={Link} to={"/subject/view/" + currentUser?.username}>View a Subject</Button>
               <Button component={Link} to={"/tutor/view"}>View Tutors</Button>
+              <Button component={Link} to={"/enrollment/viewrequest/" + currentUser?.username}> View Enrollment Requests</Button>
               </>
             )}
 
@@ -126,6 +128,7 @@ const App = () => {
             <Route path={"/request/create/" + currentUser?.username} component={CreatePeerRequest} />
             <Route path={"/enrollment/create/" + currentUser?.username} component={CreateSubjectEnrollment} />
             <Route path={"/enrollment/view/" + currentUser?.username} component={ViewSubjectEnrollment} />
+            <Route path={"/enrollment/viewrequest/" + currentUser?.username} component={ApproveSubjectEnrollment} />
             <Route path={"/subject/" + currentUser?.username + "/"} component={EditSubject} />
             <Route path={"/tutorial/" + currentUser?.id + "/"} component={TutorialPage} />
           </Switch>

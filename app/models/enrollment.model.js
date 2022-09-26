@@ -5,8 +5,10 @@ const Enrollment = mongoose.model(
     new mongoose.Schema({
         subjectName: String,
         username: String, 
-        strengths: [String],
-        weaknesses: [String],
+        subjectTopics: Array,
+        tutorialNumber: String,
+        status: String,
+        reason: String
     })
 );
 
