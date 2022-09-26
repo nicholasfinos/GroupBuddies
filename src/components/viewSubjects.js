@@ -37,7 +37,6 @@ class SubjectList extends Component {
         this.setState({
           subjects: response.data
         });
-        console.log(response.data);
       })
       .catch(e => {
         console.log(e);
@@ -89,6 +88,7 @@ class SubjectList extends Component {
 
     SubjectDataService.findTutorial(subject.subjectName)
       .then((response) => {
+        console.log(response);
         this.setState({ tutorials: response.data });
       })
       .catch((e) => {

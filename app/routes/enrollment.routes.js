@@ -18,6 +18,8 @@ module.exports = app => {
 
     router.put("/updateEnrollment", enrollment.updateEnrollment);
   
+    router.get(`/tutorialEnrollments`, enrollment.getTutorialEnrollments)
+
     app.use('/api/enrollment', router);
 };
   

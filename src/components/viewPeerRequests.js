@@ -89,6 +89,7 @@ class viewPeerRequests extends Component {
   }
 
   setActiveRequest(request, index) {
+    console.log(request);
     this.setState({
       request: request,
       currentIndex: index,
@@ -96,7 +97,6 @@ class viewPeerRequests extends Component {
       noPeers: request.noPeers,
       status: request.status,
     });
-    window.location.reload();
   }
   
 
@@ -113,7 +113,7 @@ class viewPeerRequests extends Component {
                 <h2>My Peer Request List</h2>
                 <div className="list-group">
                   {requests && requests.map((request, index) => (
-                    <ListItem selected={index === currentIndex} onClick={() => this.setActiveRequest(request, index)} divider button style={{ padding: "20px" }} key={index}> {"Name: " + request?.username + ", Subject: " + request?.subjectName} </ListItem>
+                    <ListItem selected={index === currentIndex} onClick={() => this.setActiveRequest(request, index)} divider button style={{ padding: "20px" }} key={index}> {"Subject: " + request?.subjectName + " | Tutorial Number: " + request?.tutorialNumber} </ListItem>
                   ))}
                 </div>
               </Grid>
@@ -124,7 +124,7 @@ class viewPeerRequests extends Component {
                     <div>
                       <h2>Peer Request</h2>
                       <div>
-                        <label><strong>Subject Name:</strong></label>{" "}{subjectName}
+                        <label><strong>Subject Name:</strong></label>{" "}{request.subjectName}
                       </div>
 
                       <br />
@@ -132,7 +132,7 @@ class viewPeerRequests extends Component {
                       <div className="list-group">
                         {yesPeers && yesPeers.map((yesPeer, index) => (
                           <ListItem selected={index === currentIndex} onClick={() => this.setActiveYesPeer(yesPeer, index)} divider button style={{ padding: "20px" }} key={index}>
-                            {"Name: " + yesPeer}
+                            {"Name: " + yesPeer.username}
                           </ListItem>
                         ))}
                       </div>
@@ -142,7 +142,7 @@ class viewPeerRequests extends Component {
                       <div className="list-group">
                         {noPeers && noPeers.map((noPeer, index) => (
                           <ListItem selected={index === currentIndex} onClick={() => this.setActiveNoPeer(noPeer, index)} divider button style={{ padding: "20px" }} key={index}>
-                            {"Name: " + noPeer}
+                            {"Name: " + noPeer.username}
                           </ListItem>
                         ))}
                       </div>
@@ -186,7 +186,7 @@ class viewPeerRequests extends Component {
                     <div className="list-group">
                       {yesPeers && yesPeers.map((yesPeer, index) => (
                         <ListItem selected={index === currentIndex} onClick={() => this.setActiveYesPeer(yesPeer, index)} divider button style={{ padding: "20px" }} key={index}>
-                          {"Name: " + yesPeer}
+                          {"Name: " + yesPeer.username}
                         </ListItem>
                       ))}
                     </div>
@@ -196,7 +196,7 @@ class viewPeerRequests extends Component {
                     <div className="list-group">
                       {noPeers && noPeers.map((noPeer, index) => (
                         <ListItem selected={index === currentIndex} onClick={() => this.setActiveNoPeer(noPeer, index)} divider button style={{ padding: "20px" }} key={index}>
-                          {"Name: " + noPeer}
+                          {"Name: " + noPeer.username}
                         </ListItem>
                       ))}
                     </div>

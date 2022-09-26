@@ -50,7 +50,7 @@ class TutorList extends Component {
       currentIndex: index
     });
 
-    SubjectDataService.findTutorialByTutor(tutor._id)
+    TutorDataService.getTutorials(tutor._id)
       .then((response) => {
         this.setState({ tutorials: response.data });
       })

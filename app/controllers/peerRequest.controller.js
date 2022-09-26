@@ -1,5 +1,6 @@
 const PeerRequest = require("../models/peerRequest.model");
 const Subject = require("../models/subject.model");
+const Tutorial = require("../models/tutorial.model")
 const User = require("../models/user.model");
 const Role = require("../models/role.model");
 
@@ -39,6 +40,7 @@ exports.createPeerRequests = (req, res) => {
   const peerRequest = new PeerRequest({
     username: req.params.username,
     subjectName: req.body.subjectName,
+    tutorialNumber: req.body.tutorialNumber,
     yesPeers: req.body.yesPeers,
     noPeers: req.body.noPeers,
     status: req.body.status,
@@ -72,15 +74,16 @@ exports.getPeers = (req, res) => {
 };
 
 exports.getAllSubjects = (req, res) => {
-  Subject.find()
-    .then((data) => {
-      res.send(data);
-    })
-    .catch((err) => {
-      res
-        .status(500)
-        .send({ message: "Error retrieving Subjects" });
-    })
+  Tutorial.find({
+    allStudents: {$elemMatch: {username: req.params.username}}
+  }).then((data) => {
+    res.send(data);
+  })
+  .catch((err) => {
+    res
+      .status(500)
+      .send({ message: "Error retrieving Tutorial" });
+  })
 };
 
 exports.getPeerRequest = (req, res) => {

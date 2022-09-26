@@ -17,3 +17,27 @@ exports.getStudentProfile = async (req, res) => {
     }
   })
 }
+
+exports.getStudentUsername = (req, res) => {
+  StudentProfile.find({username: req.body.username})
+  .then((data) => {
+    res.send(data);
+  })
+  .catch((err) => {
+    res
+      .status(500)
+      .send({ message: "Error retriving Student Profile" });
+  })
+}
+
+exports.getProfile = (req, res) => {
+  StudentProfile.findById(req.params.id)
+  .then((data) => {
+    res.send(data);
+  })
+  .catch((err) => {
+    res
+      .status(500)
+      .send({ message: "Error retriving Student Profile" });
+  })
+}

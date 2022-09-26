@@ -26,7 +26,7 @@ class CreatePeerRequest extends React.Component {
       noPeers: [],
       message: "",
       peers: [],
-      subjects: "",
+      tutroials: [],
       students: "",
       currentSubject: "",
       selectedSubject: false,
@@ -50,7 +50,7 @@ class CreatePeerRequest extends React.Component {
     PeerRequestDataService.getSubjects(username)
     .then((res) => 
       this.setState({
-        subjects: res.data
+        tutroials: res.data
       })
     )
   }
@@ -62,6 +62,7 @@ class CreatePeerRequest extends React.Component {
           username: this.state?.username,
           subjectName: this.state?.currentSubject.subjectName,
           yesPeers: this.state?.addedYesPeers,
+          tutorialNumber: this.state?.currentSubject.number,
           noPeers: this.state?.addedNoPeers,
         }
         
@@ -83,12 +84,12 @@ class CreatePeerRequest extends React.Component {
     }
   }
 
-  setActiveSelectSubject(subject, index) {
+  setActiveSelectSubject(tutorial, index) {
     this.setState({
-      currentSubject: subject,
+      currentSubject: tutorial,
       currentIndex: index,
       selectedSubject: true,
-      peers: subject.students,
+      peers: tutorial.allStudents,
     });
   }
 
@@ -170,7 +171,7 @@ class CreatePeerRequest extends React.Component {
       noPeers: [],
       message: "",
       peers: [],
-      subjects: "",
+      tutroials: [],
       students: "",
       currentIndex: -1,
       currentSubject: "",
@@ -182,7 +183,7 @@ class CreatePeerRequest extends React.Component {
   }
 
   render() {
-    const { subjects, peers, currentNoPeerIndex, addedNoPeers, addedYesPeers, currentYesPeerIndex, currentSubject, currentIndex} = this.state;
+    const { tutroials, peers, currentNoPeerIndex, addedNoPeers, addedYesPeers, currentYesPeerIndex, currentSubject, currentIndex} = this.state;
     return (
       <div style={{ textAlign: "center", maxWidth: '90%', fontFamily: "Times New Roman", marginLeft: "110px" }} className="form">
         <h3>Create a Peer Request</h3>
@@ -196,9 +197,9 @@ class CreatePeerRequest extends React.Component {
             {!this.state.selectedSubject ? (
               <div>
                 <label htmlFor="subject-name" style={{ marginLeft: '180px' }}><i>Please select a Subject to create a peer request for:</i></label>
-                {subjects && subjects.map((subject, index) => (
-                  <ListItem style={{ padding: "20px", marginLeft: "15px", maxWidth: "400px" }} selected={index === currentIndex} onClick={() => this.setActiveSelectSubject(subject, index)} divider button key={index}>
-                    {subject.subjectName}
+                {tutroials && tutroials.map((tutorial, index) => (
+                  <ListItem style={{ padding: "20px", marginLeft: "15px", maxWidth: "400px" }} selected={index === currentIndex} onClick={() => this.setActiveSelectSubject(tutorial, index)} divider button key={index}>
+                    {"Subject Name: " + tutorial.subjectName + " | Tutorial Number: " + tutorial.number}
                   </ListItem>
                 ))}
               </div>
@@ -220,7 +221,7 @@ class CreatePeerRequest extends React.Component {
                         <div style={{ flexDirection: "column", minWidth: "400px" }}>
                           {peers && peers.map((peer, index) => (
                             <ListItem style={{ padding: "20px", marginLeft: "15px", maxWidth: "400px" }} selected={index === currentYesPeerIndex} onClick={() => this.addYesPeer(peer, index)} divider button key={index}>
-                              {peer}
+                              {peer.username}
                             </ListItem>
                           ))}
                         </div>
@@ -233,7 +234,7 @@ class CreatePeerRequest extends React.Component {
                         <div style={{ flexDirection: "column", minWidth: "400px" }}>
                           {peers && peers.map((peer, index) => (
                             <ListItem style={{ padding: "20px", marginLeft: "15px", maxWidth: "400px" }} selected={index === currentNoPeerIndex} onClick={() => this.addNoPeer(peer, index)} divider button key={index}>
-                              {peer}
+                              {peer.username}
                             </ListItem>
                           ))}
                         </div>
@@ -246,7 +247,7 @@ class CreatePeerRequest extends React.Component {
                     <div style={{ paddingLeft: "50px" }}>
                       {addedYesPeers.map((addedYesPeer, index) => (
                         <ListItem style={{ padding: "20px", minWidth: "300px" }} selected={index === currentYesPeerIndex} onClick={() => this.deleteYesPeer(index)} divider button key={index}>
-                          {" "}{addedYesPeer}
+                          {" "}{addedYesPeer.username}
                         </ListItem>
                       ))}
                     </div>
@@ -256,7 +257,7 @@ class CreatePeerRequest extends React.Component {
                     <div style={{ paddingLeft: "50px", marginTop: "300px"}}>
                       {addedNoPeers.map((addedNoPeer, index) => (
                         <ListItem style={{ padding: "20px", minWidth: "300px" }} selected={index === currentNoPeerIndex} onClick={() => this.deleteNoPeer(index)} divider button key={index}>
-                          {" "}{addedNoPeer}
+                          {" "}{addedNoPeer.username}
                         </ListItem>
                       ))}
                     </div>

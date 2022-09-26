@@ -82,6 +82,17 @@ exports.viewEnrollmentBySubjectName = (req, res) => {
     })
 }
 
+exports.getTutorialEnrollments = (req, res) => {
+  const enrollments = Enrollment.find()
+    .then((data) => {
+      res.send(data);
+    }).catch((err) => {
+      res
+        .status(500)
+        .send({ message: "Error retreiving tutorialEnrollments" });
+    });
+}
+
 exports.updateEnrollment = (req, res) => {
 
   Enrollment.updateOne(
