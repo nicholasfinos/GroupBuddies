@@ -4,7 +4,7 @@ const Tutorial = require("../models/tutorial.model");
 const Group = require("../models/group.model");
 const StudentProfile = require("../models/studentProfile.model");
 const Subject = require("../models/subject.model");
-const ArrayList = require("arraylist");
+// const ArrayList = require("arraylist");
 
 exports.findAllTutors = (req, res) => {
   Role.find({ name: "tutor" })
