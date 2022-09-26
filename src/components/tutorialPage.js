@@ -91,9 +91,6 @@ class TutorialPage extends React.Component {
           tutorial: response.data,
           groupList: response.data.groups
         })
-
-
-        // this.setCurrentGroup(response.data.groups[response.data.groups.length - 1]);
       })
       .catch(e => {
         console.log(e);
@@ -128,7 +125,6 @@ class TutorialPage extends React.Component {
       }
       TutorDataService.removeGroup(data)
         .then(response => {
-          //How do you refresh page
           this.setState({
             groupList: response.data.groups,
             tutorial: response.data,
@@ -167,24 +163,29 @@ class TutorialPage extends React.Component {
   }
 
   autoSort() {
-    SubjectDataService.findSubjectByName(this.state.tutorial.subjectName)
-    .then(response => {
-      var data = {
-        studentList: this.state.studentList,
-        tutorial: this.state.tutorial,
-        groupSize: this.state.groupSize,
-        subject: response.data[0]
-      }
-      TutorDataService.autoSort(this.state.tutorial._id, data)
+    if (this.state.groupSize >= 1) {
+      SubjectDataService.findSubjectByName(this.state.tutorial.subjectName)
         .then(response => {
+          var data = {
+            studentList: this.state.studentList,
+            tutorial: this.state.tutorial,
+            groupSize: this.state.groupSize,
+            subject: response.data[0]
+          }
+          TutorDataService.autoSort(this.state.tutorial._id, data)
+            .then(response => {
+            })
+            .catch(e => {
+              console.log(e);
+            });
         })
         .catch(e => {
           console.log(e);
         });
-    })
-    .catch(e => {
-      console.log(e);
-    });
+    }
+    else {
+      console.log("Group Size value must be greater then 1");
+    }
   }
 
   render() {
@@ -241,7 +242,7 @@ class TutorialPage extends React.Component {
             <label>Student Info</label>
             <div className="box">
               <ListItem>
-                {currentStudent && ("Name: " + currentStudent.username +  " | Subject Topics: " + currentStudent.subjectTopics)}
+                {currentStudent && ("Name: " + currentStudent.username + " | Subject Topics: " + currentStudent.subjectTopics)}
               </ListItem>
             </div>
             <button className="button" onClick={() => { this.addStudentGroup() }}>Add to Group</button>
