@@ -23,6 +23,7 @@ const PeerRequest = require("./app/models/peerRequest.model");
 const StudentProfile = require("./app/models/studentProfile.model");
 const { Promise } = require("mongodb");
 const Role = db.role;
+const students = [];
 
 db.mongoose
   .connect(`mongodb://127.0.0.1:27017/GroupBuddies`, {
@@ -717,12 +718,24 @@ async function initial() {
     }
   })
 
-  //settingUpSubjects();
-  // settingUpProfile();
-  addStudentsToSubject();
+  /*
+  -------------------
+  //ALGORITHM TESTING
+  -------------------
+  1. Uncomment "settingUpProfiles();" and run node server.js
+  2. Comment "settingUpProfiles"
+  3. Create subject with details matching profiles created
+  4. Uncomment "addStudentsToSubject();" and run node server.js
+  5. Comment "addStudentsToSubject();"
+  */
+  
+
+  // settingUpSubjects();
+  // settingUpProfiles();
+  // addStudentsToSubject();
 }
 
-async function settingUpProfile() {
+async function settingUpProfiles() {
   StudentProfile.create({
     student: "6322e72c188f6e93043d5c76",
     username: "student",
@@ -797,174 +810,33 @@ async function settingUpProfile() {
 }
 
 async function addStudentsToSubject() {
-  StudentProfile.find({ username: "jeromeSario" })
-    .then((x) => {
-      var data = {
-        _id: x[0].id,
-        username: x[0].username,
-        subjectTopics: x[0].subjectTopics        
-      };
-      Tutorial.updateOne(
-        { subjectName: "Yeran Test Group" },
-        {
-          $push: {
-            UnselectedStudents: data,
-            allStudents: data
+  students.push("student", "graceBilliris", "yeran", "nicholasFinos", "ashishChadha", "lukaRyan", "lachlanSinclair")
+  for (let i=0; i <students.length; i++) {
+    const studentUsername = students[i];
+    StudentProfile.find({ username: studentUsername })
+      .then((x) => {
+        var data = {
+          _id: x[0].id,
+          username: x[0].username,
+          subjectTopics: x[0].subjectTopics        
+        };
+        Tutorial.updateOne(
+          { subjectName: "Yeran Test Group" },
+          {
+            $push: {
+              UnselectedStudents: data,
+              allStudents: data
+            }
           }
-        }
-      )
-        .then((h) => {
-          console.log(h);
-        })
-    })
-
-    StudentProfile.find({ username: "yeran" })
-    .then((x) => {
-      var data = {
-        _id: x[0].id,
-        username: x[0].username,
-        subjectTopics: x[0].subjectTopics        
-      };
-      Tutorial.updateOne(
-        { subjectName: "Yeran Test Group" },
-        {
-          $push: {
-            UnselectedStudents: data,
-            allStudents: data
-          }
-        }
-      )
-        .then((h) => {
-          console.log(h);
-        })
-    })
-
-    StudentProfile.find({ username: "nicholasFinos" })
-    .then((x) => {
-      var data = {
-        _id: x[0].id,
-        username: x[0].username,
-        subjectTopics: x[0].subjectTopics        
-      };
-      Tutorial.updateOne(
-        { subjectName: "Yeran Test Group" },
-        {
-          $push: {
-            UnselectedStudents: data,
-            allStudents: data
-          }
-        }
-      )
-        .then((h) => {
-          console.log(h);
-        })
-    })
-
-    StudentProfile.find({ username: "ashishChadha" })
-    .then((x) => {
-      var data = {
-        _id: x[0].id,
-        username: x[0].username,
-        subjectTopics: x[0].subjectTopics        
-      };
-      Tutorial.updateOne(
-        { subjectName: "Yeran Test Group" },
-        {
-          $push: {
-            UnselectedStudents: data,
-            allStudents: data
-          }
-        }
-      )
-        .then((h) => {
-          console.log(h);
-        })
-    })
-
-    StudentProfile.find({ username: "graceBilliris" })
-    .then((x) => {
-      var data = {
-        _id: x[0].id,
-        username: x[0].username,
-        subjectTopics: x[0].subjectTopics        
-      };
-      Tutorial.updateOne(
-        { subjectName: "Yeran Test Group" },
-        {
-          $push: {
-            UnselectedStudents: data,
-            allStudents: data
-          }
-        }
-      )
-        .then((h) => {
-          console.log(h);
-        })
-    })
-
-    StudentProfile.find({ username: "student" })
-    .then((x) => {
-      var data = {
-        _id: x[0].id,
-        username: x[0].username,
-        subjectTopics: x[0].subjectTopics        
-      };
-      Tutorial.updateOne(
-        { subjectName: "Yeran Test Group" },
-        {
-          $push: {
-            UnselectedStudents: data,
-            allStudents: data
-          }
-        }
-      )
-        .then((h) => {
-          console.log(h);
-        })
-    })
-
-    StudentProfile.find({ username: "lukaRyan" })
-    .then((x) => {
-      var data = {
-        _id: x[0].id,
-        username: x[0].username,
-        subjectTopics: x[0].subjectTopics        
-      };
-      Tutorial.updateOne(
-        { subjectName: "Yeran Test Group" },
-        {
-          $push: {
-            UnselectedStudents: data,
-            allStudents: data
-          }
-        }
-      )
-        .then((h) => {
-          console.log(h);
-        })
-    })
-
-    StudentProfile.find({ username: "lachlanSinclair" })
-    .then((x) => {
-      var data = {
-        _id: x[0].id,
-        username: x[0].username,
-        subjectTopics: x[0].subjectTopics        
-      };
-      Tutorial.updateOne(
-        { subjectName: "Yeran Test Group" },
-        {
-          $push: {
-            UnselectedStudents: data,
-            allStudents: data
-          }
-        }
-      )
-        .then((h) => {
-          console.log(h);
-        })
-    })
+        )
+          .then((h) => {
+            console.log(h);
+          })
+      })
+    }  
 }
+
+
 
 async function settingUpSubjects() {
   Subject.create({
