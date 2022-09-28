@@ -813,6 +813,28 @@ async function initial() {
     //   subjectTopics: ["yeran"],
     // })
 
+    StudentProfile.find({ username: "lachlanSinclair" })
+      .then((x) => {
+        var data = {
+          _id: x[0].id,
+          username: x[0].username,
+          subjectTopics: x[0].subjectTopics        
+        };
+        Tutorial.updateOne(
+          { subjectName: "Yeran Test Group" },
+          {
+            $push: {
+              UnselectedStudents: data,
+              allStudents: data
+            }
+          }
+        )
+          .then((h) => {
+            console.log(h);
+          })
+      })
+    }
+
 
 
 async function settingUpSubjects() {
