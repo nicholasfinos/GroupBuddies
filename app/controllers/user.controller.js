@@ -21,14 +21,14 @@ exports.getUser = (req, res) => {
   User.find({
     username: req.params.username
   })
-  .then((data) => {
-    res.send(data);
-  })
-  .catch((err) => {
-    res
-      .status(500)
-      .send({ message: "Error retreiving User related to " + req.params.username });
-  })
+    .then((data) => {
+      res.send(data);
+    })
+    .catch((err) => {
+      res
+        .status(500)
+        .send({ message: "Error retreiving User related to " + req.params.username });
+    })
 }
 
 exports.updateStudent = (req, res) => {
@@ -60,4 +60,12 @@ exports.updateStudent = (req, res) => {
         preferredName: user.preferredName,
       });
     })
+}
+
+exports.createStudyGroup = (req, res) => {
+  console.log(req.body);
+  // check the user is a student
+  // check all the details are correct
+  // create the study group
+  return res.status(200).send({ message: "works" })
 }
