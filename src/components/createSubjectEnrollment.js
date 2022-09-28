@@ -176,7 +176,7 @@ class CreateSubjectEnrollment extends React.Component {
         <h3 style={{textAlign:'center'}}>Create a Subject Enrollment</h3>
       <Paper bgcolor sx={{ borderColor: 'black' }} elevation={10} style={paperStyling}>
         <form>
-      <div>
+      <div style={{background:"white"}}>
         
         {this.state.submitted ? (
           <div>

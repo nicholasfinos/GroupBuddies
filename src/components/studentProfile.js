@@ -5,7 +5,7 @@ import { Grid, Paper, TextField } from "@material-ui/core";
 import { Typography } from "@material-ui/core";
 import { Button } from "@material-ui/core";
 
-const paperStyling = { padding: 40, height: '80vh ', width: '65%', margin: '20px auto', background: '#fff0e7', borderRadius: 20/*border: '2px solid'*/ }
+const paperStyling = { padding: 40, height: '100%', width: '65%', margin: '20px auto', background: '#fff0e7', borderRadius: 20/*border: '2px solid'*/ }
 const btnstyle = { margin: '40px 0', borderRadius: 10, width: '75%', align:'center'}
 const typ1 = { fontWeight: 600, fontFamily: "Arial" }
 
