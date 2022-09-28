@@ -174,6 +174,7 @@ class TutorialPage extends React.Component {
           }
           TutorDataService.autoSort(this.state.tutorial._id, data)
             .then(response => {
+              console.log(response)
             })
             .catch(e => {
               console.log(e);
