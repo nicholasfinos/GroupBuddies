@@ -466,6 +466,7 @@ exports.autoSort = (req, res) => {
     }
     k = start;
   }
+  console.log(groupList);
 
   for (let i = 0; i < groupList.length; i++) {
 
