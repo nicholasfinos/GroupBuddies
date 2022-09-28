@@ -3,7 +3,9 @@ import { ListItem } from "@material-ui/core";
 import TutorDataService from "../services/tutor-service";
 import StudentProfileDataServcie from "../services/studentProfile-service";
 import SubjectDataService from "../services/subject-service";
+import { Link, Switch, Route } from "react-router-dom";
 import styles from "./tutorialPage.css";
+import { Button } from "@material-ui/core";
 import viewTutorial from "../components/viewTutorial";
 
 class TutorialPage extends React.Component {
@@ -20,7 +22,8 @@ class TutorialPage extends React.Component {
       groupMembers: [],
       tutorial: null,
       currentIndex: null,
-      groupSize: null
+      groupSize: null,
+      message: ""
     };
   }
 
@@ -159,6 +162,11 @@ class TutorialPage extends React.Component {
   }
 
   onChangeGroupSize(e) {
+    if (parseInt(e.target.value) < 1){
+      this.setState({message: "Group Size cannot be less than 1!"})
+    } else {
+      this.setState({message: ""})
+    }
     this.setState({ groupSize: e.target.value });
   }
 
@@ -203,12 +211,15 @@ class TutorialPage extends React.Component {
   }
 
   render() {
-    const { studentList, groupList, currentStudent, currentGroup, groupMembers, currentIndex } = this.state;
+    const { studentList, groupList, currentStudent, currentGroup, groupMembers, currentIndex, message, tutorial } = this.state;
     return (
       <div className="layout">
         <div className="header">
           <label style={{ margin: "0px", fontSize: "36px" }}>Tutorial 1</label>
-          <button className="button" style={{ width: "100px", marginTop: "0px" }}>Return</button>
+          <Link className="button" style={{ width: "100px", marginTop: "0px", WebkitTextFillColor: "black" }} to={"/tutor/viewTutorial/" + tutorial.tutor }>Return</Link>
+          <Switch>
+            <Route path={"/tutor/viewTutorial/" + tutorial.tutor} component={viewTutorial} />
+          </Switch>
         </div>
         <div className="main">
           <div className="column">
@@ -225,6 +236,7 @@ class TutorialPage extends React.Component {
             <div>
               <label htmlFor="groupSize" >Number of Groups to Create: </label>
               <input className="form-control" style={{ maxWidth: '500px' }} type="text" name="groupSize" onChange={this.onChangeGroupSize} />
+              { message ? (<div>{message}</div>): (<div></div>)}
             </div>
             <button className="button" onClick={() => { this.autoSort() }}>Automatic Sort</button>
           </div>
