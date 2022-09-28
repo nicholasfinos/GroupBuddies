@@ -17,7 +17,7 @@ export default class StudentProfile extends React.Component {
       username: "",
       preferredName: "",
       year: "",
-      course: "",
+      course: ""
     };
   }
 
@@ -51,9 +51,9 @@ export default class StudentProfile extends React.Component {
       year: this.state.year,
       course: this.state.course,
       preferredName: this.state.preferredName,
-      studentName: this.state.username,
+      studentName: this.state.username
     }
-    UserService.updateStudent(data);
+    UserService.updateStudent(data.username, data);
   }
 
   onSubmit = () => {
