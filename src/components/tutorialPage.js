@@ -179,10 +179,23 @@ class TutorialPage extends React.Component {
             .catch(e => {
               console.log(e);
             });
+
+          const URL = String(this.props.location.pathname);
+          const _id = String(URL.substring(URL.lastIndexOf("/") + 1, URL.length));
+          TutorDataService.getTutorial(_id)
+            .then(response => {
+              this.setState({
+                tutorial: response.data,
+                studentList: response.data.UnselectedStudents,
+                groupList: response.data.groups,
+                groupSize: null
+              });
+            })
         })
         .catch(e => {
           console.log(e);
         });
+
     }
     else {
       console.log("Group Size value must be greater then 1");
@@ -249,7 +262,7 @@ class TutorialPage extends React.Component {
             <button className="button" onClick={() => { this.addStudentGroup() }}>Add to Group</button>
           </div>
           <div className="column">
-            <label>Students</label>
+            <label>Ungrouped Students</label>
             <div className="box">
               {studentList && studentList.map((student, index) => (
                 <ListItem style={{ padding: "20px", marginLeft: "15px", maxWidth: "200px" }} selected={index === currentIndex} onClick={() => this.setCurrentStudent(student)} divider button key={index}>

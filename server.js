@@ -179,7 +179,6 @@ async function initial() {
           })
       });
 
-
       new Role({
         name: "subjectcoordinator"
       }).save(err => {
@@ -746,127 +745,102 @@ async function initial() {
             });
           });
       })
+
+      settingUpProfile();
+
+      /*
+      -------------------
+      //ALGORITHM TESTING
+      -------------------
+      1. Uncomment "settingUpProfiles();" and run node server.js
+      2. Comment "settingUpProfiles"
+      3. Create subject with details matching profiles created
+       - Subject name - Yeran Test Group
+       - Tutorial Number - 1
+       - Topics: test,why,yeran
+       - Tutor - Tutor
+      Make sure to pick these option, if you want to do something else then make sure to edit both function below 
+      
+      4. Uncomment "addStudentsToSubject();" and run node server.js
+      5. Comment "addStudentsToSubject();"
+      */
     }
-  })
-
-  /*
-  -------------------
-  //ALGORITHM TESTING
-  -------------------
-  1. Uncomment "settingUpProfiles();" and run node server.js
-  2. Comment "settingUpProfiles"
-  3. Create subject with details matching profiles created
-   - Subject name - Yeran Test Group
-   - Tutorial Number - 1
-   - Topics: test,why,yeran
-   - Tutor - Tutor
-  Make sure to pick these option, if you want to do something else then make sure to edit both function below 
-  
-  4. Uncomment "addStudentsToSubject();" and run node server.js
-  5. Comment "addStudentsToSubject();"
-  */
-
-    StudentProfile.find({ username: "lachlanSinclair" })
-      .then((x) => {
-        var data = {
-          _id: x[0].id,
-          username: x[0].username,
-          subjectTopics: x[0].subjectTopics        
-        };
-        Tutorial.updateOne(
-          { subjectName: "Yeran Test Group" },
-          {
-            $push: {
-              UnselectedStudents: data,
-              allStudents: data
-            }
-          }
-        )
-          .then((h) => {
-            console.log(h);
-          })
-      })
-    }
-
-
-  // settingUpSubjects();
-  settingUpProfile();
   }
+  )
+  
+  async function settingUpProfile() {
+    StudentProfile.create({
+      student: "6322e72c188f6e93043d5c76",
+      username: "student",
+      subjectName: "Yeran Test Group",
+      tutorialNumber: "1",
+      groupNumber: "",
+      subjectTopics: ["test"],
+    })
 
-async function settingUpProfile() {
-  // StudentProfile.create({
-  //   student: "6322e72c188f6e93043d5c76",
-  //   username: "student",
-  //   subjectName: "Yeran Test Group",
-  //   tutorialNumber: "1",
-  //   groupNumber: "",
-  //   subjectTopics: ["test"],
-  // })
+    StudentProfile.create({
+      student: "6322e72c188f6e93043d5c77",
+      username: "graceBilliris",
+      subjectName: "Yeran Test Group",
+      tutorialNumber: "1",
+      groupNumber: "",
+      subjectTopics: ["yeran"],
+    })
 
-  // StudentProfile.create({
-  //   student: "6322e72c188f6e93043d5c77",
-  //   username: "graceBilliris",
-  //   subjectName: "Yeran Test Group",
-  //   tutorialNumber: "1",
-  //   groupNumber: "",
-  //   subjectTopics: ["yeran"],
-  // })
+    StudentProfile.create({
+      student: "6322e72c188f6e93043d5c78",
+      username: "yeran",
+      subjectName: "Yeran Test Group",
+      tutorialNumber: "1",
+      groupNumber: "",
+      subjectTopics: ["why"],
+    })
 
-  // StudentProfile.create({
-  //   student: "6322e72c188f6e93043d5c78",
-  //   username: "yeran",
-  //   subjectName: "Yeran Test Group",
-  //   tutorialNumber: "1",
-  //   groupNumber: "",
-  //   subjectTopics: ["why"],
-  // })
+    StudentProfile.create({
+      student: "6322e72c188f6e93043d5c79",
+      username: "nicholasFinos",
+      subjectName: "Yeran Test Group",
+      tutorialNumber: "1",
+      groupNumber: "",
+      subjectTopics: ["test"],
+    })
 
-  // StudentProfile.create({
-  //   student: "6322e72c188f6e93043d5c79",
-  //   username: "nicholasFinos",
-  //   subjectName: "Yeran Test Group",
-  //   tutorialNumber: "1",
-  //   groupNumber: "",
-  //   subjectTopics: ["test"],
-  // })
+    StudentProfile.create({
+      student: "6322e72c188f6e93043d5c7a",
+      username: "jeromeSario",
+      subjectName: "Yeran Test Group",
+      tutorialNumber: "1",
+      groupNumber: "",
+      subjectTopics: ["yeran"],
+    })
 
-  // StudentProfile.create({
-  //   student: "6322e72c188f6e93043d5c7a",
-  //   username: "jeromeSario",
-  //   subjectName: "Yeran Test Group",
-  //   tutorialNumber: "1",
-  //   groupNumber: "",
-  //   subjectTopics: ["yeran"],
-  // })
+    StudentProfile.create({
+      student: "6322e72c188f6e93043d5c7b",
+      username: "ashishChadha",
+      subjectName: "Yeran Test Group",
+      tutorialNumber: "1",
+      groupNumber: "",
+      subjectTopics: ["why"],
+    })
 
-  // StudentProfile.create({
-  //   student: "6322e72c188f6e93043d5c7b",
-  //   username: "ashishChadha",
-  //   subjectName: "Yeran Test Group",
-  //   tutorialNumber: "1",
-  //   groupNumber: "",
-  //   subjectTopics: ["why"],
-  // })
+    StudentProfile.create({
+      student: "6322e72c188f6e93043d5c7c",
+      username: "lukaRyan",
+      subjectName: "Yeran Test Group",
+      tutorialNumber: "1",
+      groupNumber: "",
+      subjectTopics: ["test"],
+    })
 
-  // StudentProfile.create({
-  //   student: "6322e72c188f6e93043d5c7c",
-  //   username: "lukaRyan",
-  //   subjectName: "Yeran Test Group",
-  //   tutorialNumber: "1",
-  //   groupNumber: "",
-  //   subjectTopics: ["test"],
-  // })
+    StudentProfile.create({
+      student: "6322e72c188f6e93043d5c7d",
+      username: "lachlanSinclair",
+      subjectName: "Yeran Test Group",
+      tutorialNumber: "1",
+      groupNumber: "",
+      subjectTopics: ["yeran"],
+    })
 
-  // StudentProfile.create({
-  //   student: "6322e72c188f6e93043d5c7d",
-  //   username: "lachlanSinclair",
-  //   subjectName: "Yeran Test Group",
-  //   tutorialNumber: "1",
-  //   groupNumber: "",
-  //   subjectTopics: ["yeran"],
-  // })
-
-  // async function settingUpSubjects() {
     Subject.create({
       subjectName: "Mathematical Modelling 1",
       subjectCoordinator: null,
@@ -1018,3 +992,175 @@ async function settingUpProfile() {
     })
     console.log('creating Yeran Test Group - the subject')
   }
+  // addingToTutorials();
+}
+
+async function addingToTutorials() {
+  StudentProfile.find({ username: "lachlanSinclair" })
+    .then((x) => {
+      var data = {
+        _id: x[0]?.id,
+        username: x[0]?.username,
+        subjectTopics: x[0]?.subjectTopics        
+      };
+      Tutorial.updateOne(
+        { subjectName: "Yeran Test Group" },
+        {
+          $push: {
+            UnselectedStudents: data,
+            allStudents: data
+          }
+        }
+      )
+        .then((h) => {
+          console.log(h);
+        })
+    })
+
+  StudentProfile.find({ username: "graceBilliris" })
+  .then((x) => {
+    var data = {
+      _id: x[0]?.id,
+      username: x[0]?.username,
+      subjectTopics: x[0]?.subjectTopics        
+    };
+    Tutorial.updateOne(
+      { subjectName: "Yeran Test Group" },
+      {
+        $push: {
+          UnselectedStudents: data,
+          allStudents: data
+        }
+      }
+    )
+      .then((h) => {
+        console.log(h);
+      })
+  })
+
+  StudentProfile.find({ username: "yeran" })
+    .then((x) => {
+      var data = {
+        _id: x[0]?.id,
+        username: x[0]?.username,
+        subjectTopics: x[0]?.subjectTopics        
+      };
+      Tutorial.updateOne(
+        { subjectName: "Yeran Test Group" },
+        {
+          $push: {
+            UnselectedStudents: data,
+            allStudents: data
+          }
+        }
+      )
+        .then((h) => {
+          console.log(h);
+        })
+    })
+
+    StudentProfile.find({ username: "ashishChadha" })
+    .then((x) => {
+      var data = {
+        _id: x[0]?.id,
+        username: x[0]?.username,
+        subjectTopics: x[0]?.subjectTopics        
+      };
+      Tutorial.updateOne(
+        { subjectName: "Yeran Test Group" },
+        {
+          $push: {
+            UnselectedStudents: data,
+            allStudents: data
+          }
+        }
+      )
+        .then((h) => {
+          console.log(h);
+        })
+    })
+
+    StudentProfile.find({ username: "jeromeSario" })
+    .then((x) => {
+      var data = {
+        _id: x[0]?.id,
+        username: x[0]?.username,
+        subjectTopics: x[0]?.subjectTopics        
+      };
+      Tutorial.updateOne(
+        { subjectName: "Yeran Test Group" },
+        {
+          $push: {
+            UnselectedStudents: data,
+            allStudents: data
+          }
+        }
+      )
+        .then((h) => {
+          console.log(h);
+        })
+    })
+
+    StudentProfile.find({ username: "lukaRyan" })
+    .then((x) => {
+      var data = {
+        _id: x[0]?.id,
+        username: x[0]?.username,
+        subjectTopics: x[0]?.subjectTopics        
+      };
+      Tutorial.updateOne(
+        { subjectName: "Yeran Test Group" },
+        {
+          $push: {
+            UnselectedStudents: data,
+            allStudents: data
+          }
+        }
+      )
+        .then((h) => {
+          console.log(h);
+        })
+    })
+
+    StudentProfile.find({ username: "nicholasFinos" })
+    .then((x) => {
+      var data = {
+        _id: x[0]?.id,
+        username: x[0]?.username,
+        subjectTopics: x[0]?.subjectTopics        
+      };
+      Tutorial.updateOne(
+        { subjectName: "Yeran Test Group" },
+        {
+          $push: {
+            UnselectedStudents: data,
+            allStudents: data
+          }
+        }
+      )
+        .then((h) => {
+          console.log(h);
+        })
+    })
+
+    StudentProfile.find({ username: "student" })
+    .then((x) => {
+      var data = {
+        _id: x[0]?.id,
+        username: x[0]?.username,
+        subjectTopics: x[0]?.subjectTopics        
+      };
+      Tutorial.updateOne(
+        { subjectName: "Yeran Test Group" },
+        {
+          $push: {
+            UnselectedStudents: data,
+            allStudents: data
+          }
+        }
+      )
+        .then((h) => {
+          console.log(h);
+        })
+    })
+}
