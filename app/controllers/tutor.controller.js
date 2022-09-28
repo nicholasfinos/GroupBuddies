@@ -285,10 +285,10 @@ exports.autoSort = (req, res) => {
           topicList[j].push(studentList[i]);
         }
         else if (x === 1) {
-          topicList[j].splcie(((topicList[j].length - 1) / 2), 0, studentList[i]);
+          topicList[j].splice(((topicList[j].length - 1) / 2), 0, studentList[i]);
         }
         else {
-          topicList[j].splcie(topicList[j].length - 1, 0, studentList[i])
+          topicList[j].splice(topicList[j].length - 1, 0, studentList[i])
           break;
         }
         x++;
