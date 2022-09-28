@@ -285,10 +285,10 @@ exports.autoSort = (req, res) => {
           topicList[j].push(studentList[i]);
         }
         else if (x === 1) {
-          topicList[j].splice(((topicList[j].length - 1) / 2), 0, studentList[i]);
+          topicList[j].splcie(((topicList[j].length - 1) / 2), 0, studentList[i]);
         }
         else {
-          topicList[j].splice(topicList[j].length - 1, 0, studentList[i])
+          topicList[j].splcie(topicList[j].length - 1, 0, studentList[i])
           break;
         }
         x++;
@@ -420,7 +420,7 @@ exports.autoSort = (req, res) => {
   else {
     while (studentList.size !== 0) {
       for (let i = 0; i < groupID.size; i++) {
-        var student = topicList[k][0];
+        var student = topicList[k];
 
         //Add Student Group
         console.log("2nd");
@@ -428,21 +428,13 @@ exports.autoSort = (req, res) => {
         console.log("GroupList", groupList)
 
         //Remove Student and Topic
-        StudentProfile.updateOne(
-          {
-            username: student.username
-          },
-          { $set: { groupNumber: groupID[i].groupNumber } }
-        ).then((u) => console.log(u));
-
-        //Remove Student and Topic
         var z = 0;
         while (z < topicList.length) {
           var y = 0;
           while (y < topicList[z].length) {
             if (topicList[z][y].username === student.username) {
-              // console.log("3rd");
-              //console.log("List: ", z + " Pos: ", y);
+              console.log("3rd");
+              console.log("List: ", z + " Pos: ", y);
               topicList[z].splice(y, 1);
             }
             else {
@@ -450,8 +442,8 @@ exports.autoSort = (req, res) => {
             }
           }
           if (topicList[z].length === 0) {
-            //console.log("4th")
-            //console.log("Remove List", z);
+            console.log("4th")
+            console.log("Remove List", z);
             topicList.splice(z, 1);
           }
           else {
@@ -474,6 +466,7 @@ exports.autoSort = (req, res) => {
     }
     k = start;
   }
+  console.log(groupList);
 
   for (let i = 0; i < groupList.length; i++) {
 
