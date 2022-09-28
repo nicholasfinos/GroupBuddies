@@ -417,7 +417,7 @@ exports.autoSort = (req, res) => {
     }
   }
   else {
-    while (studentList.length !== 0) {
+    while (topicList.length !== 0) {
       for (let i = 0; i < groupID.length; i++) {
         if (topicList.length === 0) {
           break;
