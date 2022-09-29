@@ -3,6 +3,12 @@ import { Button, Input } from "@material-ui/core";
 import { Grid, ListItem } from "@material-ui/core";
 import EnrollmentDataService from "../services/enrollment-service";
 import SubjectDataService from "../services/subject-service";
+import { Paper} from "@material-ui/core";
+import "./studentProfile.css";
+
+const paperStyling = { padding: 40, height: '100%', width: '100%', margin: '20px auto', background: '#fff0e7', borderRadius: 20/*border: '2px solid'*/ }
+const subjectScrollable = {overflowY: 'auto', overflowX:'hidden', maxHeight:'450px', marginLeft:'30%', width:'400px'}
+const skillsScrollable = {overflowY: 'auto', overflowX:'hidden', maxHeight:'400px', width:'100%', flexDirection: "column", minWidth: "400px", maxWidth:"500px", padding:"20px"}  
 
 class CreateSubjectEnrollment extends React.Component {
   constructor(props) {
@@ -174,26 +180,34 @@ class CreateSubjectEnrollment extends React.Component {
   render() {
     const { topics, currentIndex, addedTopics, currentSubject, subjects, tutorials, addedTutorials, } = this.state;
     return (
-      <div style={{ textAlign: "center", maxWidth: '90%', fontFamily: "Times New Roman", marginLeft: "110px" }} className="form">
-        <h3>Create a Subject Enrollment</h3>
+      <div>
+        <form>
+        <h3 style={{textAlign:"center"}}>Create a Subject Enrollment</h3>
+        <Paper bgcolor sx={{ borderColor: 'black' }} elevation={10} style={paperStyling}>
+        
         {this.state.submitted ? (
           <div>
             <p><i>You created a subject enrollment successfully!</i></p>
             <Button size="small" variant="contained" onClick={this.newEnrollment}>{" "}Create a Subject Enrollment{" "}</Button>
           </div>
         ) : (
-          <div className="card" style={{ maxWidth: "100%", marginLeft: "0px", paddingLeft: "0px", paddingRight: "120px" }}>
+          <Grid>
             {!this.state.selectedSubject ? (
-              <div>
-                <label htmlFor="subject-name" style={{ marginLeft: '210px' }}><i>Please select a Subject to enroll into:</i></label>
-                {subjects && subjects.map((subject, index) => (
-                  <ListItem style={{ padding: "20px", marginLeft: "15px", maxWidth: "400px" }} selected={index === currentIndex} onClick={() => this.setActiveAddSubject(subject, index)} divider button key={index}>
-                    {subject.subjectName}
-                  </ListItem>
-                ))}
-              </div>
+              <Grid>
+              <label htmlFor="subject-name"><i>Please select a Subject to enroll into:</i></label>
+              <br/>
+              <br/>
+            <div style={subjectScrollable}>
+              {subjects && subjects.map((subject, index) => (
+                <ListItem style={{ padding: "20px", marginLeft: "15px", maxWidth: "400px" }} selected={index === currentIndex} onClick={() => this.setActiveAddSubject(subject, index)} divider button key={index}>
+                  {subject.subjectName}
+                </ListItem>
+              ))}
+            </div>
+            </Grid>
             ) : (
-              <div>
+              <Grid container>
+                <Grid item md={12}>
                 <br />
                 <div style={{ alignContent: "space-between" }}>
                   <h4>Selected Subject: </h4>
@@ -201,27 +215,34 @@ class CreateSubjectEnrollment extends React.Component {
                   </i>
                 </div>
                 <br />
-                <Grid container style={{ maxWidth: "1000px" }}>
-                  <Grid item md={4}>
+                </Grid>
+                  <Grid item md={6}>
                     {currentSubject ? (
-                      <Grid item md={4} style={{ minWidth: "400px" }}>
+                      <div className="word-break">
                         <h4>Subject Topics</h4>
                         <i>Please select your strengths from the list:</i>
-                        <div style={{ flexDirection: "column", minWidth: "400px" }}>
+                        <br />
+                        <i>(Maximum of three)</i>
+                        <div style={skillsScrollable}>
+                          <div className="word-break">
                           {topics && topics.map((topic, index) => (
-                            <ListItem style={{ padding: "20px", marginLeft: "15px", maxWidth: "400px" }} onClick={() => this.addTopic(topic)} divider button key={index}>
+                            <ListItem style={{ padding: "20px", marginLeft: "15px", maxWidth: "500px" }} onClick={() => this.addTopic(topic)} divider button key={index}>
                               {topic}
                             </ListItem>
                           ))}
+                          </div>
+                          
                         </div>
-                      </Grid>
+                        </div>
                     ) : (
                       <div></div>
                     )}
                   </Grid>
-                  <Grid item md={4} style={{ paddingLeft: "100px", minWidth: "400px" }}>
-                    <h4 style={{ paddingLeft: "50px" }}>Subject Strengths</h4>
-                    <div style={{ paddingLeft: "50px" }}>
+                  <Grid item md={6} style={{ minWidth: "400px" }}>
+
+                    <h4>Your Subject Strengths</h4>
+                    <i>Click a strength below to deselect it:</i>
+                    <div className="word-break">
                       {addedTopics.map((addedTopic, index) => (
                         <ListItem style={{ padding: "20px", minWidth: "300px" }} selected={index === currentIndex} onClick={() => this.deleteTopic(index)} divider button key={index}>
                           {" "}{addedTopic}
@@ -229,28 +250,31 @@ class CreateSubjectEnrollment extends React.Component {
                       ))}
                     </div>
                   </Grid>
-                  < br />
-                  < br />
-                  <Grid item md={4}> 
+                  <Grid item md={12}>
+                    {/* <hr className="new5"></hr> */}
+                  </Grid>
+                  <Grid item md={6}> 
                     {currentSubject ? (
-                      <Grid item md={4} style={{paddingTop: "50px", minWidth: "400px"}}>
+                      <div style={{paddingTop: "30px", minWidth: "400px"}}>
                         <h4>Tutorials</h4>
                         <i>Please select a tutorial from the list:</i>
-                        <div style={{ flexDirection: "column", minWidth: "400px"}}>
+                        <div style={skillsScrollable}>
                           {tutorials && tutorials.map((tutorial, index) => (
                             <ListItem style={{padding: "20px", marginLeft: "15px", maxWidth: "400px"}} onClick={() => this.addTutorial(tutorial)} divider button key={index}>
                               {"Tutorial: " + tutorial.number + " | Day: " + tutorial.day + " | Time Slot: " + tutorial.timeSlot}
                               </ListItem>
                           ))}
                         </div>
-                      </Grid>
+                      </div>
                     ) : (
                       <div></div>
                     )}
                   </Grid>
-                  <Grid item md={4} style={{ paddingTop: "50px", paddingLeft: "100px", minWidth: "400px" }}>
-                    <h4 style={{ paddingLeft: "50px" }}>Chosen Tutorial</h4>
-                    <div style={{ paddingLeft: "50px" }}>
+                  <Grid item md={6} style={{ paddingTop: "30px", minWidth: "400px" }}>
+
+                    <h4 >Chosen Tutorial</h4>
+                    <i>Click a tutorial below to deselect it:</i>
+                    <div >
                       {addedTutorials.map((addedTutorial, index) => (
                         <ListItem style={{ padding: "20px", minWidth: "300px" }} selected={index === currentIndex} onClick={() => this.deleteTutorial(index)} divider button key={index}>
                           {"Tutorial: " + addedTutorial.number + " | Day: " + addedTutorial.day + " | Time Slot: " + addedTutorial.timeSlot}
@@ -260,16 +284,21 @@ class CreateSubjectEnrollment extends React.Component {
                   </Grid>
                   <br />
                   <br />
-                </Grid>
-                <div className="form-group">
-                  <Button size="small" variant="contained" style={{ maxWidth: "700px", marginLeft: "225px" }} onClick={this.saveEnrollment}>Submit</Button>
-                  <Button size="small" variant="contained" onClick={() => window.location.reload()}>{" "}Back{" "}</Button>
-                </div>
-              </div>
+                  <Grid item md={12}>
+                    <br />
+                    <br />
+
+                  <Button size="small" color="primary" variant="contained" style={{ maxWidth: "700px", marginRight: "10px" }} onClick={this.saveEnrollment}>Submit</Button>
+                  <Button size="small" color="primary" variant="contained" style={{ maxWidth: "700px", marginLeft: "10px" }} onClick={() => window.location.reload()}>{" "}Back{" "}</Button>
+
+                  </Grid>
+              </Grid>
             )}
             <p>{this.state.message}</p>
-          </div>
+          </Grid>
         )}
+        </Paper>
+      </form>
       </div>     
     );
   };

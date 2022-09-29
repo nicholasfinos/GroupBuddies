@@ -5,7 +5,7 @@ import { Grid, Paper, TextField } from "@material-ui/core";
 import { Typography } from "@material-ui/core";
 import { Button } from "@material-ui/core";
 
-const paperStyling = { padding: 40, height: '80vh ', width: '65%', margin: '20px auto', background: '#fff0e7', borderRadius: 20/*border: '2px solid'*/ }
+const paperStyling = { padding: 40, height: '100%', width: '65%', margin: '20px auto', background: '#fff0e7', borderRadius: 20/*border: '2px solid'*/ }
 const btnstyle = { margin: '40px 0', borderRadius: 10, width: '75%', align:'center'}
 const typ1 = { fontWeight: 600, fontFamily: "Arial" }
 
@@ -95,9 +95,14 @@ export default class StudentProfile extends React.Component {
                 <label className="details">Degree:</label>
                 <select className="info-card" value={this.state.course} onChange={this.handleCourseChange}>
                   <option value="" disabled selected>Select your option</option>
-                  <option value="Software Engineering">Software Engo</option>
-                  <option value="Finance">Finance</option>
-                  <option value="Philosophy">Philosophy</option>
+                  <option value="1">Bachelor of Engineering (Honours)</option>
+                  <option value="2">Bachelor of Engineering Science</option>
+                  <option value="3">Bachelor of Engineering Science Bachelor of Laws</option>
+                  <option value="4">Bachelor of Engineering (Honours) Bachelor of Creative Intelligence and Innovation</option>
+                  <option value="5">Bachelor of Engineering (Honours) Bachelor of Business</option>
+                  <option value="6">Bachelor of Engineering (Honours) Bachelor of International Studies</option>
+                  <option value="7">Bachelor of Engineering (Honours) Bachelor of Medical Science</option>
+                  <option value="8">Bachelor of Engineering (Honours) Bachelor of Science</option>
                 </select>
               </Grid>
             </Grid>
