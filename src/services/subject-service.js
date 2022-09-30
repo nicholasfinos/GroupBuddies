@@ -5,6 +5,10 @@ class SubjectDataService {
         return http.get(`/subject/view/${username}`);
     }
 
+    viewAllSubjects(username) {
+        return http.get(`/subject/viewAll/${username}`);
+    }
+
     create(data, username) {
         return http.post(`/subject/create/${username}`, data);
     }

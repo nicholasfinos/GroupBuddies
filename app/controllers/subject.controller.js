@@ -1,6 +1,7 @@
 const Subject = require("../models/subject.model");
 const User = require("../models/user.model");
 const Tutorial = require("../models/tutorial.model");
+const StudentProfile = require("../models/studentProfile.model");
 
 exports.viewSubjects = (req, res) => {
   //Display all of the subject that is associated to User
@@ -20,7 +21,25 @@ exports.viewSubjects = (req, res) => {
     })
 };
 
-exports.findSubject = (req,res) => {
+// inputs student username
+// returns all the subjects that the student is enrolled in
+exports.viewStudentSubjects = (req, res) => {
+  StudentProfile.find({ username: req.params.username })
+    .then((data) => {
+      var studentSubjects = [];
+
+      for (let i = 0; i < data.length; i++) {
+        studentSubjects.push(data[i].subjectName);
+      }
+
+      res.status(200).send(studentSubjects);
+    })
+    .catch(error => {
+      res.status(500).send(error);
+    });
+}
+
+exports.findSubject = (req, res) => {
   //Find a particular subject
   Subject.find({ subjectName: req.params.subjectName })
     .then((data) => {
@@ -148,7 +167,7 @@ exports.getAll = (req, res) => {
     .catch((err) => {
       res
         .status(500)
-        .send({ message: "Error retrieving Subjects"});
+        .send({ message: "Error retrieving Subjects" });
     })
 };
 
@@ -165,43 +184,40 @@ exports.getAll = (req, res) => {
 // };
 
 exports.getPeers = (req, res) => {
-  Subject.find({subjectName: req.body.subjectName})
-  .then((data) => {
-    res.send(data[0].studentList);
-  //   res.send(data.students);
-  })
-  .catch((err) => {
-    res
-      .status(500)
-      .send({ message: "Error retreiving Peers in " + req.params.subjectName });
-  })
+  Subject.find({ subjectName: req.body.subjectName })
+    .then((data) => {
+      res.send(data[0].studentList);
+      //   res.send(data.students);
+    })
+    .catch((err) => {
+      res
+        .status(500)
+        .send({ message: "Error retreiving Peers in " + req.params.subjectName });
+    })
 }
 
 exports.updateSubject = (req, res) => {
-}
-
-exports.updateSubject = (req, res) => {
-  if (Object.keys(req.body).length === 0){
+  if (Object.keys(req.body).length === 0) {
     return res.status(400).send({
       message: "Data to update can not be empty!",
     });
   }
-  
+
   if (req.body.groupAssessment === "Yes") {
     req.body.groupAssessment = true;
   } else {
     req.body.groupAssessment = false;
   }
 
- /* if (req.body.subjectTopics?.length !== 0 && req.body.subjectTopics[0].length === 1) {
-    var str = new ArrayList();
-    const splitQuery = req.body.subjectTopics?.split(",")
-    var i = 0
-    for (i = 0; i < splitQuery?.length; i++) {
-      str[i] = splitQuery[i].trim()
-    }
-    req.body.subjectTopics = str;
-  }*/
+  /* if (req.body.subjectTopics?.length !== 0 && req.body.subjectTopics[0].length === 1) {
+     var str = new ArrayList();
+     const splitQuery = req.body.subjectTopics?.split(",")
+     var i = 0
+     for (i = 0; i < splitQuery?.length; i++) {
+       str[i] = splitQuery[i].trim()
+     }
+     req.body.subjectTopics = str;
+   }*/
 
   Subject.findByIdAndUpdate(req.body.id, req.body, { useFindAndModify: false })
     .then((data) => {
