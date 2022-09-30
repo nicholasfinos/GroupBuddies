@@ -86,7 +86,7 @@ exports.createStudyGroup = (req, res) => {
           studyGroup.save((err, studyGroup) => {
             if (err) {
               res.status(500).send({ message: err });
-              return res.status(200).send({ message: "works" })
+              return;
             }
           })
         })
@@ -99,5 +99,17 @@ exports.getStudyGroups = (req, res) => {
       return res.status(200).send({ data })
     })
 
-    // need to append study groups that they are in here
+  // need to append study groups that they are in here
+}
+
+exports.deleteStudyGroup = (req, res) => {
+  console.log(req.params);
+
+  StudyGroup.deleteOne({ owner: req.params.studyGroup })
+    .then((data) => {
+      return res.status(200).send({ message: "item deleted" });
+    })
+    .catch(error => {
+      return res.status(500).send({ message: error });
+    })
 }

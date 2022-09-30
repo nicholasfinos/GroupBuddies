@@ -39,6 +39,10 @@ const getStudyGroups = (username) => {
   return axios.get(`http://localhost:8080/api/${username}/getStudyGroups`);
 }
 
+const deleteStudyGroup = (groupId) => {
+  return axios.delete(`http://localhost:8080/api/deleteStudyGroup/${groupId}`);
+}
+
 // eslint-disable-next-line
 export default {
   getPublicContent,
@@ -48,6 +52,7 @@ export default {
   getOwnerBoard,
   updateStudent,
   getUser,
-  createStudyGroup, 
-  getStudyGroups
+  createStudyGroup,
+  getStudyGroups,
+  deleteStudyGroup
 };

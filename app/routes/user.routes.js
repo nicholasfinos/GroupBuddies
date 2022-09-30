@@ -33,4 +33,6 @@ module.exports = function(app) {
   app.post("/api/:username/createStudyGroup", controller.createStudyGroup);
 
   app.get("/api/:username/getStudyGroups", controller.getStudyGroups);
+
+  app.delete("/api/deleteStudyGroup/:studyGroup", controller.deleteStudyGroup);
 };

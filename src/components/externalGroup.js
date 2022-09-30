@@ -24,12 +24,15 @@ const CreateGroupPopup = ({ currentStudent }) => {
         subject: subject
       }
 
-      userService.createStudyGroup(group).then(() => {
-        console.log("Study Group Created")
-      }).catch(error => {
-        console.log(error);
-      });
+      userService.createStudyGroup(group)
+        .then(() => {
+          console.log("Study Group Created");
+        }).catch(error => {
+          console.log(error);
+        });
     }
+
+    window.location.reload();
   }
 
   return (
@@ -76,18 +79,15 @@ const ExternalGroup = () => {
     if (currentStudent) {
       userService.getStudyGroups(currentStudent._id)
         .then((data) => {
-          console.log(data.data.data);
           setStudyGroups(data.data.data);
         })
     }
   }, [currentStudent])
 
-  const getCurrentGroup = () => {
-    console.log("Got current Group");
-  }
-
   const deleteCurrentGroup = () => {
-    console.log("deleted current Group")
+    userService.deleteStudyGroup(currentStudent._id);
+    window.location.reload();
+
   }
 
   return (
@@ -96,7 +96,9 @@ const ExternalGroup = () => {
         <h3>My Study Groups</h3>
         <div>
           {studyGroups.map((item, index) => (
-            <ListItem onClick={() => { setCurrentGroup(item) }}>{item.name}</ListItem>
+            <ListItem onClick={() => { setCurrentGroup(item) }} key={index}>
+              {item.name}
+            </ListItem>
           ))}
         </div>
       </div>
@@ -104,12 +106,16 @@ const ExternalGroup = () => {
         <h3>Current Group</h3>
         <div>
           {currentGroup &&
-            <ListItem>{currentGroup.owner}</ListItem>
+            <ListItem >
+              <div className="columnDiv" style={{ width: "100%" }}>
+                {currentGroup.owner}
+                <button onClick={() => deleteCurrentGroup()}>Delete Current Group</button>
+              </div>
+            </ListItem>
           }
         </div>
       </div>
       <div className="columnDiv">
-        <button onClick={() => deleteCurrentGroup()}>Delete Current Group</button>
         <button>Find Groups</button>
         <button onClick={() => setIsCreating(!isCreating)}>Create a Group</button>
         {(isCreating) &&
