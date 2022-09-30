@@ -65,8 +65,6 @@ exports.updateStudent = (req, res) => {
 }
 
 exports.createStudyGroup = (req, res) => {
-  console.log(req.body);
-
   User.find({
     username: req.body.owner
   })
@@ -78,7 +76,6 @@ exports.createStudyGroup = (req, res) => {
           if (x[0].name !== 'student') {
             return res.status(400).send({ message: "User is not a student" })
           }
-          console.log(data[0]);
 
           const studyGroup = new StudyGroup({
             owner: data[0]._id,
@@ -89,13 +86,18 @@ exports.createStudyGroup = (req, res) => {
           studyGroup.save((err, studyGroup) => {
             if (err) {
               res.status(500).send({ message: err });
-              return;
+              return res.status(200).send({ message: "works" })
             }
           })
         })
     })
+}
 
-  // check the subject exists
-  // create the study group
-  return res.status(200).send({ message: "works" })
+exports.getStudyGroups = (req, res) => {
+  StudyGroup.find({ owner: req.params.username })
+    .then((data) => {
+      return res.status(200).send({ data })
+    })
+
+    // need to append study groups that they are in here
 }

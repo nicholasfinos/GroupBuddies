@@ -35,6 +35,10 @@ const createStudyGroup = async (data) => {
   return await axios.post(`http://localhost:8080/api/${data.username}/createStudyGroup`, data);
 }
 
+const getStudyGroups = (username) => {
+  return axios.get(`http://localhost:8080/api/${username}/getStudyGroups`);
+}
+
 // eslint-disable-next-line
 export default {
   getPublicContent,
@@ -44,5 +48,6 @@ export default {
   getOwnerBoard,
   updateStudent,
   getUser,
-  createStudyGroup
+  createStudyGroup, 
+  getStudyGroups
 };

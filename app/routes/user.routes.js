@@ -31,4 +31,6 @@ module.exports = function(app) {
   app.get("/api/user/:username", controller.getUser)
 
   app.post("/api/:username/createStudyGroup", controller.createStudyGroup);
+
+  app.get("/api/:username/getStudyGroups", controller.getStudyGroups);
 };

@@ -4,9 +4,17 @@ import subjectService from "../services/subject-service";
 import "./externalGroups.css";
 import { ListItem } from "@material-ui/core";
 
-const CreateGroupPopup = ({ currentStudent, studentSubjects }) => {
+const CreateGroupPopup = ({ currentStudent }) => {
   const [groupName, setGroupName] = useState("");
   const [subject, setSubject] = useState("");
+  const [studentSubjects, setStudentSubjects] = useState([])
+
+  useEffect(() => {
+    subjectService.viewAllSubjects(currentStudent)
+      .then((x) => {
+        setStudentSubjects(x.data);
+      })
+  }, [])
 
   const createStudyGroup = () => {
     if (currentStudent && groupName !== "" && subject !== "") {
@@ -15,8 +23,6 @@ const CreateGroupPopup = ({ currentStudent, studentSubjects }) => {
         groupName: groupName,
         subject: subject
       }
-
-      console.log(group);
 
       userService.createStudyGroup(group).then(() => {
         console.log("Study Group Created")
@@ -55,22 +61,30 @@ const ExternalGroup = () => {
   const [studyGroups, setStudyGroups] = useState([]);
   const [currentGroup, setCurrentGroup] = useState();
   const [isCreating, setIsCreating] = useState(false);
-  const [studentSubjects, setStudentSubjects] = useState([])
 
-  useEffect(() => {
+  useEffect(() => { // Get the student
     const URL = window.location.href;
     const username = URL.substring(URL.lastIndexOf("/") + 1, URL.length);
 
     userService.getUser(username)
       .then((data) => {
         setCurrentStudent(data.data[0]);
-        subjectService.viewAllSubjects(username)
-          .then((x) => {
-            setStudentSubjects(x.data);
-          })
-        // search for my study groups (append the two lists together)
       });
   }, []);
+
+  useEffect(() => { // get the student's groups once their id has loaded
+    if (currentStudent) {
+      userService.getStudyGroups(currentStudent._id)
+        .then((data) => {
+          console.log(data.data.data);
+          setStudyGroups(data.data.data);
+        })
+    }
+  }, [currentStudent])
+
+  const getCurrentGroup = () => {
+    console.log("Got current Group");
+  }
 
   const deleteCurrentGroup = () => {
     console.log("deleted current Group")
@@ -81,6 +95,9 @@ const ExternalGroup = () => {
       <div className="columnDiv">
         <h3>My Study Groups</h3>
         <div>
+          {studyGroups.map((item, index) => (
+            <ListItem>{item.name}</ListItem>
+          ))}
           <div>GROUP</div>
           <div>GROUP</div>
           <div>GROUP</div>
@@ -96,7 +113,9 @@ const ExternalGroup = () => {
         <button onClick={() => deleteCurrentGroup()}>Delete Current Group</button>
         <button>Find Groups</button>
         <button onClick={() => setIsCreating(!isCreating)}>Create a Group</button>
-        {(isCreating && (studentSubjects.length > 0)) && <CreateGroupPopup currentStudent={currentStudent.username} studentSubjects={studentSubjects} />}
+        {(isCreating) &&
+          <CreateGroupPopup currentStudent={currentStudent.username} />
+        }
       </div>
     </div>
   );
