@@ -96,17 +96,16 @@ const ExternalGroup = () => {
         <h3>My Study Groups</h3>
         <div>
           {studyGroups.map((item, index) => (
-            <ListItem>{item.name}</ListItem>
+            <ListItem onClick={() => { setCurrentGroup(item) }}>{item.name}</ListItem>
           ))}
-          <div>GROUP</div>
-          <div>GROUP</div>
-          <div>GROUP</div>
         </div>
       </div>
       <div className="columnDiv">
         <h3>Current Group</h3>
         <div>
-          <div>CURRENT GROUP</div>
+          {currentGroup &&
+            <ListItem>{currentGroup.owner}</ListItem>
+          }
         </div>
       </div>
       <div className="columnDiv">
