@@ -1,4 +1,6 @@
 const db = require("../models");
+const StudyGroup = require("../models/studyGroup.model");
+const Role = require("../models/role.model");
 const { user: User } = db;
 
 exports.allAccess = (req, res) => {
@@ -64,8 +66,36 @@ exports.updateStudent = (req, res) => {
 
 exports.createStudyGroup = (req, res) => {
   console.log(req.body);
-  // check the user is a student
-  // check all the details are correct
+
+  User.find({
+    username: req.body.owner
+  })
+    .then((data) => {
+      Role.find({
+        _id: data[0].roles[0]
+      })
+        .then((x) => {
+          if (x[0].name !== 'student') {
+            return res.status(400).send({ message: "User is not a student" })
+          }
+          console.log(data[0]);
+
+          const studyGroup = new StudyGroup({
+            owner: data[0]._id,
+            name: req.body.groupName,
+            subjectName: req.body.subject
+          })
+
+          studyGroup.save((err, studyGroup) => {
+            if (err) {
+              res.status(500).send({ message: err });
+              return;
+            }
+          })
+        })
+    })
+
+  // check the subject exists
   // create the study group
   return res.status(200).send({ message: "works" })
 }
