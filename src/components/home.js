@@ -77,8 +77,8 @@ const Home = () => {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <Grid container spacing={2}>
-        <Grid item xs={5}>
+      <Grid container spacing={9}>
+        <Grid item xs={6}>
           <BigText variant="h1">
             Groupwork made easy.  
           </BigText>
@@ -86,7 +86,7 @@ const Home = () => {
           for students, tutors and subject coordinators to create effective learning solutions both inside and outside of class.
           </Typography>
         </Grid>
-        <Grid item xs={7}>
+        <Grid item xs={6}>
           <Item2>
           <Grid align='center' >
           <img src={logo} id="groupbuddieslogo" height="250" alt="" />
