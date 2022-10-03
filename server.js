@@ -23,6 +23,7 @@ const PeerRequest = require("./app/models/peerRequest.model");
 const StudentProfile = require("./app/models/studentProfile.model");
 const { Promise } = require("mongodb");
 const Role = db.role;
+const students = [];
 
 db.mongoose
   .connect(`mongodb://127.0.0.1:27017/GroupBuddies`, {
@@ -178,7 +179,6 @@ async function initial() {
           })
       });
 
-
       new Role({
         name: "subjectcoordinator"
       }).save(err => {
@@ -234,6 +234,14 @@ async function initial() {
                       console.log(err)
                     } else {
                       console.log("Adding 'danicaSolina' as a subjectCoordinator in subject: 'MM1'")
+                    }
+                  })
+
+                  Subject.findOneAndUpdate({ subjectName: 'Yeran Test Group' }, { $set: { subjectCoordinator: docs._id } }, { returnNewDocument: true }, function (err, result) {
+                    if (err) {
+                      console.log(err)
+                    } else {
+                      console.log("Adding 'danicaSolina' as a subjectCoordinator in subject: 'Yeran Test Group'")
                     }
                   })
                 }
@@ -359,6 +367,29 @@ async function initial() {
                 console.log("error", err);
               }
               console.log("added 'tutor' to Users collection");
+              User.findOne({ username: "tutor" }, function (err, docs) {
+                if (err) {
+                  console.log(err)
+                }
+                else {
+                  // console.log("UserId : ", docs._id);
+                  Subject.findOneAndUpdate({ subjectName: 'Yeran Test Group' }, { $set: { tutors: [docs._id] } }, { returnNewDocument: true }, function (err, result) {
+                    if (err) {
+                      console.log(err)
+                    } else {
+                      console.log("Adding 'tutor' as a tutor in subject: 'Yeran Test Group'")
+                    }
+                  })
+
+                  Tutorial.findOneAndUpdate({ subjectName: 'Yeran Test Group' }, { $set: { tutor: [docs._id] } }, { returnNewDocument: true }, function (err, result) {
+                    if (err) {
+                      console.log(err)
+                    } else {
+                      console.log("Adding 'tutor' as a tutor in tutorial for 'Yeran Test Group'")
+                    }
+                  })
+                }
+              })
             });
           })
 
@@ -714,379 +745,422 @@ async function initial() {
             });
           });
       })
+
+      settingUpProfile();
+
+      /*
+      -------------------
+      //ALGORITHM TESTING
+      -------------------
+      1. Uncomment "settingUpProfiles();" and run node server.js
+      2. Comment "settingUpProfiles"
+      3. Create subject with details matching profiles created
+       - Subject name - Yeran Test Group
+       - Tutorial Number - 1
+       - Topics: test,why,yeran
+       - Tutor - Tutor
+      Make sure to pick these option, if you want to do something else then make sure to edit both function below 
+      
+      4. Uncomment "addStudentsToSubject();" and run node server.js
+      5. Comment "addStudentsToSubject();"
+      */
     }
-  })
+  }
+  )
+  
+  async function settingUpProfile() {
+    StudentProfile.create({
+      student: "6322e72c188f6e93043d5c76",
+      username: "student",
+      subjectName: "Yeran Test Group",
+      tutorialNumber: "1",
+      groupNumber: "",
+      subjectTopics: ["test"],
+    })
 
-  //settingUpSubjects();
-  // settingUpProfile();
-  // addStudentsToSubject();
+    StudentProfile.create({
+      student: "6322e72c188f6e93043d5c77",
+      username: "graceBilliris",
+      subjectName: "Yeran Test Group",
+      tutorialNumber: "1",
+      groupNumber: "",
+      subjectTopics: ["yeran"],
+    })
 
+    StudentProfile.create({
+      student: "6322e72c188f6e93043d5c78",
+      username: "yeran",
+      subjectName: "Yeran Test Group",
+      tutorialNumber: "1",
+      groupNumber: "",
+      subjectTopics: ["why"],
+    })
+
+    StudentProfile.create({
+      student: "6322e72c188f6e93043d5c79",
+      username: "nicholasFinos",
+      subjectName: "Yeran Test Group",
+      tutorialNumber: "1",
+      groupNumber: "",
+      subjectTopics: ["test"],
+    })
+
+    StudentProfile.create({
+      student: "6322e72c188f6e93043d5c7a",
+      username: "jeromeSario",
+      subjectName: "Yeran Test Group",
+      tutorialNumber: "1",
+      groupNumber: "",
+      subjectTopics: ["yeran"],
+    })
+
+    StudentProfile.create({
+      student: "6322e72c188f6e93043d5c7b",
+      username: "ashishChadha",
+      subjectName: "Yeran Test Group",
+      tutorialNumber: "1",
+      groupNumber: "",
+      subjectTopics: ["why"],
+    })
+
+    StudentProfile.create({
+      student: "6322e72c188f6e93043d5c7c",
+      username: "lukaRyan",
+      subjectName: "Yeran Test Group",
+      tutorialNumber: "1",
+      groupNumber: "",
+      subjectTopics: ["test"],
+    })
+
+    StudentProfile.create({
+      student: "6322e72c188f6e93043d5c7d",
+      username: "lachlanSinclair",
+      subjectName: "Yeran Test Group",
+      tutorialNumber: "1",
+      groupNumber: "",
+      subjectTopics: ["yeran"],
+    })
+
+    Subject.create({
+      subjectName: "Mathematical Modelling 1",
+      subjectCoordinator: null,
+      tutors: [],
+      subjectTopics: [
+        "Matrix multiplication and determinants",
+        "Vectors and their application to physical problems",
+        "Complex numbers",
+        "Functions and their relationship to measurement and the interpretation of physical results",
+        "Differentiation",
+        "Differential equations arising from physical problems",
+        "Oscillatory motion",
+        "Trigonometric functions and inverse trigonometric functions",
+        "Integrals",
+        "Inverse functions",
+        "Hyperbolic functions",
+        "Methods of integration",
+        "Solution of differential equations by integration"
+      ],
+      semester: "Autumn 2020",
+      groupAssessment: false,
+      tutorials: [],
+      tutorialNumbers: 1,
+      status: false,
+    })
+    console.log('creating MM1 - the subject')
+
+    Subject.create({
+      subjectName: "Mathematical Modelling 2",
+      subjectCoordinator: null,
+      tutors: [],
+      subjectTopics: [
+        "Linear algebra including eigenvalues and eigenvectors and applications",
+        "3D geometry and functions of several variables",
+        "Partial derivatives",
+        "Optimisation",
+        "Multiple integrals and their applications",
+        "Probability",
+        "Descriptive statistics",
+        "Probability distributions",
+        "Statistical inference",
+        "Introduction to linear regression"
+      ],
+      semester: "Spring 2020",
+      groupAssessment: false,
+      tutorials: [],
+      tutorialNumbers: 1,
+      status: false,
+    })
+    console.log('creating MM2 - the subject')
+
+    Subject.create({
+      subjectName: "Engineering Communication",
+      subjectCoordinator: null,
+      tutors: [],
+      subjectTopics: [
+        "Linear algebra including eigenvalues and eigenvectors and applications",
+        "Engineering design process",
+        "Finding, evaluating and referencing information Academic integrity",
+        "Professional engineering documentation",
+        "Effective written, visual and oral communication",
+        "Teamwork processes and participation",
+        "Reflective thinking and writing"
+      ],
+      semester: "Autumn 2020",
+      groupAssessment: true,
+      tutorials: [],
+      tutorialNumbers: 4,
+      status: false,
+    })
+    console.log('creating Eng Com - the subject')
+
+    Subject.create({
+      subjectName: "Design and Innovation Fundamentals",
+      subjectCoordinator: null,
+      tutors: [],
+      subjectTopics: [
+        "Engineers as designers and innovators",
+        "Design and Engineering thinking",
+        "Approaches for thinking and problem-solving in an engineering context",
+        "The design process including problem definition, concept generation, requirements analysis, system design and detailed design",
+        "New process and product development; lifecycles, research, technology, development and innovation",
+        "Design considerations and trade-offs: including safe design, methods of managing risk and uncertainty, regulations and professionalism, sustainability, design for manufacture and business decisions involved in design and innovation",
+        "Team dynamics and techniques to facilitate successfully working in concurrent engineering teams",
+        "Review of written and oral communication skills"
+      ],
+      semester: "Spring 2021",
+      groupAssessment: true,
+      tutorials: [],
+      tutorialNumbers: 4,
+      status: false,
+    })
+    console.log('creating DIF - the subject')
+
+    Subject.create({
+      subjectName: "Physical Modelling",
+      subjectCoordinator: null,
+      tutors: [],
+      subjectTopics: [
+        "Motion in 1D",
+        "Motion in 2D",
+        "Force and motion",
+        "Work, enegery and power",
+        "Rotational knimematics",
+        "Temperature and heat",
+        "Thermal expansion",
+        "Thermal processes",
+        "Electric charge",
+        "Electric circuits",
+        "Fluids at rest",
+        "Oscilations and waves",
+        "Reflections and Mirrors",
+        "Lenses"
+      ],
+      semester: "Autumn 2021",
+      groupAssessment: false,
+      tutorials: [],
+      tutorialNumbers: 1,
+      status: false,
+    })
+    console.log('creating Phys Mod - the subject')
+
+    var tutorial = Tutorial.create({
+      subjectName: "Yeran Test Group",
+      number: "1",
+      timeSlot: "5pm",
+      day: "Tuesday",
+      tutor: null,
+      allStudents: [],
+      UnselectedStudents: [],
+      numberGroups: 0,
+      groups: []
+    })
+
+    Subject.create({
+      subjectName: "Yeran Test Group",
+      subjectCoordinator: null,
+      tutors: [],
+      subjectTopics: [
+        "yeran",
+        "why",
+        "test"
+      ],
+      semester: "Autumn 2020",
+      groupAssessment: true,
+      tutorials: [tutorial._id],
+      tutorialNumbers: 1,
+      status: false,
+    })
+    console.log('creating Yeran Test Group - the subject')
+  }
+  // addingToTutorials();
 }
 
-async function settingUpProfile() {
-  StudentProfile.create({
-    student: "6322e72c188f6e93043d5c76",
-    username: "student",
-    subjectName: "Yeran Test Group",
-    tutorialNumber: "1",
-    groupNumber: "",
-    subjectTopics: ["test"],
+async function addingToTutorials() {
+  StudentProfile.find({ username: "lachlanSinclair" })
+    .then((x) => {
+      var data = {
+        _id: x[0]?.id,
+        username: x[0]?.username,
+        subjectTopics: x[0]?.subjectTopics        
+      };
+      Tutorial.updateOne(
+        { subjectName: "Yeran Test Group" },
+        {
+          $push: {
+            UnselectedStudents: data,
+            allStudents: data
+          }
+        }
+      )
+        .then((h) => {
+          console.log(h);
+        })
+    })
+
+  StudentProfile.find({ username: "graceBilliris" })
+  .then((x) => {
+    var data = {
+      _id: x[0]?.id,
+      username: x[0]?.username,
+      subjectTopics: x[0]?.subjectTopics        
+    };
+    Tutorial.updateOne(
+      { subjectName: "Yeran Test Group" },
+      {
+        $push: {
+          UnselectedStudents: data,
+          allStudents: data
+        }
+      }
+    )
+      .then((h) => {
+        console.log(h);
+      })
   })
 
-  StudentProfile.create({
-    student: "6322e72c188f6e93043d5c77",
-    username: "graceBilliris",
-    subjectName: "Yeran Test Group",
-    tutorialNumber: "1",
-    groupNumber: "",
-    subjectTopics: ["yeran"],
-  })
+  StudentProfile.find({ username: "yeran" })
+    .then((x) => {
+      var data = {
+        _id: x[0]?.id,
+        username: x[0]?.username,
+        subjectTopics: x[0]?.subjectTopics        
+      };
+      Tutorial.updateOne(
+        { subjectName: "Yeran Test Group" },
+        {
+          $push: {
+            UnselectedStudents: data,
+            allStudents: data
+          }
+        }
+      )
+        .then((h) => {
+          console.log(h);
+        })
+    })
 
-  StudentProfile.create({
-    student: "6322e72c188f6e93043d5c78",
-    username: "yeran",
-    subjectName: "Yeran Test Group",
-    tutorialNumber: "1",
-    groupNumber: "",
-    subjectTopics: ["why"],
-  })
+    StudentProfile.find({ username: "ashishChadha" })
+    .then((x) => {
+      var data = {
+        _id: x[0]?.id,
+        username: x[0]?.username,
+        subjectTopics: x[0]?.subjectTopics        
+      };
+      Tutorial.updateOne(
+        { subjectName: "Yeran Test Group" },
+        {
+          $push: {
+            UnselectedStudents: data,
+            allStudents: data
+          }
+        }
+      )
+        .then((h) => {
+          console.log(h);
+        })
+    })
 
-  StudentProfile.create({
-    student: "6322e72c188f6e93043d5c79",
-    username: "nicholasFinos",
-    subjectName: "Yeran Test Group",
-    tutorialNumber: "1",
-    groupNumber: "",
-    subjectTopics: ["test"],
-  })
+    StudentProfile.find({ username: "jeromeSario" })
+    .then((x) => {
+      var data = {
+        _id: x[0]?.id,
+        username: x[0]?.username,
+        subjectTopics: x[0]?.subjectTopics        
+      };
+      Tutorial.updateOne(
+        { subjectName: "Yeran Test Group" },
+        {
+          $push: {
+            UnselectedStudents: data,
+            allStudents: data
+          }
+        }
+      )
+        .then((h) => {
+          console.log(h);
+        })
+    })
 
-  StudentProfile.create({
-    student: "6322e72c188f6e93043d5c7a",
-    username: "jeromeSario",
-    subjectName: "Yeran Test Group",
-    tutorialNumber: "1",
-    groupNumber: "",
-    subjectTopics: ["yeran"],
-  })
+    StudentProfile.find({ username: "lukaRyan" })
+    .then((x) => {
+      var data = {
+        _id: x[0]?.id,
+        username: x[0]?.username,
+        subjectTopics: x[0]?.subjectTopics        
+      };
+      Tutorial.updateOne(
+        { subjectName: "Yeran Test Group" },
+        {
+          $push: {
+            UnselectedStudents: data,
+            allStudents: data
+          }
+        }
+      )
+        .then((h) => {
+          console.log(h);
+        })
+    })
 
-  StudentProfile.create({
-    student: "6322e72c188f6e93043d5c7b",
-    username: "ashishChadha",
-    subjectName: "Yeran Test Group",
-    tutorialNumber: "1",
-    groupNumber: "",
-    subjectTopics: ["why"],
-  })
+    StudentProfile.find({ username: "nicholasFinos" })
+    .then((x) => {
+      var data = {
+        _id: x[0]?.id,
+        username: x[0]?.username,
+        subjectTopics: x[0]?.subjectTopics        
+      };
+      Tutorial.updateOne(
+        { subjectName: "Yeran Test Group" },
+        {
+          $push: {
+            UnselectedStudents: data,
+            allStudents: data
+          }
+        }
+      )
+        .then((h) => {
+          console.log(h);
+        })
+    })
 
-  StudentProfile.create({
-    student: "6322e72c188f6e93043d5c7c",
-    username: "lukaRyan",
-    subjectName: "Yeran Test Group",
-    tutorialNumber: "1",
-    groupNumber: "",
-    subjectTopics: ["test"],
-  })
-
-  StudentProfile.create({
-    student: "6322e72c188f6e93043d5c7d",
-    username: "lachlanSinclair",
-    subjectName: "Yeran Test Group",
-    tutorialNumber: "1",
-    groupNumber: "",
-    subjectTopics: ["yeran"],
-  })
-}
-
-// async function addStudentsToSubject() {
-//   StudentProfile.find({ username: "jeromeSario" })
-//     .then((x) => {
-//       var data = {
-//         _id: x[0]?.id,
-//         username: x[0].username,
-//         subjectTopics: x[0].subjectTopics        
-//       };
-//       Tutorial.updateOne(
-//         { subjectName: "Yeran Test Group" },
-//         {
-//           $push: {
-//             UnselectedStudents: data,
-//             allStudents: data
-//           }
-//         }
-//       )
-//         .then((h) => {
-//           console.log(h);
-//         })
-//     })
-
-//     StudentProfile.find({ username: "yeran" })
-//     .then((x) => {
-//       var data = {
-//         _id: x[0].id,
-//         username: x[0].username,
-//         subjectTopics: x[0].subjectTopics        
-//       };
-//       Tutorial.updateOne(
-//         { subjectName: "Yeran Test Group" },
-//         {
-//           $push: {
-//             UnselectedStudents: data,
-//             allStudents: data
-//           }
-//         }
-//       )
-//         .then((h) => {
-//           console.log(h);
-//         })
-//     })
-
-//     StudentProfile.find({ username: "nicholasFinos" })
-//     .then((x) => {
-//       var data = {
-//         _id: x[0].id,
-//         username: x[0].username,
-//         subjectTopics: x[0].subjectTopics        
-//       };
-//       Tutorial.updateOne(
-//         { subjectName: "Yeran Test Group" },
-//         {
-//           $push: {
-//             UnselectedStudents: data,
-//             allStudents: data
-//           }
-//         }
-//       )
-//         .then((h) => {
-//           console.log(h);
-//         })
-//     })
-
-//     StudentProfile.find({ username: "ashishChadha" })
-//     .then((x) => {
-//       var data = {
-//         _id: x[0].id,
-//         username: x[0].username,
-//         subjectTopics: x[0].subjectTopics        
-//       };
-//       Tutorial.updateOne(
-//         { subjectName: "Yeran Test Group" },
-//         {
-//           $push: {
-//             UnselectedStudents: data,
-//             allStudents: data
-//           }
-//         }
-//       )
-//         .then((h) => {
-//           console.log(h);
-//         })
-//     })
-
-//     StudentProfile.find({ username: "graceBilliris" })
-//     .then((x) => {
-//       var data = {
-//         _id: x[0].id,
-//         username: x[0].username,
-//         subjectTopics: x[0].subjectTopics        
-//       };
-//       Tutorial.updateOne(
-//         { subjectName: "Yeran Test Group" },
-//         {
-//           $push: {
-//             UnselectedStudents: data,
-//             allStudents: data
-//           }
-//         }
-//       )
-//         .then((h) => {
-//           console.log(h);
-//         })
-//     })
-
-//     StudentProfile.find({ username: "student" })
-//     .then((x) => {
-//       var data = {
-//         _id: x[0].id,
-//         username: x[0].username,
-//         subjectTopics: x[0].subjectTopics        
-//       };
-//       Tutorial.updateOne(
-//         { subjectName: "Yeran Test Group" },
-//         {
-//           $push: {
-//             UnselectedStudents: data,
-//             allStudents: data
-//           }
-//         }
-//       )
-//         .then((h) => {
-//           console.log(h);
-//         })
-//     })
-
-//     StudentProfile.find({ username: "lukaRyan" })
-//     .then((x) => {
-//       var data = {
-//         _id: x[0].id,
-//         username: x[0].username,
-//         subjectTopics: x[0].subjectTopics        
-//       };
-//       Tutorial.updateOne(
-//         { subjectName: "Yeran Test Group" },
-//         {
-//           $push: {
-//             UnselectedStudents: data,
-//             allStudents: data
-//           }
-//         }
-//       )
-//         .then((h) => {
-//           console.log(h);
-//         })
-//     })
-
-//     StudentProfile.find({ username: "lachlanSinclair" })
-//     .then((x) => {
-//       var data = {
-//         _id: x[0].id,
-//         username: x[0].username,
-//         subjectTopics: x[0].subjectTopics        
-//       };
-//       Tutorial.updateOne(
-//         { subjectName: "Yeran Test Group" },
-//         {
-//           $push: {
-//             UnselectedStudents: data,
-//             allStudents: data
-//           }
-//         }
-//       )
-//         .then((h) => {
-//           console.log(h);
-//         })
-//     })
-// }
-
-async function settingUpSubjects() {
-  Subject.create({
-    subjectName: "Mathematical Modelling 1",
-    subjectCoordinator: null,
-    tutors: [],
-    subjectTopics: [
-      "Matrix multiplication and determinants",
-      "Vectors and their application to physical problems",
-      "Complex numbers",
-      "Functions and their relationship to measurement and the interpretation of physical results",
-      "Differentiation",
-      "Differential equations arising from physical problems",
-      "Oscillatory motion",
-      "Trigonometric functions and inverse trigonometric functions",
-      "Integrals",
-      "Inverse functions",
-      "Hyperbolic functions",
-      "Methods of integration",
-      "Solution of differential equations by integration"
-    ],
-    semester: "Autumn 2020",
-    groupAssessment: false,
-    tutorials: [],
-    tutorialNumbers: 1,
-    status: false,
-  })
-  console.log('creating MM1 - the subject')
-
-  Subject.create({
-    subjectName: "Mathematical Modelling 2",
-    subjectCoordinator: null,
-    tutors: [],
-    subjectTopics: [
-      "Linear algebra including eigenvalues and eigenvectors and applications",
-      "3D geometry and functions of several variables",
-      "Partial derivatives",
-      "Optimisation",
-      "Multiple integrals and their applications",
-      "Probability",
-      "Descriptive statistics",
-      "Probability distributions",
-      "Statistical inference",
-      "Introduction to linear regression"
-    ],
-    semester: "Spring 2020",
-    groupAssessment: false,
-    tutorials: [],
-    tutorialNumbers: 1,
-    status: false,
-  })
-  console.log('creating MM2 - the subject')
-
-  Subject.create({
-    subjectName: "Engineering Communication",
-    subjectCoordinator: null,
-    tutors: [],
-    subjectTopics: [
-      "Linear algebra including eigenvalues and eigenvectors and applications",
-      "Engineering design process",
-      "Finding, evaluating and referencing information Academic integrity",
-      "Professional engineering documentation",
-      "Effective written, visual and oral communication",
-      "Teamwork processes and participation",
-      "Reflective thinking and writing"
-    ],
-    semester: "Autumn 2020",
-    groupAssessment: true,
-    tutorials: [],
-    tutorialNumbers: 4,
-    status: false,
-  })
-  console.log('creating Eng Com - the subject')
-
-  Subject.create({
-    subjectName: "Design and Innovation Fundamentals",
-    subjectCoordinator: null,
-    tutors: [],
-    subjectTopics: [
-      "Engineers as designers and innovators",
-      "Design and Engineering thinking",
-      "Approaches for thinking and problem-solving in an engineering context",
-      "The design process including problem definition, concept generation, requirements analysis, system design and detailed design",
-      "New process and product development; lifecycles, research, technology, development and innovation",
-      "Design considerations and trade-offs: including safe design, methods of managing risk and uncertainty, regulations and professionalism, sustainability, design for manufacture and business decisions involved in design and innovation",
-      "Team dynamics and techniques to facilitate successfully working in concurrent engineering teams",
-      "Review of written and oral communication skills"
-    ],
-    semester: "Spring 2021",
-    groupAssessment: true,
-    tutorials: [],
-    tutorialNumbers: 4,
-    status: false,
-  })
-  console.log('creating DIF - the subject')
-
-  Subject.create({
-    subjectName: "Physical Modelling",
-    subjectCoordinator: null,
-    tutors: [],
-    subjectTopics: [
-      "Motion in 1D",
-      "Motion in 2D",
-      "Force and motion",
-      "Work, enegery and power",
-      "Rotational knimematics",
-      "Temperature and heat",
-      "Thermal expansion",
-      "Thermal processes",
-      "Electric charge",
-      "Electric circuits",
-      "Fluids at rest",
-      "Oscilations and waves",
-      "Reflections and Mirrors",
-      "Lenses"
-    ],
-    semester: "Autumn 2021",
-    groupAssessment: false,
-    tutorials: [],
-    tutorialNumbers: 1,
-    status: false,
-  })
-  console.log('creating Phys Mod - the subject')
+    StudentProfile.find({ username: "student" })
+    .then((x) => {
+      var data = {
+        _id: x[0]?.id,
+        username: x[0]?.username,
+        subjectTopics: x[0]?.subjectTopics        
+      };
+      Tutorial.updateOne(
+        { subjectName: "Yeran Test Group" },
+        {
+          $push: {
+            UnselectedStudents: data,
+            allStudents: data
+          }
+        }
+      )
+        .then((h) => {
+          console.log(h);
+        })
+    })
 }

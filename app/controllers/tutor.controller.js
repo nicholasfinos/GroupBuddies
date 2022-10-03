@@ -4,7 +4,6 @@ const Tutorial = require("../models/tutorial.model");
 const Group = require("../models/group.model");
 const StudentProfile = require("../models/studentProfile.model");
 const Subject = require("../models/subject.model");
-// const ArrayList = require("arraylist");
 
 exports.findAllTutors = (req, res) => {
   Role.find({ name: "tutor" })
@@ -418,14 +417,26 @@ exports.autoSort = (req, res) => {
     }
   }
   else {
-    while (studentList.size !== 0) {
-      for (let i = 0; i < groupID.size; i++) {
-        var student = topicList[k];
+    while (topicList.length !== 0) {
+      for (let i = 0; i < groupID.length; i++) {
+        if (topicList.length === 0) {
+          break;
+        }
+
+        var student = topicList[k][0];
 
         //Add Student Group
         console.log("2nd");
         groupList[i].push(student);
         console.log("GroupList", groupList)
+
+        //Remove Student and Topic
+        StudentProfile.updateOne(
+          {
+            username: student.username
+          },
+          { $set: { groupNumber: groupID[i].groupNumber } }
+        ).then((u) => console.log(u));
 
         //Remove Student and Topic
         var z = 0;
@@ -452,19 +463,24 @@ exports.autoSort = (req, res) => {
         }
 
         //If K is at end of topic list then restart to beginning
-        if (k >= topicList.size - 1) {
+        if (k >= topicList.length - 1) {
+          console.log("5th restart list")
           k = 0;
         }
         else {
           k++;
+          console.log("6th k: ", k)
         }
       }
     }
+    console.log("7th start: ", start)
     start++;
-    if (start >= topicList.size) {
+    if (start >= topicList.length) {
+      console.log("8th restart starting index")
       start = 0;
     }
     k = start;
+    console.log("9th k: ", k)
   }
 
   for (let i = 0; i < groupList.length; i++) {
