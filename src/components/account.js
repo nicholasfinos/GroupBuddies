@@ -7,7 +7,7 @@ import { Typography } from "@material-ui/core";
 import { Button } from "@material-ui/core";
 import { Link } from "react-router-dom";
 
-const paperStyling = { padding: 40, height: '70vh', width: '80%', margin: '20px auto', background: '#fff0e7', borderRadius: 20/*border: '2px solid'*/ }
+const paperStyling = { padding: 40, height: '100%', width: '80%', margin: '20px auto', background: '#fff0e7', borderRadius: 20/*border: '2px solid'*/ }
 const btnstyle = { margin: '40px 0', borderRadius: 10, width: '75%', align: 'center', marginLeft: '13%' }
 const typ1 = { fontWeight: 600, fontFamily: "Arial" }
 

@@ -1,8 +1,7 @@
 import React from "react";
-import { Button, Input } from "@material-ui/core";
+import { Button} from "@material-ui/core";
 import { Grid, ListItem } from "@material-ui/core";
 import EnrollmentDataService from "../services/enrollment-service";
-import SubjectDataService from "../services/subject-service";
 import { Paper} from "@material-ui/core";
 import "./studentProfile.css";
 
@@ -181,13 +180,18 @@ class CreateSubjectEnrollment extends React.Component {
     const { topics, currentIndex, addedTopics, currentSubject, subjects, tutorials, addedTutorials, } = this.state;
     return (
       <div>
-        <form>
-        <h3 style={{textAlign:"center"}}>Create a Subject Enrollment</h3>
-        <Paper bgcolor sx={{ borderColor: 'black' }} elevation={10} style={paperStyling}>
         
+        <form>
+        
+
+        <Paper bgcolor sx={{ borderColor: 'black' }} elevation={10} style={paperStyling}>
+        <h3 style={{textAlign:"center"}}>Create a Subject Enrollment</h3>
+        <hr className="new5"></hr>
         {this.state.submitted ? (
           <div>
-            <p><i>You created a subject enrollment successfully!</i></p>
+            <p>You created a subject enrollment successfully!</p>
+            <br />
+            <p>Your enrollment is being processed. Visit "View subject enrollments" to view enrollment status</p>
             <Button size="small" variant="contained" onClick={this.newEnrollment}>{" "}Create a Subject Enrollment{" "}</Button>
           </div>
         ) : (
@@ -218,7 +222,7 @@ class CreateSubjectEnrollment extends React.Component {
                 </Grid>
                   <Grid item md={6}>
                     {currentSubject ? (
-                      <div className="word-break">
+                      <div>
                         <h4>Subject Topics</h4>
                         <i>Please select your strengths from the list:</i>
                         <br />
@@ -238,11 +242,10 @@ class CreateSubjectEnrollment extends React.Component {
                       <div></div>
                     )}
                   </Grid>
-                  <Grid item md={6} style={{ minWidth: "400px" }}>
-
+                  <Grid item md={6} className="info-card" style={{ minWidth: "400px" }}>
                     <h4>Your Subject Strengths</h4>
                     <i>Click a strength below to deselect it:</i>
-                    <div className="word-break">
+                    <div >
                       {addedTopics.map((addedTopic, index) => (
                         <ListItem style={{ padding: "20px", minWidth: "300px" }} selected={index === currentIndex} onClick={() => this.deleteTopic(index)} divider button key={index}>
                           {" "}{addedTopic}
@@ -258,6 +261,8 @@ class CreateSubjectEnrollment extends React.Component {
                       <div style={{paddingTop: "30px", minWidth: "400px"}}>
                         <h4>Tutorials</h4>
                         <i>Please select a tutorial from the list:</i>
+                        <br />
+                        <i>(Maximum of one)</i>
                         <div style={skillsScrollable}>
                           {tutorials && tutorials.map((tutorial, index) => (
                             <ListItem style={{padding: "20px", marginLeft: "15px", maxWidth: "400px"}} onClick={() => this.addTutorial(tutorial)} divider button key={index}>
@@ -271,15 +276,17 @@ class CreateSubjectEnrollment extends React.Component {
                     )}
                   </Grid>
                   <Grid item md={6} style={{ paddingTop: "30px", minWidth: "400px" }}>
-
+                      <div className="info-card" style={{height:"450px"}}>
                     <h4 >Chosen Tutorial</h4>
                     <i>Click a tutorial below to deselect it:</i>
+                    
                     <div >
                       {addedTutorials.map((addedTutorial, index) => (
                         <ListItem style={{ padding: "20px", minWidth: "300px" }} selected={index === currentIndex} onClick={() => this.deleteTutorial(index)} divider button key={index}>
                           {"Tutorial: " + addedTutorial.number + " | Day: " + addedTutorial.day + " | Time Slot: " + addedTutorial.timeSlot}
                         </ListItem>
                       ))}
+                    </div>
                     </div>
                   </Grid>
                   <br />
