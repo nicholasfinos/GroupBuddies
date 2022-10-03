@@ -1,13 +1,13 @@
 import React from "react";
-import { Button} from "@material-ui/core";
+import { Button } from "@material-ui/core";
 import { Grid, ListItem } from "@material-ui/core";
 import EnrollmentDataService from "../services/enrollment-service";
-import { Paper} from "@material-ui/core";
+import { Paper } from "@material-ui/core";
 import "./studentProfile.css";
 
 const paperStyling = { padding: 40, height: '100%', width: '100%', margin: '20px auto', background: '#fff0e7', borderRadius: 20/*border: '2px solid'*/ }
-const subjectScrollable = {overflowY: 'auto', overflowX:'hidden', maxHeight:'450px', marginLeft:'30%', width:'400px'}
-const skillsScrollable = {overflowY: 'auto', overflowX:'hidden', maxHeight:'400px', width:'100%', flexDirection: "column", minWidth: "400px", maxWidth:"500px", padding:"20px"}  
+const subjectScrollable = { overflowY: 'auto', overflowX: 'hidden', maxHeight: '450px', marginLeft: '30%', width: '400px' }
+const skillsScrollable = { overflowY: 'auto', overflowX: 'hidden', maxHeight: '400px', width: '100%', flexDirection: "column", minWidth: "400px", maxWidth: "500px", padding: "20px" }
 
 class CreateSubjectEnrollment extends React.Component {
   constructor(props) {
@@ -87,12 +87,12 @@ class CreateSubjectEnrollment extends React.Component {
     var alreadyExists = false;
     for (i = 0; i <= topicsList.length; i++) {
       if (topicsList[i] === topic) {
-         alreadyExists = true;
-         return;
+        alreadyExists = true;
+        return;
       } else {
-         alreadyExists = false;
-        }
-     }
+        alreadyExists = false;
+      }
+    }
 
     if (alreadyExists === false && topicsList.length < 3) {
       topicsList.push(topic);
@@ -137,7 +137,7 @@ class CreateSubjectEnrollment extends React.Component {
     });
   }
 
-  
+
 
   saveEnrollment = () => {
     const data = {
@@ -150,7 +150,7 @@ class CreateSubjectEnrollment extends React.Component {
     EnrollmentDataService.create(this.state.username, data)
       .then((response) => {
         this.setState({
-          submitted : true
+          submitted: true
         })
         console.log(response.data);
       })
@@ -180,133 +180,127 @@ class CreateSubjectEnrollment extends React.Component {
     const { topics, currentIndex, addedTopics, currentSubject, subjects, tutorials, addedTutorials, } = this.state;
     return (
       <div>
-        
         <form>
-        
-
-        <Paper bgcolor sx={{ borderColor: 'black' }} elevation={10} style={paperStyling}>
-        <h3 style={{textAlign:"center"}}>Create a Subject Enrollment</h3>
-        <hr className="new5"></hr>
-        {this.state.submitted ? (
-          <div>
-            <p>You created a subject enrollment successfully!</p>
-            <br />
-            <p>Your enrollment is being processed. Visit "View subject enrollments" to view enrollment status</p>
-            <Button size="small" variant="contained" onClick={this.newEnrollment}>{" "}Create a Subject Enrollment{" "}</Button>
-          </div>
-        ) : (
-          <Grid>
-            {!this.state.selectedSubject ? (
-              <Grid>
-              <label htmlFor="subject-name"><i>Please select a Subject to enroll into:</i></label>
-              <br/>
-              <br/>
-            <div style={subjectScrollable}>
-              {subjects && subjects.map((subject, index) => (
-                <ListItem style={{ padding: "20px", marginLeft: "15px", maxWidth: "400px" }} selected={index === currentIndex} onClick={() => this.setActiveAddSubject(subject, index)} divider button key={index}>
-                  {subject.subjectName}
-                </ListItem>
-              ))}
-            </div>
-            </Grid>
+          <Paper bgcolor sx={{ borderColor: 'black' }} elevation={10} style={paperStyling}>
+            <h3 style={{ textAlign: "center" }}>Create a Subject Enrollment</h3>
+            <hr className="new5"></hr>
+            {this.state.submitted ? (
+              <div>
+                <p>You created a subject enrollment successfully!</p>
+                <br />
+                <p>Your enrollment is being processed. Visit "View subject enrollments" to view enrollment status</p>
+                <Button size="small" variant="contained" onClick={this.newEnrollment}>{" "}Create a Subject Enrollment{" "}</Button>
+              </div>
             ) : (
-              <Grid container>
-                <Grid item md={12}>
-                <br />
-                <div style={{ alignContent: "space-between" }}>
-                  <h4>Selected Subject: </h4>
-                  <i><h4> {this.state.currentSubject.subjectName}</h4>
-                  </i>
-                </div>
-                <br />
-                </Grid>
-                  <Grid item md={6}>
-                    {currentSubject ? (
-                      <div>
-                        <h4>Subject Topics</h4>
-                        <i>Please select your strengths from the list:</i>
-                        <br />
-                        <i>(Maximum of three)</i>
-                        <div style={skillsScrollable}>
-                          <div className="word-break">
-                          {topics && topics.map((topic, index) => (
-                            <ListItem style={{ padding: "20px", marginLeft: "15px", maxWidth: "500px" }} onClick={() => this.addTopic(topic)} divider button key={index}>
-                              {topic}
-                            </ListItem>
-                          ))}
-                          </div>
-                          
-                        </div>
-                        </div>
-                    ) : (
-                      <div></div>
-                    )}
-                  </Grid>
-                  <Grid item md={6} className="info-card" style={{ minWidth: "400px" }}>
-                    <h4>Your Subject Strengths</h4>
-                    <i>Click a strength below to deselect it:</i>
-                    <div >
-                      {addedTopics.map((addedTopic, index) => (
-                        <ListItem style={{ padding: "20px", minWidth: "300px" }} selected={index === currentIndex} onClick={() => this.deleteTopic(index)} divider button key={index}>
-                          {" "}{addedTopic}
+              <Grid>
+                {!this.state.selectedSubject ? (
+                  <Grid>
+                    <label htmlFor="subject-name"><i>Please select a Subject to enroll into:</i></label>
+                    <br />
+                    <br />
+                    <div style={subjectScrollable}>
+                      {subjects && subjects.map((subject, index) => (
+                        <ListItem style={{ padding: "20px", marginLeft: "15px", maxWidth: "400px" }} selected={index === currentIndex} onClick={() => this.setActiveAddSubject(subject, index)} divider button key={index}>
+                          {subject.subjectName}
                         </ListItem>
                       ))}
                     </div>
                   </Grid>
-                  <Grid item md={12}>
-                    {/* <hr className="new5"></hr> */}
-                  </Grid>
-                  <Grid item md={6}> 
-                    {currentSubject ? (
-                      <div style={{paddingTop: "30px", minWidth: "400px"}}>
-                        <h4>Tutorials</h4>
-                        <i>Please select a tutorial from the list:</i>
-                        <br />
-                        <i>(Maximum of one)</i>
-                        <div style={skillsScrollable}>
-                          {tutorials && tutorials.map((tutorial, index) => (
-                            <ListItem style={{padding: "20px", marginLeft: "15px", maxWidth: "400px"}} onClick={() => this.addTutorial(tutorial)} divider button key={index}>
-                              {"Tutorial: " + tutorial.number + " | Day: " + tutorial.day + " | Time Slot: " + tutorial.timeSlot}
+                ) : (
+                  <Grid container>
+                    <Grid item md={12}>
+                      <br />
+                      <div style={{ alignContent: "space-between" }}>
+                        <h4>Selected Subject: </h4>
+                        <i><h4> {this.state.currentSubject.subjectName}</h4>
+                        </i>
+                      </div>
+                      <br />
+                    </Grid>
+                    <Grid item md={6}>
+                      {currentSubject ? (
+                        <div>
+                          <h4>Subject Topics</h4>
+                          <i>Please select your strengths from the list:</i>
+                          <br />
+                          <i>(Maximum of three)</i>
+                          <div style={skillsScrollable}>
+                            <div className="word-break">
+                              {topics && topics.map((topic, index) => (
+                                <ListItem style={{ padding: "20px", marginLeft: "15px", maxWidth: "500px" }} onClick={() => this.addTopic(topic)} divider button key={index}>
+                                  {topic}
+                                </ListItem>
+                              ))}
+                            </div>
+
+                          </div>
+                        </div>
+                      ) : (
+                        <div></div>
+                      )}
+                    </Grid>
+                    <Grid item md={6} className="info-card" style={{ minWidth: "400px" }}>
+                      <h4>Your Subject Strengths</h4>
+                      <i>Click a strength below to deselect it:</i>
+                      <div >
+                        {addedTopics.map((addedTopic, index) => (
+                          <ListItem style={{ padding: "20px", minWidth: "300px" }} selected={index === currentIndex} onClick={() => this.deleteTopic(index)} divider button key={index}>
+                            {" "}{addedTopic}
+                          </ListItem>
+                        ))}
+                      </div>
+                    </Grid>
+                    <Grid item md={12}>
+                      {/* <hr className="new5"></hr> */}
+                    </Grid>
+                    <Grid item md={6}>
+                      {currentSubject ? (
+                        <div style={{ paddingTop: "30px", minWidth: "400px" }}>
+                          <h4>Tutorials</h4>
+                          <i>Please select a tutorial from the list:</i>
+                          <br />
+                          <i>(Maximum of one)</i>
+                          <div style={skillsScrollable}>
+                            {tutorials && tutorials.map((tutorial, index) => (
+                              <ListItem style={{ padding: "20px", marginLeft: "15px", maxWidth: "400px" }} onClick={() => this.addTutorial(tutorial)} divider button key={index}>
+                                {"Tutorial: " + tutorial.number + " | Day: " + tutorial.day + " | Time Slot: " + tutorial.timeSlot}
                               </ListItem>
+                            ))}
+                          </div>
+                        </div>
+                      ) : (
+                        <div></div>
+                      )}
+                    </Grid>
+                    <Grid item md={6} style={{ paddingTop: "30px", minWidth: "400px" }}>
+                      <div className="info-card" style={{ height: "450px" }}>
+                        <h4 >Chosen Tutorial</h4>
+                        <i>Click a tutorial below to deselect it:</i>
+                        <div >
+                          {addedTutorials.map((addedTutorial, index) => (
+                            <ListItem style={{ padding: "20px", minWidth: "300px" }} selected={index === currentIndex} onClick={() => this.deleteTutorial(index)} divider button key={index}>
+                              {"Tutorial: " + addedTutorial.number + " | Day: " + addedTutorial.day + " | Time Slot: " + addedTutorial.timeSlot}
+                            </ListItem>
                           ))}
                         </div>
                       </div>
-                    ) : (
-                      <div></div>
-                    )}
-                  </Grid>
-                  <Grid item md={6} style={{ paddingTop: "30px", minWidth: "400px" }}>
-                      <div className="info-card" style={{height:"450px"}}>
-                    <h4 >Chosen Tutorial</h4>
-                    <i>Click a tutorial below to deselect it:</i>
-                    
-                    <div >
-                      {addedTutorials.map((addedTutorial, index) => (
-                        <ListItem style={{ padding: "20px", minWidth: "300px" }} selected={index === currentIndex} onClick={() => this.deleteTutorial(index)} divider button key={index}>
-                          {"Tutorial: " + addedTutorial.number + " | Day: " + addedTutorial.day + " | Time Slot: " + addedTutorial.timeSlot}
-                        </ListItem>
-                      ))}
-                    </div>
-                    </div>
-                  </Grid>
-                  <br />
-                  <br />
-                  <Grid item md={12}>
+                    </Grid>
                     <br />
                     <br />
-
-                  <Button size="small" color="primary" variant="contained" style={{ maxWidth: "700px", marginRight: "10px" }} onClick={this.saveEnrollment}>Submit</Button>
-                  <Button size="small" color="primary" variant="contained" style={{ maxWidth: "700px", marginLeft: "10px" }} onClick={() => window.location.reload()}>{" "}Back{" "}</Button>
-
+                    <Grid item md={12}>
+                      <br />
+                      <br />
+                      <Button size="small" color="primary" variant="contained" style={{ maxWidth: "700px", marginRight: "10px" }} onClick={this.saveEnrollment}>Submit</Button>
+                      <Button size="small" color="primary" variant="contained" style={{ maxWidth: "700px", marginLeft: "10px" }} onClick={() => window.location.reload()}>{" "}Back{" "}</Button>
+                    </Grid>
                   </Grid>
+                )}
+                <p>{this.state.message}</p>
               </Grid>
             )}
-            <p>{this.state.message}</p>
-          </Grid>
-        )}
-        </Paper>
-      </form>
-      </div>     
+          </Paper>
+        </form>
+      </div>
     );
   };
 }

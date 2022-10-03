@@ -1,10 +1,11 @@
-.info-card{
-  background-color: white;  
+.info-card {
+  background-color: white;
   padding: 20px;
-    border-radius: 25px;
-    width: 100%;
-    margin-top: 0px;
+  border-radius: 25px;
+  width: 100%;
+  margin-top: 0px;
 }
+
 .skills-box {
   background-color: blue;
   padding: 20px;
@@ -13,7 +14,7 @@
   height: 250px;
   margin-top: 0px;
 }
-.word-break{
+
+.word-break {
   word-wrap: break-word;
 }
-
