@@ -33,13 +33,15 @@ exports.getUser = (req, res) => {
 
 exports.updateStudent = (req, res) => {
   User.findOneAndUpdate({
-    username: req.body.username,
-    year: req.body.year,
-    course: req.body.course,
-    studentName: req.body.studentName,
-    preferredName: req.body.preferredName
-  })
-    .exec(async (err, user) => {
+    username: req.params.username }, { 
+      $set: { 
+        year: req.body.year,
+        course: req.body.course,
+        studentName: req.body.studentName,
+        preferredName: req.body.preferredName
+      } 
+    })
+    .then(async (err, user) => {
       if (err) {
         res.status(500).send({ message: err });
         return;
@@ -58,6 +60,7 @@ exports.updateStudent = (req, res) => {
         course: user.course,
         studentName: user.studentName,
         preferredName: user.preferredName,
+        email: user.email
       });
     })
 }
