@@ -23,8 +23,8 @@ const getOwnerBoard = () => {
   return axios.get(API_URL + "owner", { headers: authHeader() });
 };
 
-const updateStudent = async (data) => {
-  return await axios.patch("http://localhost:8080/api/student/", data);
+const updateStudent = async (username, data) => {
+  return await axios.patch("http://localhost:8080/api/student/" + username, data);
 };
 
 const getUser = (username) => {

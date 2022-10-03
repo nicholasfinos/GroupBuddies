@@ -82,8 +82,7 @@ class Account extends Component {
             <div style={{ fontFamily: "Times New Roman" }}>
               <>
                 <header style={{ textAlign: "center" }}>
-                  <h3>Test</h3>
-                  {/* <h3><strong>{currentUser[0]?.username}'s</strong> Account</h3> */}
+                  <h3><strong>{currentUser[0]?.username}'s</strong> Account</h3>
                 </header>
                 <p>
                   <strong>Email:</strong> {currentUser[0]?.email}
