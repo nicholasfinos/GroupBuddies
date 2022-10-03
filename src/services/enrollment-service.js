@@ -9,12 +9,32 @@ class EnrollmentDataService {
         return http.get(`/enrollment/create/${username}`);
     }
 
+    getTutorialEnrollments(){
+        return http.get(`http://localhost:8080/api/enrollment/tutorialEnrollments`);
+    }
+
     // getAll(username){
     //     return http.get(`/enrollment/view/${username}`);
     // }
 
     viewEnrollmentByUsername(username){
         return http.get(`/enrollment/view/${username}`);
+    }
+
+    findTutorial(subjectName) {
+        return http.get(`/enrollment/findTutorial/${subjectName}`)
+    }
+
+    view(username) {
+        return http.get(`/enrollment/request/${username}`);
+    }
+    
+    viewEnrollmentBySubjectName(subjectName){
+        return http.get(`/enrollment/viewEnrollment/${subjectName}`);
+    }
+
+    updateEnrollment(data){
+        return http.put("/enrollment/updateEnrollment/", data);
     }
 }
 
