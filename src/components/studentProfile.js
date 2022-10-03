@@ -95,14 +95,14 @@ export default class StudentProfile extends React.Component {
                 <label className="details">Degree:</label>
                 <select className="info-card" value={this.state.course} onChange={this.handleCourseChange}>
                   <option value="" disabled selected>Select your option</option>
-                  <option value="1">Bachelor of Engineering (Honours)</option>
-                  <option value="2">Bachelor of Engineering Science</option>
-                  <option value="3">Bachelor of Engineering Science Bachelor of Laws</option>
-                  <option value="4">Bachelor of Engineering (Honours) Bachelor of Creative Intelligence and Innovation</option>
-                  <option value="5">Bachelor of Engineering (Honours) Bachelor of Business</option>
-                  <option value="6">Bachelor of Engineering (Honours) Bachelor of International Studies</option>
-                  <option value="7">Bachelor of Engineering (Honours) Bachelor of Medical Science</option>
-                  <option value="8">Bachelor of Engineering (Honours) Bachelor of Science</option>
+                  <option value="Engineering">Bachelor of Engineering (Honours)</option>
+                  <option value="EngineeringScience">Bachelor of Engineering Science</option>
+                  <option value="Laws">Bachelor of Engineering Science Bachelor of Laws</option>
+                  <option value="BCII">Bachelor of Engineering (Honours) Bachelor of Creative Intelligence and Innovation</option>
+                  <option value="Business">Bachelor of Engineering (Honours) Bachelor of Business</option>
+                  <option value="International">Bachelor of Engineering (Honours) Bachelor of International Studies</option>
+                  <option value="Medical Science">Bachelor of Engineering (Honours) Bachelor of Medical Science</option>
+                  <option value="Science">Bachelor of Engineering (Honours) Bachelor of Science</option>
                 </select>
               </Grid>
             </Grid>

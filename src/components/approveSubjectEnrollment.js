@@ -177,7 +177,7 @@ class ApproveSubjectEnrollment extends React.Component {
             <div style={{width:"100%", marginLeft:"5%", textAlign:"center", maxWidth:"400px"}}>
           {currentEnrollment ? (
               <div>
-                <div style={{ minWidth: "400px" }}>
+                <div style={{ minWidth: "400px", maxWidth: "400px" }}>
                 <h3 style={{textAlign:"center"}}>Details</h3>
                   <label><strong>Name:</strong></label>{" "}{currentEnrollment.username}
                   <br />
