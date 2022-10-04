@@ -3,7 +3,9 @@ import { ListItem } from "@material-ui/core";
 import TutorDataService from "../services/tutor-service";
 import StudentProfileDataServcie from "../services/studentProfile-service";
 import SubjectDataService from "../services/subject-service";
+import { Link, Switch, Route } from "react-router-dom";
 import styles from "./tutorialPage.css";
+import { Button } from "@material-ui/core";
 import viewTutorial from "../components/viewTutorial";
 
 class TutorialPage extends React.Component {
@@ -20,7 +22,8 @@ class TutorialPage extends React.Component {
       groupMembers: [],
       tutorial: null,
       currentIndex: null,
-      groupSize: null
+      groupSize: null,
+      message: ""
     };
   }
 
@@ -91,9 +94,6 @@ class TutorialPage extends React.Component {
           tutorial: response.data,
           groupList: response.data.groups
         })
-
-
-        // this.setCurrentGroup(response.data.groups[response.data.groups.length - 1]);
       })
       .catch(e => {
         console.log(e);
@@ -128,7 +128,6 @@ class TutorialPage extends React.Component {
       }
       TutorDataService.removeGroup(data)
         .then(response => {
-          //How do you refresh page
           this.setState({
             groupList: response.data.groups,
             tutorial: response.data,
@@ -163,37 +162,64 @@ class TutorialPage extends React.Component {
   }
 
   onChangeGroupSize(e) {
+    if (parseInt(e.target.value) < 1){
+      this.setState({message: "Group Size cannot be less than 1!"})
+    } else {
+      this.setState({message: ""})
+    }
     this.setState({ groupSize: e.target.value });
   }
 
   autoSort() {
-    SubjectDataService.findSubjectByName(this.state.tutorial.subjectName)
-    .then(response => {
-      var data = {
-        studentList: this.state.studentList,
-        tutorial: this.state.tutorial,
-        groupSize: this.state.groupSize,
-        subject: response.data[0]
-      }
-      TutorDataService.autoSort(this.state.tutorial._id, data)
+    if (this.state.groupSize >= 1) {
+      SubjectDataService.findSubjectByName(this.state.tutorial.subjectName)
         .then(response => {
+          var data = {
+            studentList: this.state.studentList,
+            tutorial: this.state.tutorial,
+            groupSize: this.state.groupSize,
+            subject: response.data[0]
+          }
+          TutorDataService.autoSort(this.state.tutorial._id, data)
+            .then(response => {
+              console.log(response)
+            })
+            .catch(e => {
+              console.log(e);
+            });
+
+          const URL = String(this.props.location.pathname);
+          const _id = String(URL.substring(URL.lastIndexOf("/") + 1, URL.length));
+          TutorDataService.getTutorial(_id)
+            .then(response => {
+              this.setState({
+                tutorial: response.data,
+                studentList: response.data.UnselectedStudents,
+                groupList: response.data.groups,
+                groupSize: null
+              });
+            })
         })
         .catch(e => {
           console.log(e);
         });
-    })
-    .catch(e => {
-      console.log(e);
-    });
+
+    }
+    else {
+      console.log("Group Size value must be greater then 1");
+    }
   }
 
   render() {
-    const { studentList, groupList, currentStudent, currentGroup, groupMembers, currentIndex } = this.state;
+    const { studentList, groupList, currentStudent, currentGroup, groupMembers, currentIndex, message, tutorial } = this.state;
     return (
       <div className="layout">
         <div className="header">
           <label style={{ margin: "0px", fontSize: "36px" }}>Tutorial 1</label>
-          <button className="button" style={{ width: "100px", marginTop: "0px" }}>Return</button>
+          <Link className="button" style={{ width: "100px", marginTop: "0px", WebkitTextFillColor: "black" }} to={"/tutor/viewTutorial/" + tutorial.tutor }>Return</Link>
+          <Switch>
+            <Route path={"/tutor/viewTutorial/" + tutorial.tutor} component={viewTutorial} />
+          </Switch>
         </div>
         <div className="main">
           <div className="column">
@@ -210,6 +236,7 @@ class TutorialPage extends React.Component {
             <div>
               <label htmlFor="groupSize" >Number of Groups to Create: </label>
               <input className="form-control" style={{ maxWidth: '500px' }} type="text" name="groupSize" onChange={this.onChangeGroupSize} />
+              { message ? (<div>{message}</div>): (<div></div>)}
             </div>
             <button className="button" onClick={() => { this.autoSort() }}>Automatic Sort</button>
           </div>
@@ -241,13 +268,13 @@ class TutorialPage extends React.Component {
             <label>Student Info</label>
             <div className="box">
               <ListItem>
-                {currentStudent && ("Name: " + currentStudent.username +  " | Subject Topics: " + currentStudent.subjectTopics)}
+                {currentStudent && ("Name: " + currentStudent.username + " | Subject Topics: " + currentStudent.subjectTopics)}
               </ListItem>
             </div>
             <button className="button" onClick={() => { this.addStudentGroup() }}>Add to Group</button>
           </div>
           <div className="column">
-            <label>Students</label>
+            <label>Ungrouped Students</label>
             <div className="box">
               {studentList && studentList.map((student, index) => (
                 <ListItem style={{ padding: "20px", marginLeft: "15px", maxWidth: "200px" }} selected={index === currentIndex} onClick={() => this.setCurrentStudent(student)} divider button key={index}>

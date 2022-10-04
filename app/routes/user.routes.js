@@ -14,7 +14,7 @@ module.exports = function(app) {
 
   app.get("/api/test/student", [authJwt.verifyToken], controller.studentBoard);
   
-  app.patch("/api/student", controller.updateStudent);
+  app.patch("/api/student/:username", controller.updateStudent);
 
   app.get(
     "/api/test/tutor",
