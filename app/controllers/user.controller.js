@@ -69,7 +69,7 @@ exports.updateStudent = (req, res) => {
 
 exports.createStudyGroup = (req, res) => {
   User.find({
-    username: req.body.owner
+    username: req.body.ownerName
   })
     .then((data) => {
       Role.find({
@@ -82,6 +82,7 @@ exports.createStudyGroup = (req, res) => {
 
           const studyGroup = new StudyGroup({
             owner: data[0]._id,
+            ownerName: data[0].username,
             name: req.body.groupName,
             subjectName: req.body.subject
           })

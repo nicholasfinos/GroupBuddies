@@ -746,7 +746,8 @@ async function initial() {
           });
       })
 
-      settingUpProfile();
+      // settingUpProfile();
+      // addingToTutorials();
 
       /*
       -------------------
@@ -765,8 +766,7 @@ async function initial() {
       5. Comment "addStudentsToSubject();"
       */
     }
-  }
-  )
+  })
   
   async function settingUpProfile() {
     StudentProfile.create({
@@ -992,16 +992,15 @@ async function initial() {
     })
     console.log('creating Yeran Test Group - the subject')
   }
-  // addingToTutorials();
 }
 
 async function addingToTutorials() {
   StudentProfile.find({ username: "lachlanSinclair" })
     .then((x) => {
       var data = {
-        _id: x[0]?.id,
-        username: x[0]?.username,
-        subjectTopics: x[0]?.subjectTopics        
+        _id: x[0].id,
+        username: x[0].username,
+        subjectTopics: x[0].subjectTopics        
       };
       Tutorial.updateOne(
         { subjectName: "Yeran Test Group" },
@@ -1020,9 +1019,9 @@ async function addingToTutorials() {
   StudentProfile.find({ username: "graceBilliris" })
   .then((x) => {
     var data = {
-      _id: x[0]?.id,
-      username: x[0]?.username,
-      subjectTopics: x[0]?.subjectTopics        
+      _id: x[0].id,
+      username: x[0].username,
+      subjectTopics: x[0].subjectTopics        
     };
     Tutorial.updateOne(
       { subjectName: "Yeran Test Group" },
@@ -1041,9 +1040,9 @@ async function addingToTutorials() {
   StudentProfile.find({ username: "yeran" })
     .then((x) => {
       var data = {
-        _id: x[0]?.id,
-        username: x[0]?.username,
-        subjectTopics: x[0]?.subjectTopics        
+        _id: x[0].id,
+        username: x[0].username,
+        subjectTopics: x[0].subjectTopics        
       };
       Tutorial.updateOne(
         { subjectName: "Yeran Test Group" },
@@ -1062,9 +1061,9 @@ async function addingToTutorials() {
     StudentProfile.find({ username: "ashishChadha" })
     .then((x) => {
       var data = {
-        _id: x[0]?.id,
-        username: x[0]?.username,
-        subjectTopics: x[0]?.subjectTopics        
+        _id: x[0].id,
+        username: x[0].username,
+        subjectTopics: x[0].subjectTopics        
       };
       Tutorial.updateOne(
         { subjectName: "Yeran Test Group" },
@@ -1083,9 +1082,9 @@ async function addingToTutorials() {
     StudentProfile.find({ username: "jeromeSario" })
     .then((x) => {
       var data = {
-        _id: x[0]?.id,
-        username: x[0]?.username,
-        subjectTopics: x[0]?.subjectTopics        
+        _id: x[0].id,
+        username: x[0].username,
+        subjectTopics: x[0].subjectTopics        
       };
       Tutorial.updateOne(
         { subjectName: "Yeran Test Group" },
@@ -1104,9 +1103,9 @@ async function addingToTutorials() {
     StudentProfile.find({ username: "lukaRyan" })
     .then((x) => {
       var data = {
-        _id: x[0]?.id,
-        username: x[0]?.username,
-        subjectTopics: x[0]?.subjectTopics        
+        _id: x[0].id,
+        username: x[0].username,
+        subjectTopics: x[0].subjectTopics        
       };
       Tutorial.updateOne(
         { subjectName: "Yeran Test Group" },
@@ -1125,9 +1124,9 @@ async function addingToTutorials() {
     StudentProfile.find({ username: "nicholasFinos" })
     .then((x) => {
       var data = {
-        _id: x[0]?.id,
-        username: x[0]?.username,
-        subjectTopics: x[0]?.subjectTopics        
+        _id: x[0].id,
+        username: x[0].username,
+        subjectTopics: x[0].subjectTopics        
       };
       Tutorial.updateOne(
         { subjectName: "Yeran Test Group" },
@@ -1146,9 +1145,9 @@ async function addingToTutorials() {
     StudentProfile.find({ username: "student" })
     .then((x) => {
       var data = {
-        _id: x[0]?.id,
-        username: x[0]?.username,
-        subjectTopics: x[0]?.subjectTopics        
+        _id: x[0].id,
+        username: x[0].username,
+        subjectTopics: x[0].subjectTopics        
       };
       Tutorial.updateOne(
         { subjectName: "Yeran Test Group" },

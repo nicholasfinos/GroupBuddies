@@ -42,9 +42,13 @@ class SubjectDataService {
     getPeers(username, subjectName) {
         return http.get(`/request/create/${username}`, subjectName)
     }
-    
+
     updateSubject(data) {
         return http.put(`/subject/updateSubject/`, data)
+    }
+
+    getAllStudyGroups(subjectName) {
+        return http.get(`/subject/studyGroups`, { params: { subjectName } });
     }
 }
 

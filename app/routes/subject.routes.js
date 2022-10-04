@@ -27,5 +27,8 @@ module.exports = app => {
   //Update Subject with id
   router.put("/updateSubject", subject.updateSubject);
 
+  // get all the study groups in a subject
+  router.get("/studyGroups", subject.getSubjectStudyGroups);
+
   app.use('/api/subject', router);
 };

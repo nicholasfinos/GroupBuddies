@@ -3,6 +3,7 @@ import userService from "../services/user-service";
 import subjectService from "../services/subject-service";
 import "./externalGroups.css";
 import { ListItem } from "@material-ui/core";
+import { useHistory } from "react-router-dom";
 
 const CreateGroupPopup = ({ currentStudent }) => {
   const [groupName, setGroupName] = useState("");
@@ -10,7 +11,7 @@ const CreateGroupPopup = ({ currentStudent }) => {
   const [studentSubjects, setStudentSubjects] = useState([])
 
   useEffect(() => {
-    subjectService.viewAllSubjects(currentStudent)
+    subjectService.viewAllSubjects(currentStudent.username)
       .then((x) => {
         setStudentSubjects(x.data);
       })
@@ -19,7 +20,8 @@ const CreateGroupPopup = ({ currentStudent }) => {
   const createStudyGroup = () => {
     if (currentStudent && groupName !== "" && subject !== "") {
       const group = {
-        owner: currentStudent,
+        owner: currentStudent._id,
+        ownerName: currentStudent.username,
         groupName: groupName,
         subject: subject
       }
@@ -30,9 +32,11 @@ const CreateGroupPopup = ({ currentStudent }) => {
         }).catch(error => {
           console.log(error);
         });
-    }
 
-    window.location.reload();
+      window.location.reload();
+    } else {
+      alert("Please select a subject and name your group")
+    }
   }
 
   return (
@@ -65,10 +69,11 @@ const ExternalGroup = () => {
   const [currentGroup, setCurrentGroup] = useState();
   const [isCreating, setIsCreating] = useState(false);
 
-  useEffect(() => { // Get the student
-    const URL = window.location.href;
-    const username = URL.substring(URL.lastIndexOf("/") + 1, URL.length);
+  let history = useHistory();
+  const URL = window.location.href;
+  const username = URL.substring(URL.lastIndexOf("/") + 1, URL.length);
 
+  useEffect(() => { // Get the student
     userService.getUser(username)
       .then((data) => {
         setCurrentStudent(data.data[0]);
@@ -87,7 +92,10 @@ const ExternalGroup = () => {
   const deleteCurrentGroup = () => {
     userService.deleteStudyGroup(currentStudent._id);
     window.location.reload();
+  }
 
+  const handleFindGroups = () => {
+    history.push(`/study/find/${username}`);
   }
 
   return (
@@ -108,7 +116,7 @@ const ExternalGroup = () => {
           {currentGroup &&
             <ListItem >
               <div className="columnDiv" style={{ width: "100%" }}>
-                {currentGroup.owner}
+                {currentGroup.ownerName}
                 <button onClick={() => deleteCurrentGroup()}>Delete Current Group</button>
               </div>
             </ListItem>
@@ -116,10 +124,10 @@ const ExternalGroup = () => {
         </div>
       </div>
       <div className="columnDiv">
-        <button>Find Groups</button>
+        <button onClick={() => handleFindGroups()}>Find Groups</button>
         <button onClick={() => setIsCreating(!isCreating)}>Create a Group</button>
         {(isCreating) &&
-          <CreateGroupPopup currentStudent={currentStudent.username} />
+          <CreateGroupPopup currentStudent={currentStudent} />
         }
       </div>
     </div>

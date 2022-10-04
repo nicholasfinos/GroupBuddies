@@ -2,6 +2,7 @@ const Subject = require("../models/subject.model");
 const User = require("../models/user.model");
 const Tutorial = require("../models/tutorial.model");
 const StudentProfile = require("../models/studentProfile.model");
+const StudyGroup = require("../models/studyGroup.model");
 
 exports.viewSubjects = (req, res) => {
   //Display all of the subject that is associated to User
@@ -233,3 +234,15 @@ exports.updateSubject = (req, res) => {
       });
     });
 };
+
+// Get all the study groups for the subject
+exports.getSubjectStudyGroups = (req, res) => {
+  StudyGroup.find({
+    subjectName: req.query.subjectName
+  })
+    .then(data => {
+      res.status(200).send({ data });
+    })
+
+  // filter the study groups to the ones that I don't onw and that I'm not in
+}

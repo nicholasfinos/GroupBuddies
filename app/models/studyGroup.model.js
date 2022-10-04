@@ -7,6 +7,7 @@ const StudyGroup = mongoose.model(
       type: mongoose.Schema.Types.ObjectId,
       ref: "User"
     },
+    ownerName: String, 
     name: String,
     members: Array,
     subjectName: String

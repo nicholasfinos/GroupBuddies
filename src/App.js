@@ -30,6 +30,7 @@ import EditSubject from "./components/editSubject";
 import ApproveSubjectEnrollment from "./components/approveSubjectEnrollment";
 import TutorialPage from "./components/tutorialPage";
 import ExternalGroup from "./components/externalGroup";
+import FindExternalGroups from "./components/findExternalGroups";
 
 const App = () => {
   const [ShowSubjectCoordinator, setShowSubjectCoordinator] = useState(false);
@@ -135,6 +136,7 @@ const App = () => {
             <Route path={"/subject/" + currentUser?.username + "/"} component={EditSubject} />
             <Route path={"/tutorial/" + currentUser?.id + "/"} component={TutorialPage} />
             <Route path={"/study/" + currentUser?.username + "/"} component={ExternalGroup} />
+            <Route path={"/study/find/" + currentUser?.username + "/"} component={FindExternalGroups} />
           </Switch>
         </div>
       </>
