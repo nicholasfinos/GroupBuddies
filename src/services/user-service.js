@@ -43,6 +43,14 @@ const deleteStudyGroup = (groupId) => {
   return axios.delete(`http://localhost:8080/api/deleteStudyGroup/${groupId}`);
 }
 
+const joinStudyGroup = (data) => {
+  return axios.patch(`http://localhost:8080/api/joinStudyGroup/${data.groupId}`, data);
+}
+
+const leaveStudyGroup = (data) => {
+  return axios.patch(`http://localhost:8080/api/leaveStudyGroup/${data.groupId}`, data);
+}
+
 // eslint-disable-next-line
 export default {
   getPublicContent,
@@ -54,5 +62,7 @@ export default {
   getUser,
   createStudyGroup,
   getStudyGroups,
-  deleteStudyGroup
+  deleteStudyGroup,
+  joinStudyGroup,
+  leaveStudyGroup
 };

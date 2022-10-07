@@ -47,8 +47,8 @@ class SubjectDataService {
         return http.put(`/subject/updateSubject/`, data)
     }
 
-    getAllStudyGroups(subjectName) {
-        return http.get(`/subject/studyGroups`, { params: { subjectName } });
+    getAllStudyGroups(subjectName, studentName) {
+        return http.get(`/subject/studyGroups`, { params: { subjectName, studentName } });
     }
 }
 

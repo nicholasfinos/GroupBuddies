@@ -21,26 +21,29 @@ const FindExternalGroups = () => {
 
         subjectService.viewAllSubjects(data.data[0].username)
           .then((data) => {
-            console.log(data.data)
             setSubjects(data.data);
           })
       });
   }, []);
 
-  const getSubjectGroups = async (subject) => {
+  const getSubjectGroups = (subject) => {
     if (currentSubject !== subject) {
       setCurrentSubject(subject);
-      await subjectService.getAllStudyGroups(subject)
+
+      subjectService.getAllStudyGroups(subject, currentStudent.studentName)
         .then((data) => {
-          console.log(data.data.data);
           setAvailableGroups(data.data.data);
         });
     }
   }
 
   const joinStudyGroup = () => {
-    console.log("joined")
-    // create backend to join into the members part of the group
+    const data = {
+      groupId: currentGroup._id,
+      currentStudent: currentStudent.studentName
+    }
+
+    userService.joinStudyGroup(data);
   }
 
   return (

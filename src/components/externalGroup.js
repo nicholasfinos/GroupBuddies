@@ -82,7 +82,7 @@ const ExternalGroup = () => {
 
   useEffect(() => { // get the student's groups once their id has loaded
     if (currentStudent) {
-      userService.getStudyGroups(currentStudent._id)
+      userService.getStudyGroups(currentStudent.studentName)
         .then((data) => {
           setStudyGroups(data.data.data);
         })
@@ -91,6 +91,16 @@ const ExternalGroup = () => {
 
   const deleteCurrentGroup = () => {
     userService.deleteStudyGroup(currentStudent._id);
+    window.location.reload();
+  }
+
+  const leaveCurrentGroup = () => {
+    const data = {
+      groupId: currentGroup._id,
+      currentStudent: currentStudent.studentName
+    }
+
+    userService.leaveStudyGroup(data);
     window.location.reload();
   }
 
@@ -117,7 +127,11 @@ const ExternalGroup = () => {
             <ListItem >
               <div className="columnDiv" style={{ width: "100%" }}>
                 {currentGroup.ownerName}
-                <button onClick={() => deleteCurrentGroup()}>Delete Current Group</button>
+                {(currentGroup.ownerName === currentStudent.studentName) ?
+                  <button onClick={() => deleteCurrentGroup()}>Delete Current Group</button>
+                  :
+                  <button onClick={() => leaveCurrentGroup()}>Leave Current Group</button>
+                }
               </div>
             </ListItem>
           }

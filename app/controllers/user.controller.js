@@ -35,14 +35,15 @@ exports.getUser = (req, res) => {
 
 exports.updateStudent = (req, res) => {
   User.findOneAndUpdate({
-    username: req.params.username }, { 
-      $set: { 
-        year: req.body.year,
-        course: req.body.course,
-        studentName: req.body.studentName,
-        preferredName: req.body.preferredName
-      } 
-    })
+    username: req.params.username
+  }, {
+    $set: {
+      year: req.body.year,
+      course: req.body.course,
+      studentName: req.body.studentName,
+      preferredName: req.body.preferredName
+    }
+  })
     .then(async (err, user) => {
       if (err) {
         res.status(500).send({ message: err });
@@ -98,7 +99,10 @@ exports.createStudyGroup = (req, res) => {
 }
 
 exports.getStudyGroups = (req, res) => {
-  StudyGroup.find({ owner: req.params.username })
+  StudyGroup.find({
+    $or: [{ ownerName: req.params.username },
+    { members: { $in: [req.params.username] } }]
+  })
     .then((data) => {
       return res.status(200).send({ data })
     })
@@ -107,13 +111,51 @@ exports.getStudyGroups = (req, res) => {
 }
 
 exports.deleteStudyGroup = (req, res) => {
-  console.log(req.params);
-
   StudyGroup.deleteOne({ owner: req.params.studyGroup })
     .then((data) => {
       return res.status(200).send({ message: "item deleted" });
     })
     .catch(error => {
       return res.status(500).send({ message: error });
+    })
+}
+
+exports.joinStudyGroup = (req, res) => {
+  StudyGroup.updateOne(
+    { _id: req.body.groupId },
+    {
+      $push: { members: req.body.currentStudent }
+    }
+  )
+    .then((a) => {
+      console.log(a);
+      return res.status(200).send({ message: "member added" });
+    })
+    .catch(error => {
+      return res.status(500).send({ message: error })
+    });
+}
+
+exports.leaveStudyGroup = (req, res) => {
+  console.log(req.body)
+
+  StudyGroup.find({ _id: req.body.groupId })
+    .then((data) => {
+      var updatedList = data[0].members.filter((member) => { member === req.body.currentStudent })
+
+      StudyGroup.updateOne(
+        { _id: req.body.groupId },
+        {
+          $set: { members: updatedList }
+        })
+        .then((data) => {
+          console.log(data);
+          return res.status(200).send({ message: "member left" });
+        })
+        .catch(error => {
+          return res.status(500).send({ message: error })
+        })
+    }).catch(error => {
+      return res.status(500).send({ message: error })
     })
 }

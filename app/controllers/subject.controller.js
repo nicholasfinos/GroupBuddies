@@ -237,12 +237,19 @@ exports.updateSubject = (req, res) => {
 
 // Get all the study groups for the subject
 exports.getSubjectStudyGroups = (req, res) => {
+  console.log(req.query);
+
   StudyGroup.find({
-    subjectName: req.query.subjectName
+    $and: [
+      { subjectName: req.query.subjectName },
+      { ownerName: { $not: { $eq: req.query.studentName } } },
+      { members: { $not: { $in: [req.query.studentName] } } }
+    ]
   })
     .then(data => {
-      res.status(200).send({ data });
+      return res.status(200).send({ data });
     })
-
-  // filter the study groups to the ones that I don't onw and that I'm not in
+    .catch(error => {
+      return res.status(500).send({ message: error })
+    })
 }
