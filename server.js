@@ -440,6 +440,30 @@ async function initial() {
               }
               console.log("added 'alisarobins' to Users collection");
             });
+
+            new User({
+              username: "pennysawyer",
+              email: "penny.sawyer@student.uts.edu.au",
+              password: bcrypt.hashSync("penny", 8),
+              roles: [studentId]
+            }).save(err => {
+              if (err) {
+                console.log("error", err);
+              }
+              console.log("added 'pennysawyer' to Users collection");
+            });
+
+            new User({
+              username: "maliktomlinson",
+              email: "malik@student.uts.edu.au",
+              password: bcrypt.hashSync("malik", 8),
+              roles: [studentId]
+            }).save(err => {
+              if (err) {
+                console.log("error", err);
+              }
+              console.log("added 'maliktomlinson' to Users collection");
+            });
           })
       });
 
@@ -1256,6 +1280,22 @@ async function initial() {
       tutorialNumber: "1",
       groupNumber: "",
       subjectTopics: ["UX Designer", "Frontend Developer"],
+    })
+
+    StudentProfile.create({
+      username: "pennysawyer",
+      subjectName: "Software Design Studio",
+      tutorialNumber: "1",
+      groupNumber: "",
+      subjectTopics: ["UX Designer"],
+    })
+
+    StudentProfile.create({
+      username: "maliktomlinson",
+      subjectName: "Software Design Studio",
+      tutorialNumber: "1",
+      groupNumber: "",
+      subjectTopics: ["MERN Stack"],
     })
 
     Subject.create({
@@ -2323,6 +2363,39 @@ function addingToTutorials() {
     })
 
     StudentProfile.find({ username: "pennysawyer" })
+    .then((x) => {
+      var data = {
+        _id: x[0]?.id,
+        username: x[0]?.username,
+        subjectTopics: x[0]?.subjectTopics
+      };
+      Tutorial.updateOne(
+        { subjectName: "Software Design Studio" },
+        {
+          $push: {
+            UnselectedStudents: data,
+            allStudents: data
+          }
+        }
+      )
+        .then((h) => {
+          console.log(h);
+        })
+
+      Subject.updateOne(
+        { subjectName: "Software Design Studio" },
+        {
+          $push: {
+            students: data
+          }
+        }
+      )
+        .then((h) => {
+          console.log(h);
+        })
+    })
+
+    StudentProfile.find({ username: "maliktomlinson" })
     .then((x) => {
       var data = {
         _id: x[0]?.id,
