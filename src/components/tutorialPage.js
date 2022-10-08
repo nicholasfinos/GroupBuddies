@@ -216,9 +216,9 @@ class TutorialPage extends React.Component {
       <div className="layout">
         <div className="header">
           <label style={{ margin: "0px", fontSize: "36px" }}>Tutorial 1</label>
-          <Link className="button" style={{ width: "100px", marginTop: "0px", WebkitTextFillColor: "black" }} to={"/tutor/viewTutorial/" + tutorial.tutor }>Return</Link>
+          <Link className="button" style={{ width: "100px", marginTop: "0px", WebkitTextFillColor: "black" }} to={"/tutor/viewTutorial/" + tutorial?.tutor }>Return</Link>
           <Switch>
-            <Route path={"/tutor/viewTutorial/" + tutorial.tutor} component={viewTutorial} />
+            <Route path={"/tutor/viewTutorial/" + tutorial?.tutor} component={viewTutorial} />
           </Switch>
         </div>
         <div className="main">

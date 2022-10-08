@@ -29,6 +29,14 @@ Group Buddies Application (a SDS project)
 Use the Connection String: `mongodb://localhost:27017/?readPreference=primary&appname=MongoDB%20Compass&directConnection=true&ssl=false` to connect to the GroupBuddies database
 
 ## Using the Application
+**How to Run the Program**
+Go to line 1023 in server.js
+
+  1. Delete GroupBuddies Collection 
+  2. Uncomment "settingUpProfiles();" and run node server.js
+  3. Comment "settingUpProfiles"
+  4. Uncomment "addingToTutorials();" and run node server.js
+  5. Comment "addingToTutorials();"
 **Group Buddies Personnel Login Details**
 <br/>
 _Student_
