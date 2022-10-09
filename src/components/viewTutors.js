@@ -2,6 +2,11 @@ import React, { Component } from "react";
 import TutorDataService from "../services/tutor-service";
 import SubjectDataService from "../services/subject-service";
 import { Grid, ListItem } from "@material-ui/core";
+import { Paper} from "@material-ui/core";
+import "./studentProfile.css";
+
+const paperStyling = { padding: 40, height: '100%', width: '100%', margin: '20px auto', background: '#fff0e7', borderRadius: 20/*border: '2px solid'*/ }
+const subjectScrollable = {overflowY: 'auto', overflowX:'hidden', maxHeight:'450px', width:'400px'}
 
 class TutorList extends Component {
   constructor(props) {
@@ -64,15 +69,18 @@ class TutorList extends Component {
 
     return (
       <div style={{ fontFamily: "Times New Roman", textAlign: "center", "width": "80%", "marginLeft": "130px" }}>
-        <hr className="new5"></hr>
+        <Paper bgcolor sx={{ borderColor: 'black' }} elevation={10} style={paperStyling}>
         <h3>Tutors</h3>
+        <hr className="new5"></hr>
         <Grid container>
           <Grid item md={4}>
             <h2>Tutor List</h2>
+            <div style={subjectScrollable}>
             <div className="list-group">
               {tutors && tutors.map((tutor, index) => (
                 <ListItem selected={index === currentIndex} onClick={() => this.setActiveTutor(tutor, index)} divider button style={{ padding: "20px" }} key={index}> {"Name: " + tutor?.username} </ListItem>
               ))}
+            </div>
             </div>
           </Grid>
           <Grid item md={8}>
@@ -103,6 +111,7 @@ class TutorList extends Component {
             )}
           </Grid>
         </Grid>
+        </Paper>
       </div>
     );
   }
