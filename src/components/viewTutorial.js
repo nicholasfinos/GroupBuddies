@@ -1,9 +1,19 @@
 import React, { Component } from "react";
 import SubjectDataService from "../services/subject-service";
 import TutorDataService from "../services/tutor-service";
-import { Grid, ListItem } from "@material-ui/core";
+import { Box, Grid, ListItem, Paper, styled, Typography } from "@material-ui/core";
 import TutorialPage from "./tutorialPage";
 import { Link, Switch, Route } from "react-router-dom";
+
+const Backing = styled(Paper)(({ theme }) => ({
+  height: '74vh',
+  borderRadius: 20,
+  padding: 10,
+  margin: 2,
+  width: 1300,
+   background: '#fff0e7',
+}));
+
 
 class TutorialList extends Component {
   constructor(props) {
@@ -59,11 +69,13 @@ class TutorialList extends Component {
     const { currentIndex, tutorials, currentTutorial, id } = this.state;
 
     return (
-      <div style={{ fontFamily: "Times New Roman", textAlign: "center", "width": "80%", "marginLeft": "130px" }}>
-        <hr className="new5"></hr>
-        <h3>Tutors</h3>
-        <Grid container>
-          <Grid item md={4}>
+      <Grid alignContent="center">
+      <Backing>
+      <div style={{textAlign: "center", "width": "80%", "marginLeft": "130px" }}>
+     
+        <Typography variant="h2">View Tutorials</Typography>
+        <Grid container alignContent="center">
+          <Grid item alignContent="center" >
             <h2>Tutorial List</h2>
             <div className="list-group">
               {tutorials && tutorials.map((tutorial, index) => (
@@ -105,6 +117,8 @@ class TutorialList extends Component {
           </Grid>
         </Grid>
       </div>
+      </Backing>
+      </Grid>
     );
   }
 }
