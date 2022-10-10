@@ -20,6 +20,8 @@ import { KeyboardArrowRight } from '@material-ui/icons';
 import { Divider } from "@material-ui/core";
 import { CssBaseline } from "@material-ui/core";
 import { stack } from "@material-ui/core";
+import AlertMessage from "./AltertMessage";
+
 
 
 const Backing = styled(Paper)(({ theme }) => ({
@@ -36,9 +38,17 @@ const BigText = styled(Typography)(({ theme }) => ({
 
 
 
+
+
+
 class TutorialPage extends React.Component {
   constructor(props) {
+    
     super(props);
+
+    
+    
+
 
     this.onChangeGroupSize = this.onChangeGroupSize.bind(this);
 
@@ -236,6 +246,7 @@ class TutorialPage extends React.Component {
     else {
       console.log("Group Size value must be greater then 1");
     }
+    
   }
 
 
@@ -259,11 +270,13 @@ class TutorialPage extends React.Component {
           <Typography variant="h6">Groups</Typography>
           <Divider variant="middle" margin="5" padding="4px"/>
             <div className="box">
+              <Box style={{maxHeight: 135, overflow: 'auto'}}>
               {groupList && groupList.map((group, index) => (
                 <ListItem style={{ padding: "5px", marginLeft: "15px", maxWidth: "200px" }} selected={index === currentIndex} onClick={() => this.setCurrentGroup(group)} divider button key={index}>
                   {"Group " + group.groupNumber}
                 </ListItem>
               ))}
+              </Box>
             </div>
 
             <stack direction="row" spacing={2}>
@@ -298,15 +311,15 @@ class TutorialPage extends React.Component {
           
           <Grid container item xs={4} direction="column" >
             
-
-          <label>Members</label>
-            <div>{currentGroup && `Group ${currentGroup.groupNumber}`}</div>
-                
+          <Typography variant="h6">Members</Typography>
+          <Typography>{currentGroup && `Group ${currentGroup.groupNumber}`}</Typography>
+            <Box style={{maxHeight: 250, overflow: 'auto', minHeight: 250}}>  
               {groupMembers && groupMembers.map((member, index) => (
                 <ListItem style={{ padding: "20px", marginLeft: "15px" }} selected={index === currentIndex} onClick={() => this.setCurrentMember(member)} divider button key={index}>
                   {member && member.username}
                 </ListItem>
               ))}
+              </Box>
               <Divider variant="middle"  sx={{borderBottomWidth: 4}}/>
            
             <Button className="button" onClick={() => { this.removeStudentGroup() }}>Remove student from Group</Button>
@@ -333,19 +346,22 @@ class TutorialPage extends React.Component {
           
 
 
-          <label>Student Info</label>
+          <Typography variant="h6">Student Info</Typography>
+          <Box style={{maxHeight: 100, overflow: 'auto', minHeight: 100}}> 
             <div className="box">
               <ListItem>
                 {currentStudent && ("Name: " + currentStudent.username + " | Subject Topics: " + currentStudent.subjectTopics)}
               </ListItem>
             </div>
+            </Box>
             <Divider variant="middle" margin="5" padding="4px"/>
             <Button className="button" onClick={() => { this.addStudentGroup() }}>Add to Group</Button>
           
           
                 
             <Divider variant="middle" margin="5" padding="4px"/>
-            <label>Ungrouped Students</label>
+            <Typography variant="h6">Ungrouped Students</Typography>
+            <Box style={{maxHeight: 160, overflow: 'auto', minHeight: 160}}> 
             <Divider variant="middle"  sx={{borderBottomWidth: 4}}/>
             
               {studentList && studentList.map((student, index) => (
@@ -353,6 +369,7 @@ class TutorialPage extends React.Component {
                   {student.username}
                 </ListItem>
               ))}
+            </Box>
           
           
 
