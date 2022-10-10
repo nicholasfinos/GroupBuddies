@@ -176,6 +176,294 @@ async function initial() {
               }
               console.log("added 'lachlan' to Users collection");
             });
+
+            new User({
+              username: "koreymedina",
+              email: "korey.medina@student.uts.edu.au",
+              password: bcrypt.hashSync("korey", 8),
+              roles: [studentId]
+            }).save(err => {
+              if (err) {
+                console.log("error", err);
+              }
+              console.log("added 'Korey Medina' to Users collection");
+            });
+
+            new User({
+              username: "julietfaulkner",
+              email: "juliet.faulkner@student.uts.edu.au",
+              password: bcrypt.hashSync("Juliet", 8),
+              roles: [studentId]
+            }).save(err => {
+              if (err) {
+                console.log("error", err);
+              }
+              console.log("added 'Juliet' to Users collection");
+            });
+
+            new User({
+              username: "hanancash",
+              email: "hanan.cash@student.uts.edu.au",
+              password: bcrypt.hashSync("hanan", 8),
+              roles: [studentId]
+            }).save(err => {
+              if (err) {
+                console.log("error", err);
+              }
+              console.log("added 'hanancash' to Users collection");
+            });
+
+            new User({
+              username: "melodyhyde",
+              email: "melody.hyde@student.uts.edu.au",
+              password: bcrypt.hashSync("melody", 8),
+              roles: [studentId]
+            }).save(err => {
+              if (err) {
+                console.log("error", err);
+              }
+              console.log("added 'melodyhyde' to Users collection");
+            });
+
+            new User({
+              username: "rexeastwood",
+              email: "rex.eastwood@student.uts.edu.au",
+              password: bcrypt.hashSync("rex", 8),
+              roles: [studentId]
+            }).save(err => {
+              if (err) {
+                console.log("error", err);
+              }
+              console.log("added 'Rex Eastwood' to Users collection");
+            });
+
+            new User({
+              username: "halleryan",
+              email: "halle.ryan@student.uts.edu.au",
+              password: bcrypt.hashSync("halle", 8),
+              roles: [studentId]
+            }).save(err => {
+              if (err) {
+                console.log("error", err);
+              }
+              console.log("added 'halleryan' to Users collection");
+            });
+
+            new User({
+              username: "giacomocraft",
+              email: "giacomo.craft@student.uts.edu.au",
+              password: bcrypt.hashSync("giacomocraft", 8),
+              roles: [studentId]
+            }).save(err => {
+              if (err) {
+                console.log("error", err);
+              }
+              console.log("added 'giacomocraft' to Users collection");
+            });
+
+            new User({
+              username: "natanmckay",
+              email: "natan.mckay@student.uts.edu.au",
+              password: bcrypt.hashSync("natan", 8),
+              roles: [studentId]
+            }).save(err => {
+              if (err) {
+                console.log("error", err);
+              }
+              console.log("added 'natanmckay' to Users collection");
+            });
+
+            new User({
+              username: "muhammedbarry",
+              email: "muhammed.barry@student.uts.edu.au",
+              password: bcrypt.hashSync("muhammed", 8),
+              roles: [studentId]
+            }).save(err => {
+              if (err) {
+                console.log("error", err);
+              }
+              console.log("added 'muhammedbarry' to Users collection");
+            });
+
+            new User({
+              username: "brodybarnett",
+              email: "brody.barnett@student.uts.edu.au",
+              password: bcrypt.hashSync("brody", 8),
+              roles: [studentId]
+            }).save(err => {
+              if (err) {
+                console.log("error", err);
+              }
+              console.log("added 'brodybarnett' to Users collection");
+            });
+
+            new User({
+              username: "hettieriggs",
+              email: "hettie.riggs@student.uts.edu.au",
+              password: bcrypt.hashSync("hettie", 8),
+              roles: [studentId]
+            }).save(err => {
+              if (err) {
+                console.log("error", err);
+              }
+              console.log("added 'hettieriggs' to Users collection");
+            });
+
+            new User({
+              username: "shannanflower",
+              email: "shannan.flower@student.uts.edu.au",
+              password: bcrypt.hashSync("shannan", 8),
+              roles: [studentId]
+            }).save(err => {
+              if (err) {
+                console.log("error", err);
+              }
+              console.log("added 'shannanflower' to Users collection");
+            });
+
+            new User({
+              username: "robynprice",
+              email: "robyn.price@student.uts.edu.au",
+              password: bcrypt.hashSync("robyn", 8),
+              roles: [studentId]
+            }).save(err => {
+              if (err) {
+                console.log("error", err);
+              }
+              console.log("added 'robynprice' to Users collection");
+            });
+
+            new User({
+              username: "kyronconnolly",
+              email: "kyron.connolly@student.uts.edu.au",
+              password: bcrypt.hashSync("kyron", 8),
+              roles: [studentId]
+            }).save(err => {
+              if (err) {
+                console.log("error", err);
+              }
+              console.log("added 'kyronconnolly' to Users collection");
+            });
+
+            new User({
+              username: "barrywhelan",
+              email: "barry.whelan@student.uts.edu.au",
+              password: bcrypt.hashSync("barry", 8),
+              roles: [studentId]
+            }).save(err => {
+              if (err) {
+                console.log("error", err);
+              }
+              console.log("added 'barrywhelan' to Users collection");
+            });
+
+            new User({
+              username: "lexamos",
+              email: "lex.amos@student.uts.edu.au",
+              password: bcrypt.hashSync("lex", 8),
+              roles: [studentId]
+            }).save(err => {
+              if (err) {
+                console.log("error", err);
+              }
+              console.log("added 'lexamos' to Users collection");
+            });
+
+            new User({
+              username: "henriettarussell",
+              email: "henrietta.russell@student.uts.edu.au",
+              password: bcrypt.hashSync("henrietta", 8),
+              roles: [studentId]
+            }).save(err => {
+              if (err) {
+                console.log("error", err);
+              }
+              console.log("added 'henriettarussell' to Users collection");
+            });
+
+            new User({
+              username: "abihastacey",
+              email: "abiha.stacey@student.uts.edu.au",
+              password: bcrypt.hashSync("abiha", 8),
+              roles: [studentId]
+            }).save(err => {
+              if (err) {
+                console.log("error", err);
+              }
+              console.log("added 'abihastacey' to Users collection");
+            });
+
+            new User({
+              username: "aliyahchristian",
+              email: "aliyah.christian@student.uts.edu.au",
+              password: bcrypt.hashSync("aliyah", 8),
+              roles: [studentId]
+            }).save(err => {
+              if (err) {
+                console.log("error", err);
+              }
+              console.log("added 'aliyahchristian' to Users collection");
+            });
+
+            new User({
+              username: "ubaidfitzpatrick",
+              email: "ubaid.fitzpatrick@student.uts.edu.au",
+              password: bcrypt.hashSync("ubaid", 8),
+              roles: [studentId]
+            }).save(err => {
+              if (err) {
+                console.log("error", err);
+              }
+              console.log("added 'ubaidfitzpatrick' to Users collection");
+            });
+
+            new User({
+              username: "jagdeepcorrea",
+              email: "jagdeep.correa@student.uts.edu.au",
+              password: bcrypt.hashSync("jagdeep", 8),
+              roles: [studentId]
+            }).save(err => {
+              if (err) {
+                console.log("error", err);
+              }
+              console.log("added 'jagdeepcorrea' to Users collection");
+            });
+
+            new User({
+              username: "alisarobins",
+              email: "alisa.robins@student.uts.edu.au",
+              password: bcrypt.hashSync("alisa", 8),
+              roles: [studentId]
+            }).save(err => {
+              if (err) {
+                console.log("error", err);
+              }
+              console.log("added 'alisarobins' to Users collection");
+            });
+
+            new User({
+              username: "pennysawyer",
+              email: "penny.sawyer@student.uts.edu.au",
+              password: bcrypt.hashSync("penny", 8),
+              roles: [studentId]
+            }).save(err => {
+              if (err) {
+                console.log("error", err);
+              }
+              console.log("added 'pennysawyer' to Users collection");
+            });
+
+            new User({
+              username: "maliktomlinson",
+              email: "malik@student.uts.edu.au",
+              password: bcrypt.hashSync("malik", 8),
+              roles: [studentId]
+            }).save(err => {
+              if (err) {
+                console.log("error", err);
+              }
+              console.log("added 'maliktomlinson' to Users collection");
+            });
           })
       });
 
@@ -198,6 +486,22 @@ async function initial() {
               if (err) {
                 console.log("error", err);
               }
+              console.log("added Subject Coordinator: 'subjectcoordinator' to Users collection");
+              User.findOne({ username: "subjectcoordinator" }, function (err, docs) {
+                if (err) {
+                  console.log(err)
+                }
+                else {
+                  Subject.findOneAndUpdate({ subjectName: 'Software Design Studio' }, { $set: { subjectCoordinator: docs._id } }, { returnNewDocument: true }, function (err, result) {
+                    if (err) {
+                      console.log(err)
+                    } else {
+                      console.log("Adding 'subjectcoordinator' as a subjectCoordinator in subject: 'Software Design Studio'")
+                    }
+                  })
+                }
+              })
+
               console.log("added 'subjectcoordinator' to Users collection");
             })
 
@@ -234,14 +538,6 @@ async function initial() {
                       console.log(err)
                     } else {
                       console.log("Adding 'danicaSolina' as a subjectCoordinator in subject: 'MM1'")
-                    }
-                  })
-
-                  Subject.findOneAndUpdate({ subjectName: 'Yeran Test Group' }, { $set: { subjectCoordinator: docs._id } }, { returnNewDocument: true }, function (err, result) {
-                    if (err) {
-                      console.log(err)
-                    } else {
-                      console.log("Adding 'danicaSolina' as a subjectCoordinator in subject: 'Yeran Test Group'")
                     }
                   })
                 }
@@ -372,20 +668,11 @@ async function initial() {
                   console.log(err)
                 }
                 else {
-                  // console.log("UserId : ", docs._id);
-                  Subject.findOneAndUpdate({ subjectName: 'Yeran Test Group' }, { $set: { tutors: [docs._id] } }, { returnNewDocument: true }, function (err, result) {
+                  Tutorial.findOneAndUpdate({ subjectName: 'Software Design Studio' }, { $set: { tutor: [docs._id] } }, { returnNewDocument: true }, function (err, result) {
                     if (err) {
                       console.log(err)
                     } else {
-                      console.log("Adding 'tutor' as a tutor in subject: 'Yeran Test Group'")
-                    }
-                  })
-
-                  Tutorial.findOneAndUpdate({ subjectName: 'Yeran Test Group' }, { $set: { tutor: [docs._id] } }, { returnNewDocument: true }, function (err, result) {
-                    if (err) {
-                      console.log(err)
-                    } else {
-                      console.log("Adding 'tutor' as a tutor in tutorial for 'Yeran Test Group'")
+                      console.log("Adding 'tutor' as a tutor in tutorial for 'Software Design Studio'")
                     }
                   })
                 }
@@ -745,269 +1032,471 @@ async function initial() {
             });
           });
       })
-
-      // settingUpProfile();
-      // addingToTutorials();
-
-      /*
-      -------------------
-      //ALGORITHM TESTING
-      -------------------
-      1. Uncomment "settingUpProfiles();" and run node server.js
-      2. Comment "settingUpProfiles"
-      3. Create subject with details matching profiles created
-       - Subject name - Yeran Test Group
-       - Tutorial Number - 1
-       - Topics: test,why,yeran
-       - Tutor - Tutor
-      Make sure to pick these option, if you want to do something else then make sure to edit both function below 
-      
-      4. Uncomment "addStudentsToSubject();" and run node server.js
-      5. Comment "addStudentsToSubject();"
-      */
     }
   })
-  
-  async function settingUpProfile() {
-    StudentProfile.create({
-      student: "6322e72c188f6e93043d5c76",
-      username: "student",
-      subjectName: "Yeran Test Group",
-      tutorialNumber: "1",
-      groupNumber: "",
-      subjectTopics: ["test"],
-    })
+  /*
+    -------------------
+    //ALGORITHM TESTING
+    -------------------
+    1. Delete GroupBuddies Collection 
+    2. Uncomment "settingUpProfiles();" and run node server.js
+    3. Comment "settingUpProfiles"
+    4. Uncomment "addingToTutorials();" and run node server.js
+    5. Comment "addingToTutorials();"
+    */
 
-    StudentProfile.create({
-      student: "6322e72c188f6e93043d5c77",
-      username: "graceBilliris",
-      subjectName: "Yeran Test Group",
-      tutorialNumber: "1",
-      groupNumber: "",
-      subjectTopics: ["yeran"],
-    })
-
-    StudentProfile.create({
-      student: "6322e72c188f6e93043d5c78",
-      username: "yeran",
-      subjectName: "Yeran Test Group",
-      tutorialNumber: "1",
-      groupNumber: "",
-      subjectTopics: ["why"],
-    })
-
-    StudentProfile.create({
-      student: "6322e72c188f6e93043d5c79",
-      username: "nicholasFinos",
-      subjectName: "Yeran Test Group",
-      tutorialNumber: "1",
-      groupNumber: "",
-      subjectTopics: ["test"],
-    })
-
-    StudentProfile.create({
-      student: "6322e72c188f6e93043d5c7a",
-      username: "jeromeSario",
-      subjectName: "Yeran Test Group",
-      tutorialNumber: "1",
-      groupNumber: "",
-      subjectTopics: ["yeran"],
-    })
-
-    StudentProfile.create({
-      student: "6322e72c188f6e93043d5c7b",
-      username: "ashishChadha",
-      subjectName: "Yeran Test Group",
-      tutorialNumber: "1",
-      groupNumber: "",
-      subjectTopics: ["why"],
-    })
-
-    StudentProfile.create({
-      student: "6322e72c188f6e93043d5c7c",
-      username: "lukaRyan",
-      subjectName: "Yeran Test Group",
-      tutorialNumber: "1",
-      groupNumber: "",
-      subjectTopics: ["test"],
-    })
-
-    StudentProfile.create({
-      student: "6322e72c188f6e93043d5c7d",
-      username: "lachlanSinclair",
-      subjectName: "Yeran Test Group",
-      tutorialNumber: "1",
-      groupNumber: "",
-      subjectTopics: ["yeran"],
-    })
-
-    Subject.create({
-      subjectName: "Mathematical Modelling 1",
-      subjectCoordinator: null,
-      tutors: [],
-      subjectTopics: [
-        "Matrix multiplication and determinants",
-        "Vectors and their application to physical problems",
-        "Complex numbers",
-        "Functions and their relationship to measurement and the interpretation of physical results",
-        "Differentiation",
-        "Differential equations arising from physical problems",
-        "Oscillatory motion",
-        "Trigonometric functions and inverse trigonometric functions",
-        "Integrals",
-        "Inverse functions",
-        "Hyperbolic functions",
-        "Methods of integration",
-        "Solution of differential equations by integration"
-      ],
-      semester: "Autumn 2020",
-      groupAssessment: false,
-      tutorials: [],
-      tutorialNumbers: 1,
-      status: false,
-    })
-    console.log('creating MM1 - the subject')
-
-    Subject.create({
-      subjectName: "Mathematical Modelling 2",
-      subjectCoordinator: null,
-      tutors: [],
-      subjectTopics: [
-        "Linear algebra including eigenvalues and eigenvectors and applications",
-        "3D geometry and functions of several variables",
-        "Partial derivatives",
-        "Optimisation",
-        "Multiple integrals and their applications",
-        "Probability",
-        "Descriptive statistics",
-        "Probability distributions",
-        "Statistical inference",
-        "Introduction to linear regression"
-      ],
-      semester: "Spring 2020",
-      groupAssessment: false,
-      tutorials: [],
-      tutorialNumbers: 1,
-      status: false,
-    })
-    console.log('creating MM2 - the subject')
-
-    Subject.create({
-      subjectName: "Engineering Communication",
-      subjectCoordinator: null,
-      tutors: [],
-      subjectTopics: [
-        "Linear algebra including eigenvalues and eigenvectors and applications",
-        "Engineering design process",
-        "Finding, evaluating and referencing information Academic integrity",
-        "Professional engineering documentation",
-        "Effective written, visual and oral communication",
-        "Teamwork processes and participation",
-        "Reflective thinking and writing"
-      ],
-      semester: "Autumn 2020",
-      groupAssessment: true,
-      tutorials: [],
-      tutorialNumbers: 4,
-      status: false,
-    })
-    console.log('creating Eng Com - the subject')
-
-    Subject.create({
-      subjectName: "Design and Innovation Fundamentals",
-      subjectCoordinator: null,
-      tutors: [],
-      subjectTopics: [
-        "Engineers as designers and innovators",
-        "Design and Engineering thinking",
-        "Approaches for thinking and problem-solving in an engineering context",
-        "The design process including problem definition, concept generation, requirements analysis, system design and detailed design",
-        "New process and product development; lifecycles, research, technology, development and innovation",
-        "Design considerations and trade-offs: including safe design, methods of managing risk and uncertainty, regulations and professionalism, sustainability, design for manufacture and business decisions involved in design and innovation",
-        "Team dynamics and techniques to facilitate successfully working in concurrent engineering teams",
-        "Review of written and oral communication skills"
-      ],
-      semester: "Spring 2021",
-      groupAssessment: true,
-      tutorials: [],
-      tutorialNumbers: 4,
-      status: false,
-    })
-    console.log('creating DIF - the subject')
-
-    Subject.create({
-      subjectName: "Physical Modelling",
-      subjectCoordinator: null,
-      tutors: [],
-      subjectTopics: [
-        "Motion in 1D",
-        "Motion in 2D",
-        "Force and motion",
-        "Work, enegery and power",
-        "Rotational knimematics",
-        "Temperature and heat",
-        "Thermal expansion",
-        "Thermal processes",
-        "Electric charge",
-        "Electric circuits",
-        "Fluids at rest",
-        "Oscilations and waves",
-        "Reflections and Mirrors",
-        "Lenses"
-      ],
-      semester: "Autumn 2021",
-      groupAssessment: false,
-      tutorials: [],
-      tutorialNumbers: 1,
-      status: false,
-    })
-    console.log('creating Phys Mod - the subject')
-
-    var tutorial = Tutorial.create({
-      subjectName: "Yeran Test Group",
-      number: "1",
-      timeSlot: "5pm",
-      day: "Tuesday",
-      tutor: null,
-      allStudents: [],
-      UnselectedStudents: [],
-      numberGroups: 0,
-      groups: []
-    })
-
-    Subject.create({
-      subjectName: "Yeran Test Group",
-      subjectCoordinator: null,
-      tutors: [],
-      subjectTopics: [
-        "yeran",
-        "why",
-        "test"
-      ],
-      semester: "Autumn 2020",
-      groupAssessment: true,
-      tutorials: [tutorial._id],
-      tutorialNumbers: 1,
-      status: false,
-    })
-    console.log('creating Yeran Test Group - the subject')
-  }
+  //settingUpProfile();
+  //addingToTutorials();
 }
 
-async function addingToTutorials() {
+function settingUpProfile() {
+
+  StudentProfile.create({
+    username: "graceBilliris",
+    subjectName: "Software Design Studio",
+    tutorialNumber: "1",
+    groupNumber: "",
+    subjectTopics: ["Fullstack Developer", "Scrum Master", "Documentation"],
+  })
+
+  StudentProfile.create({
+    username: "yeran",
+    subjectName: "Software Design Studio",
+    tutorialNumber: "1",
+    groupNumber: "",
+    subjectTopics: ["Backend Developer", "Scrum Master", "Fullstack Developer"],
+  })
+
+  StudentProfile.create({
+    username: "nicholasFinos",
+    subjectName: "Software Design Studio",
+    tutorialNumber: "1",
+    groupNumber: "",
+    subjectTopics: ["Backend Developer", "Scrum Master", "MERN Stack"],
+  })
+
+  StudentProfile.create({
+    username: "jeromeSario",
+    subjectName: "Software Design Studio",
+    tutorialNumber: "1",
+    groupNumber: "",
+    subjectTopics: ["Frontend Developer", "UX Designer"],
+  })
+
+  StudentProfile.create({
+    username: "ashishChadha",
+    subjectName: "Software Design Studio",
+    tutorialNumber: "1",
+    groupNumber: "",
+    subjectTopics: ["Fullstack Developer"],
+  })
+
+  StudentProfile.create({
+    username: "lukaRyan",
+    subjectName: "Software Design Studio",
+    tutorialNumber: "1",
+    groupNumber: "",
+    subjectTopics: ["BA", "Documentation"],
+  })
+
+  StudentProfile.create({
+    username: "lachlanSinclair",
+    subjectName: "Software Design Studio",
+    tutorialNumber: "1",
+    groupNumber: "",
+    subjectTopics: ["Frontend Developer", "UX Designer"],
+  })
+
+  StudentProfile.create({
+    username: "koreymedina",
+    subjectName: "Software Design Studio",
+    tutorialNumber: "1",
+    groupNumber: "",
+    subjectTopics: ["Frontend Developer"],
+  })
+
+  StudentProfile.create({
+    username: "julietfaulkner",
+    subjectName: "Software Design Studio",
+    tutorialNumber: "1",
+    groupNumber: "",
+    subjectTopics: ["Backend Developer"],
+  })
+
+  StudentProfile.create({
+    username: "hanancash",
+    subjectName: "Software Design Studio",
+    tutorialNumber: "1",
+    groupNumber: "",
+    subjectTopics: ["Fullstack Developer"],
+  })
+
+  StudentProfile.create({
+    username: "melodyhyde",
+    subjectName: "Software Design Studio",
+    tutorialNumber: "1",
+    groupNumber: "",
+    subjectTopics: ["UX Designer"],
+  })
+
+  StudentProfile.create({
+    username: "rexeastwood",
+    subjectName: "Software Design Studio",
+    tutorialNumber: "1",
+    groupNumber: "",
+    subjectTopics: ["BA"],
+  })
+
+  StudentProfile.create({
+    username: "halleryan",
+    subjectName: "Software Design Studio",
+    tutorialNumber: "1",
+    groupNumber: "",
+    subjectTopics: ["Scrum Master"],
+  })
+
+  StudentProfile.create({
+    username: "giacomocraft",
+    subjectName: "Software Design Studio",
+    tutorialNumber: "1",
+    groupNumber: "",
+    subjectTopics: ["MERN Stack"],
+  })
+
+  StudentProfile.create({
+    username: "natanmckay",
+    subjectName: "Software Design Studio",
+    tutorialNumber: "1",
+    groupNumber: "",
+    subjectTopics: ["Documentation"],
+  })
+
+  StudentProfile.create({
+    username: "muhammedbarry",
+    subjectName: "Software Design Studio",
+    tutorialNumber: "1",
+    groupNumber: "",
+    subjectTopics: ["Frontend Developer", "Documentation"],
+  })
+
+  StudentProfile.create({
+    username: "brodybarnett",
+    subjectName: "Software Design Studio",
+    tutorialNumber: "1",
+    groupNumber: "",
+    subjectTopics: ["Backend Developer", "MERN Stack"],
+  })
+
+  StudentProfile.create({
+    username: "hettieriggs",
+    subjectName: "Software Design Studio",
+    tutorialNumber: "1",
+    groupNumber: "",
+    subjectTopics: ["Fullstack Developer", "Scrum Master"],
+  })
+
+  StudentProfile.create({
+    username: "shannanflower",
+    subjectName: "Software Design Studio",
+    tutorialNumber: "1",
+    groupNumber: "",
+    subjectTopics: ["UX Designer", "BA"],
+  })
+
+  StudentProfile.create({
+    username: "robynprice",
+    subjectName: "Software Design Studio",
+    tutorialNumber: "1",
+    groupNumber: "",
+    subjectTopics: ["Frontend Developer", "Documentation", "Backend Developer"],
+  })
+
+  StudentProfile.create({
+    username: "kyronconnolly",
+    subjectName: "Software Design Studio",
+    tutorialNumber: "1",
+    groupNumber: "",
+    subjectTopics: ["Backend Developer", "MERN Stack", "Fullstack Developer"],
+  })
+
+  StudentProfile.create({
+    username: "barrywhelan",
+    subjectName: "Software Design Studio",
+    tutorialNumber: "1",
+    groupNumber: "",
+    subjectTopics: ["Fullstack Developer", "Scrum Master"],
+  })
+
+  StudentProfile.create({
+    username: "lexamos",
+    subjectName: "Software Design Studio",
+    tutorialNumber: "1",
+    groupNumber: "",
+    subjectTopics: ["UX Designer", "BA", "Scrum Master"],
+  })
+
+  StudentProfile.create({
+    username: "henriettarussell",
+    subjectName: "Software Design Studio",
+    tutorialNumber: "1",
+    groupNumber: "",
+    subjectTopics: ["Documentation", "UX Designer"],
+  })
+
+  StudentProfile.create({
+    username: "abihastacey",
+    subjectName: "Software Design Studio",
+    tutorialNumber: "1",
+    groupNumber: "",
+    subjectTopics: ["Scrum Master", "Frontend Developer"],
+  })
+
+  StudentProfile.create({
+    username: "aliyahchristian",
+    subjectName: "Software Design Studio",
+    tutorialNumber: "1",
+    groupNumber: "",
+    subjectTopics: ["Backend Developer", "BA"],
+  })
+
+  StudentProfile.create({
+    username: "ubaidfitzpatrick",
+    subjectName: "Software Design Studio",
+    tutorialNumber: "1",
+    groupNumber: "",
+    subjectTopics: ["Frontend Developer", "UX Designer"],
+  })
+
+  StudentProfile.create({
+    username: "jagdeepcorrea",
+    subjectName: "Software Design Studio",
+    tutorialNumber: "1",
+    groupNumber: "",
+    subjectTopics: ["Fullstack Developer", "MERN Stack"],
+  })
+
+  StudentProfile.create({
+    username: "alisarobins",
+    subjectName: "Software Design Studio",
+    tutorialNumber: "1",
+    groupNumber: "",
+    subjectTopics: ["UX Designer", "Frontend Developer"],
+  })
+
+  StudentProfile.create({
+    username: "pennysawyer",
+    subjectName: "Software Design Studio",
+    tutorialNumber: "1",
+    groupNumber: "",
+    subjectTopics: ["UX Designer"],
+  })
+
+  StudentProfile.create({
+    username: "maliktomlinson",
+    subjectName: "Software Design Studio",
+    tutorialNumber: "1",
+    groupNumber: "",
+    subjectTopics: ["MERN Stack"],
+  })
+
+  Subject.create({
+    subjectName: "Mathematical Modelling 1",
+    subjectCoordinator: null,
+    tutors: [],
+    subjectTopics: [
+      "Matrix multiplication and determinants",
+      "Vectors and their application to physical problems",
+      "Complex numbers",
+      "Functions and their relationship to measurement and the interpretation of physical results",
+      "Differentiation",
+      "Differential equations arising from physical problems",
+      "Oscillatory motion",
+      "Trigonometric functions and inverse trigonometric functions",
+      "Integrals",
+      "Inverse functions",
+      "Hyperbolic functions",
+      "Methods of integration",
+      "Solution of differential equations by integration"
+    ],
+    semester: "Autumn 2020",
+    groupAssessment: false,
+    tutorials: [],
+    tutorialNumbers: 1,
+    status: false,
+  })
+  console.log('creating MM1 - the subject')
+
+  Subject.create({
+    subjectName: "Mathematical Modelling 2",
+    subjectCoordinator: null,
+    tutors: [],
+    subjectTopics: [
+      "Linear algebra including eigenvalues and eigenvectors and applications",
+      "3D geometry and functions of several variables",
+      "Partial derivatives",
+      "Optimisation",
+      "Multiple integrals and their applications",
+      "Probability",
+      "Descriptive statistics",
+      "Probability distributions",
+      "Statistical inference",
+      "Introduction to linear regression"
+    ],
+    semester: "Spring 2020",
+    groupAssessment: false,
+    tutorials: [],
+    tutorialNumbers: 1,
+    status: false,
+  })
+  console.log('creating MM2 - the subject')
+
+  Subject.create({
+    subjectName: "Engineering Communication",
+    subjectCoordinator: null,
+    tutors: [],
+    subjectTopics: [
+      "Linear algebra including eigenvalues and eigenvectors and applications",
+      "Engineering design process",
+      "Finding, evaluating and referencing information Academic integrity",
+      "Professional engineering documentation",
+      "Effective written, visual and oral communication",
+      "Teamwork processes and participation",
+      "Reflective thinking and writing"
+    ],
+    semester: "Autumn 2020",
+    groupAssessment: true,
+    tutorials: [],
+    tutorialNumbers: 4,
+    status: false,
+  })
+  console.log('creating Eng Com - the subject')
+
+  Subject.create({
+    subjectName: "Design and Innovation Fundamentals",
+    subjectCoordinator: null,
+    tutors: [],
+    subjectTopics: [
+      "Engineers as designers and innovators",
+      "Design and Engineering thinking",
+      "Approaches for thinking and problem-solving in an engineering context",
+      "The design process including problem definition, concept generation, requirements analysis, system design and detailed design",
+      "New process and product development; lifecycles, research, technology, development and innovation",
+      "Design considerations and trade-offs: including safe design, methods of managing risk and uncertainty, regulations and professionalism, sustainability, design for manufacture and business decisions involved in design and innovation",
+      "Team dynamics and techniques to facilitate successfully working in concurrent engineering teams",
+      "Review of written and oral communication skills"
+    ],
+    semester: "Spring 2021",
+    groupAssessment: true,
+    tutorials: [],
+    tutorialNumbers: 4,
+    status: false,
+  })
+  console.log('creating DIF - the subject')
+
+  Subject.create({
+    subjectName: "Physical Modelling",
+    subjectCoordinator: null,
+    tutors: [],
+    subjectTopics: [
+      "Motion in 1D",
+      "Motion in 2D",
+      "Force and motion",
+      "Work, enegery and power",
+      "Rotational knimematics",
+      "Temperature and heat",
+      "Thermal expansion",
+      "Thermal processes",
+      "Electric charge",
+      "Electric circuits",
+      "Fluids at rest",
+      "Oscilations and waves",
+      "Reflections and Mirrors",
+      "Lenses"
+    ],
+    semester: "Autumn 2021",
+    groupAssessment: false,
+    tutorials: [],
+    tutorialNumbers: 1,
+    status: false,
+  })
+  console.log('creating Phys Mod - the subject')
+
+  Tutorial.create({
+    subjectName: "Software Design Studio",
+    number: "1",
+    timeSlot: "5pm",
+    day: "Tuesday",
+    tutor: null,
+    allStudents: [],
+    UnselectedStudents: [],
+    numberGroups: 0,
+    groups: []
+  })
+
+  Subject.create({
+    subjectName: "Software Design Studio",
+    subjectCoordinator: null,
+    tutors: [],
+    subjectTopics: [
+      "Frontend Developer",
+      "Backend Developer",
+      "Fullstack Developer",
+      "UX Designer",
+      "BA",
+      "Scrum Master",
+      "MERN Stack",
+      "Documentation"
+    ],
+    semester: "Spring 2022",
+    groupAssessment: true,
+    tutorials: [],
+    tutorialNumbers: 1,
+    status: false,
+  })
+  console.log('creating Software Design Studio - the subject')
+}
+
+function addingToTutorials() {
+  Tutorial.find({ subjectName: "Software Design Studio" })
+    .then((x) => {
+      Subject.updateOne(
+        { subjectName: "Software Design Studio" },
+        {
+          $push: {
+            tutorials: x[0]._id
+          }
+        }
+      )
+        .then((h) => {
+          console.log(h);
+        })
+    })
+
   StudentProfile.find({ username: "lachlanSinclair" })
     .then((x) => {
       var data = {
-        _id: x[0].id,
-        username: x[0].username,
-        subjectTopics: x[0].subjectTopics        
+        _id: x[0]?.id,
+        username: x[0]?.username,
+        subjectTopics: x[0]?.subjectTopics
       };
       Tutorial.updateOne(
-        { subjectName: "Yeran Test Group" },
+        { subjectName: "Software Design Studio" },
         {
           $push: {
             UnselectedStudents: data,
             allStudents: data
+          }
+        }
+      )
+        .then((h) => {
+          console.log(h);
+        });
+
+      Subject.updateOne(
+        { subjectName: "Software Design Studio" },
+        {
+          $push: {
+            students: data
           }
         }
       )
@@ -1017,35 +1506,14 @@ async function addingToTutorials() {
     })
 
   StudentProfile.find({ username: "graceBilliris" })
-  .then((x) => {
-    var data = {
-      _id: x[0].id,
-      username: x[0].username,
-      subjectTopics: x[0].subjectTopics        
-    };
-    Tutorial.updateOne(
-      { subjectName: "Yeran Test Group" },
-      {
-        $push: {
-          UnselectedStudents: data,
-          allStudents: data
-        }
-      }
-    )
-      .then((h) => {
-        console.log(h);
-      })
-  })
-
-  StudentProfile.find({ username: "yeran" })
     .then((x) => {
       var data = {
-        _id: x[0].id,
-        username: x[0].username,
-        subjectTopics: x[0].subjectTopics        
+        _id: x[0]?.id,
+        username: x[0]?.username,
+        subjectTopics: x[0]?.subjectTopics
       };
       Tutorial.updateOne(
-        { subjectName: "Yeran Test Group" },
+        { subjectName: "Software Design Studio" },
         {
           $push: {
             UnselectedStudents: data,
@@ -1056,17 +1524,29 @@ async function addingToTutorials() {
         .then((h) => {
           console.log(h);
         })
+
+      Subject.updateOne(
+        { subjectName: "Software Design Studio" },
+        {
+          $push: {
+            students: data
+          }
+        }
+      )
+        .then((h) => {
+          console.log(h);
+        })
     })
 
-    StudentProfile.find({ username: "ashishChadha" })
+  StudentProfile.find({ username: "nicholasFinos" })
     .then((x) => {
       var data = {
-        _id: x[0].id,
-        username: x[0].username,
-        subjectTopics: x[0].subjectTopics        
+        _id: x[0]?.id,
+        username: x[0]?.username,
+        subjectTopics: x[0]?.subjectTopics
       };
       Tutorial.updateOne(
-        { subjectName: "Yeran Test Group" },
+        { subjectName: "Software Design Studio" },
         {
           $push: {
             UnselectedStudents: data,
@@ -1077,17 +1557,29 @@ async function addingToTutorials() {
         .then((h) => {
           console.log(h);
         })
+
+      Subject.updateOne(
+        { subjectName: "Software Design Studio" },
+        {
+          $push: {
+            students: data
+          }
+        }
+      )
+        .then((h) => {
+          console.log(h);
+        })
     })
 
-    StudentProfile.find({ username: "jeromeSario" })
+  StudentProfile.find({ username: "jeromeSario" })
     .then((x) => {
       var data = {
-        _id: x[0].id,
-        username: x[0].username,
-        subjectTopics: x[0].subjectTopics        
+        _id: x[0]?.id,
+        username: x[0]?.username,
+        subjectTopics: x[0]?.subjectTopics
       };
       Tutorial.updateOne(
-        { subjectName: "Yeran Test Group" },
+        { subjectName: "Software Design Studio" },
         {
           $push: {
             UnselectedStudents: data,
@@ -1098,17 +1590,29 @@ async function addingToTutorials() {
         .then((h) => {
           console.log(h);
         })
+
+      Subject.updateOne(
+        { subjectName: "Software Design Studio" },
+        {
+          $push: {
+            students: data
+          }
+        }
+      )
+        .then((h) => {
+          console.log(h);
+        })
     })
 
-    StudentProfile.find({ username: "lukaRyan" })
+  StudentProfile.find({ username: "ashishChadha" })
     .then((x) => {
       var data = {
-        _id: x[0].id,
-        username: x[0].username,
-        subjectTopics: x[0].subjectTopics        
+        _id: x[0]?.id,
+        username: x[0]?.username,
+        subjectTopics: x[0]?.subjectTopics
       };
       Tutorial.updateOne(
-        { subjectName: "Yeran Test Group" },
+        { subjectName: "Software Design Studio" },
         {
           $push: {
             UnselectedStudents: data,
@@ -1119,17 +1623,29 @@ async function addingToTutorials() {
         .then((h) => {
           console.log(h);
         })
+
+      Subject.updateOne(
+        { subjectName: "Software Design Studio" },
+        {
+          $push: {
+            students: data
+          }
+        }
+      )
+        .then((h) => {
+          console.log(h);
+        })
     })
 
-    StudentProfile.find({ username: "nicholasFinos" })
+  StudentProfile.find({ username: "lukaRyan" })
     .then((x) => {
       var data = {
-        _id: x[0].id,
-        username: x[0].username,
-        subjectTopics: x[0].subjectTopics        
+        _id: x[0]?.id,
+        username: x[0]?.username,
+        subjectTopics: x[0]?.subjectTopics
       };
       Tutorial.updateOne(
-        { subjectName: "Yeran Test Group" },
+        { subjectName: "Software Design Studio" },
         {
           $push: {
             UnselectedStudents: data,
@@ -1140,21 +1656,771 @@ async function addingToTutorials() {
         .then((h) => {
           console.log(h);
         })
+
+      Subject.updateOne(
+        { subjectName: "Software Design Studio" },
+        {
+          $push: {
+            students: data
+          }
+        }
+      )
+        .then((h) => {
+          console.log(h);
+        })
     })
 
-    StudentProfile.find({ username: "student" })
+  StudentProfile.find({ username: "koreymedina" })
     .then((x) => {
       var data = {
-        _id: x[0].id,
-        username: x[0].username,
-        subjectTopics: x[0].subjectTopics        
+        _id: x[0]?.id,
+        username: x[0]?.username,
+        subjectTopics: x[0]?.subjectTopics
       };
       Tutorial.updateOne(
-        { subjectName: "Yeran Test Group" },
+        { subjectName: "Software Design Studio" },
         {
           $push: {
             UnselectedStudents: data,
             allStudents: data
+          }
+        }
+      )
+        .then((h) => {
+          console.log(h);
+        })
+
+      Subject.updateOne(
+        { subjectName: "Software Design Studio" },
+        {
+          $push: {
+            students: data
+          }
+        }
+      )
+        .then((h) => {
+          console.log(h);
+        })
+    })
+
+  StudentProfile.find({ username: "hanancash" })
+    .then((x) => {
+      var data = {
+        _id: x[0]?.id,
+        username: x[0]?.username,
+        subjectTopics: x[0]?.subjectTopics
+      };
+      Tutorial.updateOne(
+        { subjectName: "Software Design Studio" },
+        {
+          $push: {
+            UnselectedStudents: data,
+            allStudents: data
+          }
+        }
+      )
+        .then((h) => {
+          console.log(h);
+        })
+
+      Subject.updateOne(
+        { subjectName: "Software Design Studio" },
+        {
+          $push: {
+            students: data
+          }
+        }
+      )
+        .then((h) => {
+          console.log(h);
+        })
+    })
+
+  StudentProfile.find({ username: "melodyhyde" })
+    .then((x) => {
+      var data = {
+        _id: x[0]?.id,
+        username: x[0]?.username,
+        subjectTopics: x[0]?.subjectTopics
+      };
+      Tutorial.updateOne(
+        { subjectName: "Software Design Studio" },
+        {
+          $push: {
+            UnselectedStudents: data,
+            allStudents: data
+          }
+        }
+      )
+        .then((h) => {
+          console.log(h);
+        })
+
+      Subject.updateOne(
+        { subjectName: "Software Design Studio" },
+        {
+          $push: {
+            students: data
+          }
+        }
+      )
+        .then((h) => {
+          console.log(h);
+        })
+    })
+
+  StudentProfile.find({ username: "rexeastwood" })
+    .then((x) => {
+      var data = {
+        _id: x[0]?.id,
+        username: x[0]?.username,
+        subjectTopics: x[0]?.subjectTopics
+      };
+      Tutorial.updateOne(
+        { subjectName: "Software Design Studio" },
+        {
+          $push: {
+            UnselectedStudents: data,
+            allStudents: data
+          }
+        }
+      )
+        .then((h) => {
+          console.log(h);
+        })
+
+      Subject.updateOne(
+        { subjectName: "Software Design Studio" },
+        {
+          $push: {
+            students: data
+          }
+        }
+      )
+        .then((h) => {
+          console.log(h);
+        })
+    })
+
+  StudentProfile.find({ username: "halleryan" })
+    .then((x) => {
+      var data = {
+        _id: x[0]?.id,
+        username: x[0]?.username,
+        subjectTopics: x[0]?.subjectTopics
+      };
+      Tutorial.updateOne(
+        { subjectName: "Software Design Studio" },
+        {
+          $push: {
+            UnselectedStudents: data,
+            allStudents: data
+          }
+        }
+      )
+        .then((h) => {
+          console.log(h);
+        })
+
+      Subject.updateOne(
+        { subjectName: "Software Design Studio" },
+        {
+          $push: {
+            students: data
+          }
+        }
+      )
+        .then((h) => {
+          console.log(h);
+        })
+    })
+
+  StudentProfile.find({ username: "giacomocraft" })
+    .then((x) => {
+      var data = {
+        _id: x[0]?.id,
+        username: x[0]?.username,
+        subjectTopics: x[0]?.subjectTopics
+      };
+      Tutorial.updateOne(
+        { subjectName: "Software Design Studio" },
+        {
+          $push: {
+            UnselectedStudents: data,
+            allStudents: data
+          }
+        }
+      )
+        .then((h) => {
+          console.log(h);
+        })
+
+      Subject.updateOne(
+        { subjectName: "Software Design Studio" },
+        {
+          $push: {
+            students: data
+          }
+        }
+      )
+        .then((h) => {
+          console.log(h);
+        })
+    })
+
+  StudentProfile.find({ username: "natanmckay" })
+    .then((x) => {
+      var data = {
+        _id: x[0]?.id,
+        username: x[0]?.username,
+        subjectTopics: x[0]?.subjectTopics
+      };
+      Tutorial.updateOne(
+        { subjectName: "Software Design Studio" },
+        {
+          $push: {
+            UnselectedStudents: data,
+            allStudents: data
+          }
+        }
+      )
+        .then((h) => {
+          console.log(h);
+        })
+
+      Subject.updateOne(
+        { subjectName: "Software Design Studio" },
+        {
+          $push: {
+            students: data
+          }
+        }
+      )
+        .then((h) => {
+          console.log(h);
+        })
+    })
+
+  StudentProfile.find({ username: "muhammedbarry" })
+    .then((x) => {
+      var data = {
+        _id: x[0]?.id,
+        username: x[0]?.username,
+        subjectTopics: x[0]?.subjectTopics
+      };
+      Tutorial.updateOne(
+        { subjectName: "Software Design Studio" },
+        {
+          $push: {
+            UnselectedStudents: data,
+            allStudents: data
+          }
+        }
+      )
+        .then((h) => {
+          console.log(h);
+        })
+
+      Subject.updateOne(
+        { subjectName: "Software Design Studio" },
+        {
+          $push: {
+            students: data
+          }
+        }
+      )
+        .then((h) => {
+          console.log(h);
+        })
+    })
+
+  StudentProfile.find({ username: "brodybarnett" })
+    .then((x) => {
+      var data = {
+        _id: x[0]?.id,
+        username: x[0]?.username,
+        subjectTopics: x[0]?.subjectTopics
+      };
+      Tutorial.updateOne(
+        { subjectName: "Software Design Studio" },
+        {
+          $push: {
+            UnselectedStudents: data,
+            allStudents: data
+          }
+        }
+      )
+        .then((h) => {
+          console.log(h);
+        })
+
+      Subject.updateOne(
+        { subjectName: "Software Design Studio" },
+        {
+          $push: {
+            students: data
+          }
+        }
+      )
+        .then((h) => {
+          console.log(h);
+        })
+    })
+
+  StudentProfile.find({ username: "hettieriggs" })
+    .then((x) => {
+      var data = {
+        _id: x[0]?.id,
+        username: x[0]?.username,
+        subjectTopics: x[0]?.subjectTopics
+      };
+      Tutorial.updateOne(
+        { subjectName: "Software Design Studio" },
+        {
+          $push: {
+            UnselectedStudents: data,
+            allStudents: data
+          }
+        }
+      )
+        .then((h) => {
+          console.log(h);
+        })
+
+      Subject.updateOne(
+        { subjectName: "Software Design Studio" },
+        {
+          $push: {
+            students: data
+          }
+        }
+      )
+        .then((h) => {
+          console.log(h);
+        })
+    })
+
+  StudentProfile.find({ username: "shannanflower" })
+    .then((x) => {
+      var data = {
+        _id: x[0]?.id,
+        username: x[0]?.username,
+        subjectTopics: x[0]?.subjectTopics
+      };
+      Tutorial.updateOne(
+        { subjectName: "Software Design Studio" },
+        {
+          $push: {
+            UnselectedStudents: data,
+            allStudents: data
+          }
+        }
+      )
+        .then((h) => {
+          console.log(h);
+        })
+
+      Subject.updateOne(
+        { subjectName: "Software Design Studio" },
+        {
+          $push: {
+            students: data
+          }
+        }
+      )
+        .then((h) => {
+          console.log(h);
+        })
+    })
+
+  StudentProfile.find({ username: "robynprice" })
+    .then((x) => {
+      var data = {
+        _id: x[0]?.id,
+        username: x[0]?.username,
+        subjectTopics: x[0]?.subjectTopics
+      };
+      Tutorial.updateOne(
+        { subjectName: "Software Design Studio" },
+        {
+          $push: {
+            UnselectedStudents: data,
+            allStudents: data
+          }
+        }
+      )
+        .then((h) => {
+          console.log(h);
+        })
+
+      Subject.updateOne(
+        { subjectName: "Software Design Studio" },
+        {
+          $push: {
+            students: data
+          }
+        }
+      )
+        .then((h) => {
+          console.log(h);
+        })
+    })
+
+  StudentProfile.find({ username: "kyronconnolly" })
+    .then((x) => {
+      var data = {
+        _id: x[0]?.id,
+        username: x[0]?.username,
+        subjectTopics: x[0]?.subjectTopics
+      };
+      Tutorial.updateOne(
+        { subjectName: "Software Design Studio" },
+        {
+          $push: {
+            UnselectedStudents: data,
+            allStudents: data
+          }
+        }
+      )
+        .then((h) => {
+          console.log(h);
+        })
+
+      Subject.updateOne(
+        { subjectName: "Software Design Studio" },
+        {
+          $push: {
+            students: data
+          }
+        }
+      )
+        .then((h) => {
+          console.log(h);
+        })
+    })
+
+  StudentProfile.find({ username: "barrywhelan" })
+    .then((x) => {
+      var data = {
+        _id: x[0]?.id,
+        username: x[0]?.username,
+        subjectTopics: x[0]?.subjectTopics
+      };
+      Tutorial.updateOne(
+        { subjectName: "Software Design Studio" },
+        {
+          $push: {
+            UnselectedStudents: data,
+            allStudents: data
+          }
+        }
+      )
+        .then((h) => {
+          console.log(h);
+        })
+
+      Subject.updateOne(
+        { subjectName: "Software Design Studio" },
+        {
+          $push: {
+            students: data
+          }
+        }
+      )
+        .then((h) => {
+          console.log(h);
+        })
+    })
+
+  StudentProfile.find({ username: "lexamos" })
+    .then((x) => {
+      var data = {
+        _id: x[0]?.id,
+        username: x[0]?.username,
+        subjectTopics: x[0]?.subjectTopics
+      };
+      Tutorial.updateOne(
+        { subjectName: "Software Design Studio" },
+        {
+          $push: {
+            UnselectedStudents: data,
+            allStudents: data
+          }
+        }
+      )
+        .then((h) => {
+          console.log(h);
+        })
+
+      Subject.updateOne(
+        { subjectName: "Software Design Studio" },
+        {
+          $push: {
+            students: data
+          }
+        }
+      )
+        .then((h) => {
+          console.log(h);
+        })
+    })
+
+  StudentProfile.find({ username: "henriettarussell" })
+    .then((x) => {
+      var data = {
+        _id: x[0]?.id,
+        username: x[0]?.username,
+        subjectTopics: x[0]?.subjectTopics
+      };
+      Tutorial.updateOne(
+        { subjectName: "Software Design Studio" },
+        {
+          $push: {
+            UnselectedStudents: data,
+            allStudents: data
+          }
+        }
+      )
+        .then((h) => {
+          console.log(h);
+        })
+
+      Subject.updateOne(
+        { subjectName: "Software Design Studio" },
+        {
+          $push: {
+            students: data
+          }
+        }
+      )
+        .then((h) => {
+          console.log(h);
+        })
+    })
+
+  StudentProfile.find({ username: "abihastacey" })
+    .then((x) => {
+      var data = {
+        _id: x[0]?.id,
+        username: x[0]?.username,
+        subjectTopics: x[0]?.subjectTopics
+      };
+      Tutorial.updateOne(
+        { subjectName: "Software Design Studio" },
+        {
+          $push: {
+            UnselectedStudents: data,
+            allStudents: data
+          }
+        }
+      )
+        .then((h) => {
+          console.log(h);
+        })
+
+      Subject.updateOne(
+        { subjectName: "Software Design Studio" },
+        {
+          $push: {
+            students: data
+          }
+        }
+      )
+        .then((h) => {
+          console.log(h);
+        })
+    })
+
+  StudentProfile.find({ username: "aliyahchristian" })
+    .then((x) => {
+      var data = {
+        _id: x[0]?.id,
+        username: x[0]?.username,
+        subjectTopics: x[0]?.subjectTopics
+      };
+      Tutorial.updateOne(
+        { subjectName: "Software Design Studio" },
+        {
+          $push: {
+            UnselectedStudents: data,
+            allStudents: data
+          }
+        }
+      )
+        .then((h) => {
+          console.log(h);
+        })
+
+      Subject.updateOne(
+        { subjectName: "Software Design Studio" },
+        {
+          $push: {
+            students: data
+          }
+        }
+      )
+        .then((h) => {
+          console.log(h);
+        })
+    })
+
+  StudentProfile.find({ username: "ubaidfitzpatrick" })
+    .then((x) => {
+      var data = {
+        _id: x[0]?.id,
+        username: x[0]?.username,
+        subjectTopics: x[0]?.subjectTopics
+      };
+      Tutorial.updateOne(
+        { subjectName: "Software Design Studio" },
+        {
+          $push: {
+            UnselectedStudents: data,
+            allStudents: data
+          }
+        }
+      )
+        .then((h) => {
+          console.log(h);
+        })
+
+      Subject.updateOne(
+        { subjectName: "Software Design Studio" },
+        {
+          $push: {
+            students: data
+          }
+        }
+      )
+        .then((h) => {
+          console.log(h);
+        })
+    })
+
+  StudentProfile.find({ username: "jagdeepcorrea" })
+    .then((x) => {
+      var data = {
+        _id: x[0]?.id,
+        username: x[0]?.username,
+        subjectTopics: x[0]?.subjectTopics
+      };
+      Tutorial.updateOne(
+        { subjectName: "Software Design Studio" },
+        {
+          $push: {
+            UnselectedStudents: data,
+            allStudents: data
+          }
+        }
+      )
+        .then((h) => {
+          console.log(h);
+        })
+
+      Subject.updateOne(
+        { subjectName: "Software Design Studio" },
+        {
+          $push: {
+            students: data
+          }
+        }
+      )
+        .then((h) => {
+          console.log(h);
+        })
+    })
+
+  StudentProfile.find({ username: "alisarobins" })
+    .then((x) => {
+      var data = {
+        _id: x[0]?.id,
+        username: x[0]?.username,
+        subjectTopics: x[0]?.subjectTopics
+      };
+      Tutorial.updateOne(
+        { subjectName: "Software Design Studio" },
+        {
+          $push: {
+            UnselectedStudents: data,
+            allStudents: data
+          }
+        }
+      )
+        .then((h) => {
+          console.log(h);
+        })
+
+      Subject.updateOne(
+        { subjectName: "Software Design Studio" },
+        {
+          $push: {
+            students: data
+          }
+        }
+      )
+        .then((h) => {
+          console.log(h);
+        })
+    })
+
+  StudentProfile.find({ username: "pennysawyer" })
+    .then((x) => {
+      var data = {
+        _id: x[0]?.id,
+        username: x[0]?.username,
+        subjectTopics: x[0]?.subjectTopics
+      };
+      Tutorial.updateOne(
+        { subjectName: "Software Design Studio" },
+        {
+          $push: {
+            UnselectedStudents: data,
+            allStudents: data
+          }
+        }
+      )
+        .then((h) => {
+          console.log(h);
+        })
+
+      Subject.updateOne(
+        { subjectName: "Software Design Studio" },
+        {
+          $push: {
+            students: data
+          }
+        }
+      )
+        .then((h) => {
+          console.log(h);
+        })
+    })
+
+  StudentProfile.find({ username: "maliktomlinson" })
+    .then((x) => {
+      var data = {
+        _id: x[0]?.id,
+        username: x[0]?.username,
+        subjectTopics: x[0]?.subjectTopics
+      };
+      Tutorial.updateOne(
+        { subjectName: "Software Design Studio" },
+        {
+          $push: {
+            UnselectedStudents: data,
+            allStudents: data
+          }
+        }
+      )
+        .then((h) => {
+          console.log(h);
+        })
+
+      Subject.updateOne(
+        { subjectName: "Software Design Studio" },
+        {
+          $push: {
+            students: data
           }
         }
       )
