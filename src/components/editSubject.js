@@ -114,49 +114,6 @@ class EditSubject extends Component {
     );
   }
 
-  // setActiveSubject(subject, index) {
-  //   if (subject.groupAssessment === true) {
-  //     this.setState({
-  //       currentSubject: subject,
-  //       groupAssessment: "Yes",
-  //       currentIndex: index
-  //     });
-  //   }
-  //   else {
-  //     this.setState({
-  //       currentSubject: subject,
-  //       groupAssessment: "No",
-  //       currentIndex: index
-  //     });
-  //   }
-
-  //   if (subject.subjectTopics.size !== 0) {
-  //     var str = "";
-
-  //     for (let i = 0; i < subject.subjectTopics.length; i++) {
-  //       str += subject.subjectTopics[i] + ",";
-  //     }
-
-  //     this.setState({ subjectTopics: str });
-  //   }
-
-  //   TutorDataService.getTutor(subject.subjectCoordinator)
-  //     .then((response) => {
-  //       this.setState({ subjectCoordinator: response.data.username });
-  //     })
-  //     .catch((e) => {
-  //       console.log(e);
-  //     })
-
-  //   SubjectDataService.findTutorial(subject.subjectName)
-  //     .then((response) => {
-  //       this.setState({ tutorials: response.data });
-  //     })
-  //     .catch((e) => {
-  //       console.log(e);
-  //     })
-  // }
-
   setActiveTutorial(tutorial, index) {
     TutorDataService.getTutor(tutorial.tutor)
       .then((response) => {
@@ -206,14 +163,6 @@ class EditSubject extends Component {
         console.log(e);
       });
   }
-
-  // refreshList() {
-  //   this.retrieveTutors();
-  //   this.setState({
-  //     currentTutor: null,
-  //     currentIndex: -1
-  //   });
-  // }
 
   setActiveAddItem(tutor, index) {
     this.setState({
