@@ -6,6 +6,9 @@ module.exports = app => {
   // Retrieves all Subjects made by a particular user
   router.get("/view/:username", subject.viewSubjects);
 
+  // returns all student subjects
+  router.get("/viewAll/:username", subject.viewStudentSubjects);
+
   // Create a new Subject
   router.post("/create/:username", subject.createSubject);
 
@@ -23,6 +26,9 @@ module.exports = app => {
   // app.get("/api/request/create/:username", subject.getPeers)
   //Update Subject with id
   router.put("/updateSubject", subject.updateSubject);
+
+  // get all the study groups in a subject
+  router.get("/studyGroups", subject.getSubjectStudyGroups);
 
   app.use('/api/subject', router);
 };

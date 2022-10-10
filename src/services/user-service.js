@@ -31,6 +31,26 @@ const getUser = (username) => {
   return axios.get("http://localhost:8080/api/user/" + username);
 };
 
+const createStudyGroup = async (data) => {
+  return await axios.post(`http://localhost:8080/api/${data.username}/createStudyGroup`, data);
+}
+
+const getStudyGroups = (username) => {
+  return axios.get(`http://localhost:8080/api/${username}/getStudyGroups`);
+}
+
+const deleteStudyGroup = (groupId) => {
+  return axios.delete(`http://localhost:8080/api/deleteStudyGroup/${groupId}`);
+}
+
+const joinStudyGroup = (data) => {
+  return axios.patch(`http://localhost:8080/api/joinStudyGroup/${data.groupId}`, data);
+}
+
+const leaveStudyGroup = (data) => {
+  return axios.patch(`http://localhost:8080/api/leaveStudyGroup/${data.groupId}`, data);
+}
+
 // eslint-disable-next-line
 export default {
   getPublicContent,
@@ -39,5 +59,10 @@ export default {
   getManagerBoard,
   getOwnerBoard,
   updateStudent,
-  getUser
+  getUser,
+  createStudyGroup,
+  getStudyGroups,
+  deleteStudyGroup,
+  joinStudyGroup,
+  leaveStudyGroup
 };

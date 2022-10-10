@@ -29,6 +29,8 @@ import EditPeerRequest from "./components/editPeerRequest";
 import EditSubject from "./components/editSubject";
 import ApproveSubjectEnrollment from "./components/approveSubjectEnrollment";
 import TutorialPage from "./components/tutorialPage";
+import ExternalGroup from "./components/externalGroup";
+import FindExternalGroups from "./components/findExternalGroups";
 
 const App = () => {
   const [ShowSubjectCoordinator, setShowSubjectCoordinator] = useState(false);
@@ -60,53 +62,55 @@ const App = () => {
 
 
   return (
-    
+
     <Router history={history}>
       <>
-      <AppBar style={{background: '#fff0e7', textColor: 'black'}} justifyContent="space-between" position="static" fullwidth>
-        <toolbar style={{textColor: ''}} justifyContent="space-between">
-        <img src={logo} id="groupbuddieslogo" height="100" alt="" />
-            <Button  component={Link} to={"/home"}>Home</Button>
+        <AppBar style={{ background: '#fff0e7', textColor: 'black' }} justifyContent="space-between" position="static" fullwidth>
+          <toolbar style={{ textColor: '' }} justifyContent="space-between">
+            <img src={logo} id="groupbuddieslogo" height="100" alt="" />
+            <Button component={Link} to={"/home"}>Home</Button>
 
             {showTutor && (
 
-            <>
-              <Button  component={Link} to={"/request/view/" + currentUser?.username}>View Peer Requests</Button>
-              <Button component={Link} to={"/tutor/viewTutorial/" + currentUser?.id}>View Tutorial Class</Button>
-             </>
+              <>
+                <Button component={Link} to={"/request/view/" + currentUser?.username}>View Peer Requests</Button>
+                <Button component={Link} to={"/tutor/viewTutorial/" + currentUser?.id}>View Tutorial Class</Button>
+              </>
             )}
 
             {ShowSubjectCoordinator && (
               <>
-              <Button component={Link} to={"/subject/create/" + currentUser?.username}>Create New Subject</Button>
-              <Button component={Link} to={"/subject/view/" + currentUser?.username}>View a Subject</Button>
-              <Button component={Link} to={"/tutor/view"}>View Tutors</Button>
-              <Button component={Link} to={"/enrollment/viewrequest/" + currentUser?.username}> View Enrollment Requests</Button>
+                <Button component={Link} to={"/subject/create/" + currentUser?.username}>Create New Subject</Button>
+                <Button component={Link} to={"/subject/view/" + currentUser?.username}>View a Subject</Button>
+                <Button component={Link} to={"/tutor/view"}>View Tutors</Button>
+                <Button component={Link} to={"/enrollment/viewrequest/" + currentUser?.username}> View Enrollment Requests</Button>
               </>
             )}
 
             {showStudent && (
               <>
-              <Button  component={Link} to={"/request/create/" + currentUser?.username}>Create Peer Request</Button>
-              <Button  component={Link} to={"/request/view/" + currentUser?.username}>My Peer Requests</Button>
-              <Button  component={Link} to={"/enrollment/create/" + currentUser?.username}>Create a Subject Enrollment</Button>
-              <Button  component={Link} to={"/enrollment/view/" + currentUser?.username}>View Subject Enrollments</Button>
-              <Button  component={Link} to={"/profile/" + currentUser?.username}>My Profile</Button>
+                <Button component={Link} to={"/request/create/" + currentUser?.username}>Create Peer Request</Button>
+                <Button component={Link} to={"/request/view/" + currentUser?.username}>My Peer Requests</Button>
+                <Button component={Link} to={"/enrollment/create/" + currentUser?.username}>Create a Subject Enrollment</Button>
+                <Button component={Link} to={"/enrollment/view/" + currentUser?.username}>View Subject Enrollments</Button>
+                <Button component={Link} to={"/profile/" + currentUser?.username}>My Profile</Button>
+                <Button component={Link} to={"/study/" + currentUser?.username}>My Study Groups</Button>
               </>
             )}
 
-          {currentUser ? (
-    
-              <><Button  component={Link} to={"/account/" + currentUser?.username}>My Account</Button>
-              <Button component={Link} to={"/"} onClick={logOut}>Logout </Button>
-              </> 
-              
-           
-          ) : (
-            
-              <Button  component={Link} to={"/login"}>Login</Button>
-            
-          )}
+            {currentUser ? (
+
+              <>
+                <Button component={Link} to={"/account/" + currentUser?.username}>My Account</Button>
+                <Button component={Link} to={"/"} onClick={logOut}>Logout </Button>
+              </>
+
+
+            ) : (
+
+              <Button component={Link} to={"/login"}>Login</Button>
+
+            )}
           </toolbar>
         </AppBar>
 
@@ -131,6 +135,8 @@ const App = () => {
             <Route path={"/enrollment/viewrequest/" + currentUser?.username} component={ApproveSubjectEnrollment} />
             <Route path={"/subject/" + currentUser?.username + "/"} component={EditSubject} />
             <Route path={"/tutorial/" + currentUser?.id + "/"} component={TutorialPage} />
+            <Route path={"/study/" + currentUser?.username + "/"} component={ExternalGroup} />
+            <Route path={"/study/find/" + currentUser?.username + "/"} component={FindExternalGroups} />
           </Switch>
         </div>
       </>

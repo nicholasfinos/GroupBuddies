@@ -29,4 +29,14 @@ module.exports = function(app) {
   );
 
   app.get("/api/user/:username", controller.getUser)
+
+  app.post("/api/:username/createStudyGroup", controller.createStudyGroup);
+
+  app.get("/api/:username/getStudyGroups", controller.getStudyGroups);
+  
+  app.delete("/api/deleteStudyGroup/:studyGroup", controller.deleteStudyGroup);
+
+  app.patch("/api/joinStudyGroup/:groupId", controller.joinStudyGroup);
+
+  app.patch("/api/leaveStudyGroup/:groupId", controller.leaveStudyGroup);
 };

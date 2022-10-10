@@ -1032,446 +1032,447 @@ async function initial() {
             });
           });
       })
-    }})
-    /*
-      -------------------
-      //ALGORITHM TESTING
-      -------------------
-      1. Delete GroupBuddies Collection 
-      2. Uncomment "settingUpProfiles();" and run node server.js
-      3. Comment "settingUpProfiles"
-      4. Uncomment "addingToTutorials();" and run node server.js
-      5. Comment "addingToTutorials();"
-      */
+    }
+  })
+  /*
+    -------------------
+    //ALGORITHM TESTING
+    -------------------
+    1. Delete GroupBuddies Collection 
+    2. Uncomment "settingUpProfiles();" and run node server.js
+    3. Comment "settingUpProfiles"
+    4. Uncomment "addingToTutorials();" and run node server.js
+    5. Comment "addingToTutorials();"
+    */
 
-      //settingUpProfile();
-      //addingToTutorials();
+  //settingUpProfile();
+  //addingToTutorials();
 }
 
-  function settingUpProfile() {
+function settingUpProfile() {
 
-    StudentProfile.create({          
-      username: "graceBilliris",
-      subjectName: "Software Design Studio",
-      tutorialNumber: "1",
-      groupNumber: "",
-      subjectTopics: ["Fullstack Developer", "Scrum Master", "Documentation"],
-    })
+  StudentProfile.create({
+    username: "graceBilliris",
+    subjectName: "Software Design Studio",
+    tutorialNumber: "1",
+    groupNumber: "",
+    subjectTopics: ["Fullstack Developer", "Scrum Master", "Documentation"],
+  })
 
-    StudentProfile.create({       
-      username: "yeran",
-      subjectName: "Software Design Studio",
-      tutorialNumber: "1",
-      groupNumber: "",
-      subjectTopics: ["Backend Developer", "Scrum Master", "Fullstack Developer"],
-    })
+  StudentProfile.create({
+    username: "yeran",
+    subjectName: "Software Design Studio",
+    tutorialNumber: "1",
+    groupNumber: "",
+    subjectTopics: ["Backend Developer", "Scrum Master", "Fullstack Developer"],
+  })
 
-    StudentProfile.create({         
-      username: "nicholasFinos",
-      subjectName: "Software Design Studio",
-      tutorialNumber: "1",
-      groupNumber: "",
-      subjectTopics: ["Backend Developer", "Scrum Master", "MERN Stack"],
-    })
+  StudentProfile.create({
+    username: "nicholasFinos",
+    subjectName: "Software Design Studio",
+    tutorialNumber: "1",
+    groupNumber: "",
+    subjectTopics: ["Backend Developer", "Scrum Master", "MERN Stack"],
+  })
 
-    StudentProfile.create({          
-      username: "jeromeSario",
-      subjectName: "Software Design Studio",
-      tutorialNumber: "1",
-      groupNumber: "",
-      subjectTopics: ["Frontend Developer", "UX Designer"],
-    })
+  StudentProfile.create({
+    username: "jeromeSario",
+    subjectName: "Software Design Studio",
+    tutorialNumber: "1",
+    groupNumber: "",
+    subjectTopics: ["Frontend Developer", "UX Designer"],
+  })
 
-    StudentProfile.create({        
-      username: "ashishChadha",
-      subjectName: "Software Design Studio",
-      tutorialNumber: "1",
-      groupNumber: "",
-      subjectTopics: ["Fullstack Developer"],
-    })
+  StudentProfile.create({
+    username: "ashishChadha",
+    subjectName: "Software Design Studio",
+    tutorialNumber: "1",
+    groupNumber: "",
+    subjectTopics: ["Fullstack Developer"],
+  })
 
-    StudentProfile.create({
-      username: "lukaRyan",
-      subjectName: "Software Design Studio",
-      tutorialNumber: "1",
-      groupNumber: "",
-      subjectTopics: ["BA", "Documentation"],
-    })
+  StudentProfile.create({
+    username: "lukaRyan",
+    subjectName: "Software Design Studio",
+    tutorialNumber: "1",
+    groupNumber: "",
+    subjectTopics: ["BA", "Documentation"],
+  })
 
-    StudentProfile.create({
-      username: "lachlanSinclair",
-      subjectName: "Software Design Studio",
-      tutorialNumber: "1",
-      groupNumber: "",
-      subjectTopics: ["Frontend Developer", "UX Designer"],
-    })
+  StudentProfile.create({
+    username: "lachlanSinclair",
+    subjectName: "Software Design Studio",
+    tutorialNumber: "1",
+    groupNumber: "",
+    subjectTopics: ["Frontend Developer", "UX Designer"],
+  })
 
-    StudentProfile.create({
-      username: "koreymedina",
-      subjectName: "Software Design Studio",
-      tutorialNumber: "1",
-      groupNumber: "",
-      subjectTopics: ["Frontend Developer"],
-    })
+  StudentProfile.create({
+    username: "koreymedina",
+    subjectName: "Software Design Studio",
+    tutorialNumber: "1",
+    groupNumber: "",
+    subjectTopics: ["Frontend Developer"],
+  })
 
-    StudentProfile.create({
-      username: "julietfaulkner",
-      subjectName: "Software Design Studio",
-      tutorialNumber: "1",
-      groupNumber: "",
-      subjectTopics: ["Backend Developer"],
-    })
+  StudentProfile.create({
+    username: "julietfaulkner",
+    subjectName: "Software Design Studio",
+    tutorialNumber: "1",
+    groupNumber: "",
+    subjectTopics: ["Backend Developer"],
+  })
 
-    StudentProfile.create({
-      username: "hanancash",
-      subjectName: "Software Design Studio",
-      tutorialNumber: "1",
-      groupNumber: "",
-      subjectTopics: ["Fullstack Developer"],
-    })
+  StudentProfile.create({
+    username: "hanancash",
+    subjectName: "Software Design Studio",
+    tutorialNumber: "1",
+    groupNumber: "",
+    subjectTopics: ["Fullstack Developer"],
+  })
 
-    StudentProfile.create({
-      username: "melodyhyde",
-      subjectName: "Software Design Studio",
-      tutorialNumber: "1",
-      groupNumber: "",
-      subjectTopics: ["UX Designer"],
-    })
+  StudentProfile.create({
+    username: "melodyhyde",
+    subjectName: "Software Design Studio",
+    tutorialNumber: "1",
+    groupNumber: "",
+    subjectTopics: ["UX Designer"],
+  })
 
-    StudentProfile.create({
-      username: "rexeastwood",
-      subjectName: "Software Design Studio",
-      tutorialNumber: "1",
-      groupNumber: "",
-      subjectTopics: ["BA"],
-    })
+  StudentProfile.create({
+    username: "rexeastwood",
+    subjectName: "Software Design Studio",
+    tutorialNumber: "1",
+    groupNumber: "",
+    subjectTopics: ["BA"],
+  })
 
-    StudentProfile.create({
-      username: "halleryan",
-      subjectName: "Software Design Studio",
-      tutorialNumber: "1",
-      groupNumber: "",
-      subjectTopics: ["Scrum Master"],
-    })
+  StudentProfile.create({
+    username: "halleryan",
+    subjectName: "Software Design Studio",
+    tutorialNumber: "1",
+    groupNumber: "",
+    subjectTopics: ["Scrum Master"],
+  })
 
-    StudentProfile.create({
-      username: "giacomocraft",
-      subjectName: "Software Design Studio",
-      tutorialNumber: "1",
-      groupNumber: "",
-      subjectTopics: ["MERN Stack"],
-    })
+  StudentProfile.create({
+    username: "giacomocraft",
+    subjectName: "Software Design Studio",
+    tutorialNumber: "1",
+    groupNumber: "",
+    subjectTopics: ["MERN Stack"],
+  })
 
-    StudentProfile.create({
-      username: "natanmckay",
-      subjectName: "Software Design Studio",
-      tutorialNumber: "1",
-      groupNumber: "",
-      subjectTopics: ["Documentation"],
-    })
+  StudentProfile.create({
+    username: "natanmckay",
+    subjectName: "Software Design Studio",
+    tutorialNumber: "1",
+    groupNumber: "",
+    subjectTopics: ["Documentation"],
+  })
 
-    StudentProfile.create({
-      username: "muhammedbarry",
-      subjectName: "Software Design Studio",
-      tutorialNumber: "1",
-      groupNumber: "",
-      subjectTopics: ["Frontend Developer", "Documentation"],
-    })
+  StudentProfile.create({
+    username: "muhammedbarry",
+    subjectName: "Software Design Studio",
+    tutorialNumber: "1",
+    groupNumber: "",
+    subjectTopics: ["Frontend Developer", "Documentation"],
+  })
 
-    StudentProfile.create({
-      username: "brodybarnett",
-      subjectName: "Software Design Studio",
-      tutorialNumber: "1",
-      groupNumber: "",
-      subjectTopics: ["Backend Developer", "MERN Stack"],
-    })
+  StudentProfile.create({
+    username: "brodybarnett",
+    subjectName: "Software Design Studio",
+    tutorialNumber: "1",
+    groupNumber: "",
+    subjectTopics: ["Backend Developer", "MERN Stack"],
+  })
 
-    StudentProfile.create({
-      username: "hettieriggs",
-      subjectName: "Software Design Studio",
-      tutorialNumber: "1",
-      groupNumber: "",
-      subjectTopics: ["Fullstack Developer", "Scrum Master"],
-    })
+  StudentProfile.create({
+    username: "hettieriggs",
+    subjectName: "Software Design Studio",
+    tutorialNumber: "1",
+    groupNumber: "",
+    subjectTopics: ["Fullstack Developer", "Scrum Master"],
+  })
 
-    StudentProfile.create({
-      username: "shannanflower",
-      subjectName: "Software Design Studio",
-      tutorialNumber: "1",
-      groupNumber: "",
-      subjectTopics: ["UX Designer", "BA"],
-    })
+  StudentProfile.create({
+    username: "shannanflower",
+    subjectName: "Software Design Studio",
+    tutorialNumber: "1",
+    groupNumber: "",
+    subjectTopics: ["UX Designer", "BA"],
+  })
 
-    StudentProfile.create({
-      username: "robynprice",
-      subjectName: "Software Design Studio",
-      tutorialNumber: "1",
-      groupNumber: "",
-      subjectTopics: ["Frontend Developer", "Documentation", "Backend Developer"],
-    })
+  StudentProfile.create({
+    username: "robynprice",
+    subjectName: "Software Design Studio",
+    tutorialNumber: "1",
+    groupNumber: "",
+    subjectTopics: ["Frontend Developer", "Documentation", "Backend Developer"],
+  })
 
-    StudentProfile.create({
-      username: "kyronconnolly",
-      subjectName: "Software Design Studio",
-      tutorialNumber: "1",
-      groupNumber: "",
-      subjectTopics: ["Backend Developer", "MERN Stack", "Fullstack Developer"],
-    })
+  StudentProfile.create({
+    username: "kyronconnolly",
+    subjectName: "Software Design Studio",
+    tutorialNumber: "1",
+    groupNumber: "",
+    subjectTopics: ["Backend Developer", "MERN Stack", "Fullstack Developer"],
+  })
 
-    StudentProfile.create({
-      username: "barrywhelan",
-      subjectName: "Software Design Studio",
-      tutorialNumber: "1",
-      groupNumber: "",
-      subjectTopics: ["Fullstack Developer", "Scrum Master"],
-    })
+  StudentProfile.create({
+    username: "barrywhelan",
+    subjectName: "Software Design Studio",
+    tutorialNumber: "1",
+    groupNumber: "",
+    subjectTopics: ["Fullstack Developer", "Scrum Master"],
+  })
 
-    StudentProfile.create({
-      username: "lexamos",
-      subjectName: "Software Design Studio",
-      tutorialNumber: "1",
-      groupNumber: "",
-      subjectTopics: ["UX Designer", "BA", "Scrum Master"],
-    })
+  StudentProfile.create({
+    username: "lexamos",
+    subjectName: "Software Design Studio",
+    tutorialNumber: "1",
+    groupNumber: "",
+    subjectTopics: ["UX Designer", "BA", "Scrum Master"],
+  })
 
-    StudentProfile.create({
-      username: "henriettarussell",
-      subjectName: "Software Design Studio",
-      tutorialNumber: "1",
-      groupNumber: "",
-      subjectTopics: ["Documentation", "UX Designer"],
-    })
+  StudentProfile.create({
+    username: "henriettarussell",
+    subjectName: "Software Design Studio",
+    tutorialNumber: "1",
+    groupNumber: "",
+    subjectTopics: ["Documentation", "UX Designer"],
+  })
 
-    StudentProfile.create({
-      username: "abihastacey",
-      subjectName: "Software Design Studio",
-      tutorialNumber: "1",
-      groupNumber: "",
-      subjectTopics: ["Scrum Master", "Frontend Developer"],
-    })
+  StudentProfile.create({
+    username: "abihastacey",
+    subjectName: "Software Design Studio",
+    tutorialNumber: "1",
+    groupNumber: "",
+    subjectTopics: ["Scrum Master", "Frontend Developer"],
+  })
 
-    StudentProfile.create({
-      username: "aliyahchristian",
-      subjectName: "Software Design Studio",
-      tutorialNumber: "1",
-      groupNumber: "",
-      subjectTopics: ["Backend Developer", "BA"],
-    })
+  StudentProfile.create({
+    username: "aliyahchristian",
+    subjectName: "Software Design Studio",
+    tutorialNumber: "1",
+    groupNumber: "",
+    subjectTopics: ["Backend Developer", "BA"],
+  })
 
-    StudentProfile.create({
-      username: "ubaidfitzpatrick",
-      subjectName: "Software Design Studio",
-      tutorialNumber: "1",
-      groupNumber: "",
-      subjectTopics: ["Frontend Developer", "UX Designer"],
-    })
+  StudentProfile.create({
+    username: "ubaidfitzpatrick",
+    subjectName: "Software Design Studio",
+    tutorialNumber: "1",
+    groupNumber: "",
+    subjectTopics: ["Frontend Developer", "UX Designer"],
+  })
 
-    StudentProfile.create({
-      username: "jagdeepcorrea",
-      subjectName: "Software Design Studio",
-      tutorialNumber: "1",
-      groupNumber: "",
-      subjectTopics: ["Fullstack Developer", "MERN Stack"],
-    })
+  StudentProfile.create({
+    username: "jagdeepcorrea",
+    subjectName: "Software Design Studio",
+    tutorialNumber: "1",
+    groupNumber: "",
+    subjectTopics: ["Fullstack Developer", "MERN Stack"],
+  })
 
-    StudentProfile.create({
-      username: "alisarobins",
-      subjectName: "Software Design Studio",
-      tutorialNumber: "1",
-      groupNumber: "",
-      subjectTopics: ["UX Designer", "Frontend Developer"],
-    })
+  StudentProfile.create({
+    username: "alisarobins",
+    subjectName: "Software Design Studio",
+    tutorialNumber: "1",
+    groupNumber: "",
+    subjectTopics: ["UX Designer", "Frontend Developer"],
+  })
 
-    StudentProfile.create({
-      username: "pennysawyer",
-      subjectName: "Software Design Studio",
-      tutorialNumber: "1",
-      groupNumber: "",
-      subjectTopics: ["UX Designer"],
-    })
+  StudentProfile.create({
+    username: "pennysawyer",
+    subjectName: "Software Design Studio",
+    tutorialNumber: "1",
+    groupNumber: "",
+    subjectTopics: ["UX Designer"],
+  })
 
-    StudentProfile.create({
-      username: "maliktomlinson",
-      subjectName: "Software Design Studio",
-      tutorialNumber: "1",
-      groupNumber: "",
-      subjectTopics: ["MERN Stack"],
-    })
+  StudentProfile.create({
+    username: "maliktomlinson",
+    subjectName: "Software Design Studio",
+    tutorialNumber: "1",
+    groupNumber: "",
+    subjectTopics: ["MERN Stack"],
+  })
 
-    Subject.create({
-      subjectName: "Mathematical Modelling 1",
-      subjectCoordinator: null,
-      tutors: [],
-      subjectTopics: [
-        "Matrix multiplication and determinants",
-        "Vectors and their application to physical problems",
-        "Complex numbers",
-        "Functions and their relationship to measurement and the interpretation of physical results",
-        "Differentiation",
-        "Differential equations arising from physical problems",
-        "Oscillatory motion",
-        "Trigonometric functions and inverse trigonometric functions",
-        "Integrals",
-        "Inverse functions",
-        "Hyperbolic functions",
-        "Methods of integration",
-        "Solution of differential equations by integration"
-      ],
-      semester: "Autumn 2020",
-      groupAssessment: false,
-      tutorials: [],
-      tutorialNumbers: 1,
-      status: false,
-    })
-    console.log('creating MM1 - the subject')
+  Subject.create({
+    subjectName: "Mathematical Modelling 1",
+    subjectCoordinator: null,
+    tutors: [],
+    subjectTopics: [
+      "Matrix multiplication and determinants",
+      "Vectors and their application to physical problems",
+      "Complex numbers",
+      "Functions and their relationship to measurement and the interpretation of physical results",
+      "Differentiation",
+      "Differential equations arising from physical problems",
+      "Oscillatory motion",
+      "Trigonometric functions and inverse trigonometric functions",
+      "Integrals",
+      "Inverse functions",
+      "Hyperbolic functions",
+      "Methods of integration",
+      "Solution of differential equations by integration"
+    ],
+    semester: "Autumn 2020",
+    groupAssessment: false,
+    tutorials: [],
+    tutorialNumbers: 1,
+    status: false,
+  })
+  console.log('creating MM1 - the subject')
 
-    Subject.create({
-      subjectName: "Mathematical Modelling 2",
-      subjectCoordinator: null,
-      tutors: [],
-      subjectTopics: [
-        "Linear algebra including eigenvalues and eigenvectors and applications",
-        "3D geometry and functions of several variables",
-        "Partial derivatives",
-        "Optimisation",
-        "Multiple integrals and their applications",
-        "Probability",
-        "Descriptive statistics",
-        "Probability distributions",
-        "Statistical inference",
-        "Introduction to linear regression"
-      ],
-      semester: "Spring 2020",
-      groupAssessment: false,
-      tutorials: [],
-      tutorialNumbers: 1,
-      status: false,
-    })
-    console.log('creating MM2 - the subject')
+  Subject.create({
+    subjectName: "Mathematical Modelling 2",
+    subjectCoordinator: null,
+    tutors: [],
+    subjectTopics: [
+      "Linear algebra including eigenvalues and eigenvectors and applications",
+      "3D geometry and functions of several variables",
+      "Partial derivatives",
+      "Optimisation",
+      "Multiple integrals and their applications",
+      "Probability",
+      "Descriptive statistics",
+      "Probability distributions",
+      "Statistical inference",
+      "Introduction to linear regression"
+    ],
+    semester: "Spring 2020",
+    groupAssessment: false,
+    tutorials: [],
+    tutorialNumbers: 1,
+    status: false,
+  })
+  console.log('creating MM2 - the subject')
 
-    Subject.create({
-      subjectName: "Engineering Communication",
-      subjectCoordinator: null,
-      tutors: [],
-      subjectTopics: [
-        "Linear algebra including eigenvalues and eigenvectors and applications",
-        "Engineering design process",
-        "Finding, evaluating and referencing information Academic integrity",
-        "Professional engineering documentation",
-        "Effective written, visual and oral communication",
-        "Teamwork processes and participation",
-        "Reflective thinking and writing"
-      ],
-      semester: "Autumn 2020",
-      groupAssessment: true,
-      tutorials: [],
-      tutorialNumbers: 4,
-      status: false,
-    })
-    console.log('creating Eng Com - the subject')
+  Subject.create({
+    subjectName: "Engineering Communication",
+    subjectCoordinator: null,
+    tutors: [],
+    subjectTopics: [
+      "Linear algebra including eigenvalues and eigenvectors and applications",
+      "Engineering design process",
+      "Finding, evaluating and referencing information Academic integrity",
+      "Professional engineering documentation",
+      "Effective written, visual and oral communication",
+      "Teamwork processes and participation",
+      "Reflective thinking and writing"
+    ],
+    semester: "Autumn 2020",
+    groupAssessment: true,
+    tutorials: [],
+    tutorialNumbers: 4,
+    status: false,
+  })
+  console.log('creating Eng Com - the subject')
 
-    Subject.create({
-      subjectName: "Design and Innovation Fundamentals",
-      subjectCoordinator: null,
-      tutors: [],
-      subjectTopics: [
-        "Engineers as designers and innovators",
-        "Design and Engineering thinking",
-        "Approaches for thinking and problem-solving in an engineering context",
-        "The design process including problem definition, concept generation, requirements analysis, system design and detailed design",
-        "New process and product development; lifecycles, research, technology, development and innovation",
-        "Design considerations and trade-offs: including safe design, methods of managing risk and uncertainty, regulations and professionalism, sustainability, design for manufacture and business decisions involved in design and innovation",
-        "Team dynamics and techniques to facilitate successfully working in concurrent engineering teams",
-        "Review of written and oral communication skills"
-      ],
-      semester: "Spring 2021",
-      groupAssessment: true,
-      tutorials: [],
-      tutorialNumbers: 4,
-      status: false,
-    })
-    console.log('creating DIF - the subject')
+  Subject.create({
+    subjectName: "Design and Innovation Fundamentals",
+    subjectCoordinator: null,
+    tutors: [],
+    subjectTopics: [
+      "Engineers as designers and innovators",
+      "Design and Engineering thinking",
+      "Approaches for thinking and problem-solving in an engineering context",
+      "The design process including problem definition, concept generation, requirements analysis, system design and detailed design",
+      "New process and product development; lifecycles, research, technology, development and innovation",
+      "Design considerations and trade-offs: including safe design, methods of managing risk and uncertainty, regulations and professionalism, sustainability, design for manufacture and business decisions involved in design and innovation",
+      "Team dynamics and techniques to facilitate successfully working in concurrent engineering teams",
+      "Review of written and oral communication skills"
+    ],
+    semester: "Spring 2021",
+    groupAssessment: true,
+    tutorials: [],
+    tutorialNumbers: 4,
+    status: false,
+  })
+  console.log('creating DIF - the subject')
 
-    Subject.create({
-      subjectName: "Physical Modelling",
-      subjectCoordinator: null,
-      tutors: [],
-      subjectTopics: [
-        "Motion in 1D",
-        "Motion in 2D",
-        "Force and motion",
-        "Work, enegery and power",
-        "Rotational knimematics",
-        "Temperature and heat",
-        "Thermal expansion",
-        "Thermal processes",
-        "Electric charge",
-        "Electric circuits",
-        "Fluids at rest",
-        "Oscilations and waves",
-        "Reflections and Mirrors",
-        "Lenses"
-      ],
-      semester: "Autumn 2021",
-      groupAssessment: false,
-      tutorials: [],
-      tutorialNumbers: 1,
-      status: false,
-    })
-    console.log('creating Phys Mod - the subject')
+  Subject.create({
+    subjectName: "Physical Modelling",
+    subjectCoordinator: null,
+    tutors: [],
+    subjectTopics: [
+      "Motion in 1D",
+      "Motion in 2D",
+      "Force and motion",
+      "Work, enegery and power",
+      "Rotational knimematics",
+      "Temperature and heat",
+      "Thermal expansion",
+      "Thermal processes",
+      "Electric charge",
+      "Electric circuits",
+      "Fluids at rest",
+      "Oscilations and waves",
+      "Reflections and Mirrors",
+      "Lenses"
+    ],
+    semester: "Autumn 2021",
+    groupAssessment: false,
+    tutorials: [],
+    tutorialNumbers: 1,
+    status: false,
+  })
+  console.log('creating Phys Mod - the subject')
 
-    Tutorial.create({
-      subjectName: "Software Design Studio",
-      number: "1",
-      timeSlot: "5pm",
-      day: "Tuesday",
-      tutor: null,
-      allStudents: [],
-      UnselectedStudents: [],
-      numberGroups: 0,
-      groups: []
-    })
+  Tutorial.create({
+    subjectName: "Software Design Studio",
+    number: "1",
+    timeSlot: "5pm",
+    day: "Tuesday",
+    tutor: null,
+    allStudents: [],
+    UnselectedStudents: [],
+    numberGroups: 0,
+    groups: []
+  })
 
-    Subject.create({
-      subjectName: "Software Design Studio",
-      subjectCoordinator: null,
-      tutors: [],
-      subjectTopics: [
-        "Frontend Developer",
-        "Backend Developer",
-        "Fullstack Developer",
-        "UX Designer",
-        "BA",
-        "Scrum Master",
-        "MERN Stack",
-        "Documentation"
-      ],
-      semester: "Spring 2022",
-      groupAssessment: true,
-      tutorials: [],
-      tutorialNumbers: 1,
-      status: false,
-    })
-    console.log('creating Software Design Studio - the subject')
-  }
+  Subject.create({
+    subjectName: "Software Design Studio",
+    subjectCoordinator: null,
+    tutors: [],
+    subjectTopics: [
+      "Frontend Developer",
+      "Backend Developer",
+      "Fullstack Developer",
+      "UX Designer",
+      "BA",
+      "Scrum Master",
+      "MERN Stack",
+      "Documentation"
+    ],
+    semester: "Spring 2022",
+    groupAssessment: true,
+    tutorials: [],
+    tutorialNumbers: 1,
+    status: false,
+  })
+  console.log('creating Software Design Studio - the subject')
+}
 
 function addingToTutorials() {
-    Tutorial.find({subjectName: "Software Design Studio"})
-      .then((x) => {
-        Subject.updateOne(
-          { subjectName: "Software Design Studio" },
-          {
-            $push: {
-              tutorials: x[0]._id
-            }
+  Tutorial.find({ subjectName: "Software Design Studio" })
+    .then((x) => {
+      Subject.updateOne(
+        { subjectName: "Software Design Studio" },
+        {
+          $push: {
+            tutorials: x[0]._id
           }
-        )
+        }
+      )
         .then((h) => {
           console.log(h);
         })
-      })
+    })
 
-    StudentProfile.find({ username: "lachlanSinclair" })
+  StudentProfile.find({ username: "lachlanSinclair" })
     .then((x) => {
       var data = {
         _id: x[0]?.id,
@@ -1504,7 +1505,7 @@ function addingToTutorials() {
         })
     })
 
-    StudentProfile.find({ username: "graceBilliris" })
+  StudentProfile.find({ username: "graceBilliris" })
     .then((x) => {
       var data = {
         _id: x[0]?.id,
@@ -1537,7 +1538,7 @@ function addingToTutorials() {
         })
     })
 
-    StudentProfile.find({ username: "nicholasFinos" })
+  StudentProfile.find({ username: "nicholasFinos" })
     .then((x) => {
       var data = {
         _id: x[0]?.id,
@@ -1570,7 +1571,7 @@ function addingToTutorials() {
         })
     })
 
-    StudentProfile.find({ username: "jeromeSario" })
+  StudentProfile.find({ username: "jeromeSario" })
     .then((x) => {
       var data = {
         _id: x[0]?.id,
@@ -1603,7 +1604,7 @@ function addingToTutorials() {
         })
     })
 
-    StudentProfile.find({ username: "ashishChadha" })
+  StudentProfile.find({ username: "ashishChadha" })
     .then((x) => {
       var data = {
         _id: x[0]?.id,
@@ -1636,7 +1637,7 @@ function addingToTutorials() {
         })
     })
 
-    StudentProfile.find({ username: "lukaRyan" })
+  StudentProfile.find({ username: "lukaRyan" })
     .then((x) => {
       var data = {
         _id: x[0]?.id,
@@ -1669,7 +1670,7 @@ function addingToTutorials() {
         })
     })
 
-    StudentProfile.find({ username: "koreymedina" })
+  StudentProfile.find({ username: "koreymedina" })
     .then((x) => {
       var data = {
         _id: x[0]?.id,
@@ -1702,7 +1703,7 @@ function addingToTutorials() {
         })
     })
 
-    StudentProfile.find({ username: "hanancash" })
+  StudentProfile.find({ username: "hanancash" })
     .then((x) => {
       var data = {
         _id: x[0]?.id,
@@ -1735,7 +1736,7 @@ function addingToTutorials() {
         })
     })
 
-    StudentProfile.find({ username: "melodyhyde" })
+  StudentProfile.find({ username: "melodyhyde" })
     .then((x) => {
       var data = {
         _id: x[0]?.id,
@@ -1768,7 +1769,7 @@ function addingToTutorials() {
         })
     })
 
-    StudentProfile.find({ username: "rexeastwood" })
+  StudentProfile.find({ username: "rexeastwood" })
     .then((x) => {
       var data = {
         _id: x[0]?.id,
@@ -1801,7 +1802,7 @@ function addingToTutorials() {
         })
     })
 
-    StudentProfile.find({ username: "halleryan" })
+  StudentProfile.find({ username: "halleryan" })
     .then((x) => {
       var data = {
         _id: x[0]?.id,
@@ -1834,7 +1835,7 @@ function addingToTutorials() {
         })
     })
 
-    StudentProfile.find({ username: "giacomocraft" })
+  StudentProfile.find({ username: "giacomocraft" })
     .then((x) => {
       var data = {
         _id: x[0]?.id,
@@ -1867,7 +1868,7 @@ function addingToTutorials() {
         })
     })
 
-    StudentProfile.find({ username: "natanmckay" })
+  StudentProfile.find({ username: "natanmckay" })
     .then((x) => {
       var data = {
         _id: x[0]?.id,
@@ -1900,7 +1901,7 @@ function addingToTutorials() {
         })
     })
 
-    StudentProfile.find({ username: "muhammedbarry" })
+  StudentProfile.find({ username: "muhammedbarry" })
     .then((x) => {
       var data = {
         _id: x[0]?.id,
@@ -1933,7 +1934,7 @@ function addingToTutorials() {
         })
     })
 
-    StudentProfile.find({ username: "brodybarnett" })
+  StudentProfile.find({ username: "brodybarnett" })
     .then((x) => {
       var data = {
         _id: x[0]?.id,
@@ -1966,7 +1967,7 @@ function addingToTutorials() {
         })
     })
 
-    StudentProfile.find({ username: "hettieriggs" })
+  StudentProfile.find({ username: "hettieriggs" })
     .then((x) => {
       var data = {
         _id: x[0]?.id,
@@ -1999,7 +2000,7 @@ function addingToTutorials() {
         })
     })
 
-    StudentProfile.find({ username: "shannanflower" })
+  StudentProfile.find({ username: "shannanflower" })
     .then((x) => {
       var data = {
         _id: x[0]?.id,
@@ -2032,7 +2033,7 @@ function addingToTutorials() {
         })
     })
 
-    StudentProfile.find({ username: "robynprice" })
+  StudentProfile.find({ username: "robynprice" })
     .then((x) => {
       var data = {
         _id: x[0]?.id,
@@ -2065,7 +2066,7 @@ function addingToTutorials() {
         })
     })
 
-    StudentProfile.find({ username: "kyronconnolly" })
+  StudentProfile.find({ username: "kyronconnolly" })
     .then((x) => {
       var data = {
         _id: x[0]?.id,
@@ -2098,7 +2099,7 @@ function addingToTutorials() {
         })
     })
 
-    StudentProfile.find({ username: "barrywhelan" })
+  StudentProfile.find({ username: "barrywhelan" })
     .then((x) => {
       var data = {
         _id: x[0]?.id,
@@ -2131,7 +2132,7 @@ function addingToTutorials() {
         })
     })
 
-    StudentProfile.find({ username: "lexamos" })
+  StudentProfile.find({ username: "lexamos" })
     .then((x) => {
       var data = {
         _id: x[0]?.id,
@@ -2164,7 +2165,7 @@ function addingToTutorials() {
         })
     })
 
-    StudentProfile.find({ username: "henriettarussell" })
+  StudentProfile.find({ username: "henriettarussell" })
     .then((x) => {
       var data = {
         _id: x[0]?.id,
@@ -2197,7 +2198,7 @@ function addingToTutorials() {
         })
     })
 
-    StudentProfile.find({ username: "abihastacey" })
+  StudentProfile.find({ username: "abihastacey" })
     .then((x) => {
       var data = {
         _id: x[0]?.id,
@@ -2230,7 +2231,7 @@ function addingToTutorials() {
         })
     })
 
-    StudentProfile.find({ username: "aliyahchristian" })
+  StudentProfile.find({ username: "aliyahchristian" })
     .then((x) => {
       var data = {
         _id: x[0]?.id,
@@ -2263,7 +2264,7 @@ function addingToTutorials() {
         })
     })
 
-    StudentProfile.find({ username: "ubaidfitzpatrick" })
+  StudentProfile.find({ username: "ubaidfitzpatrick" })
     .then((x) => {
       var data = {
         _id: x[0]?.id,
@@ -2296,7 +2297,7 @@ function addingToTutorials() {
         })
     })
 
-    StudentProfile.find({ username: "jagdeepcorrea" })
+  StudentProfile.find({ username: "jagdeepcorrea" })
     .then((x) => {
       var data = {
         _id: x[0]?.id,
@@ -2329,7 +2330,7 @@ function addingToTutorials() {
         })
     })
 
-    StudentProfile.find({ username: "alisarobins" })
+  StudentProfile.find({ username: "alisarobins" })
     .then((x) => {
       var data = {
         _id: x[0]?.id,
@@ -2362,7 +2363,7 @@ function addingToTutorials() {
         })
     })
 
-    StudentProfile.find({ username: "pennysawyer" })
+  StudentProfile.find({ username: "pennysawyer" })
     .then((x) => {
       var data = {
         _id: x[0]?.id,
@@ -2395,7 +2396,7 @@ function addingToTutorials() {
         })
     })
 
-    StudentProfile.find({ username: "maliktomlinson" })
+  StudentProfile.find({ username: "maliktomlinson" })
     .then((x) => {
       var data = {
         _id: x[0]?.id,

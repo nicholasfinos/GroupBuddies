@@ -5,6 +5,10 @@ class SubjectDataService {
         return http.get(`/subject/view/${username}`);
     }
 
+    viewAllSubjects(username) {
+        return http.get(`/subject/viewAll/${username}`);
+    }
+
     create(data, username) {
         return http.post(`/subject/create/${username}`, data);
     }
@@ -38,9 +42,13 @@ class SubjectDataService {
     getPeers(username, subjectName) {
         return http.get(`/request/create/${username}`, subjectName)
     }
-    
+
     updateSubject(data) {
         return http.put(`/subject/updateSubject/`, data)
+    }
+
+    getAllStudyGroups(subjectName, studentName) {
+        return http.get(`/subject/studyGroups`, { params: { subjectName, studentName } });
     }
 }
 
