@@ -345,7 +345,7 @@ class CreateSubject extends React.Component {
                     {currentTutor ? (
                       <div style={{ textAlign: "center" }}>
                         <h4>Tutor Selected</h4>
-                        <label><strong></strong></label>{"Name: " + currentTutor?.username}
+                        <label><strong>{"Name: " + currentTutor?.username}</strong></label>
                         <p><i>Please select a Day and Timeslot to assign tutor...</i></p>
                         <div className="form-group" style={{ marginLeft: "30px" }}>
                           <label htmlFor="Day" style={{ marginLeft: "50px" }}>Day:</label>
@@ -372,6 +372,7 @@ class CreateSubject extends React.Component {
                   </Grid>
                   <Grid item md={4} style={{}}>
                     <h4>Assigned Tutors to Tutorial Class</h4>
+                    <p><i>Click a tutor below to unassign them from this subject...</i></p>
                     <div style={subjectScrollable}>
                       <div className="form-group" style={{ flexDirection: "column" }}>
                         {addedtutors.map((addedTutor, index) => (
