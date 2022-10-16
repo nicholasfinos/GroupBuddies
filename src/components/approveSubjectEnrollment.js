@@ -183,9 +183,9 @@ class ApproveSubjectEnrollment extends React.Component {
                       <label><strong>Name:</strong></label>{" "}{currentEnrollment.username}
                       <br />
                       <label><strong>Subject Topics:</strong></label>
-                      <div className="list-group" >
+                      <div className="list-group" style={{wordWrap:"break-word"}} >
                         {subjectTopics && subjectTopics.map((topic, index) => (
-                          <ListItem divider style={{ padding: "20px", alignItems: 'center', maxWidth: "400px", }} key={index}> {topic}{" "} </ListItem>
+                          <ListItem style={{ padding: "20px", alignItems: 'center', maxWidth: "400px", wordWrap:"break-word"}} divider key={index}> {topic}{" "} </ListItem>
                         ))}
                       </div>
                       <br />
