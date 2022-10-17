@@ -159,7 +159,14 @@ exports.addStudentGroup = (req, res) => {
     {
       $push: { students: addedStudent }
     }
-  ).then((g) => console.log(g));
+  ).then((g) => { console.log(g) });
+
+  Group.findById({ _id: req.body.group._id })
+    .then((data) => {
+      console.log(data);
+      return res.status(200).send({ currentGroup: data })
+    })
+
 }
 
 exports.removeStudentGroup = (req, res) => {
@@ -201,6 +208,12 @@ exports.removeStudentGroup = (req, res) => {
       $set: { groupNumber: "" }
     }
   ).then((h) => console.log(h));
+
+  Group.findById({ _id: req.body.group._id })
+    .then((data) => {
+      console.log(data);
+      return res.status(200).send({ currentGroup: data })
+    })
 }
 
 exports.removeGroup = (req, res) => {
