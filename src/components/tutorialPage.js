@@ -1,5 +1,5 @@
 import React from "react";
-import { ListItem } from "@material-ui/core";
+import { createTheme, FormControl, FormHelperText, InputAdornment, ListItem, OutlinedInput } from "@material-ui/core";
 import TutorDataService from "../services/tutor-service";
 import StudentProfileDataServcie from "../services/studentProfile-service";
 import SubjectDataService from "../services/subject-service";
@@ -7,10 +7,48 @@ import { Link, Switch, Route } from "react-router-dom";
 import styles from "./tutorialPage.css";
 import { Button } from "@material-ui/core";
 import viewTutorial from "../components/viewTutorial";
+import { Grid, Paper, TextField } from "@material-ui/core";
+import logo from "../media/groupbuddies-logo.png"
+import { styled } from "@material-ui/styles";
+import { Typography } from "@material-ui/core";
+import { Box } from "@material-ui/core";
+import { ButtonGroup } from "@material-ui/core";
+import { MobileStepper } from "@material-ui/core";
+import { useTheme } from "@material-ui/core";
+import { KeyboardArrowLeft } from '@material-ui/icons';
+import { KeyboardArrowRight } from '@material-ui/icons';
+import { Divider } from "@material-ui/core";
+import { CssBaseline } from "@material-ui/core";
+import { stack } from "@material-ui/core";
+import AlertMessage from "./AltertMessage";
+
+
+
+const Backing = styled(Paper)(({ theme }) => ({
+  height: '74vh',
+  borderRadius: 20,
+  padding: 10,
+  margin: 2,
+   background: '#fff0e7',
+}));
+
+const BigText = styled(Typography)(({ theme }) => ({
+  fontWeight: 600,
+}));
+
+
+
+
+
 
 class TutorialPage extends React.Component {
   constructor(props) {
+    
     super(props);
+
+    
+    
+
 
     this.onChangeGroupSize = this.onChangeGroupSize.bind(this);
 
@@ -208,12 +246,155 @@ class TutorialPage extends React.Component {
     else {
       console.log("Group Size value must be greater then 1");
     }
+    
   }
+
+
+
+  
 
   render() {
     const { studentList, groupList, currentStudent, currentGroup, groupMembers, currentIndex, message, tutorial } = this.state;
     return (
+      
+      <Box sx={{ flexGrow: 1 }}>
+      <Backing>
+        <Grid align='center'>
+          <BigText variant="h2"> Edit Tutorial </BigText>
+          <Button  component={Link} to={"/tutor/viewTutorial/" + tutorial?.tutor }>Return</Button>
+          <hr />
+          <Grid  alignContent="center" container spacing={3} margin={2} >
+          <Grid container item xs={4} direction="column">
+
+          <Box paddingBottom={2} >
+          <Typography variant="h6">Groups</Typography>
+          <Divider variant="middle" margin="5" padding="4px"/>
+            <div className="box">
+              <Box style={{maxHeight: 135, overflow: 'auto'}}>
+              {groupList && groupList.map((group, index) => (
+                <ListItem style={{ padding: "5px", marginLeft: "15px", maxWidth: "200px" }} selected={index === currentIndex} onClick={() => this.setCurrentGroup(group)} divider button key={index}>
+                  {"Group " + group.groupNumber}
+                </ListItem>
+              ))}
+              </Box>
+            </div>
+
+            <stack direction="row" spacing={2}>
+            <Button variant="text"  size="medium" className="button" onClick={() => { this.addGroup() }}>Add Group</Button>
+            <Button variant="text"  size="medium" className="button" onClick={() => { this.removeGroup() }}>Remove Group</Button>
+
+            </stack>
+            <Divider variant="middle" padding={10} margin={5}/>
+            </Box>
+            <Typography variant="h6"> Auto Grouping</Typography>
+            <Divider variant="middle"  sx={{borderBottomWidth: 4}}/>
+              <Box padding={2} >
+              <FormControl sx={{ m: 2, p:5 }} variant="outlined">
+                  <OutlinedInput
+                  id="groupSize"
+                  onChange={this.onChangeGroupSize} 
+                  endAdornment={<InputAdornment position="end">Groups</InputAdornment>}
+                  aria-describedby="outlined-weight-helper-text"
+                  
+                />
+                <FormHelperText id="outlined-weight-helper-text">Number of Groups to be Made</FormHelperText>
+              </FormControl>
+              <Button  variant="text"  size="medium" color="default" className="button" onClick={() => { this.autoSort() }}>Automatic Sort</Button>
+
+              </Box>
+
+
+
+
+          </Grid>
+          <Divider orientation="vertical" flexItem sx={{ mr: "-2px" }} />
+          
+          <Grid container item xs={4} direction="column" >
+            
+          <Typography variant="h6">Members</Typography>
+          <Typography>{currentGroup && `Group ${currentGroup.groupNumber}`}</Typography>
+            <Box style={{maxHeight: 250, overflow: 'auto', minHeight: 250}}>  
+              {groupMembers && groupMembers.map((member, index) => (
+                <ListItem style={{ padding: "5px", marginLeft: "5px", alignItems:"center", maxWidth: 390}} selected={index === currentIndex} onClick={() => this.setCurrentMember(member)} divider button key={index}>
+                  {member && member.username}
+                </ListItem>
+              ))}
+              </Box>
+              <Divider variant="middle"  sx={{borderBottomWidth: 4}}/>
+           
+            <Button className="button" onClick={() => { this.removeStudentGroup() }}>Remove student from Group</Button>
+            
+            
+            
+                
+
+
+
+
+
+
+          
+          </Grid>
+          <Divider orientation="vertical" flexItem sx={{ mr: "-1px" }} />
+          <Grid container item xs={3  } direction="column" >
+            
+          
+
+
+
+
+          
+
+
+          <Typography variant="h6">Student Info</Typography>
+          <Box style={{maxHeight: 100, overflow: 'auto', minHeight: 100, maxWidth: 405, minWidth: 405, }}> 
+            <div className="box">
+              <ListItem>
+                {currentStudent && ("Name: " + currentStudent.username)}
+              </ListItem>
+              <ListItem>
+                {currentStudent && ("Proficient Subject Topics: " + currentStudent.subjectTopics)}
+              </ListItem>
+            </div>
+            </Box>
+            <Divider variant="middle" margin="5" padding="4px"/>
+            <Button className="button" onClick={() => { this.addStudentGroup() }}>Add to Group</Button>
+          
+          
+                
+            <Divider variant="middle" margin="5" padding="4px"/>
+            <Typography variant="h6">Ungrouped Students</Typography>
+            <Box style={{maxHeight: 160, overflow: 'auto', minHeight: 160, maxWidth: 405}}> 
+            <Divider variant="middle"  sx={{borderBottomWidth: 4}}/>
+            
+              {studentList && studentList.map((student, index) => (
+                <ListItem style={{ padding: "5px" }} selected={index === currentIndex} onClick={() => this.setCurrentStudent(student)} divider button key={index}>
+                  {student.username}
+                </ListItem>
+              ))}
+            </Box>
+          
+          
+
+
+
+
+
+
+
+
+
+
+
+          </Grid>
+          </Grid>
+        </Grid>
+      </Backing>
+      </Box>
+
+      /*
       <div className="layout">
+        <Backing>
         <div className="header">
           <label style={{ margin: "0px", fontSize: "36px" }}>Tutorial 1</label>
           <Link className="button" style={{ width: "100px", marginTop: "0px", WebkitTextFillColor: "black" }} to={"/tutor/viewTutorial/" + tutorial?.tutor }>Return</Link>
@@ -284,7 +465,9 @@ class TutorialPage extends React.Component {
             </div>
           </div>
         </div>
+        </Backing>
       </div>
+      */
     )
   };
 }

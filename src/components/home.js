@@ -62,7 +62,7 @@ const Home = () => {
 
 
   const Item2 = styled(Paper)(({ theme }) => ({
-    height: '74vh',
+    height: '75vh',
     borderRadius: 20,
     padding: 50,
      background: '#fff0e7',
@@ -91,15 +91,15 @@ const Home = () => {
           <Grid align='center' >
           <img src={logo} id="groupbuddieslogo" height="250" alt="" />
         
-          <Box sx={{ height: 5, maxWidth: 400, width: '100%', p: 3, bgcolor: '#fff0e7', background: '#fff0e7' }}>
+          <Box sx={{ height: 2, maxWidth: 400, width: '100%', p: 3, bgcolor: '#fff0e7', background: '#fff0e7' }}>
           <Typography variant="h6">How can  <strong>Group Buddies</strong> help you?</Typography>
           </Box>
 
-          <Box sx={{ height: 10, maxWidth: 400, width: '100%', p: 2, bgcolor: '#fff0e7', background: '#fff0e7' }}>
+          <Box sx={{ height: 4, maxWidth: 400, width: '100%', p: 2, bgcolor: '#fff0e7', background: '#fff0e7' }}>
           <Typography variant="body1">{slideSteps[activeStep].label}</Typography>
           </Box>
       
-      <Box sx={{ height: 125, maxWidth: 400, width: '100%', p: 2, bgcolor: '#fff0e7', background: '#fff0e7' }}>
+      <Box sx={{ height: 100, maxWidth: 500, width: '100%', p: 2, bgcolor: '#fff0e7', background: '#fff0e7' }}>
       <Typography variant="subtitle2">{slideSteps[activeStep].description}</Typography>
       </Box>
       <MobileStepper
