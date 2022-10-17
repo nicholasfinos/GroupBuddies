@@ -315,7 +315,7 @@ class TutorialPage extends React.Component {
           <Typography>{currentGroup && `Group ${currentGroup.groupNumber}`}</Typography>
             <Box style={{maxHeight: 250, overflow: 'auto', minHeight: 250}}>  
               {groupMembers && groupMembers.map((member, index) => (
-                <ListItem style={{ padding: "20px", marginLeft: "15px" }} selected={index === currentIndex} onClick={() => this.setCurrentMember(member)} divider button key={index}>
+                <ListItem style={{ padding: "5px", marginLeft: "5px", alignItems:"center", maxWidth: 390}} selected={index === currentIndex} onClick={() => this.setCurrentMember(member)} divider button key={index}>
                   {member && member.username}
                 </ListItem>
               ))}
@@ -347,10 +347,13 @@ class TutorialPage extends React.Component {
 
 
           <Typography variant="h6">Student Info</Typography>
-          <Box style={{maxHeight: 100, overflow: 'auto', minHeight: 100}}> 
+          <Box style={{maxHeight: 100, overflow: 'auto', minHeight: 100, maxWidth: 405, minWidth: 405, }}> 
             <div className="box">
               <ListItem>
-                {currentStudent && ("Name: " + currentStudent.username + " | Subject Topics: " + currentStudent.subjectTopics)}
+                {currentStudent && ("Name: " + currentStudent.username)}
+              </ListItem>
+              <ListItem>
+                {currentStudent && ("Proficient Subject Topics: " + currentStudent.subjectTopics)}
               </ListItem>
             </div>
             </Box>
@@ -361,11 +364,11 @@ class TutorialPage extends React.Component {
                 
             <Divider variant="middle" margin="5" padding="4px"/>
             <Typography variant="h6">Ungrouped Students</Typography>
-            <Box style={{maxHeight: 160, overflow: 'auto', minHeight: 160}}> 
+            <Box style={{maxHeight: 160, overflow: 'auto', minHeight: 160, maxWidth: 405}}> 
             <Divider variant="middle"  sx={{borderBottomWidth: 4}}/>
             
               {studentList && studentList.map((student, index) => (
-                <ListItem style={{ padding: "20px", marginLeft: "15px" }} selected={index === currentIndex} onClick={() => this.setCurrentStudent(student)} divider button key={index}>
+                <ListItem style={{ padding: "5px" }} selected={index === currentIndex} onClick={() => this.setCurrentStudent(student)} divider button key={index}>
                   {student.username}
                 </ListItem>
               ))}
