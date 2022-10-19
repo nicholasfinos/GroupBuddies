@@ -8,7 +8,7 @@ import "./studentProfile.css";
 import { Divider } from "@material-ui/core";
 
 const paperStyling = { padding: 40, height: '100%', width: '100%', margin: '20px auto', background: '#fff0e7', borderRadius: 20/*border: '2px solid'*/ }
-const subjectScrollable = { overflowY: 'auto', overflowX: 'hidden', maxHeight: '500px' }
+const subjectScrollable = { overflowY: 'auto', overflowX: 'hidden', maxHeight: '500px', maxWidth:"400px" }
 
 class ApproveSubjectEnrollment extends React.Component {
   constructor(props) {
@@ -183,9 +183,9 @@ class ApproveSubjectEnrollment extends React.Component {
                       <label><strong>Name:</strong></label>{" "}{currentEnrollment.username}
                       <br />
                       <label><strong>Subject Topics:</strong></label>
-                      <div className="list-group" >
+                      <div className="list-group" style={{display:"flex"}} >
                         {subjectTopics && subjectTopics.map((topic, index) => (
-                          <ListItem divider style={{ padding: "20px", alignItems: 'center', maxWidth: "400px", }} key={index}> {topic}{" "} </ListItem>
+                          <ListItem style={{ padding: "20px", alignItems: 'center', maxWidth: "400px", wordBreak:"break-all", wordWrap: "break-word", overflow:"auto", display:"flex"}} divider key={index}>{topic}{" "}</ListItem>
                         ))}
                       </div>
                       <br />
