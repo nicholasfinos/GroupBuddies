@@ -205,7 +205,9 @@ class TutorialPage extends React.Component {
                 tutorial: response.data,
                 studentList: response.data.UnselectedStudents,
                 groupList: response.data.groups,
-                groupSize: null
+                groupSize: null,
+                currentStudent: null,
+                currentGroup: null
               });
             })
         })
