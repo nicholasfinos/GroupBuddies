@@ -2,11 +2,26 @@ import React, { Component } from "react";
 import SubjectDataService from "../services/subject-service";
 import TutorDataService from "../services/tutor-service";
 import { Link, Switch, Route } from "react-router-dom";
-import { Button, Input } from "@material-ui/core";
+import { Box, Button, ButtonGroup, Input, Paper, styled, Typography } from "@material-ui/core";
 import viewSubject from "../components/viewSubjects";
 import { Grid, ListItem } from "@material-ui/core";
 import PeerRequestDataService from "../services/peer-request-service";
 import viewPeerRequests from "./viewPeerRequests";
+
+
+
+const Backing2 = styled(Paper)(({ theme }) => ({
+    height: '74vh',
+    borderRadius: 20,
+    padding: 10,
+    margin: 2,
+     background: '#fff0e7',
+     width: 1200
+  }));
+
+  const BigText = styled(Typography)(({ theme }) => ({
+    fontWeight: 600,
+  }));
 
 const required = (value) => {
     if (!value) {
@@ -134,15 +149,23 @@ class EditPeerRequest extends Component {
         const { subjectName, username, yesPeers, noPeers, creator, status } = this.state;
 
         return (
-            <div style={{ fontFamily: "Times New Roman", textAlign: "center" }}>
-                <h3>Peer Request for <i>{subjectName}</i> by <i>{creator}</i></h3>
+            <Box>
+                <Grid align='center'>
+                    <Backing2>
+                    <div>
+                    <BigText variant="h3">Peer Request for <i>{subjectName}</i> by <i>{creator}</i></BigText>
+
+                
                 <form>
-                    <label htmlFor="username">Subject Name: {subjectName}</label>
-                    <br />
-                    <label htmlFor="subject-topics">Created By: {creator}</label>
-                    <br />
+                    <Typography>Subject Name: {subjectName}</Typography>
+                    <Typography>Created By: {creator}</Typography>
+
+                    
+                    
                     <div className="form-group">
-                        <label htmlFor="group-assessment">Status:</label>
+                    <Grid align='center'>
+                    <Box paddingLeft={40}>
+                    <Typography>Request Status</Typography>
                         {!status ? (
                              <select className="border" style={{ minWidth: "500px" }} value={status} onChange={this.onChangeStatus} validations={[required]} >
                                 <option default value="false">Idle</option>
@@ -154,40 +177,55 @@ class EditPeerRequest extends Component {
                              <option default value="true">Actioned</option>
                             </select>
                         )}
+                        </Box>
+                        </Grid>
                     </div>
-                    <br />
+                    
                     <div className="list-group">
-                        <h2>Peers You Wish To Be With:</h2>
+                    <Typography variant='h6'>Peers {creator} wishes to be grouped with </Typography>
+                        <Grid align='center'>
+                        <Box style={{minHeight: 100, maxHeight: 100, overflow: 'auto', maxWidth: 200}}>
                         <div className="list-group">
                             {yesPeers && yesPeers.map((yesPeer, index) => (
-                            <ListItem divider button style={{ padding: "20px" }} key={index}>
+                            <ListItem divider button style={{ padding: "5px"}} key={index}>
                                 {"Name: " + yesPeer.username}
                             </ListItem>
                             ))}
                         </div>
+                        </Box>
+                        </Grid>
 
-                        <br />
-                        <br />
-                        <h2>Peers Don't You Wish To Be With:</h2>
+                        <Typography variant='h6'>Peers {creator} wishes to not be grouped with </Typography>
+                        <Grid align='center'>
+                        <Box style={{minHeight: 100, maxHeight: 100, overflow: 'auto', maxWidth: 200}}>
                         <div className="list-group">
                             {noPeers && noPeers.map((noPeer, index) => (
-                            <ListItem divider button style={{ padding: "20px" }} key={index}>
+                            <ListItem divider button style={{ padding: "5px" }} key={index}>
                                 {"Name: " + noPeer.username}
                             </ListItem>
                             ))}
                         </div>
-                    </div>
+                        </Box>
+                        </Grid>
+                       </div>
                     <div>
-                        <br />
-                        <Button size="small" variant="contained" style={{ maxWidth: "700px", marginLeft: "225px" }} onClick={this.updateRequest}>Save</Button>
-                        <Link style={{ WebkitTextFillColor: "black" }} to={"/request/view/" + username}>Go Back?</Link>
-                        <Switch>
-                            <Route path={"/request/view/" + username} component={viewPeerRequests} />
-                        </Switch>
+                                <ButtonGroup>
+                                disableElevation
+                                variant="contained"
+                                aria-label="Disabled elevation buttons"
+                                >
+                                <Button onClick={this.updateRequest}>Save</Button>
+                                <Button component={Link}  to={"/request/view/" + username}>Return</Button>
+                                </ButtonGroup>
+                        
                     </div>
                 </form>
                 <p>{this.state.message}</p>
             </div>
+            </Backing2>
+            </Grid>
+
+            </Box>
         );
     }
 }

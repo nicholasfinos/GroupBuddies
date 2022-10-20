@@ -1,10 +1,24 @@
 import React, { Component } from "react";
-import { Grid, ListItem } from "@material-ui/core";
+import { Box, Grid, ListItem, Paper, styled, Typography } from "@material-ui/core";
 import PeerRequestDataService from "../services/peer-request-service";
 import UserDataService from '../services/user-service';
 import RoleDataService from '../services/role-service';
 import EditPeerRequest from "./editPeerRequest";
 import { Link, Switch, Route } from "react-router-dom"; 
+
+
+const Backing = styled(Paper)(({ theme }) => ({
+  height: '74vh',
+  borderRadius: 20,
+  padding: 10,
+  margin: 2,
+   background: '#fff0e7',
+ 
+}));
+
+const BigText = styled(Typography)(({ theme }) => ({
+  fontWeight: 600,
+}));
 
 class viewPeerRequests extends Component {
   constructor(props) {
@@ -104,54 +118,73 @@ class viewPeerRequests extends Component {
     const { requests, isTutor, status, username, request, subjectName, yesPeers, noPeers, currentIndex } = this.state;
 
     return (
-      <div style={{ fontFamily: "Times New Roman", textAlign: "center", "width": "80%", "marginLeft": "130px" }}>
+      <Box>
+        <Grid align='center'>
+          <Backing>
+
+      
+      <div>
         {!isTutor ? (
-          <div style={{ fontFamily: "Times New Roman", textAlign: "center", "width": "80%", "marginLeft": "130px" }}>
-            <h3>Peer Requests</h3>
-            <Grid container>
+          <div>
+            <BigText variant={'h2'}>View Peer Requests </BigText>
+            
+            <Grid container align='center'>
               <Grid item md={4}>
-                <h2>My Peer Request List</h2>
+              <Box padding={5} paddingLeft={15}>
+                <BigText variant='h5'>My Peer Request List</BigText>
+              
+                <Box paddingLeft={5} style={{minHeight: 350, overflow: 'auto',maxHeight: 350,}}>
                 <div className="list-group">
                   {requests && requests.map((request, index) => (
                     <ListItem selected={index === currentIndex} onClick={() => this.setActiveRequest(request, index)} divider button style={{ padding: "20px" }} key={index}> {"Subject: " + request?.subjectName + " | Tutorial Number: " + request?.tutorialNumber} </ListItem>
                   ))}
                 </div>
+                </Box>
+                </Box>
               </Grid>
               <Grid item md={4}>
                 {request ? (
-                  <div style={{ "marginLeft": "50px", "minWidth": "450px"}}>
-                    <br />
+                  <Box padding={5}>
+                  <div style={{ "marginLeft": "50px",}}>
+                    
                     <div>
-                      <h2>Peer Request</h2>
-                      <div>
-                        <label><strong>Subject Name:</strong></label>{" "}{request.subjectName}
-                      </div>
+                      
+                      <BigText variant='h5'>My Peer Requests for: {request.subjectName}</BigText>
+                     
 
-                      <br />
-                      <h2>Peers You Wish To Be With:</h2>
+                      <Box paddingTop={2}>
+                      <Typography variant='h6'>Peers I wish to be grouped with: </Typography>
+                      </Box>
+                      <Box paddingLeft={10} style={{minHeight: 100, overflow: 'auto',maxHeight: 100,}}>
                       <div className="list-group">
                         {yesPeers && yesPeers.map((yesPeer, index) => (
-                          <ListItem selected={index === currentIndex} onClick={() => this.setActiveYesPeer(yesPeer, index)} divider button style={{ padding: "20px" }} key={index}>
+                          <ListItem selected={index === currentIndex} onClick={() => this.setActiveYesPeer(yesPeer, index)} divider button style={{ padding: "5px" }} key={index}>
                             {"Name: " + yesPeer.username}
                           </ListItem>
                         ))}
                       </div>
+                      </Box>
+                      <Box paddingLeft={4}>
+                      <Typography variant='h6'>Peers I wish not be grouped with: </Typography>
+                      </Box>
+                      <Box paddingLeft={10} style={{minHeight: 100, overflow: 'auto',maxHeight: 100,}}>
 
-                      <br />
-                      <h2>Peers Don't You Wish To Be With:</h2>
                       <div className="list-group">
                         {noPeers && noPeers.map((noPeer, index) => (
-                          <ListItem selected={index === currentIndex} onClick={() => this.setActiveNoPeer(noPeer, index)} divider button style={{ padding: "20px" }} key={index}>
+                          <ListItem selected={index === currentIndex} onClick={() => this.setActiveNoPeer(noPeer, index)} divider button style={{ padding: "5px" }} key={index}>
                             {"Name: " + noPeer.username}
                           </ListItem>
                         ))}
                       </div>
+                      </Box>
                     </div>
                   </div>
+                  </Box>
                 ) : (
-                  <div style={{ display: "block", paddingTop: "75px", paddingBottom: "75px", marginLeft: "100px", transform: "translateY(-30%)" }}>
-                    <br />
-                    <p style={{ marginLeft: "100px" }}><i>Please click on a Request...</i></p>
+                  <div style={{ display: "block", paddingTop: "", paddingBottom: "75px", marginLeft: "0px", transform: "translateY(-30%)" }}>
+                    <Box paddingTop={12.6}>
+                    <Typography variant="h6">Select a request to begin</Typography>
+                    </Box>
                     <div style={{ float: "left", width: "100%" }}>
                     </div>
                   </div>
@@ -160,68 +193,79 @@ class viewPeerRequests extends Component {
             </Grid>
           </div>
         ) : (
-          <div style={{ fontFamily: "Times New Roman", textAlign: "center", "width": "80%", "marginLeft": "130px" }}>
-          <h3>Peer Requests</h3>
+          <div>
+          <BigText variant={'h2'}>View Peer Requests </BigText>
           <Grid container>
             <Grid item md={4}>
-              <h2>Student Peer Request List</h2>
+            <Box paddingLeft={0}>
+            <Box paddingTop={5}>
+            <BigText variant='h5'>Student Peer Request List</BigText>
+            </Box>
+            <Box paddingLeft={10} style={{minHeight: 400, overflow: 'auto',maxHeight: 350,}}>
               <div className="list-group">
                 {requests && requests.map((request, index) => (
-                  <ListItem selected={index === currentIndex} onClick={() => this.setActiveRequest(request, index)} divider button style={{ padding: "20px" }} key={index}> {"Name: " + request?.username + ", Subject: " + request?.subjectName} </ListItem>
+                  <ListItem selected={index === currentIndex} onClick={() => this.setActiveRequest(request, index)} divider button style={{ padding: "10px" }} key={index}> {"Name: " + request?.username + ", Subject: " + request?.subjectName} </ListItem>
                 ))}
               </div>
+              </Box>
+              </Box>
             </Grid>
             <Grid item md={4}>
               {request ? (
-                 <div style={{ "marginLeft": "50px", "minWidth": "450px"}}>
-                  <br />
+                 <Box padding={5}>
+                  
                   <div>
-                    <h2>Peer Request</h2>
-                    <div>
-                      <label><strong>Subject Name:</strong></label>{" "}{request.subjectName}
-                    </div>
+                  <BigText variant='h5'>Student request for: {request.subjectName}</BigText>
+                   
 
-                    <br />
-                    <h2>Peers Student Wishes To Be With:</h2>
+                  <Box paddingTop={2}>
+                      <Typography>Peers Student Wishes To Be With:</Typography>
+                      </Box>
+                      <Box paddingLeft={10} style={{minHeight: 100, overflow: 'auto',maxHeight: 100,}}>
+
                     <div className="list-group">
                       {yesPeers && yesPeers.map((yesPeer, index) => (
-                        <ListItem selected={index === currentIndex} onClick={() => this.setActiveYesPeer(yesPeer, index)} divider button style={{ padding: "20px" }} key={index}>
+                        <ListItem selected={index === currentIndex} onClick={() => this.setActiveYesPeer(yesPeer, index)} divider button style={{ padding: "0px" }} key={index}>
                           {"Name: " + yesPeer.username}
                         </ListItem>
                       ))}
                     </div>
+                    </Box>
 
-                    <br />
-                    <h2>Peers Student Doesn't Wish To Be With:</h2>
+                    <Typography>Peers Student Doesn't Wish To Be With:</Typography>
+                    <Box paddingLeft={10} style={{minHeight: 100, overflow: 'auto',maxHeight: 100,}}>
                     <div className="list-group">
                       {noPeers && noPeers.map((noPeer, index) => (
-                        <ListItem selected={index === currentIndex} onClick={() => this.setActiveNoPeer(noPeer, index)} divider button style={{ padding: "20px" }} key={index}>
+                        <ListItem selected={index === currentIndex} onClick={() => this.setActiveNoPeer(noPeer, index)} divider button style={{ padding: "0px" }} key={index}>
                           {"Name: " + noPeer.username}
                         </ListItem>
                       ))}
                     </div>
+                    </Box>
                   </div>
+                  
 
                   <div>
                       {!status ? (
-                        <label><strong>Status:</strong> Idle</label>
+                        <label><strong>Request Status:</strong> Idle</label>
                       ) : (
-                        <label><strong>Status:</strong> Actioned</label>
+                        <label><strong>Request Status:</strong> Actioned</label>
                       )}
                     </div>
 
                   <br/>
                   <div>
-                    <Link style={{WebkitTextFillColor: "black"}} to={"/request/edit/" + username + "/" + request._id}>Edit</Link>
+                    <Link style={{WebkitTextFillColor: "black"}} to={"/request/edit/" + username + "/" + request._id}>Action Request</Link>
                     <Switch>
                       <Route exact path={"/request/edit/" + username + "/" + request._id} component={EditPeerRequest}/>
                     </Switch>
                   </div>
-                </div>
+                  </Box>
+                
               ) : (
-                <div style={{ display: "block", paddingTop: "75px", paddingBottom: "75px", marginLeft: "100px", transform: "translateY(-30%)" }}>
+                <div style={{ display: "block", paddingTop: "75px", paddingBottom: "75px", transform: "translateY(-30%)" }}>
                   <br />
-                  <p style={{ marginLeft: "100px" }}><i>Please click on a Request...</i></p>
+                  <Typography variant="h6">Select a request to begin</Typography>
                   <div style={{ float: "left", width: "100%" }}>
                   </div>
                 </div>
@@ -231,6 +275,9 @@ class viewPeerRequests extends Component {
           </div>
         )}
       </div>
+      </Backing>
+      </Grid>
+      </Box>
     );
   }
 }
