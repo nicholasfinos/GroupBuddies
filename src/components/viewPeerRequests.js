@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Box, Grid, ListItem, Paper, styled, Typography } from "@material-ui/core";
+import { Box, Button, Grid, ListItem, Paper, styled, Typography } from "@material-ui/core";
 import PeerRequestDataService from "../services/peer-request-service";
 import UserDataService from '../services/user-service';
 import RoleDataService from '../services/role-service';
@@ -253,12 +253,11 @@ class viewPeerRequests extends Component {
                       )}
                     </div>
 
-                  <br/>
+                 
                   <div>
-                    <Link style={{WebkitTextFillColor: "black"}} to={"/request/edit/" + username + "/" + request._id}>Action Request</Link>
-                    <Switch>
-                      <Route exact path={"/request/edit/" + username + "/" + request._id} component={EditPeerRequest}/>
-                    </Switch>
+                    
+                    
+                    <Button variant="contained"  component={Link} to={"/request/edit/" + username + "/" + request._id}>Action Request</Button>
                   </div>
                   </Box>
                 
