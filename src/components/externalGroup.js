@@ -112,7 +112,7 @@ const ExternalGroup = () => {
 
   useEffect(() => { // get the student's groups once their id has loaded
     if (currentStudent) {
-      userService.getStudyGroups(currentStudent.studentName)
+      userService.getStudyGroups(currentStudent.username)
         .then((data) => {
           setStudyGroups(data.data.data);
         })
