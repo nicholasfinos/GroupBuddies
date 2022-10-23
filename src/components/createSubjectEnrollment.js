@@ -40,7 +40,7 @@ class CreateSubjectEnrollment extends React.Component {
   componentDidMount() {
     const URL = String(this.props.match.path);
     const name = String(URL.substring(URL.lastIndexOf("/") + 1, URL.length));
-    this.setState({ username: name });
+    this.setState({ username: name, topics: "", currentTutorial: null});
     this.retrieveSubjects();
   }
 
@@ -137,8 +137,6 @@ class CreateSubjectEnrollment extends React.Component {
     });
   }
 
-  
-
   saveEnrollment = () => {
     const data = {
       username: this.state.username,
@@ -165,13 +163,19 @@ class CreateSubjectEnrollment extends React.Component {
       subjectName: "",
       username: "",
       submitted: false,
-      subjects: [],
       message: "",
-      topics: [],
-      tutorials: [],
+      topics: "",
+      tutorials: "",
+      subjects: [],
+      currentIndex: -1,
       currentTopic: null,
       currentTutorial: null,
       selectedSubject: false,
+      currentSubject: "",
+      addedTopics: [],
+      addedTutorials: [],
+      currentTopicIndex: -1,
+      currentTutorialIndex: -1,
     });
     this.componentDidMount();
   }

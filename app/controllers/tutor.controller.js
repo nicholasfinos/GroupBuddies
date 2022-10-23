@@ -3,7 +3,6 @@ const Role = require("../models/role.model");
 const Tutorial = require("../models/tutorial.model");
 const Group = require("../models/group.model");
 const StudentProfile = require("../models/studentProfile.model");
-const Subject = require("../models/subject.model");
 
 exports.findAllTutors = (req, res) => {
   Role.find({ name: "tutor" })
@@ -160,7 +159,14 @@ exports.addStudentGroup = (req, res) => {
     {
       $push: { students: addedStudent }
     }
-  ).then((g) => console.log(g));
+  ).then((g) => { console.log(g) });
+
+  Group.findById({ _id: req.body.group._id })
+    .then((data) => {
+      console.log(data);
+      return res.status(200).send({ currentGroup: data })
+    })
+
 }
 
 exports.removeStudentGroup = (req, res) => {
@@ -202,6 +208,12 @@ exports.removeStudentGroup = (req, res) => {
       $set: { groupNumber: "" }
     }
   ).then((h) => console.log(h));
+
+  Group.findById({ _id: req.body.group._id })
+    .then((data) => {
+      console.log(data);
+      return res.status(200).send({ currentGroup: data })
+    })
 }
 
 exports.removeGroup = (req, res) => {
@@ -284,10 +296,10 @@ exports.autoSort = (req, res) => {
           topicList[j].push(studentList[i]);
         }
         else if (x === 1) {
-          topicList[j].splcie(((topicList[j].length - 1) / 2), 0, studentList[i]);
+          topicList[j].splice(((topicList[j].length - 1) / 2), 0, studentList[i]);
         }
         else {
-          topicList[j].splcie(topicList[j].length - 1, 0, studentList[i])
+          topicList[j].splice(topicList[j].length - 1, 0, studentList[i])
           break;
         }
         x++;
@@ -426,9 +438,9 @@ exports.autoSort = (req, res) => {
         var student = topicList[k][0];
 
         //Add Student Group
-        console.log("2nd");
+        //console.log("2nd");
         groupList[i].push(student);
-        console.log("GroupList", groupList)
+        //console.log("GroupList", groupList)
 
         //Remove Student and Topic
         StudentProfile.updateOne(
@@ -444,8 +456,8 @@ exports.autoSort = (req, res) => {
           var y = 0;
           while (y < topicList[z].length) {
             if (topicList[z][y].username === student.username) {
-              console.log("3rd");
-              console.log("List: ", z + " Pos: ", y);
+              //console.log("3rd");
+              //console.log("List: ", z + " Pos: ", y);
               topicList[z].splice(y, 1);
             }
             else {
@@ -453,8 +465,8 @@ exports.autoSort = (req, res) => {
             }
           }
           if (topicList[z].length === 0) {
-            console.log("4th")
-            console.log("Remove List", z);
+            //console.log("4th")
+            //console.log("Remove List", z);
             topicList.splice(z, 1);
           }
           else {
@@ -464,23 +476,23 @@ exports.autoSort = (req, res) => {
 
         //If K is at end of topic list then restart to beginning
         if (k >= topicList.length - 1) {
-          console.log("5th restart list")
+          //console.log("5th restart list")
           k = 0;
         }
         else {
           k++;
-          console.log("6th k: ", k)
+          //console.log("6th k: ", k)
         }
       }
     }
-    console.log("7th start: ", start)
+    //console.log("7th start: ", start)
     start++;
     if (start >= topicList.length) {
-      console.log("8th restart starting index")
+      //console.log("8th restart starting index")
       start = 0;
     }
     k = start;
-    console.log("9th k: ", k)
+    //console.log("9th k: ", k)
   }
 
   for (let i = 0; i < groupList.length; i++) {

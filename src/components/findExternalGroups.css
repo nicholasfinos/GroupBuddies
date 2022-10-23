@@ -1,0 +1,11 @@
+.main {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.columnDiv {
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+}

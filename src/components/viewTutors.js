@@ -2,6 +2,13 @@ import React, { Component } from "react";
 import TutorDataService from "../services/tutor-service";
 import SubjectDataService from "../services/subject-service";
 import { Grid, ListItem } from "@material-ui/core";
+import { Paper } from "@material-ui/core";
+import "./studentProfile.css";
+import { Divider } from "@material-ui/core";
+
+const paperStyling = { padding: 40, height: '100%', width: '80%', margin: '20px auto', background: '#fff0e7', borderRadius: 20/*border: '2px solid'*/ }
+const subjectScrollable = { overflowY: 'auto', overflowX: 'hidden', maxHeight: '450px', width: '300px' }
+const tutorScrollable = { overflowY: 'auto', overflowX: 'hidden', maxHeight: '350px' }
 
 class TutorList extends Component {
   constructor(props) {
@@ -63,47 +70,54 @@ class TutorList extends Component {
     const { tutors, currentTutor, currentIndex, tutorials } = this.state;
 
     return (
-      <div style={{ fontFamily: "Times New Roman", textAlign: "center", "width": "80%", "marginLeft": "130px" }}>
-        <hr className="new5"></hr>
-        <h3>Tutors</h3>
-        <Grid container>
-          <Grid item md={4}>
-            <h2>Tutor List</h2>
-            <div className="list-group">
-              {tutors && tutors.map((tutor, index) => (
-                <ListItem selected={index === currentIndex} onClick={() => this.setActiveTutor(tutor, index)} divider button style={{ padding: "20px" }} key={index}> {"Name: " + tutor?.username} </ListItem>
-              ))}
-            </div>
-          </Grid>
-          <Grid item md={8}>
-            {currentTutor ? (
-              <div style={{ "marginLeft": "200px" }}>
-                <br />
-                <div>
-                  <h2>Tutor</h2>
+      <Grid style={{ textAlign: "center" }}>
+        <Paper bgcolor sx={{ borderColor: 'black' }} elevation={10} style={paperStyling}>
+          <h3>View Tutors</h3>
+          <p><i>To begin, please select a tutor...</i></p>
+          <hr className="new5"></hr>
+          <Grid container>
+            <Grid item md={2}>
+              <h2>Tutor List</h2>
+              <div style={subjectScrollable}>
+                <div className="list-group">
+                  {tutors && tutors.map((tutor, index) => (
+                    <ListItem selected={index === currentIndex} onClick={() => this.setActiveTutor(tutor, index)} divider button style={{ padding: "20px" }} key={index}> {"Name: " + tutor?.username} </ListItem>
+                  ))}
+                </div>
+              </div>
+              <Divider orientation="vertical" flexItem style={{ marginLeft: "20%" }}>
+              </Divider>
+            </Grid>
+            <Grid item md={10}>
+              {currentTutor ? (
+                <div style={{ "marginLeft": "200px" }}>
                   <div>
-                    <label><strong>Tutor Name:</strong></label>{" "}{currentTutor?.username}
+                    <div>
+                      <h2>Tutor Name: {currentTutor?.username}</h2>{" "}
+                    </div>
+                    <br />
+                    <h2>Tutorial List:</h2>
+                    <div style={tutorScrollable}>
+                      <div className="list-group">
+                        {tutorials && tutorials.map((tutorial, index) => (
+                          <ListItem selected={index === currentIndex} divider button style={{ padding: "20px" }} key={index}> {"Subject: " + tutorial?.subjectName + " Number: " + tutorial?.number + ", Day " + tutorial?.day + ", Time Slot: " + tutorial?.timeSlot} </ListItem>
+                        ))}
+                      </div>
+                    </div>
                   </div>
+                </div>
+              ) : (
+                <div style={{ display: "block", paddingTop: "75px", paddingBottom: "75px", transform: "translateY(-30%)" }}>
                   <br />
-                  <h2>Tutorial List</h2>
-                  <div className="list-group">
-                    {tutorials && tutorials.map((tutorial, index) => (
-                      <ListItem selected={index === currentIndex} divider button style={{ padding: "20px" }} key={index}> {"Subject: " + tutorial?.subjectName + " Number: " + tutorial?.number + ", Day " + tutorial?.day + ", Time Slot: " + tutorial?.timeSlot} </ListItem>
-                    ))}
+                  <h1 style={{ marginLeft: "100px", marginTop: "40%" }}><i>Please click on a tutor...</i></h1>
+                  <div style={{ float: "left", width: "100%" }}>
                   </div>
                 </div>
-              </div>
-            ) : (
-              <div style={{ display: "block", paddingTop: "75px", paddingBottom: "75px", marginLeft: "100px", transform: "translateY(-30%)" }}>
-                <br />
-                <p style={{ marginLeft: "100px" }}><i>Please click on a tutor...</i></p>
-                <div style={{ float: "left", width: "100%" }}>
-                </div>
-              </div>
-            )}
+              )}
+            </Grid>
           </Grid>
-        </Grid>
-      </div>
+        </Paper>
+      </Grid>
     );
   }
 }

@@ -5,6 +5,9 @@ import { Link, Switch, Route } from "react-router-dom";
 import { Button, Input } from "@material-ui/core";
 import viewSubject from "../components/viewSubjects";
 import { Grid, ListItem } from "@material-ui/core";
+import { Paper } from "@material-ui/core";
+
+const paperStyling = { padding: 40, height: '100%', width: '80%', margin: '20px auto', background: '#fff0e7', borderRadius: 20/*border: '2px solid'*/ }
 
 const required = (value) => {
   if (!value) {
@@ -114,49 +117,6 @@ class EditSubject extends Component {
     );
   }
 
-  // setActiveSubject(subject, index) {
-  //   if (subject.groupAssessment === true) {
-  //     this.setState({
-  //       currentSubject: subject,
-  //       groupAssessment: "Yes",
-  //       currentIndex: index
-  //     });
-  //   }
-  //   else {
-  //     this.setState({
-  //       currentSubject: subject,
-  //       groupAssessment: "No",
-  //       currentIndex: index
-  //     });
-  //   }
-
-  //   if (subject.subjectTopics.size !== 0) {
-  //     var str = "";
-
-  //     for (let i = 0; i < subject.subjectTopics.length; i++) {
-  //       str += subject.subjectTopics[i] + ",";
-  //     }
-
-  //     this.setState({ subjectTopics: str });
-  //   }
-
-  //   TutorDataService.getTutor(subject.subjectCoordinator)
-  //     .then((response) => {
-  //       this.setState({ subjectCoordinator: response.data.username });
-  //     })
-  //     .catch((e) => {
-  //       console.log(e);
-  //     })
-
-  //   SubjectDataService.findTutorial(subject.subjectName)
-  //     .then((response) => {
-  //       this.setState({ tutorials: response.data });
-  //     })
-  //     .catch((e) => {
-  //       console.log(e);
-  //     })
-  // }
-
   setActiveTutorial(tutorial, index) {
     TutorDataService.getTutor(tutorial.tutor)
       .then((response) => {
@@ -206,14 +166,6 @@ class EditSubject extends Component {
         console.log(e);
       });
   }
-
-  // refreshList() {
-  //   this.retrieveTutors();
-  //   this.setState({
-  //     currentTutor: null,
-  //     currentIndex: -1
-  //   });
-  // }
 
   setActiveAddItem(tutor, index) {
     this.setState({
@@ -288,6 +240,7 @@ class EditSubject extends Component {
 
     return (
         <div style={{ fontFamily: "Times New Roman", textAlign: "center" }}>
+          <Paper bgcolor sx={{ borderColor: 'black' }} elevation={10} style={paperStyling}>
           <h3>{subjectName}</h3>
           <form>
             <div>
@@ -300,7 +253,7 @@ class EditSubject extends Component {
             </div>
             <div className="form-group">
               <label style={{ marginLeft: "220px" }} htmlFor="tutorial numbers">Number of Tutorials:</label>
-              <select className="form-group border" style={{ minWidth: "500px" }} value={tutorialNumbers} onChange={this.onChangeTutorialNumbers} validations={[required]} disabled>
+              <select className="form-group border" style={{ minWidth: "500px", marginTop:"3%", marginLeft:"4%" }} value={tutorialNumbers} onChange={this.onChangeTutorialNumbers} validations={[required]} disabled>
                 <option value="" disabled selected>Select your option</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
@@ -317,7 +270,7 @@ class EditSubject extends Component {
 
             <div className="form-group">
               <label style={{ marginLeft: "220px" }} htmlFor="group-assessment">Group Assessment:</label>
-              <select className="border" style={{ minWidth: "500px" }} value={groupAssessment} onChange={this.onChangeGroupAssessment} validations={[required]} >
+              <select className="border" style={{ minWidth: "500px", marginTop:"3%" }} value={groupAssessment} onChange={this.onChangeGroupAssessment} validations={[required]} >
                 <option value="" disabled selected>Select your option</option>
                 <option value="Yes">Yes</option>
                 <option value="No">No</option>
@@ -340,6 +293,7 @@ class EditSubject extends Component {
             </div>
           </form>
           <p>{this.state.message}</p>
+          </Paper>
       </div>
     );
   }
