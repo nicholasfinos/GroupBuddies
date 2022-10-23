@@ -1,8 +1,30 @@
 import React from "react";
-import { Button, Input } from "@material-ui/core";
+import { Button, ButtonGroup, Divider, Input, styled } from "@material-ui/core";
 import SubjectDataService from "../services/subject-service";
 import PeerRequestDataService from "../services/peer-request-service";
-import { Grid, ListItem } from "@material-ui/core";
+import { Grid, ListItem, Paper, Box, Typography } from "@material-ui/core";
+
+const Backing = styled(Paper)(({ theme }) => ({
+  height: '74vh',
+  borderRadius: 20,
+  padding: 10,
+  margin: 2,
+   background: '#fff0e7',
+   width: 800
+}));
+
+const Backing2 = styled(Paper)(({ theme }) => ({
+  height: '74vh',
+  borderRadius: 20,
+  padding: 10,
+  margin: 2,
+   background: '#fff0e7',
+   width: 1200
+}));
+
+const BigText = styled(Typography)(({ theme }) => ({
+  fontWeight: 600,
+}));
 
 const required = (value) => {
   if (!value) {
@@ -56,6 +78,9 @@ class CreatePeerRequest extends React.Component {
   }
 
   savePeerRequest = () => {
+    
+
+
     if (this.state.currentSubject.subjectName.length !==0){
       if ((this.state.addedYesPeers.length !== 0) || (this.state.addedNoPeers[0].length !== 0)){
         var data = {
@@ -180,11 +205,149 @@ class CreatePeerRequest extends React.Component {
       addedPeers: [],
     });
     this.componentDidMount();
+    
   }
+
+
+  
 
   render() {
     const { tutroials, peers, currentNoPeerIndex, addedNoPeers, addedYesPeers, currentYesPeerIndex, currentSubject, currentIndex} = this.state;
     return (
+      <Box sx={{ flexGrow: 1 }}>
+      
+      <Grid align="center">
+      <div style={{ textAlign: "center", maxWidth: '90%', fontFamily: "Times New Roman", marginLeft: "110px" }} className="form">
+        
+        {this.state.submitted ? (
+          <div>
+            <p><i>You created a subject peer request successfully!</i></p>
+            <Button size="small" variant="contained" onClick={this.newPeerRequest}>{" "}Create a New Peer Request{" "}</Button>
+          </div>
+        ) : (
+
+
+
+          
+          <Box sx={{ flexGrow: 1 }}>
+            {!this.state.selectedSubject ? (
+              <Grid align="center">
+              <Backing>
+                <Box paddingTop={5}>
+              <BigText variant="h2">Create a Peer Request</BigText>
+               </Box>
+              <Box alignContent={'center'}>
+                <Typography htmlFor="subject-name" marginLeft='100'>Please select a Subject to create a peer request for:</Typography>
+                <Grid align='center'>
+                {tutroials && tutroials.map((tutorial, index) => (
+                  <ListItem style={{ padding: "20px", maxWidth: "400px", alignContent: 'center', paddingLeft:'10'}} selected={index === currentIndex} onClick={() => this.setActiveSelectSubject(tutorial, index)} divider button key={index}>
+                    {"Subject Name: " + tutorial.subjectName + " | Tutorial Number: " + tutorial.number}
+                  </ListItem>
+                ))}
+                </Grid>
+              </Box>
+              </Backing>
+              </Grid>
+
+
+
+            
+            ) : (
+              
+              <Box>
+                <Grid align='center'>
+                  <Backing2>
+                  <Box paddingTop={5} paddingBottom={2}>
+                    <BigText variant='h3'>Create a Peer Request for {this.state.currentSubject.subjectName} </BigText>
+                  </Box>
+                
+                
+                <Grid container style={{ maxWidth: "1000px" }}>
+                  <Grid item md={4}>
+                    {currentSubject ? (
+                      <Grid item md={4} style={{ minWidth: "400px" }}>
+                         <Typography variant='h6'>Peers you wish to be grouped with:</Typography>
+                         <Box maxWidth={300}>
+                         <Typography variant='caption'>Please select the peers you are happy to be grouped with from the following list</Typography>
+                         </Box>
+                        
+                         <Box style={{minHeight: 100, maxHeight: 100, overflow: 'auto'}}>
+                        <div style={{ flexDirection: "column" }}>
+                          {peers && peers.map((peer, index) => (
+                            <ListItem style={{ padding: "0px" }} selected={index === currentYesPeerIndex} onClick={() => this.addYesPeer(peer, index)} divider button key={index}>
+                              {peer.username}
+                            </ListItem>
+                          ))}
+                        </div>
+                        </Box>
+
+                        <Typography variant='h6'>Peers you don't wish to be grouped with:</Typography>
+                        <Box maxWidth={300}>
+                         <Typography variant='caption'>Please select the peers you don't wish to be grouped with from the following list</Typography>
+                         </Box>
+                         <Box style={{minHeight: 100, maxHeight: 100, overflow: 'auto'}}>
+                        <div style={{ flexDirection: "column", minWidth: "400px" }}>
+                          {peers && peers.map((peer, index) => (
+                            <ListItem style={{ padding: "0px"}} selected={index === currentNoPeerIndex} onClick={() => this.addNoPeer(peer, index)} divider button key={index}>
+                              {peer.username}
+                            </ListItem>
+                          ))}
+                        </div>
+                        </Box>
+                      </Grid>
+                    ) : (
+                      <div></div>
+                    )}
+                  </Grid>
+                  <Grid item md={4} style={{ paddingLeft: "150px", minWidth: "500px" }}>
+                  <Typography variant='h6'>Peers to request grouping with:</Typography>
+                    
+                    <Box style={{minHeight: 125, maxHeight: 125, overflow: 'auto'}} >
+                      {addedYesPeers.map((addedYesPeer, index) => (
+                        <ListItem style={{ padding: "5px",  }} selected={index === currentYesPeerIndex} onClick={() => this.deleteYesPeer(index)} divider button key={index}>
+                          {" "}{addedYesPeer.username}
+                        </ListItem>
+                      ))}
+                      </Box>
+                    
+                    
+             
+                      <Typography variant='h6'>Peers to request avoiding:</Typography>
+                      <Box style={{minHeight: 125, maxHeight: 125, overflow: 'auto'}} >
+                      {addedNoPeers.map((addedNoPeer, index) => (
+                        <ListItem style={{ padding: "5px",  }} selected={index === currentNoPeerIndex} onClick={() => this.deleteNoPeer(index)} divider button key={index}>
+                          {" "}{addedNoPeer.username}
+                        </ListItem>
+                      ))}
+                      </Box>
+                    
+               
+                </Grid>
+                </Grid>
+                
+                <ButtonGroup
+      disableElevation
+      variant="contained"
+      aria-label="Disabled elevation buttons"
+    >
+      <Button onClick={this.savePeerRequest}>Submit</Button>
+      <Button onClick={() => window.location.reload()}>Return</Button>
+    </ButtonGroup>
+                
+                
+                </Backing2>
+                </Grid>
+              </Box>
+            )}
+            <p>{this.state.message}</p>
+          </Box>
+        )}
+      </div>
+      </Grid>
+     
+      
+      </Box>
+      /*
       <div style={{ textAlign: "center", maxWidth: '90%', fontFamily: "Times New Roman", marginLeft: "110px" }} className="form">
         <h3>Create a Peer Request</h3>
         {this.state.submitted ? (
@@ -275,8 +438,10 @@ class CreatePeerRequest extends React.Component {
           </div>
         )}
       </div>
+      */
     );
   };
+  
 }
 
 export default CreatePeerRequest;

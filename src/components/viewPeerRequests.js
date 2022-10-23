@@ -1,15 +1,27 @@
 import React, { Component } from "react";
-import { Grid, ListItem } from "@material-ui/core";
+import { Box, Button, Grid, ListItem, Paper, styled, Typography } from "@material-ui/core";
 import PeerRequestDataService from "../services/peer-request-service";
 import UserDataService from '../services/user-service';
 import RoleDataService from '../services/role-service';
-import EditPeerRequest from "./editPeerRequest";
-import { Link, Switch, Route } from "react-router-dom";
-import { Paper } from "@material-ui/core";
+import { Link } from "react-router-dom";
 
 const paperStyling = { padding: 40, height: '100%', width: '80%', margin: '20px auto', background: '#fff0e7', borderRadius: 20/*border: '2px solid'*/ }
 const subjectScrollable = { overflowY: 'auto', overflowX: 'hidden', maxHeight: '580px' }
 const tutorialScrollable = { overflowY: 'auto', overflowX: 'hidden', maxHeight: '200px' }
+
+
+const Backing = styled(Paper)(({ theme }) => ({
+  height: '74vh',
+  borderRadius: 20,
+  padding: 10,
+  margin: 2,
+  background: '#fff0e7',
+
+}));
+
+const BigText = styled(Typography)(({ theme }) => ({
+  fontWeight: 600,
+}));
 
 class viewPeerRequests extends Component {
   constructor(props) {
@@ -109,137 +121,163 @@ class viewPeerRequests extends Component {
     const { requests, isTutor, status, username, request, subjectName, yesPeers, noPeers, currentIndex } = this.state;
 
     return (
-      <Grid style={{ textAlign: "center" }}>
-        <Paper bgcolor sx={{ borderColor: 'black' }} elevation={10} style={paperStyling}>
-          {!isTutor ? (
-            <div style={{}}>
-              <h3>Peer Requests</h3>
-              <hr className="new5"></hr>
-              <Grid container>
-                <Grid item md={6}>
-                  <div style={{ width: "90%" }}>
-                    <h2>My Peer Request List</h2>
-                    <div className="list-group" style={subjectScrollable}>
-                      {requests && requests.map((request, index) => (
-                        <ListItem selected={index === currentIndex} onClick={() => this.setActiveRequest(request, index)} divider button style={{ padding: "20px" }} key={index}> {"Subject: " + request?.subjectName + " | Tutorial Number: " + request?.tutorialNumber} </ListItem>
-                      ))}
-                    </div>
-                  </div>
-                </Grid>
-                <Grid item md={6}>
-                  {request ? (
-                    <div style={{ "minWidth": "450px" }}>
-                      <div>
-                        <h2>Peer Request</h2>
-                        <div>
-                          <label><strong>Subject Name:</strong></label>{" "}{request.subjectName}
-                        </div>
+      <Box>
+        <Grid align='center'>
+          <Backing>
+            <div>
+              {!isTutor ? (
+                <div>
+                  <BigText variant={'h2'}>View Peer Requests </BigText>
 
-                        <br />
-                        <h3>Peers You Wish To Be With:</h3>
-                        <div className="list-group" style={tutorialScrollable}>
-                          {yesPeers && yesPeers.map((yesPeer, index) => (
-                            <ListItem selected={index === currentIndex} onClick={() => this.setActiveYesPeer(yesPeer, index)} divider button style={{ padding: "20px" }} key={index}>
-                              {"Name: " + yesPeer.username}
-                            </ListItem>
-                          ))}
-                        </div>
+                  <Grid container align='center'>
+                    <Grid item md={4}>
+                      <Box padding={5} paddingLeft={15}>
+                        <BigText variant='h5'>My Peer Request List</BigText>
 
-                        <br />
-                        <h3>Peers Don't You Wish To Be With:</h3>
-                        <div className="list-group" style={tutorialScrollable}>
-                          {noPeers && noPeers.map((noPeer, index) => (
-                            <ListItem selected={index === currentIndex} onClick={() => this.setActiveNoPeer(noPeer, index)} divider button style={{ padding: "20px" }} key={index}>
-                              {"Name: " + noPeer.username}
-                            </ListItem>
-                          ))}
+                        <Box paddingLeft={5} style={{ minHeight: 350, overflow: 'auto', maxHeight: 350, }}>
+                          <div className="list-group">
+                            {requests && requests.map((request, index) => (
+                              <ListItem selected={index === currentIndex} onClick={() => this.setActiveRequest(request, index)} divider button style={{ padding: "20px" }} key={index}> {"Subject: " + request?.subjectName + " | Tutorial Number: " + request?.tutorialNumber} </ListItem>
+                            ))}
+                          </div>
+                        </Box>
+                      </Box>
+                    </Grid>
+                    <Grid item md={4}>
+                      {request ? (
+                        <Box padding={5}>
+                          <div style={{ "marginLeft": "50px", }}>
+
+                            <div>
+
+                              <BigText variant='h5'>My Peer Requests for: {request.subjectName}</BigText>
+
+
+                              <Box paddingTop={2}>
+                                <Typography variant='h6'>Peers I wish to be grouped with: </Typography>
+                              </Box>
+                              <Box paddingLeft={10} style={{ minHeight: 100, overflow: 'auto', maxHeight: 100, }}>
+                                <div className="list-group">
+                                  {yesPeers && yesPeers.map((yesPeer, index) => (
+                                    <ListItem selected={index === currentIndex} onClick={() => this.setActiveYesPeer(yesPeer, index)} divider button style={{ padding: "5px" }} key={index}>
+                                      {"Name: " + yesPeer.username}
+                                    </ListItem>
+                                  ))}
+                                </div>
+                              </Box>
+                              <Box paddingLeft={4}>
+                                <Typography variant='h6'>Peers I wish not be grouped with: </Typography>
+                              </Box>
+                              <Box paddingLeft={10} style={{ minHeight: 100, overflow: 'auto', maxHeight: 100, }}>
+
+                                <div className="list-group">
+                                  {noPeers && noPeers.map((noPeer, index) => (
+                                    <ListItem selected={index === currentIndex} onClick={() => this.setActiveNoPeer(noPeer, index)} divider button style={{ padding: "5px" }} key={index}>
+                                      {"Name: " + noPeer.username}
+                                    </ListItem>
+                                  ))}
+                                </div>
+                              </Box>
+                            </div>
+                          </div>
+                        </Box>
+                      ) : (
+                        <div style={{ display: "block", paddingTop: "", paddingBottom: "75px", marginLeft: "0px", transform: "translateY(-30%)" }}>
+                          <Box paddingTop={12.6}>
+                            <Typography variant="h6">Select a request to begin</Typography>
+                          </Box>
+                          <div style={{ float: "left", width: "100%" }}>
+                          </div>
                         </div>
-                      </div>
-                    </div>
-                  ) : (
-                    <div style={{ display: "block", paddingTop: "75px", paddingBottom: "75px", marginLeft: "100px", transform: "translateY(-30%)" }}>
-                      <br />
-                      <p><i>Please click on a Request...</i></p>
-                      <div style={{ float: "left", width: "100%" }}>
-                      </div>
-                    </div>
-                  )}
-                </Grid>
-              </Grid>
+                      )}
+                    </Grid>
+                  </Grid>
+                </div>
+              ) : (
+                <div>
+                  <BigText variant={'h2'}>View Peer Requests </BigText>
+                  <Grid container>
+                    <Grid item md={4}>
+                      <Box paddingLeft={0}>
+                        <Box paddingTop={5}>
+                          <BigText variant='h5'>Student Peer Request List</BigText>
+                        </Box>
+                        <Box paddingLeft={10} style={{ minHeight: 400, overflow: 'auto', maxHeight: 350, }}>
+                          <div className="list-group">
+                            {requests && requests.map((request, index) => (
+                              <ListItem selected={index === currentIndex} onClick={() => this.setActiveRequest(request, index)} divider button style={{ padding: "10px" }} key={index}> {"Name: " + request?.username + ", Subject: " + request?.subjectName} </ListItem>
+                            ))}
+                          </div>
+                        </Box>
+                      </Box>
+                    </Grid>
+                    <Grid item md={4}>
+                      {request ? (
+                        <Box padding={5}>
+
+                          <div>
+                            <BigText variant='h5'>Student request for: {request.subjectName}</BigText>
+
+
+                            <Box paddingTop={2}>
+                              <Typography>Peers Student Wishes To Be With:</Typography>
+                            </Box>
+                            <Box paddingLeft={10} style={{ minHeight: 100, overflow: 'auto', maxHeight: 100, }}>
+
+                              <div className="list-group">
+                                {yesPeers && yesPeers.map((yesPeer, index) => (
+                                  <ListItem selected={index === currentIndex} onClick={() => this.setActiveYesPeer(yesPeer, index)} divider button style={{ padding: "0px" }} key={index}>
+                                    {"Name: " + yesPeer.username}
+                                  </ListItem>
+                                ))}
+                              </div>
+                            </Box>
+
+                            <Typography>Peers Student Doesn't Wish To Be With:</Typography>
+                            <Box paddingLeft={10} style={{ minHeight: 100, overflow: 'auto', maxHeight: 100, }}>
+                              <div className="list-group">
+                                {noPeers && noPeers.map((noPeer, index) => (
+                                  <ListItem selected={index === currentIndex} onClick={() => this.setActiveNoPeer(noPeer, index)} divider button style={{ padding: "0px" }} key={index}>
+                                    {"Name: " + noPeer.username}
+                                  </ListItem>
+                                ))}
+                              </div>
+                            </Box>
+                          </div>
+
+
+                          <div>
+                            {!status ? (
+                              <label><strong>Request Status:</strong> Idle</label>
+                            ) : (
+                              <label><strong>Request Status:</strong> Actioned</label>
+                            )}
+                          </div>
+
+
+                          <div>
+
+
+                            <Button variant="contained" component={Link} to={"/request/edit/" + username + "/" + request._id}>Action Request</Button>
+                          </div>
+                        </Box>
+
+                      ) : (
+                        <div style={{ display: "block", paddingTop: "75px", paddingBottom: "75px", transform: "translateY(-30%)" }}>
+                          <br />
+                          <Typography variant="h6">Select a request to begin</Typography>
+                          <div style={{ float: "left", width: "100%" }}>
+                          </div>
+                        </div>
+                      )}
+                    </Grid>
+                  </Grid>
+                </div>
+              )}
             </div>
-          ) : (
-            <div style={{ fontFamily: "Times New Roman", textAlign: "center", "width": "80%", "marginLeft": "130px" }}>
-              <h3>Peer Requests</h3>
-              <Grid container>
-                <Grid item md={4}>
-                  <h2>Student Peer Request List</h2>
-                  <div className="list-group">
-                    {requests && requests.map((request, index) => (
-                      <ListItem selected={index === currentIndex} onClick={() => this.setActiveRequest(request, index)} divider button style={{ padding: "20px" }} key={index}> {"Name: " + request?.username + ", Subject: " + request?.subjectName} </ListItem>
-                    ))}
-                  </div>
-                </Grid>
-                <Grid item md={4}>
-                  {request ? (
-                    <div style={{ "marginLeft": "50px", "minWidth": "450px" }}>
-                      <br />
-                      <div>
-                        <h2>Peer Request</h2>
-                        <div>
-                          <label><strong>Subject Name:</strong></label>{" "}{request.subjectName}
-                        </div>
-
-                        <br />
-                        <h2>Peers Student Wishes To Be With:</h2>
-                        <div className="list-group" style={tutorialScrollable}>
-                          {yesPeers && yesPeers.map((yesPeer, index) => (
-                            <ListItem selected={index === currentIndex} onClick={() => this.setActiveYesPeer(yesPeer, index)} divider button style={{ padding: "20px" }} key={index}>
-                              {"Name: " + yesPeer.username}
-                            </ListItem>
-                          ))}
-                        </div>
-
-                        <br />
-                        <h2>Peers Student Doesn't Wish To Be With:</h2>
-                        <div className="list-group" style={tutorialScrollable}>
-                          {noPeers && noPeers.map((noPeer, index) => (
-                            <ListItem selected={index === currentIndex} onClick={() => this.setActiveNoPeer(noPeer, index)} divider button style={{ padding: "20px" }} key={index}>
-                              {"Name: " + noPeer.username}
-                            </ListItem>
-                          ))}
-                        </div>
-                      </div>
-
-                      <div>
-                        {!status ? (
-                          <label><strong>Status:</strong> Idle</label>
-                        ) : (
-                          <label><strong>Status:</strong> Actioned</label>
-                        )}
-                      </div>
-
-                      <br />
-                      <div>
-                        <Link style={{ WebkitTextFillColor: "black" }} to={"/request/edit/" + username + "/" + request._id}>Edit</Link>
-                        <Switch>
-                          <Route exact path={"/request/edit/" + username + "/" + request._id} component={EditPeerRequest} />
-                        </Switch>
-                      </div>
-                    </div>
-                  ) : (
-                    <div style={{ display: "block", paddingTop: "75px", paddingBottom: "75px", marginLeft: "100px", transform: "translateY(-30%)" }}>
-                      <br />
-                      <p style={{ marginLeft: "100px" }}><i>Please click on a Request...</i></p>
-                      <div style={{ float: "left", width: "100%" }}>
-                      </div>
-                    </div>
-                  )}
-                </Grid>
-              </Grid>
-            </div>
-          )}
-        </Paper>
-      </Grid>
+          </Backing>
+        </Grid>
+      </Box>
     );
   }
 }
