@@ -43,7 +43,7 @@ const FindExternalGroups = () => {
     if (currentSubject !== subject) {
       setCurrentSubject(subject);
 
-      subjectService.getAllStudyGroups(subject, currentStudent.studentName)
+      subjectService.getAllStudyGroups(subject, currentStudent.username)
         .then((data) => {
           setAvailableGroups(data.data.data);
         });
@@ -53,7 +53,7 @@ const FindExternalGroups = () => {
   const joinStudyGroup = () => {
     const data = {
       groupId: currentGroup._id,
-      currentStudent: currentStudent.studentName
+      currentStudent: currentStudent.username
     }
 
     userService.joinStudyGroup(data);
