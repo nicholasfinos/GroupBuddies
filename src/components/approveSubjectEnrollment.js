@@ -1,5 +1,5 @@
 import React from "react";
-import { Button } from "@material-ui/core";
+import { Box, Button, Typography } from "@material-ui/core";
 import { Grid, ListItem } from "@material-ui/core";
 import EnrollmentDataService from "../services/enrollment-service";
 import SubjectDataService from "../services/subject-service";
@@ -134,11 +134,13 @@ class ApproveSubjectEnrollment extends React.Component {
           <hr className="new5"></hr>
 
           <Grid container>
-            <Grid item md={4}>
+            <Grid item md={4} align={'center'}>
 
               <div style={{ width: "95%" }}>
                 <h3 style={{ textAlign: "center" }}>Subject List</h3>
                 <p style={{ textAlign: "center" }}><i>Please select a subject:</i></p>
+                <Box  borderColor={'black'} bgcolor={'#D3D3D3'}  border={1} minHeight={237} maxHeight={237} maxWidth={305} overflow={'auto'}>
+
                 <div style={subjectScrollable}>
                   {subjects && subjects.map((subject, index) => (
                     <ListItem style={{ padding: "20px", maxWidth: "400px" }} onClick={() => this.setActiveAddSubject(subject, index)} divider button key={index}>
@@ -146,23 +148,27 @@ class ApproveSubjectEnrollment extends React.Component {
                     </ListItem>
                   ))}
                 </div>
+                </Box>
               </div>
 
             </Grid>
             <Divider orientation="vertical" flexItem>
             </Divider>
-            <Grid item md={4}>
+            <Grid item md={4} align={'center'}>
               <div style={{ width: "95%", marginLeft: "2.5%" }}>
                 {currentSubject ? (
                   <Grid style={{ minWidth: "300px" }}>
                     <h3 style={{ textAlign: "center" }}>{currentSubject.subjectName} Enrollments</h3>
                     <p style={{ textAlign: "center" }}><i>Please select an enrollment request</i></p>
-                    <Grid style={{ flexDirection: "column" }}>
+                    <Grid  align={'center'} style={{ flexDirection: "column" }}>
+                    <Box  borderColor={'black'} bgcolor={'#D3D3D3'}  border={1} minHeight={237} maxHeight={237} maxWidth={305} overflow={'auto'}>
+
                       {enrollments && enrollments.map((enrollment, index) => (
                         <ListItem style={{ padding: "20px", maxWidth: "400px" }} onClick={() => this.setActiveEnrollment(enrollment, index)} divider button key={index}>
                           {"Name: " + enrollment?.username}
                         </ListItem>
                       ))}
+                      </Box>
                     </Grid>
                   </Grid>
                 ) : (
@@ -174,42 +180,56 @@ class ApproveSubjectEnrollment extends React.Component {
               </div>
             </Grid>
             <Divider orientation="vertical" flexItem></Divider>
-            <Grid item md={3.9}>
-              <div style={{ width: "100%", marginLeft: "5%", textAlign: "center", maxWidth: "400px" }}>
+            <Grid item md={3.9} >
+              <div style={{ }}>
                 {currentEnrollment ? (
                   <div>
                     <div style={{ minWidth: "400px", maxWidth: "400px" }}>
                       <h3 style={{ textAlign: "center" }}>Details</h3>
-                      <label><strong>Name:</strong></label>{" "}{currentEnrollment.username}
-                      <br />
-                      <label><strong>Subject Topics:</strong></label>
+                      <Box paddingLeft={5}>
+                      <Box paddingLeft={1} borderColor={'black'} bgcolor={'#D3D3D3'}  border={1} minHeight={277} maxHeight={277} maxWidth={350} overflow={'auto'}>
+                      <Grid>
+                      <Typography><strong>Name: </strong>{currentEnrollment.username}</Typography>
+                      
+                      <Typography><strong>Subject Topics:</strong></Typography>
+                      <Box >
+                      <Grid  allign={'center'}>
                       <div className="list-group" style={{display:"flex"}} >
                         {subjectTopics && subjectTopics.map((topic, index) => (
-                          <ListItem style={{ padding: "20px", alignItems: 'center', maxWidth: "400px", wordBreak:"break-all", wordWrap: "break-word", overflow:"auto", display:"flex"}} divider key={index}>{topic}{" "}</ListItem>
+                          <ListItem  maxWidth={'100'} style={{ width: 200  ,padding: "2px",  wordBreak:"break-all", wordWrap: "break-word", overflow:"auto"}} divider key={index}>{topic}{" "}</ListItem>
                         ))}
                       </div>
-                      <br />
-                      <label><strong>Tutorial:</strong></label>{" "}{currentEnrollment.tutorialNumber}
-                      <br />
-                      <label><strong>Status:</strong></label>{" "}
-                      <br />
+                      </Grid>
+                      </Box>
+                      
+                      <Typography><strong>Tutorial: </strong> {currentEnrollment.tutorialNumber}</Typography>{" "}
+                      
+                      <Typography><strong>Status:</strong></Typography>
+                      
                       <select className="border" style={{ minWidth: "300px" }} value={status} onChange={this.onChangeStatus}>
                         <option default value="Pending">Pending</option>
                         <option value="Approved">Approved</option>
                         <option value="Declined">Declined</option>
                       </select>
-                      <br />
+                     
                       {this.state.isDecline ? (
                         <div>
-                          <label htmlFor="reason" >Reason for Declined Request: </label>
+                          <Typography htmlFor="reason" >Reason for Declined Request: </Typography>
                           <input className="form-control" style={{ maxWidth: '500px' }} type="text" name="reason" onChange={this.onChangeReason} />
                         </div>
                       ) : (
                         <div></div>
                       )}
-                      <br />
-                      <br />
-                      <Button color="primary" size="small" variant="contained" style={{ maxWidth: "700px" }} onClick={this.updateEnrollment}>Update</Button>
+                      
+                      <Box paddingTop={1} align={'center'}>
+                      <Button  maxWidth disableElevation
+      variant="contained"
+      
+      aria-label="Disabled elevation buttons" onClick={this.updateEnrollment}>Update</Button>
+                      </Box>
+                      </Grid>
+                    </Box>
+                    </Box>
                     </div>
                   </div>
                 ) : (
