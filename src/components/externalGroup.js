@@ -2,8 +2,25 @@ import React, { useEffect, useState } from "react";
 import userService from "../services/user-service";
 import subjectService from "../services/subject-service";
 import "./externalGroups.css";
-import { ListItem } from "@material-ui/core";
+import { Box, Button, Grid, ListItem, Paper, styled, Typography } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
+
+
+
+const Backing2 = styled(Paper)(({ theme }) => ({
+  height: '74vh',
+  borderRadius: 20,
+  padding: 10,
+  margin: 2,
+   background: '#fff0e7',
+   width: 800
+}));
+
+const BigText = styled(Typography)(({ theme }) => ({
+  fontWeight: 600,
+}));
+
+
 
 const CreateGroupPopup = ({ currentStudent }) => {
   const [groupName, setGroupName] = useState("");
@@ -40,6 +57,9 @@ const CreateGroupPopup = ({ currentStudent }) => {
   }
 
   return (
+    <Box>
+      <Grid>
+        <Backing2>
     <div className="columnDiv" style={{ width: "100%" }}>
       <div>
         <label>Name</label>
@@ -60,6 +80,9 @@ const CreateGroupPopup = ({ currentStudent }) => {
       </div>
       <button onClick={() => createStudyGroup()}>Create Group</button>
     </div>
+    </Backing2>
+    </Grid>
+    </Box>
   );
 }
 
@@ -109,19 +132,47 @@ const ExternalGroup = () => {
   }
 
   return (
-    <div className="main">
-      <div className="columnDiv">
-        <h3>My Study Groups</h3>
+
+    <Box>
+      <Grid align={'center'}>
+        <Backing2>
+          <BigText variant={'h3'}>My Study Groups</BigText>
+          <Grid container>
+        <Grid item xs={6}>
+        <Box paddingTop={2} paddingLeft={5}>
+        <Grid align="center">
+          <Box>
+        <BigText variant="h4">My Study Groups</BigText>
+        <Box  maxWidth={250} >
+        <Typography variant="caption">Study groups you have joined.</Typography>
+        </Box>
+        <Box borderColor={'black'}  minHeight={350}  maxWidth={320} border={1} bgcolor={'#D3D3D3'} overflow={'auto'} >
         <div>
           {studyGroups.map((item, index) => (
             <ListItem onClick={() => { setCurrentGroup(item) }} key={index}>
               {item.name}
             </ListItem>
           ))}
+          
         </div>
-      </div>
-      <div className="columnDiv">
-        <h3>Current Group</h3>
+        </Box>
+        </Box>
+        </Grid>
+        </Box>
+        </Grid>
+        
+      
+
+      
+        <Grid item xs={6}>
+      <Grid align="center">
+        <Box paddingTop={2}>
+        <BigText variant="h4">Selected Group Info</BigText>
+        </Box>
+        <Box  maxWidth={250} >
+        <Typography variant="caption">Details of selected group.</Typography>
+        </Box>
+        <Box borderColor={'black'}  minHeight={350} maxWidth={320} border={1} bgcolor={'#D3D3D3'} overflow={'auto'} >
         <div>
           {currentGroup &&
             <ListItem >
@@ -136,15 +187,15 @@ const ExternalGroup = () => {
             </ListItem>
           }
         </div>
-      </div>
-      <div className="columnDiv">
-        <button onClick={() => handleFindGroups()}>Find Groups</button>
-        <button onClick={() => setIsCreating(!isCreating)}>Create a Group</button>
-        {(isCreating) &&
-          <CreateGroupPopup currentStudent={currentStudent} />
-        }
-      </div>
-    </div>
+        </Box>
+        </Grid>
+      </Grid>
+     
+    
+      </Grid>
+    </Backing2>
+    </Grid>
+    </Box>
   );
 }
 
