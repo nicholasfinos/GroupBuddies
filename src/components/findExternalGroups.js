@@ -1,4 +1,4 @@
-import { Box, Grid, ListItem, Paper, styled, Typography } from "@material-ui/core";
+import { Box, Button, Grid, ListItem, Paper, styled, Typography } from "@material-ui/core";
 import { useEffect, useState } from "react";
 import userService from "../services/user-service";
 import subjectService from "../services/subject-service";
@@ -87,15 +87,32 @@ const FindExternalGroups = () => {
       <BigText variant="h4">Study Groups</BigText>
       </Box>
       <Box borderColor={'black'}  minHeight={300} maxHeight={300}  maxWidth={320} border={1} bgcolor={'#D3D3D3'} overflow={'auto'} >
+      {(availableGroups.length > 0) && availableGroups.map((group, index) => (
+          <ListItem onClick={() => setCurrentGroup(group)} key={index}>
+            {group.name}
+          </ListItem>
+        ))}
       </Box>
 
       </Grid>
 
-      <Grid item xs={3} align={'center'} >
-      <Box paddingTop={3}>
+      <Grid item xs={4} align={'center'} >
+      <Box paddingTop={4}>
       <BigText variant="h4">Selected Group</BigText>
       </Box>
       <Box borderColor={'black'}  minHeight={300} maxHeight={300}  maxWidth={320} border={1} bgcolor={'#D3D3D3'} overflow={'auto'} >
+      {currentGroup &&
+          <>
+            <label>{currentGroup.name}</label>
+            <p>{currentGroup.ownerName}</p>
+            {currentGroup.members.map((member, index) => (
+              <ListItem key={index}>
+                {member}
+              </ListItem>
+            ))}
+            <Button onClick={() => joinStudyGroup()}>Join Group</Button>
+          </>
+        }
       </Box>
 
       </Grid>
@@ -107,5 +124,42 @@ const FindExternalGroups = () => {
     </Box>
   )
 }
+
+/*
+<div className="main">
+      <div className="columnDiv">
+        <label>Your Subjects</label>
+        {subjects.map((subject, index) => (
+          <ListItem onClick={() => getSubjectGroups(subject)} key={index}>
+            {subject}
+          </ListItem>
+        ))}
+      </div>
+      <div className="columnDiv">
+        <label>{currentSubject}</label>
+        {(availableGroups.length > 0) && availableGroups.map((group, index) => (
+          <ListItem onClick={() => setCurrentGroup(group)} key={index}>
+            {group.name}
+          </ListItem>
+        ))}
+      </div>
+      <div className="columnDiv">
+        {currentGroup &&
+          <>
+            <label>{currentGroup.name}</label>
+            <p>{currentGroup.ownerName}</p>
+            {currentGroup.members.map((member, index) => (
+              <ListItem key={index}>
+                {member}
+              </ListItem>
+            ))}
+            <button onClick={() => joinStudyGroup()}>Join Group</button>
+          </>
+        }
+      </div>
+    </div>
+
+*/
+
 
 export default FindExternalGroups;
