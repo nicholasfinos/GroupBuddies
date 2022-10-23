@@ -1,13 +1,23 @@
 import React from "react";
-import { Button} from "@material-ui/core";
+import { Box, Button, styled} from "@material-ui/core";
 import { Grid, ListItem } from "@material-ui/core";
 import EnrollmentDataService from "../services/enrollment-service";
 import { Paper} from "@material-ui/core";
 import "./studentProfile.css";
 
-const paperStyling = { padding: 40, height: '100%', width: '100%', margin: '20px auto', background: '#fff0e7', borderRadius: 20/*border: '2px solid'*/ }
+const paperStyling = { padding: 40, height: '74', width: '100%', margin: '20px auto', background: '#fff0e7', borderRadius: 20/*border: '2px solid'*/ }
 const subjectScrollable = {overflowY: 'auto', overflowX:'hidden', maxHeight:'450px', marginLeft:'30%', width:'400px'}
 const skillsScrollable = {overflowY: 'auto', overflowX:'hidden', maxHeight:'400px', width:'100%', flexDirection: "column", minWidth: "400px", maxWidth:"500px", padding:"20px"}  
+
+
+const Backing2 = styled(Paper)(({ theme }) => ({
+  height: '74vh',
+  borderRadius: 20,
+  padding: 10,
+  margin: 2,
+   background: '#fff0e7',
+   width: 1200
+}));
 
 class CreateSubjectEnrollment extends React.Component {
   constructor(props) {
@@ -205,13 +215,17 @@ class CreateSubjectEnrollment extends React.Component {
               <label htmlFor="subject-name"><i>Please select a Subject to enroll into:</i></label>
               <br/>
               <br/>
+              <Grid align={'center'}>
+              <Box borderColor={'black'} bgcolor={'#D3D3D3'}  maxWidth={600} border={1} style={{minHeight: 300, maxHeight: 300, overflow: 'auto'}}>
             <div style={subjectScrollable}>
               {subjects && subjects.map((subject, index) => (
-                <ListItem style={{ padding: "20px", marginLeft: "15px", maxWidth: "400px" }} selected={index === currentIndex} onClick={() => this.setActiveAddSubject(subject, index)} divider button key={index}>
+                <ListItem  padding={0} style={{}} selected={index === currentIndex} onClick={() => this.setActiveAddSubject(subject, index)} divider button key={index}>
                   {subject.subjectName}
                 </ListItem>
               ))}
             </div>
+            </Box>
+            </Grid>
             </Grid>
             ) : (
               <Grid container>

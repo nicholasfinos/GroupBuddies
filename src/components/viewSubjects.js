@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import SubjectDataService from "../services/subject-service";
 import TutorDataService from "../services/tutor-service";
-import { Grid, ListItem } from "@material-ui/core";
+import { Box, Button, Grid, ListItem, styled, Typography } from "@material-ui/core";
 import EditSubject from "./editSubject";
 import { Link, Switch, Route } from "react-router-dom";
 import { Paper } from "@material-ui/core";
@@ -10,6 +10,20 @@ import "./studentProfile.css";
 const paperStyling = { padding: 40, height: '100%', width: '100%', margin: '20px auto', background: '#fff0e7', borderRadius: 20/*border: '2px solid'*/ }
 const subjectScrollable = { overflowY: 'auto', overflowX: 'hidden', maxHeight: '550px', width: '300px' }
 const tutorialScrollable = { overflowY: 'auto', overflowX: 'hidden', maxHeight: '500px' }
+
+const BigText = styled(Typography)(({ theme }) => ({
+  fontWeight: 600,
+}));
+
+const Backing2 = styled(Paper)(({ theme }) => ({
+  height: '72vh',
+  borderRadius: 20,
+  padding: 10,
+  margin: 2,
+   background: '#fff0e7',
+   width: 1100
+}));
+
 
 class SubjectList extends Component {
   constructor(props) {
@@ -121,14 +135,15 @@ class SubjectList extends Component {
     const { subjects, currentSubject, currentIndex, tutorials, currentTutorial, subjectCoordinator, tutor } = this.state;
 
     return (
-      <Grid style={{ textAlign: "center" }}>
-        <Paper bgcolor sx={{ borderColor: 'black' }} elevation={10} style={paperStyling}>
-          <h3>View Subjects</h3>
+      <Grid  align={'center'} >
+        <Backing2>
+        <BigText variant="h2"> Edit Tutorial </BigText>
           <hr className="new5"></hr>
-          <Grid container>
-            <Grid item md={3} >
+          <Grid container >
+            <Grid item xs={6} >
               <div style={{ width: "90%" }}>
-                <h2 >Subject List</h2>
+              <Typography variant="h4">Subject List</Typography>
+                <Box borderColor={'black'} bgcolor={'#D3D3D3'}  border={1} minHeight={330} maxHeight={330} maxWidth={350}>
                 <div style={subjectScrollable}>
                   <div className="list-group">
                     {subjects && subjects.map((subject, index) => (
@@ -136,37 +151,42 @@ class SubjectList extends Component {
                     ))}
                   </div>
                 </div>
+                </Box>
               </div>
             </Grid>
-            <Grid item md={9}>
+            <Grid item xs={6}>
               {currentSubject ? (
-                <Grid container>
-                  <Grid item md={6}>
-                    <div style={{ width: "90%", marginLeft: "5%" }}>
-                      <h2>{currentSubject.subjectName}</h2>
+                <Grid container spacing={2}>
+                  <Grid item xs={6} align='center'>
+                    <div style={{ }}>
+                    <Typography variant="h4">{currentSubject.subjectName}</Typography>
+                      <Box borderColor={'black'} bgcolor={'#D3D3D3'}  border={1} minHeight={330} maxHeight={330} maxWidth={350}>
                       <div>
-                        <label><strong>Subject Coordinator:</strong></label>{" "}{subjectCoordinator}
+                        <Typography><strong>Subject Coordinator:</strong></Typography>{" "}{subjectCoordinator}
                       </div>
                       <div>
-                        <label><strong>Subject Name:</strong></label>{" "}{currentSubject.subjectName}
+                        <Typography><strong>Subject Name:</strong></Typography>{" "}{currentSubject.subjectName}
                       </div>
                       <div>
-                        <label><strong>Number of Tutorials:</strong></label>{" "}{currentSubject.tutorialNumbers}
+                        <Typography><strong>Number of Tutorials:</strong></Typography>{" "}{currentSubject.tutorialNumbers}
                       </div>
                       <div>
-                        <label><strong>Semester:</strong></label>{" "}{currentSubject.semester}
+                        <Typography><strong>Semester:</strong></Typography>{" "}{currentSubject.semester}
                       </div>
                       <div>
-                        <label><strong>Group Assessment:</strong></label>{" "}{this.state.groupAssessment}
+                        <Typography><strong>Group Assessment:</strong></Typography>{" "}{this.state.groupAssessment}
                       </div>
                       <div>
-                        <label><strong>Subject Topics:</strong></label><br />{" "}{this.state.subjectTopics}
+                        <Typography><strong>Subject Topics:</strong></Typography><br />{" "}{this.state.subjectTopics}
                       </div>
+                      </Box>
                     </div>
+                    
                   </Grid>
-                  <Grid item md={6}>
+                  <Grid item xs={6} align={'center'}>
                     <div>
-                      <h2>Tutorial List</h2>
+                    <Typography variant="h4">Tutorial List</Typography>
+                    <Box borderColor={'black'} bgcolor={'#D3D3D3'}  border={1} minHeight={330} maxHeight={330} maxWidth={350}>
                       <div style={tutorialScrollable}>
                         <div className="list-group">
                           {tutorials && tutorials.map((tutorial, index) => (
@@ -174,15 +194,19 @@ class SubjectList extends Component {
                           ))}
                         </div>
                       </div>
-                      <br />
+                      </Box>
                       <div>
-                        <Link style={{ WebkitTextFillColor: "black" }} to={"/subject/" + this.state.subjectCoordinator + "/" + currentSubject._id}>Edit</Link>
-                        <Switch>
-                          <Route exact path={"/subject/" + this.state.subjectCoordinator + "/" + currentSubject?._id} component={EditSubject} />
-                        </Switch>
+                        
                       </div>
+                      
                     </div>
                   </Grid>
+                  <Box paddingLeft={27}>
+                      <Button  maxWidth disableElevation
+      variant="contained"
+      
+      aria-label="Disabled elevation buttons" component={Link} to={"/subject/" + this.state.subjectCoordinator + "/" + currentSubject._id}>Edit Subject</Button>
+                        </Box>
                 </Grid>
               ) : (
                 <div style={{ display: "block", paddingTop: "75px", paddingBottom: "75px", marginLeft: "100px", transform: "translateY(-30%)" }}>
@@ -194,7 +218,7 @@ class SubjectList extends Component {
               )}
             </Grid>
           </Grid>
-        </Paper>
+          </Backing2>
       </Grid>
     );
   }

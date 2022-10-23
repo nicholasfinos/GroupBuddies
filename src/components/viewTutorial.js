@@ -1,11 +1,14 @@
 import React, { Component } from "react";
 import SubjectDataService from "../services/subject-service";
 import TutorDataService from "../services/tutor-service";
-import { Box, Grid, ListItem, Paper, styled, Typography } from "@material-ui/core";
+import { Box, Button, Grid, ListItem, Paper, styled, Typography } from "@material-ui/core";
 import TutorialPage from "./tutorialPage";
 import { Link, Switch, Route } from "react-router-dom";
 
 
+const BigText = styled(Typography)(({ theme }) => ({
+  fontWeight: 600,
+}));
 
 
 const Backing = styled(Paper)(({ theme }) => ({
@@ -13,7 +16,7 @@ const Backing = styled(Paper)(({ theme }) => ({
   borderRadius: 20,
   padding: 10,
   margin: 2,
-  width: 1300,
+  width: 1100,
    background: '#fff0e7',
 }));
 
@@ -72,45 +75,55 @@ class TutorialList extends Component {
     const { currentIndex, tutorials, currentTutorial, id } = this.state;
 
     return (
-      <Grid alignContent="center">
+      <Grid align="center">
       <Backing>
-      <div style={{textAlign: "center", "width": "80%", "marginLeft": "130px" }}>
+      <div style={{textAlign: "center",}}>
      
-        <Typography variant="h2">View Tutorials</Typography>
-        <Grid container alignContent="center">
-          <Grid item alignContent="center" >
-            <h2>Tutorial List</h2>
+        <BigText variant="h2">View Tutorials</BigText>
+        <Grid container align="center" >
+          <Grid item align="center" xs={6}>
+            <Box paddingTop={2}>
+            <Typography variant="h5">Tutorial List</Typography>
+            </Box>
+            <Box borderColor={'black'} bgcolor={'#D3D3D3'}  border={1} minHeight={300} maxHeight={300} maxWidth={300}>
             <div className="list-group">
               {tutorials && tutorials.map((tutorial, index) => (
-                <ListItem selected={index === currentIndex} onClick={() => this.setActiveTutorial(tutorial, index)} divider button style={{ padding: "20px" }} key={index}> {"Subject: " + tutorial?.subjectName + " Number: " + tutorial?.number} </ListItem>
+                <ListItem selected={index === currentIndex} onClick={() => this.setActiveTutorial(tutorial, index)} divider button style={{ padding: "5px" }} key={index}> {"Subject: " + tutorial?.subjectName + " Number: " + tutorial?.number} </ListItem>
               ))}
             </div>
+            </Box>
           </Grid>
-          <Grid item md={4}>
+          <Grid item xs={3}>
             {currentTutorial ? (
-              <div style={{ "marginLeft": "200px" }}>
-                <br />
+              <div style={{ }}>
+                
                 <div>
-                  <h2>Tutorial</h2>
-                  <div>
-                    <label><strong>Tutorial Number:</strong></label>{" "}{currentTutorial.number}
-                  </div>
-                  <div>
-                    <label><strong>Day:</strong></label>{" "}{currentTutorial.day}
-                  </div>
-                  <div>
-                    <label><strong>Time Slot:</strong></label>{" "}{currentTutorial.timeSlot}
-                  </div>
-                  <div>
-                  <Link style={{WebkitTextFillColor: "black"}} to={"/tutorial/" + id + "/" + currentTutorial._id}>Edit Tutorial</Link>
-                    <Switch>
-                      <Route exact path={"/tutorial/" + id + "/" + currentTutorial?._id} component={TutorialPage}/>
-                    </Switch>
-                  </div>   
+                  <Grid align={'center'}>
+                  <Box paddingTop={2}>
+                  <Typography variant="h5">{currentTutorial.subjectName}</Typography>
+                
+                  </Box>
+                  <Box borderColor={'black'} bgcolor={'#D3D3D3'}  border={1} minHeight={300} maxHeight={300} maxWidth={300}>
+                  <Box paddingTop={2}>
+                    <Typography variant="h6">Tutorial Number: {currentTutorial.number}</Typography>
+                  </Box>
+                  <Box paddingTop={1}>
+                    <Typography variant="h6">Day: {currentTutorial.day}</Typography>
+                  </Box>
+                  <Box paddingTop={1}>
+                    <Typography variant="h6">Time Slot: {currentTutorial.timeSlot}</Typography>
+                  </Box>
+                  
+                  <Box paddingTop={10}>
+                  <Button variant="contained" component={Link} to={"/tutorial/" + id + "/" + currentTutorial._id}>Edit Tutorial</Button>
+                  </Box>
+                  
+                  </Box> 
+                  </Grid>
                 </div>
               </div>
             ) : (
-              <div style={{ display: "block", paddingTop: "75px", paddingBottom: "75px", marginLeft: "100px", transform: "translateY(-30%)" }}>
+              <div style={{ }}>
                 <br />
                 <p style={{ marginLeft: "100px" }}><i>Please click on a tutorial...</i></p>
                 <div style={{ float: "left", width: "100%" }}>

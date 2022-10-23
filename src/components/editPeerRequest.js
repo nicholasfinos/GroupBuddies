@@ -164,15 +164,15 @@ class EditPeerRequest extends Component {
                     
                     <div className="form-group">
                     <Grid align='center'>
-                    <Box paddingLeft={40}>
+                    <Box paddingLeft={50}>
                     <Typography>Request Status</Typography>
                         {!status ? (
-                             <select className="border" style={{ minWidth: "500px" }} value={status} onChange={this.onChangeStatus} validations={[required]} >
+                             <select className="border" style={{ minWidth: "300px" }} value={status} onChange={this.onChangeStatus} validations={[required]} >
                                 <option default value="false">Idle</option>
                                 <option value="true">Actioned</option>
                             </select>
                         ) : (
-                            <select className="border" style={{ minWidth: "500px" }} value={status} onChange={this.onChangeStatus} validations={[required]} >
+                            <select className="border" style={{ minWidth: "300px" }} value={status} onChange={this.onChangeStatus} validations={[required]} >
                              <option value="false">Idle</option>
                              <option default value="true">Actioned</option>
                             </select>
@@ -182,9 +182,9 @@ class EditPeerRequest extends Component {
                     </div>
                     
                     <div className="list-group">
-                    <Typography variant='h6'>Peers {creator} wishes to be grouped with </Typography>
+                    <Typography variant='subtitle'>Peers {creator} wishes to be grouped with </Typography>
                         <Grid align='center'>
-                        <Box style={{minHeight: 100, maxHeight: 100, overflow: 'auto', maxWidth: 200}}>
+                        <Box borderColor={'black'} bgcolor={'#D3D3D3'}  border={1} style={{minHeight: 100, maxHeight: 100, overflow: 'auto', maxWidth: 200}}>
                         <div className="list-group">
                             {yesPeers && yesPeers.map((yesPeer, index) => (
                             <ListItem divider button style={{ padding: "5px"}} key={index}>
@@ -195,9 +195,9 @@ class EditPeerRequest extends Component {
                         </Box>
                         </Grid>
 
-                        <Typography variant='h6'>Peers {creator} wishes to not be grouped with </Typography>
+                        <Typography variant='subtitle'>Peers {creator} wishes to not be grouped with </Typography>
                         <Grid align='center'>
-                        <Box style={{minHeight: 100, maxHeight: 100, overflow: 'auto', maxWidth: 200}}>
+                        <Box borderColor={'black'} bgcolor={'#D3D3D3'}  border={1} style={{minHeight: 100, maxHeight: 100, overflow: 'auto', maxWidth: 200}}>
                         <div className="list-group">
                             {noPeers && noPeers.map((noPeer, index) => (
                             <ListItem divider button style={{ padding: "5px" }} key={index}>
@@ -209,6 +209,7 @@ class EditPeerRequest extends Component {
                         </Grid>
                        </div>
                     <div>
+                        <Box paddingTop={2}>
                                 <ButtonGroup>
                                 disableElevation
                                 variant="contained"
@@ -217,7 +218,7 @@ class EditPeerRequest extends Component {
                                 <Button onClick={this.updateRequest}>Save</Button>
                                 <Button component={Link}  to={"/request/view/" + username}>Return</Button>
                                 </ButtonGroup>
-                        
+                                </Box>
                     </div>
                 </form>
                 <p>{this.state.message}</p>

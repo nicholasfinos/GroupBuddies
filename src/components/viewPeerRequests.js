@@ -16,6 +16,7 @@ const Backing = styled(Paper)(({ theme }) => ({
   padding: 10,
   margin: 2,
   background: '#fff0e7',
+  
 
 }));
 
@@ -130,11 +131,11 @@ class viewPeerRequests extends Component {
                   <BigText variant={'h2'}>View Peer Requests </BigText>
 
                   <Grid container align='center'>
-                    <Grid item md={4}>
+                    <Grid item xs={5}>
                       <Box padding={5} paddingLeft={15}>
                         <BigText variant='h5'>My Peer Request List</BigText>
 
-                        <Box paddingLeft={5} style={{ minHeight: 350, overflow: 'auto', maxHeight: 350, }}>
+                        <Box borderColor={'black'} bgcolor={'#D3D3D3'}  border={1} paddingLeft={0}  style={{ minHeight: 320, overflow: 'auto', maxHeight: 350, }}>
                           <div className="list-group">
                             {requests && requests.map((request, index) => (
                               <ListItem selected={index === currentIndex} onClick={() => this.setActiveRequest(request, index)} divider button style={{ padding: "20px" }} key={index}> {"Subject: " + request?.subjectName + " | Tutorial Number: " + request?.tutorialNumber} </ListItem>
@@ -143,20 +144,20 @@ class viewPeerRequests extends Component {
                         </Box>
                       </Box>
                     </Grid>
-                    <Grid item md={4}>
+                    <Grid item xs={5}>
                       {request ? (
                         <Box padding={5}>
                           <div style={{ "marginLeft": "50px", }}>
 
                             <div>
 
-                              <BigText variant='h5'>My Peer Requests for: {request.subjectName}</BigText>
+                              <BigText variant='h6'>My Peer Requests for: {request.subjectName}</BigText>
 
 
                               <Box paddingTop={2}>
                                 <Typography variant='h6'>Peers I wish to be grouped with: </Typography>
                               </Box>
-                              <Box paddingLeft={10} style={{ minHeight: 100, overflow: 'auto', maxHeight: 100, }}>
+                              <Box borderColor={'black'} bgcolor={'#D3D3D3'}  border={1} paddingLeft={0} style={{ minHeight: 100, overflow: 'auto', maxHeight: 100, }}>
                                 <div className="list-group">
                                   {yesPeers && yesPeers.map((yesPeer, index) => (
                                     <ListItem selected={index === currentIndex} onClick={() => this.setActiveYesPeer(yesPeer, index)} divider button style={{ padding: "5px" }} key={index}>
@@ -168,7 +169,7 @@ class viewPeerRequests extends Component {
                               <Box paddingLeft={4}>
                                 <Typography variant='h6'>Peers I wish not be grouped with: </Typography>
                               </Box>
-                              <Box paddingLeft={10} style={{ minHeight: 100, overflow: 'auto', maxHeight: 100, }}>
+                              <Box borderColor={'black'} bgcolor={'#D3D3D3'}  border={1} paddingLeft={0} style={{ minHeight: 100, overflow: 'auto', maxHeight: 100, }}>
 
                                 <div className="list-group">
                                   {noPeers && noPeers.map((noPeer, index) => (
@@ -197,12 +198,13 @@ class viewPeerRequests extends Component {
                 <div>
                   <BigText variant={'h2'}>View Peer Requests </BigText>
                   <Grid container>
-                    <Grid item md={4}>
-                      <Box paddingLeft={0}>
+                    <Grid item xs={6} align='center'>
+                      <Box paddingLeft={20}>
                         <Box paddingTop={5}>
                           <BigText variant='h5'>Student Peer Request List</BigText>
                         </Box>
-                        <Box paddingLeft={10} style={{ minHeight: 400, overflow: 'auto', maxHeight: 350, }}>
+                        <Box></Box>
+                        <Box borderColor={'black'} bgcolor={'#D3D3D3'}  border={1}  style={{ minHeight: 300, overflow: 'auto', maxHeight: 300, maxWidth: 400 }}>
                           <div className="list-group">
                             {requests && requests.map((request, index) => (
                               <ListItem selected={index === currentIndex} onClick={() => this.setActiveRequest(request, index)} divider button style={{ padding: "10px" }} key={index}> {"Name: " + request?.username + ", Subject: " + request?.subjectName} </ListItem>
@@ -211,7 +213,7 @@ class viewPeerRequests extends Component {
                         </Box>
                       </Box>
                     </Grid>
-                    <Grid item md={4}>
+                    <Grid item xs={4} align='center'>
                       {request ? (
                         <Box padding={5}>
 
@@ -222,7 +224,7 @@ class viewPeerRequests extends Component {
                             <Box paddingTop={2}>
                               <Typography>Peers Student Wishes To Be With:</Typography>
                             </Box>
-                            <Box paddingLeft={10} style={{ minHeight: 100, overflow: 'auto', maxHeight: 100, }}>
+                            <Box borderColor={'black'} bgcolor={'#D3D3D3'}  border={1}  style={{ minHeight: 100, overflow: 'auto', maxHeight: 100, }}>
 
                               <div className="list-group">
                                 {yesPeers && yesPeers.map((yesPeer, index) => (
@@ -234,7 +236,7 @@ class viewPeerRequests extends Component {
                             </Box>
 
                             <Typography>Peers Student Doesn't Wish To Be With:</Typography>
-                            <Box paddingLeft={10} style={{ minHeight: 100, overflow: 'auto', maxHeight: 100, }}>
+                            <Box borderColor={'black'} bgcolor={'#D3D3D3'}  border={1}  style={{ minHeight: 100, overflow: 'auto', maxHeight: 100, }}>
                               <div className="list-group">
                                 {noPeers && noPeers.map((noPeer, index) => (
                                   <ListItem selected={index === currentIndex} onClick={() => this.setActiveNoPeer(noPeer, index)} divider button style={{ padding: "0px" }} key={index}>

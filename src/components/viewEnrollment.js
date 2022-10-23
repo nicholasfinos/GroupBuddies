@@ -1,8 +1,21 @@
 import React, { Component } from "react";
 import SubjectDataService from "../services/subject-service";
 import TutorDataService from "../services/tutor-service";
-import { Grid, ListItem } from "@material-ui/core";
+import { Box, Grid, ListItem, Paper, styled, Typography } from "@material-ui/core";
 import EnrollmentDataService from "../services/enrollment-service";
+
+const BigText = styled(Typography)(({ theme }) => ({
+  fontWeight: 600,
+}));
+
+const Backing2 = styled(Paper)(({ theme }) => ({
+  height: '72vh',
+  borderRadius: 20,
+  padding: 10,
+  margin: 2,
+   background: '#fff0e7',
+   width: 1100
+}));
 
 class ViewSubjectEnrollment extends Component {
   constructor(props) {
@@ -60,45 +73,65 @@ class ViewSubjectEnrollment extends Component {
 
     return (
       <div style={{ fontFamily: "Times New Roman", textAlign: "center", "width": "80%", "marginLeft": "130px" }}>
+        <Backing2>
         <hr className="new5"></hr>
-        <h3>My Enrollments</h3>
-        <Grid container>
-          <Grid item md={4}>
-            <h2>Enrollment List</h2>
+        <Box paddingBottom={2}>
+        <BigText variant="h2">View Enrolled Subjects</BigText>
+        </Box>
+        <Grid container align='center'>
+          <Grid item xs={5}>
+            <Box paddingBottom={1}>
+            <BigText variant="h5">Enrollment List</BigText>
+            </Box>
+            <Box borderColor={'black'} bgcolor={'#D3D3D3'}  border={1} minHeight={300} maxHeight={300}  maxWidth={320}  overflow={'auto'}>
             <div className="list-group">
               {enrollments && enrollments.map((enrollment, index) => (
                 <ListItem selected={index === currentIndex} onClick={() => this.setActiveEnrollment(enrollment, index)} divider button style={{ padding: "20px" }} key={index}> {"Name: " + enrollment?.subjectName} </ListItem>
               ))}
             </div>
+            </Box>
           </Grid>
-          <Grid item md={4}>
+          <Grid item xs={4}>
             {currentEnrollment ? (
-              <div style={{ "marginLeft": "200px" }}>
-                <br />
+              <div style={{ }}>
+              
+                <Grid align={'center'}>
+                <Box paddingLeft={5} paddingBottom={1} align={'center'}>
+            <BigText variant="h5">Enrollment Details</BigText>
+            </Box>
+            </Grid>
+                <Box borderColor={'black'} bgcolor={'#D3D3D3'}  border={1} minHeight={300} maxHeight={300}  minWidth={420}  overflow={'auto'}>
+
                 <div style={{ minWidth: "400px" }}>
-                  <label><strong>Subject Name:</strong></label>{" "}{currentEnrollment.subjectName}
+                <Box>
+                  <Typography><strong>Subject Name:</strong></Typography>{" "}{currentEnrollment.subjectName}
                   <br />
-                  <label><strong>Username:</strong></label>{" "}{currentEnrollment.username}
+                  <Typography><strong>Username:</strong></Typography>{" "}{currentEnrollment.username}
                   <br />
-                  <label><strong>Subject Topics:</strong></label>
+                  <Typography><strong>Subject Topics:</strong></Typography>
+                  <Box maxWidth={100}>
                   <div className="list-group" >
                     {subjectTopics && subjectTopics.map((topic, index) => (
-                      <ListItem selected={index === currentIndex} divider style={{ padding: "20px" }} key={index}> {topic}{" "} </ListItem>
+                      <ListItem selected={index === currentIndex} divider style={{ padding: "0px" }} key={index}> {topic}{" "} </ListItem>
                     ))}
                   </div>
-                  <br />
-                  <label><strong>Tutorial:</strong></label>{" "}{currentEnrollment.tutorialNumber}
-                  <br />
-                  <label><strong>Status:</strong></label>{" "}{currentEnrollment.status}
-                  <br />
+                  </Box>
+                  
+                  <Typography> <strong>Tutorial: {" "}{currentEnrollment.tutorialNumber}</strong> </Typography>
+                  
+                  <Typography><strong>Status:</strong></Typography>{" "}{currentEnrollment.status}
+                  
                   {currentEnrollment.reason ? (
                     <div>
-                      <label><strong>Reason for Declined Request:</strong></label>{" "}{currentEnrollment.reason}
+                      <Typography><strong>Reason for Declined Request:</strong></Typography>{" "}{currentEnrollment.reason}
                     </div>
                   ) : (
                     <div></div>
                   )}
+                </Box>
                 </div>
+                
+                </Box>
               </div>
             ) : (
               <div style={{ display: "block", paddingTop: "75px", paddingBottom: "75px", marginLeft: "100px", transform: "translateY(-30%)" }}>
@@ -110,6 +143,7 @@ class ViewSubjectEnrollment extends Component {
             )}
           </Grid>
         </Grid>
+        </Backing2>
       </div>
     );
   }
