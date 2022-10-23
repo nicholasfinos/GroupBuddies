@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import userService from "../services/user-service";
 import subjectService from "../services/subject-service";
 import "./externalGroups.css";
-import { Box, Button, Grid, ListItem, Paper, styled, Typography } from "@material-ui/core";
+import { Box, Button, ButtonGroup, Grid, Link, ListItem, Paper, styled, TextField, Typography } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 
 
@@ -13,7 +13,7 @@ const Backing2 = styled(Paper)(({ theme }) => ({
   padding: 10,
   margin: 2,
    background: '#fff0e7',
-   width: 800
+   width: 1200
 }));
 
 const BigText = styled(Typography)(({ theme }) => ({
@@ -59,14 +59,18 @@ const CreateGroupPopup = ({ currentStudent }) => {
   return (
     <Box>
       <Grid>
-        <Backing2>
+        
     <div className="columnDiv" style={{ width: "100%" }}>
       <div>
-        <label>Name</label>
-        <input type="text" onChange={(e) => setGroupName(e.target.value)} />
+        <Typography>Group Name</Typography>
+        <Box paddingBottom={2} >
+        <TextField id="filled-basic"  variant="filled" onChange={(e) => setGroupName(e.target.value)}/>
+        </Box>
       </div>
       <div>
-        <label>Subjects</label>
+      <Typography>Subjects</Typography>
+        
+        <Box minHeight={100} maxHeight={100}  maxWidth={222} border={1} bgcolor={'#D3D3D3'} overflow={'auto'} paddingBottom={3}>
         {studentSubjects.map((item, index) => (
           <ListItem
             onClick={() => setSubject(item)}
@@ -77,10 +81,13 @@ const CreateGroupPopup = ({ currentStudent }) => {
             {item}
           </ListItem>
         ))}
+        </Box>
       </div>
-      <button onClick={() => createStudyGroup()}>Create Group</button>
+      <Box paddingTop={2}>
+      <Button  variant="outlined" onClick={() => createStudyGroup()}>Create Group</Button>
+      </Box>
     </div>
-    </Backing2>
+   
     </Grid>
     </Box>
   );
@@ -137,16 +144,18 @@ const ExternalGroup = () => {
       <Grid align={'center'}>
         <Backing2>
           <BigText variant={'h3'}>My Study Groups</BigText>
+           
+     
           <Grid container>
-        <Grid item xs={6}>
+        <Grid item xs={4}>
         <Box paddingTop={2} paddingLeft={5}>
         <Grid align="center">
           <Box>
-        <BigText variant="h4">My Study Groups</BigText>
+        <BigText variant="h4">Joined Groups</BigText>
         <Box  maxWidth={250} >
         <Typography variant="caption">Study groups you have joined.</Typography>
         </Box>
-        <Box borderColor={'black'}  minHeight={350}  maxWidth={320} border={1} bgcolor={'#D3D3D3'} overflow={'auto'} >
+        <Box borderColor={'black'} minHeight={300} maxHeight={300}  maxWidth={320} border={1} bgcolor={'#D3D3D3'} overflow={'auto'} >
         <div>
           {studyGroups.map((item, index) => (
             <ListItem onClick={() => { setCurrentGroup(item) }} key={index}>
@@ -164,7 +173,7 @@ const ExternalGroup = () => {
       
 
       
-        <Grid item xs={6}>
+        <Grid item xs={4}>
       <Grid align="center">
         <Box paddingTop={2}>
         <BigText variant="h4">Selected Group Info</BigText>
@@ -172,7 +181,7 @@ const ExternalGroup = () => {
         <Box  maxWidth={250} >
         <Typography variant="caption">Details of selected group.</Typography>
         </Box>
-        <Box borderColor={'black'}  minHeight={350} maxWidth={320} border={1} bgcolor={'#D3D3D3'} overflow={'auto'} >
+        <Box borderColor={'black'}  minHeight={300} maxHeight={300}  maxWidth={320} border={1} bgcolor={'#D3D3D3'} overflow={'auto'} >
         <div>
           {currentGroup &&
             <ListItem >
@@ -189,12 +198,47 @@ const ExternalGroup = () => {
         </div>
         </Box>
         </Grid>
+        </Grid>
+        
+
+          
+
+
+        <Grid item xs={3}>
+        <Box paddingTop={2}>
+           
+        <BigText variant="h4">Create or Join a Group</BigText>
+        <Box paddingTop={2}>
+      <ButtonGroup>
+                                disableElevation
+                                variant="contained"
+                                color='primary'
+                                aria-label="Disabled elevation buttons"
+                                
+                                >
+                                <Button onClick={() => handleFindGroups()}>Find Group</Button>
+                                <Button onClick={() => setIsCreating(!isCreating)}>Create Group</Button>
+                                </ButtonGroup>
+      
+
+            
+                                </Box>
+        </Box>
+        {(isCreating) &&
+  <CreateGroupPopup currentStudent={currentStudent} />
+}
+        </Grid>
+
+        
+        
       </Grid>
-     
     
-      </Grid>
+      
+      
+
     </Backing2>
     </Grid>
+    
     </Box>
   );
 }
