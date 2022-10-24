@@ -143,7 +143,7 @@ class SubjectList extends Component {
             <Grid item xs={6} >
               <div style={{ width: "90%" }}>
               <Typography variant="h4">Subject List</Typography>
-                <Box borderColor={'black'} bgcolor={'#D3D3D3'}  border={1} minHeight={330} maxHeight={330} maxWidth={350}>
+                <Box borderColor={'black'} bgcolor={'white'}  border={1} minHeight={330} maxHeight={330} maxWidth={350}>
                 <div style={subjectScrollable}>
                   <div className="list-group">
                     {subjects && subjects.map((subject, index) => (
@@ -160,7 +160,7 @@ class SubjectList extends Component {
                   <Grid item xs={6} align='center'>
                     <div style={{ }}>
                     <Typography variant="h4">{currentSubject.subjectName}</Typography>
-                      <Box borderColor={'black'} bgcolor={'#D3D3D3'}  border={1} minHeight={330} maxHeight={330} maxWidth={350}>
+                      <Box borderColor={'black'} bgcolor={'white'}  border={1} minHeight={330} maxHeight={330} maxWidth={350}>
                       <div>
                         <Typography><strong>Subject Coordinator:</strong></Typography>{" "}{subjectCoordinator}
                       </div>
@@ -186,7 +186,7 @@ class SubjectList extends Component {
                   <Grid item xs={6} align={'center'}>
                     <div>
                     <Typography variant="h4">Tutorial List</Typography>
-                    <Box borderColor={'black'} bgcolor={'#D3D3D3'}  border={1} minHeight={330} maxHeight={330} maxWidth={350}>
+                    <Box borderColor={'black'} bgcolor={'white'}  border={1} minHeight={330} maxHeight={330} maxWidth={350}>
                       <div style={tutorialScrollable}>
                         <div className="list-group">
                           {tutorials && tutorials.map((tutorial, index) => (

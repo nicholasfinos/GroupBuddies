@@ -247,7 +247,7 @@ class TutorialPage extends React.Component {
                   <Typography variant="h4">Groups</Typography>
                  
                   <div className="box">
-                    <Box borderColor={'black'} bgcolor={'#D3D3D3'} maxWidth={300} border={1} style={{ maxHeight: 160, overflow: 'auto', minHeight:160}}>
+                    <Box borderColor={'black'} bgcolor={'white'} maxWidth={300} border={1} style={{ maxHeight: 160, overflow: 'auto', minHeight:160}}>
                       {groupList && groupList.map((group, index) => (
                         <ListItem style={{ padding: "5px", marginLeft: "15px", maxWidth: "200px" }} selected={index === currentIndex} onClick={() => this.setCurrentGroup(group)} divider button key={index}>
                           {"Group " + group.groupNumber}
@@ -292,7 +292,7 @@ class TutorialPage extends React.Component {
               <Grid container item xs={4} direction="column" >
                 <Typography variant="h4">{currentGroup && `Group ${currentGroup.groupNumber}`} Members</Typography>
                
-                <Box Box borderColor={'black'} bgcolor={'#D3D3D3'}  border={1} style={{ maxHeight: 315, overflow: 'auto', minHeight: 315 }}>
+                <Box Box borderColor={'black'} bgcolor={'white'}  border={1} style={{ maxHeight: 315, overflow: 'auto', minHeight: 315 }}>
                   {groupMembers && groupMembers.map((member, index) => (
                     <ListItem style={{ padding: "5px", marginLeft: "5px", alignItems: "center", maxWidth: 390 }} selected={index === currentIndex} onClick={() => this.setCurrentMember(member)} divider button key={index}>
                       {member && member.username}
@@ -309,7 +309,7 @@ class TutorialPage extends React.Component {
               <Grid container item xs={3} direction="column" >
                 <Box paddingBottom={0}>
                 <Typography variant="h4">Ungrouped Students</Typography>
-                <Box borderColor={'black'} bgcolor={'#D3D3D3'}  border={1} style={{ maxHeight: 175, overflow: 'auto', minHeight: 175, maxWidth: 405 }}>
+                <Box borderColor={'black'} bgcolor={'white'}  border={1} style={{ maxHeight: 175, overflow: 'auto', minHeight: 175, maxWidth: 405 }}>
                   {studentList && studentList.map((student, index) => (
                     <ListItem style={{ padding: "0px" }} selected={index === currentIndex} onClick={() => this.setCurrentStudent(student)} divider button key={index}>
                       {student.username}
@@ -318,7 +318,7 @@ class TutorialPage extends React.Component {
                 </Box>
                 <Box>
                 <Typography variant="h4">Student Information</Typography>
-                <Box borderColor={'black'} bgcolor={'#D3D3D3'}  border={1} style={{ maxHeight: 100, overflow: 'auto', minHeight: 100, maxWidth: 405, minWidth: 405, }}>
+                <Box borderColor={'black'} bgcolor={'white'}  border={1} style={{ maxHeight: 100, overflow: 'auto', minHeight: 100, maxWidth: 405, minWidth: 405, }}>
                   <div className="box">
                     <ListItem>
                       {currentStudent && ("Name: " + currentStudent.username)}

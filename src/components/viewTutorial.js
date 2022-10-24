@@ -85,7 +85,7 @@ class TutorialList extends Component {
             <Box paddingTop={2}>
             <Typography variant="h5">Tutorial List</Typography>
             </Box>
-            <Box borderColor={'black'} bgcolor={'#D3D3D3'}  border={1} minHeight={300} maxHeight={300} maxWidth={300}>
+            <Box borderColor={'black'} bgcolor={'white'}  border={1} minHeight={300} maxHeight={300} maxWidth={300}>
             <div className="list-group">
               {tutorials && tutorials.map((tutorial, index) => (
                 <ListItem selected={index === currentIndex} onClick={() => this.setActiveTutorial(tutorial, index)} divider button style={{ padding: "5px" }} key={index}> {"Subject: " + tutorial?.subjectName + " Number: " + tutorial?.number} </ListItem>
@@ -103,7 +103,7 @@ class TutorialList extends Component {
                   <Typography variant="h5">{currentTutorial.subjectName}</Typography>
                 
                   </Box>
-                  <Box borderColor={'black'} bgcolor={'#D3D3D3'}  border={1} minHeight={300} maxHeight={300} maxWidth={300}>
+                  <Box borderColor={'black'} bgcolor={'white'}  border={1} minHeight={300} maxHeight={300} maxWidth={300}>
                   <Box paddingTop={2}>
                     <Typography variant="h6">Tutorial Number: {currentTutorial.number}</Typography>
                   </Box>

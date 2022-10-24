@@ -72,7 +72,7 @@ const FindExternalGroups = () => {
       <Box paddingTop={3}>
       <BigText variant="h4">Classes</BigText>
       </Box>
-      <Box borderColor={'black'}  minHeight={300} maxHeight={300}  maxWidth={320} border={1} bgcolor={'#D3D3D3'} overflow={'auto'} >
+      <Box borderColor={'black'}  minHeight={300} maxHeight={300}  maxWidth={320} border={1} bgcolor={'white'} overflow={'auto'} >
       {subjects.map((subject, index) => (
           <ListItem onClick={() => getSubjectGroups(subject)} key={index}>
             {subject}
@@ -86,7 +86,7 @@ const FindExternalGroups = () => {
       <Box paddingTop={3}>
       <BigText variant="h4">Study Groups</BigText>
       </Box>
-      <Box borderColor={'black'}  minHeight={300} maxHeight={300}  maxWidth={320} border={1} bgcolor={'#D3D3D3'} overflow={'auto'} >
+      <Box borderColor={'black'}  minHeight={300} maxHeight={300}  maxWidth={320} border={1} bgcolor={'white'} overflow={'auto'} >
       {(availableGroups.length > 0) && availableGroups.map((group, index) => (
           <ListItem onClick={() => setCurrentGroup(group)} key={index}>
             {group.name}
@@ -100,7 +100,7 @@ const FindExternalGroups = () => {
       <Box paddingTop={4}>
       <BigText variant="h4">Selected Group</BigText>
       </Box>
-      <Box borderColor={'black'}  minHeight={300} maxHeight={300}  maxWidth={320} border={1} bgcolor={'#D3D3D3'} overflow={'auto'} >
+      <Box borderColor={'black'}  minHeight={300} maxHeight={300}  maxWidth={320} border={1} bgcolor={'white'} overflow={'auto'} >
       {currentGroup &&
           <>
             <label>{currentGroup.name}</label>

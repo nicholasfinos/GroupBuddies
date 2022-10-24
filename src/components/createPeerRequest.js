@@ -239,7 +239,7 @@ class CreatePeerRequest extends React.Component {
               <Box alignContent={'center'}>
                 <Typography htmlFor="subject-name" marginLeft='100'>Please select a Subject to create a peer request for:</Typography>
                 <Grid align='center'>
-                <Box borderColor={'black'} bgcolor={'#D3D3D3'}  border={1} maxWidth={400} maxHeight={350} overflow={'auto'}>
+                <Box borderColor={'black'} bgcolor={'white'}  border={1} maxWidth={400} maxHeight={350} overflow={'auto'}>
                 {tutroials && tutroials.map((tutorial, index) => (
                   <ListItem style={{ padding: "20px", maxWidth: "400px", alignContent: 'center', paddingLeft:'10'}} selected={index === currentIndex} onClick={() => this.setActiveSelectSubject(tutorial, index)} divider button key={index}>
                     {"Subject Name: " + tutorial.subjectName + " | Tutorial Number: " + tutorial.number}
@@ -273,7 +273,7 @@ class CreatePeerRequest extends React.Component {
                          <Typography variant='caption'>Please select the peers you are happy to be grouped with from the following list</Typography>
                          </Box>
                         
-                         <Box  borderColor={'black'} bgcolor={'#D3D3D3'}  border={1} style={{minHeight: 100, maxHeight: 100, overflow: 'auto'}}>
+                         <Box  borderColor={'black'} bgcolor={'white'}  border={1} style={{minHeight: 100, maxHeight: 100, overflow: 'auto'}}>
                         <div style={{ flexDirection: "column" }}>
                           {peers && peers.map((peer, index) => (
                             <ListItem style={{ padding: "0px" }} selected={index === currentYesPeerIndex} onClick={() => this.addYesPeer(peer, index)} divider button key={index}>
@@ -287,7 +287,7 @@ class CreatePeerRequest extends React.Component {
                         <Box maxWidth={305}>
                          <Typography variant='caption'>Please select the peers you don't wish to be grouped with from the following list</Typography>
                          </Box>
-                         <Box  borderColor={'black'} bgcolor={'#D3D3D3'}  border={1} style={{minHeight: 100, maxHeight: 100, overflow: 'auto'}}>
+                         <Box  borderColor={'black'} bgcolor={'white'}  border={1} style={{minHeight: 100, maxHeight: 100, overflow: 'auto'}}>
                         <div style={{ flexDirection: "column", minWidth: "" }}>
                           {peers && peers.map((peer, index) => (
                             <ListItem style={{ padding: "0px"}} selected={index === currentNoPeerIndex} onClick={() => this.addNoPeer(peer, index)} divider button key={index}>
@@ -304,7 +304,7 @@ class CreatePeerRequest extends React.Component {
                   <Grid item md={4} style={{ paddingLeft: "150px", minWidth: "500px" }}>
                   <Typography variant='h6'>Peers to request grouping with:</Typography>
                     
-                    <Box  borderColor={'black'} bgcolor={'#D3D3D3'}  border={1} style={{minHeight: 125, maxHeight: 125, overflow: 'auto'}} >
+                    <Box  borderColor={'black'} bgcolor={'white'}  border={1} style={{minHeight: 125, maxHeight: 125, overflow: 'auto'}} >
                       {addedYesPeers.map((addedYesPeer, index) => (
                         <ListItem style={{ padding: "5px",  }} selected={index === currentYesPeerIndex} onClick={() => this.deleteYesPeer(index)} divider button key={index}>
                           {" "}{addedYesPeer.username}
@@ -315,7 +315,7 @@ class CreatePeerRequest extends React.Component {
                     
              
                       <Typography variant='h6'>Peers to request avoiding:</Typography>
-                      <Box  borderColor={'black'} bgcolor={'#D3D3D3'}  border={1} style={{minHeight: 125, maxHeight: 125, overflow: 'auto'}} >
+                      <Box  borderColor={'black'} bgcolor={'white'}  border={1} style={{minHeight: 125, maxHeight: 125, overflow: 'auto'}} >
                       {addedNoPeers.map((addedNoPeer, index) => (
                         <ListItem style={{ padding: "5px",  }} selected={index === currentNoPeerIndex} onClick={() => this.deleteNoPeer(index)} divider button key={index}>
                           {" "}{addedNoPeer.username}

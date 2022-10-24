@@ -139,7 +139,7 @@ class ApproveSubjectEnrollment extends React.Component {
               <div style={{ width: "95%" }}>
                 <h3 style={{ textAlign: "center" }}>Subject List</h3>
                 <p style={{ textAlign: "center" }}><i>Please select a subject:</i></p>
-                <Box  borderColor={'black'} bgcolor={'#D3D3D3'}  border={1} minHeight={237} maxHeight={237} maxWidth={305} overflow={'auto'}>
+                <Box  borderColor={'black'} bgcolor={'white'}  border={1} minHeight={237} maxHeight={237} maxWidth={305} overflow={'auto'}>
 
                 <div style={subjectScrollable}>
                   {subjects && subjects.map((subject, index) => (
@@ -161,7 +161,7 @@ class ApproveSubjectEnrollment extends React.Component {
                     <h3 style={{ textAlign: "center" }}>{currentSubject.subjectName} Enrollments</h3>
                     <p style={{ textAlign: "center" }}><i>Please select an enrollment request</i></p>
                     <Grid  align={'center'} style={{ flexDirection: "column" }}>
-                    <Box  borderColor={'black'} bgcolor={'#D3D3D3'}  border={1} minHeight={237} maxHeight={237} maxWidth={305} overflow={'auto'}>
+                    <Box  borderColor={'black'} bgcolor={'white'}  border={1} minHeight={237} maxHeight={237} maxWidth={305} overflow={'auto'}>
 
                       {enrollments && enrollments.map((enrollment, index) => (
                         <ListItem style={{ padding: "20px", maxWidth: "400px" }} onClick={() => this.setActiveEnrollment(enrollment, index)} divider button key={index}>
@@ -187,7 +187,7 @@ class ApproveSubjectEnrollment extends React.Component {
                     <div style={{ minWidth: "400px", maxWidth: "400px" }}>
                       <h3 style={{ textAlign: "center" }}>Details</h3>
                       <Box paddingLeft={5}>
-                      <Box paddingLeft={1} borderColor={'black'} bgcolor={'#D3D3D3'}  border={1} minHeight={277} maxHeight={277} maxWidth={350} overflow={'auto'}>
+                      <Box paddingLeft={1} borderColor={'black'} bgcolor={'white'}  border={1} minHeight={277} maxHeight={277} maxWidth={350} overflow={'auto'}>
                       <Grid>
                       <Typography><strong>Name: </strong>{currentEnrollment.username}</Typography>
                       

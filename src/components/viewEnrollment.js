@@ -83,7 +83,7 @@ class ViewSubjectEnrollment extends Component {
             <Box paddingBottom={1}>
             <BigText variant="h5">Enrollment List</BigText>
             </Box>
-            <Box borderColor={'black'} bgcolor={'#D3D3D3'}  border={1} minHeight={300} maxHeight={300}  maxWidth={320}  overflow={'auto'}>
+            <Box borderColor={'black'} bgcolor={'white'}  border={1} minHeight={300} maxHeight={300}  maxWidth={320}  overflow={'auto'}>
             <div className="list-group">
               {enrollments && enrollments.map((enrollment, index) => (
                 <ListItem selected={index === currentIndex} onClick={() => this.setActiveEnrollment(enrollment, index)} divider button style={{ padding: "20px" }} key={index}> {"Name: " + enrollment?.subjectName} </ListItem>
@@ -100,7 +100,7 @@ class ViewSubjectEnrollment extends Component {
             <BigText variant="h5">Enrollment Details</BigText>
             </Box>
             </Grid>
-                <Box borderColor={'black'} bgcolor={'#D3D3D3'}  border={1} minHeight={300} maxHeight={300}  minWidth={420}  overflow={'auto'}>
+                <Box borderColor={'black'} bgcolor={'white'}  border={1} minHeight={300} maxHeight={300}  minWidth={420}  overflow={'auto'}>
 
                 <div style={{ minWidth: "400px" }}>
                 <Box>

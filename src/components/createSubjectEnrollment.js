@@ -216,7 +216,7 @@ class CreateSubjectEnrollment extends React.Component {
               <br/>
               <br/>
               <Grid align={'center'}>
-              <Box borderColor={'black'} bgcolor={'#D3D3D3'}  maxWidth={600} border={1} style={{minHeight: 300, maxHeight: 300, overflow: 'auto'}}>
+              <Box borderColor={'black'} bgcolor={'white'}  maxWidth={600} border={1} style={{minHeight: 300, maxHeight: 300, overflow: 'auto'}}>
             <div style={subjectScrollable}>
               {subjects && subjects.map((subject, index) => (
                 <ListItem  padding={0} style={{}} selected={index === currentIndex} onClick={() => this.setActiveAddSubject(subject, index)} divider button key={index}>

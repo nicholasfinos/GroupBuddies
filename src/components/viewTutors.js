@@ -92,7 +92,7 @@ class TutorList extends Component {
   >
     <Grid item xs={6} align={'center'}>
         <Typography variant="h4">Tutor List</Typography>
-          <Box  borderColor={'black'} bgcolor={'#D3D3D3'}  border={1} minHeight={330} maxHeight={330} maxWidth={305} overflow={'auto'}>
+          <Box  borderColor={'black'} bgcolor={'white'}  border={1} minHeight={330} maxHeight={330} maxWidth={305} overflow={'auto'}>
            <div style={subjectScrollable}>
                 <div className="list-group">
                   {tutors && tutors.map((tutor, index) => (
@@ -110,7 +110,7 @@ class TutorList extends Component {
                     <Typography variant="h4">{currentTutor?.username}'s Assigned Tutorials</Typography>
                       
                     </div>
-                    <Box  borderColor={'black'} bgcolor={'#D3D3D3'}  border={1} minHeight={330} maxHeight={330} maxWidth={400} overflow={'auto'}>
+                    <Box  borderColor={'black'} bgcolor={'white'}  border={1} minHeight={330} maxHeight={330} maxWidth={400} overflow={'auto'}>
 
                     <div style={tutorScrollable}>
                       <div className="list-group">
