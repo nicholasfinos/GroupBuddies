@@ -1,8 +1,21 @@
-import { ListItem } from "@material-ui/core";
+import { Box, Button, Grid, ListItem, Paper, styled, Typography } from "@material-ui/core";
 import { useEffect, useState } from "react";
 import userService from "../services/user-service";
 import subjectService from "../services/subject-service";
 import "./findExternalGroups.css";
+
+const Backing2 = styled(Paper)(({ theme }) => ({
+  height: '74vh',
+  borderRadius: 20,
+  padding: 10,
+  margin: 2,
+   background: '#fff0e7',
+   width: 1200
+}));
+
+const BigText = styled(Typography)(({ theme }) => ({
+  fontWeight: 600,
+}));
 
 const FindExternalGroups = () => {
   const [currentStudent, setCurrentStudent] = useState();
@@ -30,7 +43,7 @@ const FindExternalGroups = () => {
     if (currentSubject !== subject) {
       setCurrentSubject(subject);
 
-      subjectService.getAllStudyGroups(subject, currentStudent.studentName)
+      subjectService.getAllStudyGroups(subject, currentStudent.username)
         .then((data) => {
           setAvailableGroups(data.data.data);
         });
@@ -40,14 +53,80 @@ const FindExternalGroups = () => {
   const joinStudyGroup = () => {
     const data = {
       groupId: currentGroup._id,
-      currentStudent: currentStudent.studentName
+      currentStudent: currentStudent.username
     }
 
     userService.joinStudyGroup(data);
   }
 
   return (
-    <div className="main">
+    <Box>
+      <Backing2>
+      <Grid align={'center'}>
+      <BigText variant="h2">Find External Study Groups</BigText>
+      <Typography>Browse created study groups for your classes</Typography>
+      </Grid>
+      <Grid  align={'center'} container spacing={1} alignItems={'center'}>
+        
+      <Grid item xs={4} align={'center'} >
+      <Box paddingTop={3}>
+      <BigText variant="h4">Classes</BigText>
+      </Box>
+      <Box borderColor={'black'}  minHeight={300} maxHeight={300}  maxWidth={320} border={1} bgcolor={'white'} overflow={'auto'} >
+      {subjects.map((subject, index) => (
+          <ListItem onClick={() => getSubjectGroups(subject)} key={index}>
+            {subject}
+          </ListItem>
+        ))}
+      
+      </Box>
+      </Grid>
+
+      <Grid item xs={4} align={'center'} >
+      <Box paddingTop={3}>
+      <BigText variant="h4">Study Groups</BigText>
+      </Box>
+      <Box borderColor={'black'}  minHeight={300} maxHeight={300}  maxWidth={320} border={1} bgcolor={'white'} overflow={'auto'} >
+      {(availableGroups.length > 0) && availableGroups.map((group, index) => (
+          <ListItem onClick={() => setCurrentGroup(group)} key={index}>
+            {group.name}
+          </ListItem>
+        ))}
+      </Box>
+
+      </Grid>
+
+      <Grid item xs={4} align={'center'} >
+      <Box paddingTop={4}>
+      <BigText variant="h4">Selected Group</BigText>
+      </Box>
+      <Box borderColor={'black'}  minHeight={300} maxHeight={300}  maxWidth={320} border={1} bgcolor={'white'} overflow={'auto'} >
+      {currentGroup &&
+          <>
+            <label>{currentGroup.name}</label>
+            <p>{currentGroup.ownerName}</p>
+            {currentGroup.members.map((member, index) => (
+              <ListItem key={index}>
+                {member}
+              </ListItem>
+            ))}
+            <Button onClick={() => joinStudyGroup()}>Join Group</Button>
+          </>
+        }
+      </Box>
+
+      </Grid>
+
+
+   
+    </Grid>
+    </Backing2>
+    </Box>
+  )
+}
+
+/*
+<div className="main">
       <div className="columnDiv">
         <label>Your Subjects</label>
         {subjects.map((subject, index) => (
@@ -79,7 +158,8 @@ const FindExternalGroups = () => {
         }
       </div>
     </div>
-  )
-}
+
+*/
+
 
 export default FindExternalGroups;

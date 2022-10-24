@@ -1,5 +1,5 @@
 import React from "react";
-import { FormControl, FormHelperText, InputAdornment, ListItem, OutlinedInput } from "@material-ui/core";
+import { ButtonGroup, FormControl, FormHelperText, InputAdornment, ListItem, OutlinedInput } from "@material-ui/core";
 import TutorDataService from "../services/tutor-service";
 import StudentProfileDataServcie from "../services/studentProfile-service";
 import SubjectDataService from "../services/subject-service";
@@ -225,16 +225,29 @@ class TutorialPage extends React.Component {
       <Box sx={{ flexGrow: 1 }}>
         <Backing>
           <Grid align='center'>
+            <Grid container direction="row" justifyContent="center"
+  alignItems="center">
+            <Grid item xs={5}>
+              <Box paddingLeft={13}>
             <BigText variant="h2"> Edit Tutorial </BigText>
-            <Button component={Link} to={"/tutor/viewTutorial/" + tutorial?.tutor}>Return</Button>
-            <hr />
+            </Box>
+            </Grid>
+            <Grid item xs={0}>
+            <Box paddingLeft={0}>
+            <BigText variant="h2"> <Button variant="outlined" component={Link} to={"/tutor/viewTutorial/" + tutorial?.tutor}>Return</Button> </BigText>
+            </Box>
+
+            </Grid>
+            
+            
+            </Grid>
             <Grid alignContent="center" container spacing={3} margin={2} >
               <Grid container item xs={4} direction="column">
                 <Box paddingBottom={2} >
-                  <Typography variant="h6">Groups</Typography>
-                  <Divider variant="middle" margin="5" padding="4px" />
+                  <Typography variant="h4">Groups</Typography>
+                 
                   <div className="box">
-                    <Box style={{ maxHeight: 135, overflow: 'auto' }}>
+                    <Box borderColor={'black'} bgcolor={'white'} maxWidth={300} border={1} style={{ maxHeight: 160, overflow: 'auto', minHeight:160}}>
                       {groupList && groupList.map((group, index) => (
                         <ListItem style={{ padding: "5px", marginLeft: "15px", maxWidth: "200px" }} selected={index === currentIndex} onClick={() => this.setCurrentGroup(group)} divider button key={index}>
                           {"Group " + group.groupNumber}
@@ -242,16 +255,25 @@ class TutorialPage extends React.Component {
                       ))}
                     </Box>
                   </div>
-                  <stack direction="row" spacing={2}>
-                    <Button variant="text" size="medium" className="button" onClick={() => { this.addGroup() }}>Add Group</Button>
-                    <Button variant="text" size="medium" className="button" onClick={() => { this.removeGroup() }}>Remove Group</Button>
-                  </stack>
-                  <Divider variant="middle" padding={10} margin={5} />
+                  <Box paddingTop={1}>
+                  <ButtonGroup
+                  
+      disableElevation
+      variant="contained"
+      aria-label="Disabled elevation buttons"
+    >
+      <Button  size="small" className="button" onClick={() => { this.addGroup() }}>Add Group</Button>
+      <Button  size="small" className="button" onClick={() => { this.removeGroup() }}>Remove Group</Button>
+    </ButtonGroup>
+    </Box>
+    
+                  
+                
                 </Box>
-                <Typography variant="h6"> Auto Grouping</Typography>
-                <Divider variant="middle" sx={{ borderBottomWidth: 4 }} />
-                <Box padding={2} >
-                  <FormControl sx={{ m: 2, p: 5 }} variant="outlined">
+                <Typography variant="h5"> Auto Grouping</Typography>
+                
+                <Box padding={1} >
+                  <FormControl sx={{ m: 2, p: 5 }} variant="filled">
                     <OutlinedInput
                       id="groupSize"
                       onChange={this.onChangeGroupSize}
@@ -260,28 +282,43 @@ class TutorialPage extends React.Component {
                     />
                     <FormHelperText id="outlined-weight-helper-text">Number of Groups to be Made</FormHelperText>
                   </FormControl>
-                  <Button variant="text" size="medium" color="default" className="button" onClick={() => { this.autoSort() }}>Automatic Sort</Button>
+                  <Box></Box>
+                  <Button  maxWidth disableElevation
+      variant="contained"
+      
+      aria-label="Disabled elevation buttons" onClick={() => { this.autoSort() }}>Automatic Sort</Button>
                 </Box>
               </Grid>
-              <Divider orientation="vertical" flexItem sx={{ mr: "-2px" }} />
               <Grid container item xs={4} direction="column" >
-                <Typography variant="h6">Members</Typography>
-                <Typography>{currentGroup && `Group ${currentGroup.groupNumber}`}</Typography>
-                <Box style={{ maxHeight: 250, overflow: 'auto', minHeight: 250 }}>
+                <Typography variant="h4">{currentGroup && `Group ${currentGroup.groupNumber}`} Members</Typography>
+               
+                <Box Box borderColor={'black'} bgcolor={'white'}  border={1} style={{ maxHeight: 315, overflow: 'auto', minHeight: 315 }}>
                   {groupMembers && groupMembers.map((member, index) => (
                     <ListItem style={{ padding: "5px", marginLeft: "5px", alignItems: "center", maxWidth: 390 }} selected={index === currentIndex} onClick={() => this.setCurrentMember(member)} divider button key={index}>
                       {member && member.username}
                     </ListItem>
                   ))}
                 </Box>
-                <Divider variant="middle" sx={{ borderBottomWidth: 4 }} />
-
-                <Button className="button" onClick={() => { this.removeStudentGroup() }}>Remove student from Group</Button>
+                  <Box paddingTop={2}>
+                <Button  disableElevation
+      variant="contained"
+      
+      aria-label="Disabled elevation buttons" className="button" onClick={() => { this.removeStudentGroup() }}>Remove student from Group</Button>
+              </Box>
               </Grid>
-              <Divider orientation="vertical" flexItem sx={{ mr: "-1px" }} />
               <Grid container item xs={3} direction="column" >
-                <Typography variant="h6">Student Info</Typography>
-                <Box style={{ maxHeight: 100, overflow: 'auto', minHeight: 100, maxWidth: 405, minWidth: 405, }}>
+                <Box paddingBottom={0}>
+                <Typography variant="h4">Ungrouped Students</Typography>
+                <Box borderColor={'black'} bgcolor={'white'}  border={1} style={{ maxHeight: 175, overflow: 'auto', minHeight: 175, maxWidth: 405 }}>
+                  {studentList && studentList.map((student, index) => (
+                    <ListItem style={{ padding: "0px" }} selected={index === currentIndex} onClick={() => this.setCurrentStudent(student)} divider button key={index}>
+                      {student.username}
+                    </ListItem>
+                  ))}
+                </Box>
+                <Box>
+                <Typography variant="h4">Student Information</Typography>
+                <Box borderColor={'black'} bgcolor={'white'}  border={1} style={{ maxHeight: 100, overflow: 'auto', minHeight: 100, maxWidth: 405, minWidth: 405, }}>
                   <div className="box">
                     <ListItem>
                       {currentStudent && ("Name: " + currentStudent.username)}
@@ -291,18 +328,17 @@ class TutorialPage extends React.Component {
                     </ListItem>
                   </div>
                 </Box>
-                <Divider variant="middle" margin="5" padding="4px" />
-                <Button className="button" onClick={() => { this.addStudentGroup() }}>Add to Group</Button>
-                <Divider variant="middle" margin="5" padding="4px" />
-                <Typography variant="h6">Ungrouped Students</Typography>
-                <Box style={{ maxHeight: 160, overflow: 'auto', minHeight: 160, maxWidth: 405 }}>
-                  <Divider variant="middle" sx={{ borderBottomWidth: 4 }} />
-                  {studentList && studentList.map((student, index) => (
-                    <ListItem style={{ padding: "5px" }} selected={index === currentIndex} onClick={() => this.setCurrentStudent(student)} divider button key={index}>
-                      {student.username}
-                    </ListItem>
-                  ))}
+                <Box paddingTop={1.5}>
+                <Button maxWidth disableElevation
+      variant="contained"
+      
+      aria-label="Disabled elevation buttons"className="button" onClick={() => { this.addStudentGroup() }}>Add to Group</Button>
                 </Box>
+                </Box>
+                </Box>
+                
+               
+                
               </Grid>
             </Grid>
           </Grid>

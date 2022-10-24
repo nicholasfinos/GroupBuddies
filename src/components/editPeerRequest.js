@@ -15,13 +15,13 @@ const Backing2 = styled(Paper)(({ theme }) => ({
     borderRadius: 20,
     padding: 10,
     margin: 2,
-     background: '#fff0e7',
-     width: 1200
-  }));
+    background: '#fff0e7',
+    width: 1200
+}));
 
-  const BigText = styled(Typography)(({ theme }) => ({
+const BigText = styled(Typography)(({ theme }) => ({
     fontWeight: 600,
-  }));
+}));
 
 const required = (value) => {
     if (!value) {
@@ -103,7 +103,7 @@ class EditPeerRequest extends Component {
             .catch((e) => {
                 console.log(e);
             }
-        );
+            );
     }
 
     onChangeStatus(e) {
@@ -120,24 +120,24 @@ class EditPeerRequest extends Component {
             noPeers: this.state.noPeers,
             status: this.state.status,
         };
-        
+
         PeerRequestDataService.updatePeerRequest(this.state.username, data.id, data)
-          .then((response) => {
-            this.setState({
-                id: response.data.id,
-                creator: response.data.creator,
-                subjectName:response.data.subjectName,
-                yesPeers: response.data.yesPeers,
-                noPeers: response.data.noPeers,
-                status: response.data.status,
-                message: ""
+            .then((response) => {
+                this.setState({
+                    id: response.data.id,
+                    creator: response.data.creator,
+                    subjectName: response.data.subjectName,
+                    yesPeers: response.data.yesPeers,
+                    noPeers: response.data.noPeers,
+                    status: response.data.status,
+                    message: ""
+                });
+                console.log(response.data);
+                window.location.reload();
+            })
+            .catch((e) => {
+                console.log(e);
             });
-            console.log(response.data);
-            window.location.reload();
-          })
-          .catch((e) => {
-            console.log(e);
-          });
     }
 
     goBack = (username) => {
@@ -152,78 +152,78 @@ class EditPeerRequest extends Component {
             <Box>
                 <Grid align='center'>
                     <Backing2>
-                    <div>
-                    <BigText variant="h3">Peer Request for <i>{subjectName}</i> by <i>{creator}</i></BigText>
+                        <div>
+                            <BigText variant="h3">Peer Request for <i>{subjectName}</i> by <i>{creator}</i></BigText>
 
-                
-                <form>
-                    <Typography>Subject Name: {subjectName}</Typography>
-                    <Typography>Created By: {creator}</Typography>
 
-                    
-                    
-                    <div className="form-group">
-                    <Grid align='center'>
-                    <Box paddingLeft={40}>
-                    <Typography>Request Status</Typography>
-                        {!status ? (
-                             <select className="border" style={{ minWidth: "500px" }} value={status} onChange={this.onChangeStatus} validations={[required]} >
-                                <option default value="false">Idle</option>
-                                <option value="true">Actioned</option>
-                            </select>
-                        ) : (
-                            <select className="border" style={{ minWidth: "500px" }} value={status} onChange={this.onChangeStatus} validations={[required]} >
-                             <option value="false">Idle</option>
-                             <option default value="true">Actioned</option>
-                            </select>
-                        )}
-                        </Box>
-                        </Grid>
-                    </div>
-                    
-                    <div className="list-group">
-                    <Typography variant='h6'>Peers {creator} wishes to be grouped with </Typography>
-                        <Grid align='center'>
-                        <Box style={{minHeight: 100, maxHeight: 100, overflow: 'auto', maxWidth: 200}}>
-                        <div className="list-group">
-                            {yesPeers && yesPeers.map((yesPeer, index) => (
-                            <ListItem divider button style={{ padding: "5px"}} key={index}>
-                                {"Name: " + yesPeer.username}
-                            </ListItem>
-                            ))}
+                            <form>
+                                <Typography>Subject Name: {subjectName}</Typography>
+                                <Typography>Created By: {creator}</Typography>
+
+
+
+                                <div className="form-group">
+                                    <Grid align='center'>
+                                        <Box paddingLeft={50}>
+                                            <Typography>Request Status</Typography>
+                                            {!status ? (
+                                                <select className="border" style={{ minWidth: "300px" }} value={status} onChange={this.onChangeStatus} validations={[required]} >
+                                                    <option default value="false">Idle</option>
+                                                    <option value="true">Actioned</option>
+                                                </select>
+                                            ) : (
+                                                <select className="border" style={{ minWidth: "300px" }} value={status} onChange={this.onChangeStatus} validations={[required]} >
+                                                    <option value="false">Idle</option>
+                                                    <option default value="true">Actioned</option>
+                                                </select>
+                                            )}
+                                        </Box>
+                                    </Grid>
+                                </div>
+
+                                <div className="list-group">
+                                    <Typography variant='subtitle'>Peers {creator} wishes to be grouped with </Typography>
+                                    <Grid align='center'>
+                                        <Box borderColor={'black'} bgcolor={'white'} border={1} style={{ minHeight: 100, maxHeight: 100, overflow: 'auto', maxWidth: 200 }}>
+                                            <div className="list-group">
+                                                {yesPeers && yesPeers.map((yesPeer, index) => (
+                                                    <ListItem divider button style={{ padding: "5px" }} key={index}>
+                                                        {"Name: " + yesPeer.username}
+                                                    </ListItem>
+                                                ))}
+                                            </div>
+                                        </Box>
+                                    </Grid>
+
+                                    <Typography variant='subtitle'>Peers {creator} wishes to not be grouped with </Typography>
+                                    <Grid align='center'>
+                                        <Box borderColor={'black'} bgcolor={'white'} border={1} style={{ minHeight: 100, maxHeight: 100, overflow: 'auto', maxWidth: 200 }}>
+                                            <div className="list-group">
+                                                {noPeers && noPeers.map((noPeer, index) => (
+                                                    <ListItem divider button style={{ padding: "5px" }} key={index}>
+                                                        {"Name: " + noPeer.username}
+                                                    </ListItem>
+                                                ))}
+                                            </div>
+                                        </Box>
+                                    </Grid>
+                                </div>
+                                <div>
+                                    <Box paddingTop={2}>
+                                        <ButtonGroup
+                                            disableElevation
+                                            variant="contained"
+                                            aria-label="Disabled elevation buttons">
+                                            <Button onClick={this.updateRequest}>Save</Button>
+                                            <Button component={Link} to={"/request/view/" + username}>Return</Button>
+                                        </ButtonGroup>
+                                    </Box>
+                                </div>
+                            </form>
+                            <p>{this.state.message}</p>
                         </div>
-                        </Box>
-                        </Grid>
-
-                        <Typography variant='h6'>Peers {creator} wishes to not be grouped with </Typography>
-                        <Grid align='center'>
-                        <Box style={{minHeight: 100, maxHeight: 100, overflow: 'auto', maxWidth: 200}}>
-                        <div className="list-group">
-                            {noPeers && noPeers.map((noPeer, index) => (
-                            <ListItem divider button style={{ padding: "5px" }} key={index}>
-                                {"Name: " + noPeer.username}
-                            </ListItem>
-                            ))}
-                        </div>
-                        </Box>
-                        </Grid>
-                       </div>
-                    <div>
-                                <ButtonGroup>
-                                disableElevation
-                                variant="contained"
-                                aria-label="Disabled elevation buttons"
-                                >
-                                <Button onClick={this.updateRequest}>Save</Button>
-                                <Button component={Link}  to={"/request/view/" + username}>Return</Button>
-                                </ButtonGroup>
-                        
-                    </div>
-                </form>
-                <p>{this.state.message}</p>
-            </div>
-            </Backing2>
-            </Grid>
+                    </Backing2>
+                </Grid>
 
             </Box>
         );
