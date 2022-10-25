@@ -122,6 +122,7 @@ class TutorialPage extends React.Component {
       TutorDataService.addStudentGroup(data)
         .then(response => {
           this.setCurrentGroup(this.state.currentGroup);
+          this.componentDidMount();
         })
         .catch(e => {
           console.log(e);
@@ -162,6 +163,7 @@ class TutorialPage extends React.Component {
       TutorDataService.removeStudentGroup(data)
         .then(response => {
           this.setCurrentGroup(this.state.currentGroup);
+          this.componentDidMount();
         })
         .catch(e => {
           console.log(e);

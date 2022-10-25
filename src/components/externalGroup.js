@@ -127,7 +127,7 @@ const ExternalGroup = () => {
   const leaveCurrentGroup = () => {
     const data = {
       groupId: currentGroup._id,
-      currentStudent: currentStudent.studentName
+      currentStudent: currentStudent.username
     }
 
     userService.leaveStudyGroup(data);
@@ -187,7 +187,12 @@ const ExternalGroup = () => {
             <ListItem >
               <div className="columnDiv" style={{ width: "100%" }}>
                 {currentGroup.ownerName}
-                {(currentGroup.ownerName === currentStudent.studentName) ?
+                {currentGroup.members && currentGroup.members.map((member, index) => (
+                  <ListItem key = {index}>
+                    {member}
+                  </ListItem>
+                ))}
+                {(currentGroup.ownerName === currentStudent.username) ?
                   <button onClick={() => deleteCurrentGroup()}>Delete Current Group</button>
                   :
                   <button onClick={() => leaveCurrentGroup()}>Leave Current Group</button>
